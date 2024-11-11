@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/widgets/asset_grid/asset_grid_data_structure.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/widgets/asset_grid/asset_grid_data_structure.dart';
+import 'package:mediab/entities/asset.entity.dart';
 
 void main() {
   final List<Asset> testAssets = [];

@@ -5,11 +5,11 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/models/activities/activity.model.dart';
-import 'package:immich_mobile/widgets/activities/activity_tile.dart';
-import 'package:immich_mobile/providers/asset_viewer/current_asset.provider.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/widgets/common/user_circle_avatar.dart';
+import 'package:mediab/models/activities/activity.model.dart';
+import 'package:mediab/widgets/activities/activity_tile.dart';
+import 'package:mediab/providers/asset_viewer/current_asset.provider.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/widgets/common/user_circle_avatar.dart';
 import 'package:isar/isar.dart';
 
 import '../../fixtures/asset.stub.dart';
@@ -54,8 +54,7 @@ void main() {
     expect(find.byType(ListTile), findsOneWidget);
   });
 
-  testWidgets('No trailing widget when activity assetId == null',
-      (tester) async {
+  testWidgets('No trailing widget when activity assetId == null', (tester) async {
     await tester.pumpConsumerWidget(
       ActivityTile(
         Activity(
@@ -72,9 +71,7 @@ void main() {
     expect(listTile.trailing, isNull);
   });
 
-  testWidgets(
-      'Asset Thumbanil as trailing widget when activity assetId != null',
-      (tester) async {
+  testWidgets('Asset Thumbanil as trailing widget when activity assetId != null', (tester) async {
     await tester.pumpConsumerWidget(
       ActivityTile(
         Activity(
@@ -173,8 +170,7 @@ void main() {
       user: UserStub.admin,
     );
 
-    testWidgets('Comment contains User Circle Avatar as leading',
-        (tester) async {
+    testWidgets('Comment contains User Circle Avatar as leading', (tester) async {
       await tester.pumpConsumerWidget(
         ActivityTile(activity),
         overrides: overrides,

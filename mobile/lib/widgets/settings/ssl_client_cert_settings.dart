@@ -4,10 +4,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
-import 'package:immich_mobile/utils/http_ssl_cert_override.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
+import 'package:mediab/utils/http_ssl_cert_override.dart';
 
 class SslClientCertSettings extends StatefulWidget {
   const SslClientCertSettings({super.key, required this.isLoggedIn});
@@ -19,8 +19,7 @@ class SslClientCertSettings extends StatefulWidget {
 }
 
 class _SslClientCertSettingsState extends State<SslClientCertSettings> {
-  _SslClientCertSettingsState()
-      : isCertExist = SSLClientCertStoreVal.load() != null;
+  _SslClientCertSettingsState() : isCertExist = SSLClientCertStoreVal.load() != null;
 
   bool isCertExist;
 
@@ -61,9 +60,7 @@ class _SslClientCertSettingsState extends State<SslClientCertSettings> {
                 width: 15,
               ),
               ElevatedButton(
-                onPressed: widget.isLoggedIn || !isCertExist
-                    ? null
-                    : () => removeCert(context),
+                onPressed: widget.isLoggedIn || !isCertExist ? null : () => removeCert(context),
                 child: Text("client_cert_remove".tr()),
               ),
             ],
@@ -126,8 +123,7 @@ class _SslClientCertSettingsState extends State<SslClientCertSettings> {
         ),
         actions: [
           TextButton(
-            onPressed: () =>
-                {ctx.pop(), storeCert(context, data, password.text)},
+            onPressed: () => {ctx.pop(), storeCert(context, data, password.text)},
             child: Text("client_cert_dialog_msg_confirm".tr()),
           ),
         ],

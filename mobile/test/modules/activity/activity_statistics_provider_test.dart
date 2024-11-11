@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/models/activities/activity.model.dart';
-import 'package:immich_mobile/providers/activity_service.provider.dart';
-import 'package:immich_mobile/providers/activity_statistics.provider.dart';
+import 'package:mediab/models/activities/activity.model.dart';
+import 'package:mediab/providers/activity_service.provider.dart';
+import 'package:mediab/providers/activity_statistics.provider.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../test_utils.dart';

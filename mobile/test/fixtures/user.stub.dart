@@ -1,4 +1,4 @@
-import 'package:immich_mobile/entities/user.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
 
 final class UserStub {
   const UserStub._();

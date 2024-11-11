@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/utils/version_compatibility.dart';
+import 'package:mediab/utils/version_compatibility.dart';
 
 void main() {
   test('getVersionCompatibilityMessage', () {

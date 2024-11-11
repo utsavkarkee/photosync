@@ -1,13 +1,13 @@
-import 'package:immich_mobile/interfaces/album.interface.dart';
-import 'package:immich_mobile/interfaces/album_api.interface.dart';
-import 'package:immich_mobile/interfaces/album_media.interface.dart';
-import 'package:immich_mobile/interfaces/asset.interface.dart';
-import 'package:immich_mobile/interfaces/asset_media.interface.dart';
-import 'package:immich_mobile/interfaces/backup.interface.dart';
-import 'package:immich_mobile/interfaces/etag.interface.dart';
-import 'package:immich_mobile/interfaces/exif_info.interface.dart';
-import 'package:immich_mobile/interfaces/file_media.interface.dart';
-import 'package:immich_mobile/interfaces/user.interface.dart';
+import 'package:mediab/interfaces/album.interface.dart';
+import 'package:mediab/interfaces/album_api.interface.dart';
+import 'package:mediab/interfaces/album_media.interface.dart';
+import 'package:mediab/interfaces/asset.interface.dart';
+import 'package:mediab/interfaces/asset_media.interface.dart';
+import 'package:mediab/interfaces/backup.interface.dart';
+import 'package:mediab/interfaces/etag.interface.dart';
+import 'package:mediab/interfaces/exif_info.interface.dart';
+import 'package:mediab/interfaces/file_media.interface.dart';
+import 'package:mediab/interfaces/user.interface.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAlbumRepository extends Mock implements IAlbumRepository {}

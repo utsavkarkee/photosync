@@ -16,7 +16,7 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:immich_mobile/utils/openapi_patching.dart';
+import 'package:mediab/utils/openapi_patching.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
@@ -292,7 +292,6 @@ part 'model/validate_library_import_path_response_dto.dart';
 part 'model/validate_library_response_dto.dart';
 part 'model/video_codec.dart';
 part 'model/video_container.dart';
-
 
 /// An [ApiClient] instance that uses the default values obtained from
 /// the OpenAPI specification file.

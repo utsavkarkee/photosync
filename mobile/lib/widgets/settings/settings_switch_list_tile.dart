@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
 
 class SettingsSwitchListTile extends StatelessWidget {
   final ValueNotifier<bool> valueNotifier;
@@ -40,8 +40,7 @@ class SettingsSwitchListTile extends StatelessWidget {
       selectedTileColor: enabled ? null : context.themeData.disabledColor,
       value: valueNotifier.value,
       onChanged: onSwitchChanged,
-      activeColor:
-          enabled ? context.primaryColor : context.themeData.disabledColor,
+      activeColor: enabled ? context.primaryColor : context.themeData.disabledColor,
       dense: true,
       secondary: icon != null
           ? Icon(
@@ -63,9 +62,7 @@ class SettingsSwitchListTile extends StatelessWidget {
               subtitle!,
               style: subtitleStyle ??
                   context.textTheme.bodyMedium?.copyWith(
-                    color: enabled
-                        ? context.colorScheme.onSurfaceSecondary
-                        : context.themeData.disabledColor,
+                    color: enabled ? context.colorScheme.onSurfaceSecondary : context.themeData.disabledColor,
                   ),
             )
           : null,

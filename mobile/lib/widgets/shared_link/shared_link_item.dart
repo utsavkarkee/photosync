@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/widgets/search/thumbnail_with_info.dart';
-import 'package:immich_mobile/models/shared_link/shared_link.model.dart';
-import 'package:immich_mobile/providers/shared_link.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/providers/server_info.provider.dart';
-import 'package:immich_mobile/widgets/common/confirm_dialog.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
-import 'package:immich_mobile/utils/image_url_builder.dart';
-import 'package:immich_mobile/utils/url_helper.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/widgets/search/thumbnail_with_info.dart';
+import 'package:mediab/models/shared_link/shared_link.model.dart';
+import 'package:mediab/providers/shared_link.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/providers/server_info.provider.dart';
+import 'package:mediab/widgets/common/confirm_dialog.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
+import 'package:mediab/utils/image_url_builder.dart';
+import 'package:mediab/utils/url_helper.dart';
 
 class SharedLinkItem extends ConsumerWidget {
   final SharedLink sharedLink;
@@ -44,17 +44,13 @@ class SharedLinkItem extends ConsumerWidget {
         if (difference.inHours % 24 > 12) {
           dayDifference += 1;
         }
-        expiresText =
-            "shared_link_expires_days".tr(args: [dayDifference.toString()]);
+        expiresText = "shared_link_expires_days".tr(args: [dayDifference.toString()]);
       } else if (difference.inHours > 0) {
-        expiresText = "shared_link_expires_hours"
-            .tr(args: [difference.inHours.toString()]);
+        expiresText = "shared_link_expires_hours".tr(args: [difference.inHours.toString()]);
       } else if (difference.inMinutes > 0) {
-        expiresText = "shared_link_expires_minutes"
-            .tr(args: [difference.inMinutes.toString()]);
+        expiresText = "shared_link_expires_minutes".tr(args: [difference.inMinutes.toString()]);
       } else if (difference.inSeconds > 0) {
-        expiresText = "shared_link_expires_seconds"
-            .tr(args: [difference.inSeconds.toString()]);
+        expiresText = "shared_link_expires_seconds".tr(args: [difference.inSeconds.toString()]);
       }
     }
     return Text(
@@ -67,17 +63,14 @@ class SharedLinkItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = context.colorScheme;
     final isDarkMode = colorScheme.brightness == Brightness.dark;
-    final thumbnailUrl = sharedLink.thumbAssetId != null
-        ? getThumbnailUrlForRemoteId(sharedLink.thumbAssetId!)
-        : null;
+    final thumbnailUrl = sharedLink.thumbAssetId != null ? getThumbnailUrlForRemoteId(sharedLink.thumbAssetId!) : null;
     final imageSize = math.min(context.width / 4, 100.0);
 
     void copyShareLinkToClipboard() {
       final externalDomain = ref.read(
         serverInfoProvider.select((s) => s.serverConfig.externalDomain),
       );
-      var serverUrl =
-          externalDomain.isNotEmpty ? externalDomain : getServerUrl();
+      var serverUrl = externalDomain.isNotEmpty ? externalDomain : getServerUrl();
       if (serverUrl != null && !serverUrl.endsWith('/')) {
         serverUrl += '/';
       }
@@ -115,9 +108,7 @@ class SharedLinkItem extends ConsumerWidget {
           return ConfirmDialog(
             title: "delete_shared_link_dialog_title",
             content: "delete_shared_link_dialog_content",
-            onOk: () => ref
-                .read(sharedLinksStateProvider.notifier)
-                .deleteLink(sharedLink.id),
+            onOk: () => ref.read(sharedLinksStateProvider.notifier).deleteLink(sharedLink.id),
           );
         },
       );
@@ -178,12 +169,9 @@ class SharedLinkItem extends ConsumerWidget {
     Widget buildBottomInfo() {
       return Row(
         children: [
-          if (sharedLink.allowUpload)
-            buildInfoChip("shared_link_info_chip_upload".tr()),
-          if (sharedLink.allowDownload)
-            buildInfoChip("shared_link_info_chip_download".tr()),
-          if (sharedLink.showMetadata)
-            buildInfoChip("shared_link_info_chip_metadata".tr()),
+          if (sharedLink.allowUpload) buildInfoChip("shared_link_info_chip_upload".tr()),
+          if (sharedLink.allowDownload) buildInfoChip("shared_link_info_chip_download".tr()),
+          if (sharedLink.showMetadata) buildInfoChip("shared_link_info_chip_metadata".tr()),
         ],
       );
     }
@@ -198,8 +186,7 @@ class SharedLinkItem extends ConsumerWidget {
             iconSize: actionIconSize,
             icon: const Icon(Icons.delete_outline),
             style: const ButtonStyle(
-              tapTargetSize:
-                  MaterialTapTargetSize.shrinkWrap, // the '2023' part
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap, // the '2023' part
             ),
             onPressed: deleteShareLink,
           ),
@@ -209,11 +196,9 @@ class SharedLinkItem extends ConsumerWidget {
             iconSize: actionIconSize,
             icon: const Icon(Icons.edit_outlined),
             style: const ButtonStyle(
-              tapTargetSize:
-                  MaterialTapTargetSize.shrinkWrap, // the '2023' part
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap, // the '2023' part
             ),
-            onPressed: () => context
-                .pushRoute(SharedLinkEditRoute(existingLink: sharedLink)),
+            onPressed: () => context.pushRoute(SharedLinkEditRoute(existingLink: sharedLink)),
           ),
           IconButton(
             splashRadius: 25,
@@ -221,8 +206,7 @@ class SharedLinkItem extends ConsumerWidget {
             iconSize: actionIconSize,
             icon: const Icon(Icons.copy_outlined),
             style: const ButtonStyle(
-              tapTargetSize:
-                  MaterialTapTargetSize.shrinkWrap, // the '2023' part
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap, // the '2023' part
             ),
             onPressed: copyShareLinkToClipboard,
           ),

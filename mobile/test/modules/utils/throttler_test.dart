@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/utils/throttle.dart';
+import 'package:mediab/utils/throttle.dart';
 
 class _Counter {
   int _count = 0;
@@ -14,8 +14,7 @@ class _Counter {
 }
 
 void main() {
-  test('Executes the method immediately if no calls received previously',
-      () async {
+  test('Executes the method immediately if no calls received previously', () async {
     var counter = _Counter();
     final throttler = Throttler(interval: const Duration(milliseconds: 300));
     throttler.run(() => counter.increment());

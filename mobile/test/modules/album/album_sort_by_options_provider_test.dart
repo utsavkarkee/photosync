@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/album/album_sort_by_options.provider.dart';
-import 'package:immich_mobile/providers/app_settings.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/providers/album/album_sort_by_options.provider.dart';
+import 'package:mediab/providers/app_settings.provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
 import 'package:isar/isar.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -233,9 +233,7 @@ void main() {
     });
 
     test('Properly saves the correct store index of sort mode', () {
-      container
-          .read(albumSortByOptionsProvider.notifier)
-          .changeSortMode(AlbumSortMode.mostOldest);
+      container.read(albumSortByOptionsProvider.notifier).changeSortMode(AlbumSortMode.mostOldest);
 
       verify(
         () => settingsMock.setSetting(
@@ -258,14 +256,10 @@ void main() {
       );
 
       // Created -> Most Oldest
-      container
-          .read(albumSortByOptionsProvider.notifier)
-          .changeSortMode(AlbumSortMode.mostOldest);
+      container.read(albumSortByOptionsProvider.notifier).changeSortMode(AlbumSortMode.mostOldest);
 
       // Most Oldest -> Title
-      container
-          .read(albumSortByOptionsProvider.notifier)
-          .changeSortMode(AlbumSortMode.title);
+      container.read(albumSortByOptionsProvider.notifier).changeSortMode(AlbumSortMode.title);
 
       verifyInOrder([
         () => listener.call(null, AlbumSortMode.created),
@@ -326,9 +320,7 @@ void main() {
       container.read(albumSortOrderProvider.notifier).changeSortDirection(true);
 
       // true -> false
-      container
-          .read(albumSortOrderProvider.notifier)
-          .changeSortDirection(false);
+      container.read(albumSortOrderProvider.notifier).changeSortDirection(false);
 
       verifyInOrder([
         () => listener.call(null, false),

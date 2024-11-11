@@ -4,12 +4,12 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/providers/activity.provider.dart';
-import 'package:immich_mobile/widgets/activities/activity_text_field.dart';
-import 'package:immich_mobile/providers/album/current_album.provider.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/providers/user.provider.dart';
-import 'package:immich_mobile/widgets/common/user_circle_avatar.dart';
+import 'package:mediab/providers/activity.provider.dart';
+import 'package:mediab/widgets/activities/activity_text_field.dart';
+import 'package:mediab/providers/album/current_album.provider.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/providers/user.provider.dart';
+import 'package:mediab/widgets/common/user_circle_avatar.dart';
 import 'package:isar/isar.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -41,8 +41,7 @@ void main() {
     activityMock = MockAlbumActivity();
     overrides = [
       currentAlbumProvider.overrideWith(() => mockCurrentAlbumProvider),
-      albumActivityProvider(AlbumStub.twoAsset.remoteId!)
-          .overrideWith(() => activityMock),
+      albumActivityProvider(AlbumStub.twoAsset.remoteId!).overrideWith(() => activityMock),
     ];
   });
 
@@ -149,8 +148,7 @@ void main() {
       overrides: overrides,
     );
 
-    when(() => activityMock.removeActivity(any()))
-        .thenAnswer((_) => Future.value());
+    when(() => activityMock.removeActivity(any())).thenAnswer((_) => Future.value());
 
     final suffixIcon = find.byType(IconButton);
     await tester.tap(suffixIcon);

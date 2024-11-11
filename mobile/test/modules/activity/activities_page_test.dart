@@ -4,18 +4,18 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/models/activities/activity.model.dart';
-import 'package:immich_mobile/providers/activity.provider.dart';
-import 'package:immich_mobile/pages/common/activities.page.dart';
-import 'package:immich_mobile/widgets/activities/activity_text_field.dart';
-import 'package:immich_mobile/widgets/activities/dismissible_activity.dart';
-import 'package:immich_mobile/providers/album/current_album.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/current_asset.provider.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/providers/user.provider.dart';
+import 'package:mediab/models/activities/activity.model.dart';
+import 'package:mediab/providers/activity.provider.dart';
+import 'package:mediab/pages/common/activities.page.dart';
+import 'package:mediab/widgets/activities/activity_text_field.dart';
+import 'package:mediab/widgets/activities/dismissible_activity.dart';
+import 'package:mediab/providers/album/current_album.provider.dart';
+import 'package:mediab/providers/asset_viewer/current_asset.provider.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/providers/user.provider.dart';
 import 'package:isar/isar.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -195,8 +195,7 @@ void main() {
         );
         await tester.pumpAndSettle();
 
-        when(() => activityMock.addComment(any()))
-            .thenAnswer((_) => Future.value());
+        when(() => activityMock.addComment(any())).thenAnswer((_) => Future.value());
 
         final textField = find.byType(TextField);
         await tester.enterText(textField, 'Test comment');

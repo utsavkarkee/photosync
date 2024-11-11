@@ -1,14 +1,12 @@
-import 'package:immich_mobile/models/activities/activity.model.dart';
-import 'package:immich_mobile/providers/activity.provider.dart';
-import 'package:immich_mobile/providers/activity_statistics.provider.dart';
-import 'package:immich_mobile/services/activity.service.dart';
+import 'package:mediab/models/activities/activity.model.dart';
+import 'package:mediab/providers/activity.provider.dart';
+import 'package:mediab/providers/activity_statistics.provider.dart';
+import 'package:mediab/services/activity.service.dart';
 import 'package:mocktail/mocktail.dart';
 
 class ActivityServiceMock extends Mock implements ActivityService {}
 
-class MockAlbumActivity extends AlbumActivityInternal
-    with Mock
-    implements AlbumActivity {
+class MockAlbumActivity extends AlbumActivityInternal with Mock implements AlbumActivity {
   List<Activity>? initActivities;
   MockAlbumActivity([this.initActivities]);
 
@@ -18,6 +16,4 @@ class MockAlbumActivity extends AlbumActivityInternal
   }
 }
 
-class ActivityStatisticsMock extends ActivityStatisticsInternal
-    with Mock
-    implements ActivityStatistics {}
+class ActivityStatisticsMock extends ActivityStatisticsInternal with Mock implements ActivityStatistics {}

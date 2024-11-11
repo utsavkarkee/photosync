@@ -3,11 +3,11 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/models/activities/activity.model.dart';
-import 'package:immich_mobile/widgets/activities/activity_tile.dart';
-import 'package:immich_mobile/widgets/activities/dismissible_activity.dart';
-import 'package:immich_mobile/providers/asset_viewer/current_asset.provider.dart';
-import 'package:immich_mobile/widgets/common/confirm_dialog.dart';
+import 'package:mediab/models/activities/activity.model.dart';
+import 'package:mediab/widgets/activities/activity_tile.dart';
+import 'package:mediab/widgets/activities/dismissible_activity.dart';
+import 'package:mediab/providers/asset_viewer/current_asset.provider.dart';
+import 'package:mediab/widgets/common/confirm_dialog.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../fixtures/user.stub.dart';
@@ -55,9 +55,7 @@ void main() {
     expect(find.byType(ConfirmDialog), findsOneWidget);
   });
 
-  testWidgets(
-      'Ok action in ConfirmDialog should call onDismiss with activityId',
-      (tester) async {
+  testWidgets('Ok action in ConfirmDialog should call onDismiss with activityId', (tester) async {
     String? receivedActivityId;
     await tester.pumpConsumerWidget(
       DismissibleActivity(

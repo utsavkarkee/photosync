@@ -1,13 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/etag.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/interfaces/asset.interface.dart';
-import 'package:immich_mobile/interfaces/user.interface.dart';
-import 'package:immich_mobile/services/immich_logger.service.dart';
-import 'package:immich_mobile/services/sync.service.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/etag.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/interfaces/asset.interface.dart';
+import 'package:mediab/interfaces/user.interface.dart';
+import 'package:mediab/services/immich_logger.service.dart';
+import 'package:mediab/services/sync.service.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../repository.mocks.dart';
@@ -49,8 +49,7 @@ void main() {
     final MockExifInfoRepository exifInfoRepository = MockExifInfoRepository();
     final MockUserRepository userRepository = MockUserRepository();
     final MockETagRepository eTagRepository = MockETagRepository();
-    final MockAlbumMediaRepository albumMediaRepository =
-        MockAlbumMediaRepository();
+    final MockAlbumMediaRepository albumMediaRepository = MockAlbumMediaRepository();
     final MockAlbumApiRepository albumApiRepository = MockAlbumApiRepository();
     final owner = User(
       id: "1",
@@ -87,15 +86,12 @@ void main() {
         userRepository,
         eTagRepository,
       );
-      when(() => eTagRepository.get(owner.isarId))
-          .thenAnswer((_) async => ETag(id: owner.id, time: DateTime.now()));
+      when(() => eTagRepository.get(owner.isarId)).thenAnswer((_) async => ETag(id: owner.id, time: DateTime.now()));
       when(() => eTagRepository.deleteByIds(["1"])).thenAnswer((_) async {});
       when(() => eTagRepository.upsertAll(any())).thenAnswer((_) async {});
       when(() => userRepository.me()).thenAnswer((_) async => owner);
-      when(() => userRepository.getAll(sortBy: UserSort.id))
-          .thenAnswer((_) async => [owner]);
-      when(() => userRepository.getAllAccessible())
-          .thenAnswer((_) async => [owner]);
+      when(() => userRepository.getAll(sortBy: UserSort.id)).thenAnswer((_) async => [owner]);
+      when(() => userRepository.getAllAccessible()).thenAnswer((_) async => [owner]);
       when(
         () => assetRepository.getAll(
           ownerId: owner.isarId,
@@ -106,8 +102,7 @@ void main() {
           .thenAnswer((_) async => [initialAssets[3], null, null]);
       when(() => assetRepository.updateAll(any())).thenAnswer((_) async => []);
       when(() => assetRepository.deleteById(any())).thenAnswer((_) async {});
-      when(() => exifInfoRepository.updateAll(any()))
-          .thenAnswer((_) async => []);
+      when(() => exifInfoRepository.updateAll(any())).thenAnswer((_) async => []);
       when(() => assetRepository.transaction<void>(any())).thenAnswer(
         (call) => (call.positionalArguments.first as Function).call(),
       );
@@ -149,8 +144,7 @@ void main() {
       expect(c1, isTrue);
       final updatedAsset = initialAssets[3].updatedCopy(remoteAssets[3]);
       verify(
-        () => assetRepository
-            .updateAll([remoteAssets[4], remoteAssets[5], updatedAsset]),
+        () => assetRepository.updateAll([remoteAssets[4], remoteAssets[5], updatedAsset]),
       );
     });
 
@@ -217,8 +211,7 @@ void main() {
         ),
       ).thenAnswer((_) async {});
       when(
-        () => assetRepository
-            .getAllByRemoteId(["2-1", "1-1"], state: AssetState.merged),
+        () => assetRepository.getAllByRemoteId(["2-1", "1-1"], state: AssetState.merged),
       ).thenAnswer((_) async => [initialAssets[2]]);
       when(() => assetRepository.getAllByOwnerIdChecksum(any(), any()))
           .thenAnswer((_) async => [initialAssets[0], null, null]); //afg
