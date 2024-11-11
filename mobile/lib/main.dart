@@ -9,33 +9,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/utils/download.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/utils/download.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:timezone/data/latest.dart';
-import 'package:immich_mobile/constants/locales.dart';
-import 'package:immich_mobile/services/background.service.dart';
-import 'package:immich_mobile/entities/backup_album.entity.dart';
-import 'package:immich_mobile/entities/duplicated_asset.entity.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/routing/tab_navigation_observer.dart';
-import 'package:immich_mobile/utils/cache/widgets_binding.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/android_device_asset.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/etag.entity.dart';
-import 'package:immich_mobile/entities/exif_info.entity.dart';
-import 'package:immich_mobile/entities/ios_device_asset.entity.dart';
-import 'package:immich_mobile/entities/logger_message.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/providers/app_life_cycle.provider.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/services/immich_logger.service.dart';
-import 'package:immich_mobile/services/local_notification.service.dart';
-import 'package:immich_mobile/utils/http_ssl_cert_override.dart';
-import 'package:immich_mobile/utils/immich_app_theme.dart';
-import 'package:immich_mobile/utils/migration.dart';
+import 'package:mediab/constants/locales.dart';
+import 'package:mediab/services/background.service.dart';
+import 'package:mediab/entities/backup_album.entity.dart';
+import 'package:mediab/entities/duplicated_asset.entity.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/routing/tab_navigation_observer.dart';
+import 'package:mediab/utils/cache/widgets_binding.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/android_device_asset.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/etag.entity.dart';
+import 'package:mediab/entities/exif_info.entity.dart';
+import 'package:mediab/entities/ios_device_asset.entity.dart';
+import 'package:mediab/entities/logger_message.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/providers/app_life_cycle.provider.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/services/immich_logger.service.dart';
+import 'package:mediab/services/local_notification.service.dart';
+import 'package:mediab/utils/http_ssl_cert_override.dart';
+import 'package:mediab/utils/immich_app_theme.dart';
+import 'package:mediab/utils/migration.dart';
 import 'package:isar/isar.dart';
 import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart';
@@ -140,8 +140,7 @@ class ImmichApp extends ConsumerStatefulWidget {
   ImmichAppState createState() => ImmichAppState();
 }
 
-class ImmichAppState extends ConsumerState<ImmichApp>
-    with WidgetsBindingObserver {
+class ImmichAppState extends ConsumerState<ImmichApp> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
@@ -182,9 +181,7 @@ class ImmichAppState extends ConsumerState<ImmichApp>
       // Android 8 does not support transparent app bars
       final info = await DeviceInfoPlugin().androidInfo;
       if (info.version.sdkInt <= 26) {
-        overlayStyle = context.isDarkTheme
-            ? SystemUiOverlayStyle.dark
-            : SystemUiOverlayStyle.light;
+        overlayStyle = context.isDarkTheme ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light;
       }
     }
     SystemChrome.setSystemUIOverlayStyle(overlayStyle);

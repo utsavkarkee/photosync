@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/album/suggested_shared_users.provider.dart';
-import 'package:immich_mobile/services/partner.service.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
+import 'package:mediab/providers/album/suggested_shared_users.provider.dart';
+import 'package:mediab/services/partner.service.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/providers/db.provider.dart';
 import 'package:isar/isar.dart';
 
 class PartnerSharedWithNotifier extends StateNotifier<List<User>> {
@@ -21,8 +21,7 @@ class PartnerSharedWithNotifier extends StateNotifier<List<User>> {
   final PartnerService _ps;
 }
 
-final partnerSharedWithProvider =
-    StateNotifierProvider<PartnerSharedWithNotifier, List<User>>((ref) {
+final partnerSharedWithProvider = StateNotifierProvider<PartnerSharedWithNotifier, List<User>>((ref) {
   return PartnerSharedWithNotifier(
     ref.watch(dbProvider),
     ref.watch(partnerServiceProvider),
@@ -45,13 +44,11 @@ class PartnerSharedByNotifier extends StateNotifier<List<User>> {
   }
 }
 
-final partnerSharedByProvider =
-    StateNotifierProvider<PartnerSharedByNotifier, List<User>>((ref) {
+final partnerSharedByProvider = StateNotifierProvider<PartnerSharedByNotifier, List<User>>((ref) {
   return PartnerSharedByNotifier(ref.watch(dbProvider));
 });
 
-final partnerAvailableProvider =
-    FutureProvider.autoDispose<List<User>>((ref) async {
+final partnerAvailableProvider = FutureProvider.autoDispose<List<User>>((ref) async {
   final otherUsers = await ref.watch(otherUsersProvider.future);
   final currentPartners = ref.watch(partnerSharedByProvider);
   final available = Set<User>.of(otherUsers);

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:crop_image/crop_image.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/utils/hooks/crop_controller_hook.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/utils/hooks/crop_controller_hook.dart';
+import 'package:mediab/entities/asset.entity.dart';
 import 'edit.page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:auto_route/auto_route.dart';
@@ -201,9 +201,7 @@ class _AspectRatioButton extends StatelessWidget {
         IconButton(
           icon: Icon(
             iconData,
-            color: aspectRatio.value == ratio
-                ? context.primaryColor
-                : Theme.of(context).iconTheme.color,
+            color: aspectRatio.value == ratio ? context.primaryColor : Theme.of(context).iconTheme.color,
           ),
           onPressed: () {
             cropController.crop = const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9);

@@ -4,13 +4,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/asset_viewer/asset_people.provider.dart';
-import 'package:immich_mobile/models/search/search_curated_content.model.dart';
-import 'package:immich_mobile/widgets/search/curated_people_row.dart';
-import 'package:immich_mobile/widgets/search/person_name_edit_form.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/asset_viewer/asset_people.provider.dart';
+import 'package:mediab/models/search/search_curated_content.model.dart';
+import 'package:mediab/widgets/search/curated_people_row.dart';
+import 'package:mediab/widgets/search/person_name_edit_form.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/entities/asset.entity.dart';
 
 class PeopleInfo extends ConsumerWidget {
   final Asset asset;
@@ -20,12 +20,8 @@ class PeopleInfo extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final peopleProvider =
-        ref.watch(assetPeopleNotifierProvider(asset).notifier);
-    final people = ref
-        .watch(assetPeopleNotifierProvider(asset))
-        .value
-        ?.where((p) => !p.isHidden);
+    final peopleProvider = ref.watch(assetPeopleNotifierProvider(asset).notifier);
+    final people = ref.watch(assetPeopleNotifierProvider(asset)).value?.where((p) => !p.isHidden);
     final double imageSize = math.min(context.width / 3, 150);
 
     showPersonNameEditModel(
@@ -43,15 +39,10 @@ class PeopleInfo extends ConsumerWidget {
       });
     }
 
-    final curatedPeople = people
-            ?.map((p) => SearchCuratedContent(id: p.id, label: p.name))
-            .toList() ??
-        [];
+    final curatedPeople = people?.map((p) => SearchCuratedContent(id: p.id, label: p.name)).toList() ?? [];
 
     return AnimatedCrossFade(
-      crossFadeState: (people?.isEmpty ?? true)
-          ? CrossFadeState.showFirst
-          : CrossFadeState.showSecond,
+      crossFadeState: (people?.isEmpty ?? true) ? CrossFadeState.showFirst : CrossFadeState.showSecond,
       duration: const Duration(milliseconds: 200),
       firstChild: Container(),
       secondChild: Padding(

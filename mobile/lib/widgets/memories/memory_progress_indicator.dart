@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
 
 class MemoryProgressIndicator extends StatelessWidget {
   /// The number of ticks in the progress indicator
@@ -27,9 +27,7 @@ class MemoryProgressIndicator extends StatelessWidget {
                 value: value,
                 borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                 backgroundColor: Colors.grey[800],
-                color: context.isDarkTheme
-                    ? context.colorScheme.primary
-                    : context.colorScheme.inversePrimary,
+                color: context.isDarkTheme ? context.colorScheme.primary : context.colorScheme.inversePrimary,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

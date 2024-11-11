@@ -3,19 +3,19 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/models/backup/backup_state.model.dart';
-import 'package:immich_mobile/providers/backup/backup.provider.dart';
-import 'package:immich_mobile/providers/backup/manual_upload.provider.dart';
-import 'package:immich_mobile/providers/authentication.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/providers/user.provider.dart';
-import 'package:immich_mobile/providers/websocket.provider.dart';
-import 'package:immich_mobile/widgets/common/app_bar_dialog/app_bar_profile_info.dart';
-import 'package:immich_mobile/widgets/common/app_bar_dialog/app_bar_server_info.dart';
-import 'package:immich_mobile/widgets/common/confirm_dialog.dart';
-import 'package:immich_mobile/utils/bytes_units.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/models/backup/backup_state.model.dart';
+import 'package:mediab/providers/backup/backup.provider.dart';
+import 'package:mediab/providers/backup/manual_upload.provider.dart';
+import 'package:mediab/providers/authentication.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/providers/user.provider.dart';
+import 'package:mediab/providers/websocket.provider.dart';
+import 'package:mediab/widgets/common/app_bar_dialog/app_bar_profile_info.dart';
+import 'package:mediab/widgets/common/app_bar_dialog/app_bar_server_info.dart';
+import 'package:mediab/widgets/common/confirm_dialog.dart';
+import 'package:mediab/utils/bytes_units.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ImmichAppBarDialog extends HookConsumerWidget {
@@ -53,9 +53,7 @@ class ImmichAppBarDialog extends HookConsumerWidget {
           ),
           Center(
             child: Image.asset(
-              context.isDarkTheme
-                  ? 'assets/immich-text-dark.png'
-                  : 'assets/immich-text-light.png',
+              context.isDarkTheme ? 'assets/immich-text-dark.png' : 'assets/immich-text-light.png',
               height: 16,
             ),
           ),
@@ -171,14 +169,12 @@ class ImmichAppBarDialog extends HookConsumerWidget {
                     child: LinearProgressIndicator(
                       minHeight: 10.0,
                       value: percentage,
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(10.0)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 12.0),
-                    child:
-                        const Text('backup_controller_page_storage_format').tr(
+                    child: const Text('backup_controller_page_storage_format').tr(
                       args: [
                         usedDiskSpace,
                         totalDiskSpace,

@@ -1,4 +1,4 @@
-import 'package:immich_mobile/models/backup/backup_candidate.model.dart';
+import 'package:mediab/models/backup/backup_candidate.model.dart';
 
 class SuccessUploadAsset {
   final BackupCandidate candidate;
@@ -31,12 +31,9 @@ class SuccessUploadAsset {
   bool operator ==(covariant SuccessUploadAsset other) {
     if (identical(this, other)) return true;
 
-    return other.candidate == candidate &&
-        other.remoteAssetId == remoteAssetId &&
-        other.isDuplicate == isDuplicate;
+    return other.candidate == candidate && other.remoteAssetId == remoteAssetId && other.isDuplicate == isDuplicate;
   }
 
   @override
-  int get hashCode =>
-      candidate.hashCode ^ remoteAssetId.hashCode ^ isDuplicate.hashCode;
+  int get hashCode => candidate.hashCode ^ remoteAssetId.hashCode ^ isDuplicate.hashCode;
 }

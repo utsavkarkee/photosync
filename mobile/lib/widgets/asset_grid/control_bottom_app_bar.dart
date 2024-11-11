@@ -2,16 +2,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/widgets/album/add_to_album_sliverlist.dart';
-import 'package:immich_mobile/models/asset_selection_state.dart';
-import 'package:immich_mobile/widgets/asset_grid/delete_dialog.dart';
-import 'package:immich_mobile/widgets/asset_grid/upload_dialog.dart';
-import 'package:immich_mobile/providers/server_info.provider.dart';
-import 'package:immich_mobile/widgets/common/drag_sheet.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/utils/draggable_scroll_controller.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/widgets/album/add_to_album_sliverlist.dart';
+import 'package:mediab/models/asset_selection_state.dart';
+import 'package:mediab/widgets/asset_grid/delete_dialog.dart';
+import 'package:mediab/widgets/asset_grid/upload_dialog.dart';
+import 'package:mediab/providers/server_info.provider.dart';
+import 'package:mediab/widgets/common/drag_sheet.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/utils/draggable_scroll_controller.dart';
 
 final controlBottomAppBarNotifier = ControlBottomAppBarNotifier();
 
@@ -64,15 +64,11 @@ class ControlBottomAppBar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hasRemote =
-        selectionAssetState.hasRemote || selectionAssetState.hasMerged;
-    final hasLocal =
-        selectionAssetState.hasLocal || selectionAssetState.hasMerged;
-    final trashEnabled =
-        ref.watch(serverInfoProvider.select((v) => v.serverFeatures.trash));
+    final hasRemote = selectionAssetState.hasRemote || selectionAssetState.hasMerged;
+    final hasLocal = selectionAssetState.hasLocal || selectionAssetState.hasMerged;
+    final trashEnabled = ref.watch(serverInfoProvider.select((v) => v.serverFeatures.trash));
     final albums = ref.watch(albumProvider).where((a) => a.isRemote).toList();
-    final sharedAlbums =
-        ref.watch(albumProvider).where((a) => a.shared).toList();
+    final sharedAlbums = ref.watch(albumProvider).where((a) => a.shared).toList();
     const bottomPadding = 0.20;
     final scrollController = useDraggableScrollController();
 
@@ -137,21 +133,13 @@ class ControlBottomAppBar extends HookConsumerWidget {
         if (hasRemote && onArchive != null)
           ControlBoxButton(
             iconData: unarchive ? Icons.unarchive : Icons.archive,
-            label: (unarchive
-                    ? "control_bottom_app_bar_unarchive"
-                    : "control_bottom_app_bar_archive")
-                .tr(),
+            label: (unarchive ? "control_bottom_app_bar_unarchive" : "control_bottom_app_bar_archive").tr(),
             onPressed: enabled ? onArchive : null,
           ),
         if (hasRemote && onFavorite != null)
           ControlBoxButton(
-            iconData: unfavorite
-                ? Icons.favorite_border_rounded
-                : Icons.favorite_rounded,
-            label: (unfavorite
-                    ? "control_bottom_app_bar_unfavorite"
-                    : "control_bottom_app_bar_favorite")
-                .tr(),
+            iconData: unfavorite ? Icons.favorite_border_rounded : Icons.favorite_rounded,
+            label: (unfavorite ? "control_bottom_app_bar_unfavorite" : "control_bottom_app_bar_favorite").tr(),
             onPressed: enabled ? onFavorite : null,
           ),
         if (hasLocal && hasRemote && onDelete != null)
@@ -160,11 +148,8 @@ class ControlBottomAppBar extends HookConsumerWidget {
             child: ControlBoxButton(
               iconData: Icons.delete_sweep_outlined,
               label: "control_bottom_app_bar_delete".tr(),
-              onPressed: enabled
-                  ? () => handleRemoteDelete(!trashEnabled, onDelete!)
-                  : null,
-              onLongPressed:
-                  enabled ? () => showForceDeleteDialog(onDelete!) : null,
+              onPressed: enabled ? () => handleRemoteDelete(!trashEnabled, onDelete!) : null,
+              onLongPressed: enabled ? () => showForceDeleteDialog(onDelete!) : null,
             ),
           ),
         if (hasRemote && onDeleteServer != null)
@@ -232,9 +217,7 @@ class ControlBottomAppBar extends HookConsumerWidget {
               onPressed: enabled ? onEditLocation : null,
             ),
           ),
-        if (!selectionAssetState.hasLocal &&
-            selectionAssetState.selectedCount > 1 &&
-            onStack != null)
+        if (!selectionAssetState.hasLocal && selectionAssetState.selectedCount > 1 && onStack != null)
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 90),
             child: ControlBoxButton(

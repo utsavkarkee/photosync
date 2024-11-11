@@ -1,14 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/exif_info.entity.dart';
-import 'package:immich_mobile/interfaces/exif_info.interface.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/repositories/database.repository.dart';
+import 'package:mediab/entities/exif_info.entity.dart';
+import 'package:mediab/interfaces/exif_info.interface.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/repositories/database.repository.dart';
 
-final exifInfoRepositoryProvider =
-    Provider((ref) => ExifInfoRepository(ref.watch(dbProvider)));
+final exifInfoRepositoryProvider = Provider((ref) => ExifInfoRepository(ref.watch(dbProvider)));
 
-class ExifInfoRepository extends DatabaseRepository
-    implements IExifInfoRepository {
+class ExifInfoRepository extends DatabaseRepository implements IExifInfoRepository {
   ExifInfoRepository(super.db);
 
   @override

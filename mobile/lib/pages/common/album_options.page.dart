@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/providers/authentication.provider.dart';
-import 'package:immich_mobile/utils/immich_loading_overlay.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
-import 'package:immich_mobile/widgets/common/user_circle_avatar.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/providers/authentication.provider.dart';
+import 'package:mediab/utils/immich_loading_overlay.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
+import 'package:mediab/widgets/common/user_circle_avatar.dart';
 
 @RoutePage()
 class AlbumOptionsPage extends HookConsumerWidget {
@@ -44,8 +44,7 @@ class AlbumOptionsPage extends HookConsumerWidget {
       isProcessing.value = true;
 
       try {
-        final isSuccess =
-            await ref.read(albumProvider.notifier).leaveAlbum(album);
+        final isSuccess = await ref.read(albumProvider.notifier).leaveAlbum(album);
 
         if (isSuccess) {
           context.navigateTo(
@@ -93,8 +92,7 @@ class AlbumOptionsPage extends HookConsumerWidget {
         actions = [
           ListTile(
             leading: const Icon(Icons.person_remove_rounded),
-            title: const Text("shared_album_section_people_action_remove_user")
-                .tr(),
+            title: const Text("shared_album_section_people_action_remove_user").tr(),
             onTap: () => removeUserFromAlbum(user),
           ),
         ];
@@ -120,8 +118,7 @@ class AlbumOptionsPage extends HookConsumerWidget {
 
     buildOwnerInfo() {
       return ListTile(
-        leading:
-            owner != null ? UserCircleAvatar(user: owner) : const SizedBox(),
+        leading: owner != null ? UserCircleAvatar(user: owner) : const SizedBox(),
         title: Text(
           album.owner.value?.name ?? "",
           style: const TextStyle(
@@ -163,12 +160,8 @@ class AlbumOptionsPage extends HookConsumerWidget {
                 color: context.colorScheme.onSurfaceSecondary,
               ),
             ),
-            trailing: userId == user.id || isOwner
-                ? const Icon(Icons.more_horiz_rounded)
-                : const SizedBox(),
-            onTap: userId == user.id || isOwner
-                ? () => handleUserClick(user)
-                : null,
+            trailing: userId == user.id || isOwner ? const Icon(Icons.more_horiz_rounded) : const SizedBox(),
+            onTap: userId == user.id || isOwner ? () => handleUserClick(user) : null,
           );
         },
       );
@@ -197,20 +190,15 @@ class AlbumOptionsPage extends HookConsumerWidget {
               value: activityEnabled.value,
               onChanged: (bool value) async {
                 activityEnabled.value = value;
-                if (await ref
-                    .read(albumProvider.notifier)
-                    .setActivitystatus(album, value)) {
+                if (await ref.read(albumProvider.notifier).setActivitystatus(album, value)) {
                   album.activityEnabled = value;
                 }
               },
-              activeColor: activityEnabled.value
-                  ? context.primaryColor
-                  : context.themeData.disabledColor,
+              activeColor: activityEnabled.value ? context.primaryColor : context.themeData.disabledColor,
               dense: true,
               title: Text(
                 "shared_album_activity_setting_title",
-                style: context.textTheme.titleMedium
-                    ?.copyWith(fontWeight: FontWeight.w500),
+                style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w500),
               ).tr(),
               subtitle: Text(
                 "shared_album_activity_setting_subtitle",

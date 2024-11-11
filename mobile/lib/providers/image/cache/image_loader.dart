@@ -3,8 +3,8 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:immich_mobile/providers/image/exceptions/image_loading_exception.dart';
-import 'package:immich_mobile/services/api.service.dart';
+import 'package:mediab/providers/image/exceptions/image_loading_exception.dart';
+import 'package:mediab/services/api.service.dart';
 
 /// Loads the codec from the URI and sends the events to the [chunkEvents] stream
 ///

@@ -1,7 +1,7 @@
-import 'package:immich_mobile/constants/constants.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
+import 'package:mediab/constants/constants.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
 import 'package:openapi/api.dart';
 
 String getThumbnailUrl(

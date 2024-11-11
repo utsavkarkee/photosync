@@ -5,13 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/models/shared_link/shared_link.model.dart';
-import 'package:immich_mobile/providers/shared_link.provider.dart';
-import 'package:immich_mobile/services/shared_link.service.dart';
-import 'package:immich_mobile/providers/server_info.provider.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
-import 'package:immich_mobile/utils/url_helper.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/models/shared_link/shared_link.model.dart';
+import 'package:mediab/providers/shared_link.provider.dart';
+import 'package:mediab/services/shared_link.service.dart';
+import 'package:mediab/providers/server_info.provider.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
+import 'package:mediab/utils/url_helper.dart';
 
 @RoutePage()
 class SharedLinkEditPage extends HookConsumerWidget {
@@ -31,11 +31,9 @@ class SharedLinkEditPage extends HookConsumerWidget {
     const padding = 20.0;
     final themeData = context.themeData;
     final colorScheme = context.colorScheme;
-    final descriptionController =
-        useTextEditingController(text: existingLink?.description ?? "");
+    final descriptionController = useTextEditingController(text: existingLink?.description ?? "");
     final descriptionFocusNode = useFocusNode();
-    final passwordController =
-        useTextEditingController(text: existingLink?.password ?? "");
+    final passwordController = useTextEditingController(text: existingLink?.password ?? "");
     final showMetadata = useState(existingLink?.showMetadata ?? true);
     final allowDownload = useState(existingLink?.allowDownload ?? true);
     final allowUpload = useState(existingLink?.allowUpload ?? false);
@@ -155,15 +153,12 @@ class SharedLinkEditPage extends HookConsumerWidget {
     Widget buildShowMetaButton() {
       return SwitchListTile.adaptive(
         value: showMetadata.value,
-        onChanged: newShareLink.value.isEmpty
-            ? (value) => showMetadata.value = value
-            : null,
+        onChanged: newShareLink.value.isEmpty ? (value) => showMetadata.value = value : null,
         activeColor: colorScheme.primary,
         dense: true,
         title: Text(
           "shared_link_edit_show_meta",
-          style: themeData.textTheme.labelLarge
-              ?.copyWith(fontWeight: FontWeight.bold),
+          style: themeData.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
         ).tr(),
       );
     }
@@ -171,15 +166,12 @@ class SharedLinkEditPage extends HookConsumerWidget {
     Widget buildAllowDownloadButton() {
       return SwitchListTile.adaptive(
         value: allowDownload.value,
-        onChanged: newShareLink.value.isEmpty
-            ? (value) => allowDownload.value = value
-            : null,
+        onChanged: newShareLink.value.isEmpty ? (value) => allowDownload.value = value : null,
         activeColor: colorScheme.primary,
         dense: true,
         title: Text(
           "shared_link_edit_allow_download",
-          style: themeData.textTheme.labelLarge
-              ?.copyWith(fontWeight: FontWeight.bold),
+          style: themeData.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
         ).tr(),
       );
     }
@@ -187,15 +179,12 @@ class SharedLinkEditPage extends HookConsumerWidget {
     Widget buildAllowUploadButton() {
       return SwitchListTile.adaptive(
         value: allowUpload.value,
-        onChanged: newShareLink.value.isEmpty
-            ? (value) => allowUpload.value = value
-            : null,
+        onChanged: newShareLink.value.isEmpty ? (value) => allowUpload.value = value : null,
         activeColor: colorScheme.primary,
         dense: true,
         title: Text(
           "shared_link_edit_allow_upload",
-          style: themeData.textTheme.labelLarge
-              ?.copyWith(fontWeight: FontWeight.bold),
+          style: themeData.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
         ).tr(),
       );
     }
@@ -203,15 +192,12 @@ class SharedLinkEditPage extends HookConsumerWidget {
     Widget buildEditExpiryButton() {
       return SwitchListTile.adaptive(
         value: editExpiry.value,
-        onChanged: newShareLink.value.isEmpty
-            ? (value) => editExpiry.value = value
-            : null,
+        onChanged: newShareLink.value.isEmpty ? (value) => editExpiry.value = value : null,
         activeColor: colorScheme.primary,
         dense: true,
         title: Text(
           "shared_link_edit_change_expiry",
-          style: themeData.textTheme.labelLarge
-              ?.copyWith(fontWeight: FontWeight.bold),
+          style: themeData.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
         ).tr(),
       );
     }
@@ -229,8 +215,7 @@ class SharedLinkEditPage extends HookConsumerWidget {
         enableFilter: false,
         width: context.width - 40,
         initialSelection: expiryAfter.value,
-        enabled: newShareLink.value.isEmpty &&
-            (existingLink == null || editExpiry.value),
+        enabled: newShareLink.value.isEmpty && (existingLink == null || editExpiry.value),
         onSelected: (value) {
           expiryAfter.value = value!;
         },
@@ -241,8 +226,7 @@ class SharedLinkEditPage extends HookConsumerWidget {
           ),
           DropdownMenuEntry(
             value: 30,
-            label:
-                "shared_link_edit_expire_after_option_minutes".tr(args: ["30"]),
+            label: "shared_link_edit_expire_after_option_minutes".tr(args: ["30"]),
           ),
           DropdownMenuEntry(
             value: 60,
@@ -266,8 +250,7 @@ class SharedLinkEditPage extends HookConsumerWidget {
           ),
           DropdownMenuEntry(
             value: 60 * 24 * 30 * 3,
-            label:
-                "shared_link_edit_expire_after_option_months".tr(args: ["3"]),
+            label: "shared_link_edit_expire_after_option_months".tr(args: ["3"]),
           ),
           DropdownMenuEntry(
             value: 60 * 24 * 30 * 12,
@@ -342,27 +325,21 @@ class SharedLinkEditPage extends HookConsumerWidget {
     }
 
     Future<void> handleNewLink() async {
-      final newLink =
-          await ref.read(sharedLinkServiceProvider).createSharedLink(
-                albumId: albumId,
-                assetIds: assetsList,
-                showMeta: showMetadata.value,
-                allowDownload: allowDownload.value,
-                allowUpload: allowUpload.value,
-                description: descriptionController.text.isEmpty
-                    ? null
-                    : descriptionController.text,
-                password: passwordController.text.isEmpty
-                    ? null
-                    : passwordController.text,
-                expiresAt: expiryAfter.value == 0 ? null : calculateExpiry(),
-              );
+      final newLink = await ref.read(sharedLinkServiceProvider).createSharedLink(
+            albumId: albumId,
+            assetIds: assetsList,
+            showMeta: showMetadata.value,
+            allowDownload: allowDownload.value,
+            allowUpload: allowUpload.value,
+            description: descriptionController.text.isEmpty ? null : descriptionController.text,
+            password: passwordController.text.isEmpty ? null : passwordController.text,
+            expiresAt: expiryAfter.value == 0 ? null : calculateExpiry(),
+          );
       ref.invalidate(sharedLinksStateProvider);
       final externalDomain = ref.read(
         serverInfoProvider.select((s) => s.serverConfig.externalDomain),
       );
-      var serverUrl =
-          externalDomain.isNotEmpty ? externalDomain : getServerUrl();
+      var serverUrl = externalDomain.isNotEmpty ? externalDomain : getServerUrl();
       if (serverUrl != null && !serverUrl.endsWith('/')) {
         serverUrl += '/';
       }
@@ -430,9 +407,7 @@ class SharedLinkEditPage extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          existingLink == null
-              ? "shared_link_create_app_bar_title"
-              : "shared_link_edit_app_bar_title",
+          existingLink == null ? "shared_link_create_app_bar_title" : "shared_link_edit_app_bar_title",
         ).tr(),
         elevation: 0,
         leading: const CloseButton(),
@@ -470,8 +445,7 @@ class SharedLinkEditPage extends HookConsumerWidget {
               child: buildAllowDownloadButton(),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.only(left: padding, right: 20, bottom: 20),
+              padding: const EdgeInsets.only(left: padding, right: 20, bottom: 20),
               child: buildAllowUploadButton(),
             ),
             if (existingLink != null)
@@ -500,12 +474,9 @@ class SharedLinkEditPage extends HookConsumerWidget {
                     bottom: padding,
                   ),
                   child: ElevatedButton(
-                    onPressed:
-                        existingLink != null ? handleEditLink : handleNewLink,
+                    onPressed: existingLink != null ? handleEditLink : handleNewLink,
                     child: Text(
-                      existingLink != null
-                          ? "shared_link_edit_submit_button"
-                          : "shared_link_create_submit_button",
+                      existingLink != null ? "shared_link_edit_submit_button" : "shared_link_create_submit_button",
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:easy_localization/src/asset_loader.dart';
 import 'package:easy_localization/src/easy_localization_controller.dart';
 import 'package:easy_localization/src/localization.dart';
-import 'package:immich_mobile/constants/locales.dart';
+import 'package:mediab/constants/locales.dart';
 
 /// Workaround to manually load translations in another Isolate
 Future<bool> loadTranslations() async {

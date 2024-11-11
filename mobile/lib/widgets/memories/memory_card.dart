@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/pages/common/video_viewer.page.dart';
-import 'package:immich_mobile/utils/hooks/blurhash_hook.dart';
-import 'package:immich_mobile/widgets/common/immich_image.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/pages/common/video_viewer.page.dart';
+import 'package:mediab/utils/hooks/blurhash_hook.dart';
+import 'package:mediab/widgets/common/immich_image.dart';
 
 class MemoryCard extends StatelessWidget {
   final Asset asset;
@@ -45,11 +45,9 @@ class MemoryCard extends StatelessWidget {
               BoxFit fit = BoxFit.contain;
               if (asset.width != null && asset.height != null) {
                 final aspectRatio = asset.width! / asset.height!;
-                final phoneAspectRatio =
-                    constraints.maxWidth / constraints.maxHeight;
+                final phoneAspectRatio = constraints.maxWidth / constraints.maxHeight;
                 // Look for a 25% difference in either direction
-                if (phoneAspectRatio * .75 < aspectRatio &&
-                    phoneAspectRatio * 1.25 > aspectRatio) {
+                if (phoneAspectRatio * .75 < aspectRatio && phoneAspectRatio * 1.25 > aspectRatio) {
                   // Cover to look nice if we have nearly the same aspect ratio
                   fit = BoxFit.cover;
                 }

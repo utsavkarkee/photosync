@@ -1,4 +1,4 @@
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
 
 class AssetSelectionState {
   final bool hasRemote;
@@ -48,9 +48,5 @@ class AssetSelectionState {
   }
 
   @override
-  int get hashCode =>
-      hasRemote.hashCode ^
-      hasLocal.hashCode ^
-      hasMerged.hashCode ^
-      selectedCount.hashCode;
+  int get hashCode => hasRemote.hashCode ^ hasLocal.hashCode ^ hasMerged.hashCode ^ selectedCount.hashCode;
 }

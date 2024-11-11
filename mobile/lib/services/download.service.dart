@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:background_downloader/background_downloader.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/interfaces/download.interface.dart';
-import 'package:immich_mobile/interfaces/file_media.interface.dart';
-import 'package:immich_mobile/models/download/livephotos_medatada.model.dart';
-import 'package:immich_mobile/repositories/download.repository.dart';
-import 'package:immich_mobile/repositories/file_media.repository.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/utils/download.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/interfaces/download.interface.dart';
+import 'package:mediab/interfaces/file_media.interface.dart';
+import 'package:mediab/models/download/livephotos_medatada.model.dart';
+import 'package:mediab/repositories/download.repository.dart';
+import 'package:mediab/repositories/file_media.repository.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/utils/download.dart';
 import 'package:logging/logging.dart';
 
 final downloadServiceProvider = Provider(
@@ -36,8 +36,7 @@ class DownloadService {
   ) {
     _downloadRepository.onImageDownloadStatus = _onImageDownloadCallback;
     _downloadRepository.onVideoDownloadStatus = _onVideoDownloadCallback;
-    _downloadRepository.onLivePhotoDownloadStatus =
-        _onLivePhotoDownloadCallback;
+    _downloadRepository.onLivePhotoDownloadStatus = _onLivePhotoDownloadCallback;
     _downloadRepository.onTaskProgress = _onTaskProgressCallback;
   }
 
@@ -109,10 +108,8 @@ class DownloadService {
       return false;
     }
 
-    final imageRecord =
-        _findTaskRecord(records, livePhotosId, LivePhotosPart.image);
-    final videoRecord =
-        _findTaskRecord(records, livePhotosId, LivePhotosPart.video);
+    final imageRecord = _findTaskRecord(records, livePhotosId, LivePhotosPart.image);
+    final videoRecord = _findTaskRecord(records, livePhotosId, LivePhotosPart.video);
     final imageFilePath = await imageRecord.task.filePath();
     final videoFilePath = await videoRecord.task.filePath();
 
@@ -127,8 +124,7 @@ class DownloadService {
     } on PlatformException catch (error, stack) {
       // Handle saving MotionPhotos on iOS
       if (error.code == 'PHPhotosErrorDomain (-1)') {
-        final result = await _fileMediaRepository
-            .saveImageWithFile(imageFilePath, title: task.filename);
+        final result = await _fileMediaRepository.saveImageWithFile(imageFilePath, title: task.filename);
         return result != null;
       }
       _log.severe("Error saving live photo", error, stack);
@@ -175,9 +171,7 @@ class DownloadService {
       await _downloadRepository.download(
         _buildDownloadTask(
           asset.livePhotoVideoId!,
-          asset.fileName
-              .toUpperCase()
-              .replaceAll(RegExp(r"\.(JPG|HEIC)$"), '.MOV'),
+          asset.fileName.toUpperCase().replaceAll(RegExp(r"\.(JPG|HEIC)$"), '.MOV'),
           group: downloadGroupLivePhoto,
           metadata: LivePhotosMetadata(
             part: LivePhotosPart.video,

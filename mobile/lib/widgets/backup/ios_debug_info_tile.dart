@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/backup/ios_background_settings.provider.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/backup/ios_background_settings.provider.dart';
 import 'package:intl/intl.dart';
 
 /// This is a simple debug widget which should be removed later on when we are
@@ -32,8 +32,7 @@ class IosDebugInfoTile extends HookConsumerWidget {
     } else if (processing != null && fetch == null) {
       subtitle = 'Processing ran ${df.format(processing)}';
     } else {
-      final fetchOrProcessing =
-          fetch!.isAfter(processing!) ? fetch : processing;
+      final fetchOrProcessing = fetch!.isAfter(processing!) ? fetch : processing;
       subtitle = 'Last sync ${df.format(fetchOrProcessing)}';
     }
 

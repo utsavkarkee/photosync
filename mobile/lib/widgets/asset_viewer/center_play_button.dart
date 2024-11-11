@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/widgets/asset_viewer/animated_play_pause.dart';
+import 'package:mediab/widgets/asset_viewer/animated_play_pause.dart';
 
 class CenterPlayButton extends StatelessWidget {
   const CenterPlayButton({

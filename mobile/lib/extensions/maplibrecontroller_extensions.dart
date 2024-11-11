@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/services.dart';
-import 'package:immich_mobile/models/map/map_marker.model.dart';
-import 'package:immich_mobile/utils/map_utils.dart';
+import 'package:mediab/models/map/map_marker.model.dart';
+import 'package:mediab/utils/map_utils.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 
 extension MapMarkers on MaplibreMapController {

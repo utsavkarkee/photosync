@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
 
 abstract interface class IFileMediaRepository {
   Future<Asset?> saveImage(

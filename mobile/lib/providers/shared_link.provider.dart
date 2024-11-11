@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/models/shared_link/shared_link.model.dart';
-import 'package:immich_mobile/services/shared_link.service.dart';
+import 'package:mediab/models/shared_link/shared_link.model.dart';
+import 'package:mediab/services/shared_link.service.dart';
 
 class SharedLinksNotifier extends StateNotifier<AsyncValue<List<SharedLink>>> {
   final SharedLinkService _sharedLinkService;
@@ -20,9 +20,7 @@ class SharedLinksNotifier extends StateNotifier<AsyncValue<List<SharedLink>>> {
   }
 }
 
-final sharedLinksStateProvider =
-    StateNotifierProvider<SharedLinksNotifier, AsyncValue<List<SharedLink>>>(
-        (ref) {
+final sharedLinksStateProvider = StateNotifierProvider<SharedLinksNotifier, AsyncValue<List<SharedLink>>>((ref) {
   return SharedLinksNotifier(
     ref.watch(sharedLinkServiceProvider),
   );

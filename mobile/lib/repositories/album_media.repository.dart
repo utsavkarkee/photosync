@@ -1,9 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/interfaces/album_media.interface.dart';
-import 'package:immich_mobile/repositories/asset_media.repository.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/interfaces/album_media.interface.dart';
+import 'package:mediab/repositories/asset_media.repository.dart';
 import 'package:photo_manager/photo_manager.dart' hide AssetType;
 
 final albumMediaRepositoryProvider = Provider((ref) => AlbumMediaRepository());
@@ -11,8 +11,7 @@ final albumMediaRepositoryProvider = Provider((ref) => AlbumMediaRepository());
 class AlbumMediaRepository implements IAlbumMediaRepository {
   @override
   Future<List<Album>> getAll() async {
-    final List<AssetPathEntity> assetPathEntities =
-        await PhotoManager.getAssetPathList(
+    final List<AssetPathEntity> assetPathEntities = await PhotoManager.getAssetPathList(
       hasAll: true,
       filterOption: FilterOptionGroup(containsPathModified: true),
     );
@@ -22,8 +21,7 @@ class AlbumMediaRepository implements IAlbumMediaRepository {
   @override
   Future<List<String>> getAssetIds(String albumId) async {
     final album = await AssetPathEntity.fromId(albumId);
-    final List<AssetEntity> assets =
-        await album.getAssetListRange(start: 0, end: 0x7fffffffffffffff);
+    final List<AssetEntity> assets = await album.getAssetListRange(start: 0, end: 0x7fffffffffffffff);
     return assets.map((e) => e.id).toList();
   }
 
@@ -46,9 +44,7 @@ class AlbumMediaRepository implements IAlbumMediaRepository {
       albumId,
       filterOption: FilterOptionGroup(
         containsPathModified: true,
-        orders: orderByModificationDate
-            ? [const OrderOption(type: OrderOptionType.updateDate)]
-            : [],
+        orders: orderByModificationDate ? [const OrderOption(type: OrderOptionType.updateDate)] : [],
         imageOption: const FilterOption(needTitle: true),
         videoOption: const FilterOption(needTitle: true),
         updateTimeCond: modifiedFrom == null && modifiedUntil == null
@@ -60,8 +56,7 @@ class AlbumMediaRepository implements IAlbumMediaRepository {
       ),
     );
 
-    final List<AssetEntity> assets =
-        await onDevice.getAssetListRange(start: start, end: end);
+    final List<AssetEntity> assets = await onDevice.getAssetListRange(start: start, end: end);
     return assets.map(AssetMediaRepository.toAsset).toList().cast();
   }
 
@@ -78,10 +73,8 @@ class AlbumMediaRepository implements IAlbumMediaRepository {
   static Album _toAlbum(AssetPathEntity assetPathEntity) {
     final Album album = Album(
       name: assetPathEntity.name,
-      createdAt:
-          assetPathEntity.lastModified?.toUtc() ?? DateTime.now().toUtc(),
-      modifiedAt:
-          assetPathEntity.lastModified?.toUtc() ?? DateTime.now().toUtc(),
+      createdAt: assetPathEntity.lastModified?.toUtc() ?? DateTime.now().toUtc(),
+      modifiedAt: assetPathEntity.lastModified?.toUtc() ?? DateTime.now().toUtc(),
       shared: false,
       activityEnabled: false,
     );

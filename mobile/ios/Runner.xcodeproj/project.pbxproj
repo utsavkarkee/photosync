@@ -411,7 +411,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.107.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.alextran.immich.profile;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mediab.app.profile;
 				PRODUCT_NAME = "Immich-Profile";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -553,7 +553,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.107.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.alextran.immich.debug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mediab.app.debug;
 				PRODUCT_NAME = "Immich-Debug";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -581,7 +581,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.107.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.alextran.immich;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mediab.app;
 				PRODUCT_NAME = Immich;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";

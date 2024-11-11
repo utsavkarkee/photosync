@@ -4,15 +4,15 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_udid/flutter_udid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/models/authentication/authentication_state.model.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/providers/api.provider.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/utils/db.dart';
-import 'package:immich_mobile/utils/hash.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/models/authentication/authentication_state.model.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/providers/api.provider.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/utils/db.dart';
+import 'package:mediab/utils/hash.dart';
 import 'package:isar/isar.dart';
 import 'package:logging/logging.dart';
 import 'package:openapi/api.dart';
@@ -37,8 +37,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
 
   final ApiService _apiService;
   final Isar _db;
-  final StateNotifierProviderRef<AuthenticationNotifier, AuthenticationState>
-      _ref;
+  final StateNotifierProviderRef<AuthenticationNotifier, AuthenticationState> _ref;
   final _log = Logger("AuthenticationNotifier");
 
   Future<bool> login(
@@ -60,16 +59,12 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
 
     if (Platform.isIOS) {
       var iosInfo = await deviceInfoPlugin.iosInfo;
-      _apiService.authenticationApi.apiClient
-          .addDefaultHeader('deviceModel', iosInfo.utsname.machine);
-      _apiService.authenticationApi.apiClient
-          .addDefaultHeader('deviceType', 'iOS');
+      _apiService.authenticationApi.apiClient.addDefaultHeader('deviceModel', iosInfo.utsname.machine);
+      _apiService.authenticationApi.apiClient.addDefaultHeader('deviceType', 'iOS');
     } else {
       var androidInfo = await deviceInfoPlugin.androidInfo;
-      _apiService.authenticationApi.apiClient
-          .addDefaultHeader('deviceModel', androidInfo.model);
-      _apiService.authenticationApi.apiClient
-          .addDefaultHeader('deviceType', 'Android');
+      _apiService.authenticationApi.apiClient.addDefaultHeader('deviceModel', androidInfo.model);
+      _apiService.authenticationApi.apiClient.addDefaultHeader('deviceType', 'Android');
     }
 
     try {
@@ -104,8 +99,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
           .logout()
           .then((_) => log.info("Logout was successful for $userEmail"))
           .onError(
-            (error, stackTrace) =>
-                log.severe("Logout failed for $userEmail", error, stackTrace),
+            (error, stackTrace) => log.severe("Logout failed for $userEmail", error, stackTrace),
           );
 
       await Future.wait([
@@ -158,8 +152,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
     _apiService.setAccessToken(accessToken);
 
     // Get the deviceid from the store if it exists, otherwise generate a new one
-    String deviceId =
-        Store.tryGet(StoreKey.deviceId) ?? await FlutterUdid.consistentUdid;
+    String deviceId = Store.tryGet(StoreKey.deviceId) ?? await FlutterUdid.consistentUdid;
 
     bool shouldChangePassword = false;
     User? user = Store.tryGet(StoreKey.currentUser);
@@ -169,9 +162,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
     try {
       final responses = await Future.wait([
         _apiService.usersApi.getMyUser().timeout(const Duration(seconds: 7)),
-        _apiService.usersApi
-            .getMyPreferences()
-            .timeout(const Duration(seconds: 7)),
+        _apiService.usersApi.getMyPreferences().timeout(const Duration(seconds: 7)),
       ]);
       userResponse = responses[0] as UserAdminResponseDto;
       userPreferences = responses[1] as UserPreferencesResponseDto;
@@ -234,8 +225,7 @@ class AuthenticationNotifier extends StateNotifier<AuthenticationState> {
   }
 }
 
-final authenticationProvider =
-    StateNotifierProvider<AuthenticationNotifier, AuthenticationState>((ref) {
+final authenticationProvider = StateNotifierProvider<AuthenticationNotifier, AuthenticationState>((ref) {
   return AuthenticationNotifier(
     ref.watch(apiServiceProvider),
     ref.watch(dbProvider),

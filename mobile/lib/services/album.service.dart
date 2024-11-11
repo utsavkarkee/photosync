@@ -5,26 +5,26 @@ import 'dart:io';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/interfaces/album.interface.dart';
-import 'package:immich_mobile/interfaces/album_api.interface.dart';
-import 'package:immich_mobile/interfaces/album_media.interface.dart';
-import 'package:immich_mobile/interfaces/asset.interface.dart';
-import 'package:immich_mobile/interfaces/backup.interface.dart';
-import 'package:immich_mobile/models/albums/album_add_asset_response.model.dart';
-import 'package:immich_mobile/entities/backup_album.entity.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/models/albums/album_search.model.dart';
-import 'package:immich_mobile/repositories/album.repository.dart';
-import 'package:immich_mobile/repositories/album_api.repository.dart';
-import 'package:immich_mobile/repositories/asset.repository.dart';
-import 'package:immich_mobile/repositories/backup.repository.dart';
-import 'package:immich_mobile/repositories/album_media.repository.dart';
-import 'package:immich_mobile/services/entity.service.dart';
-import 'package:immich_mobile/services/sync.service.dart';
-import 'package:immich_mobile/services/user.service.dart';
+import 'package:mediab/interfaces/album.interface.dart';
+import 'package:mediab/interfaces/album_api.interface.dart';
+import 'package:mediab/interfaces/album_media.interface.dart';
+import 'package:mediab/interfaces/asset.interface.dart';
+import 'package:mediab/interfaces/backup.interface.dart';
+import 'package:mediab/models/albums/album_add_asset_response.model.dart';
+import 'package:mediab/entities/backup_album.entity.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/models/albums/album_search.model.dart';
+import 'package:mediab/repositories/album.repository.dart';
+import 'package:mediab/repositories/album_api.repository.dart';
+import 'package:mediab/repositories/asset.repository.dart';
+import 'package:mediab/repositories/backup.repository.dart';
+import 'package:mediab/repositories/album_media.repository.dart';
+import 'package:mediab/services/entity.service.dart';
+import 'package:mediab/services/sync.service.dart';
+import 'package:mediab/services/user.service.dart';
 import 'package:logging/logging.dart';
 
 final albumServiceProvider = Provider(
@@ -76,10 +76,8 @@ class AlbumService {
     final Stopwatch sw = Stopwatch()..start();
     bool changes = false;
     try {
-      final List<String> excludedIds = await _backupAlbumRepository
-          .getIdsBySelection(BackupSelection.exclude);
-      final List<String> selectedIds = await _backupAlbumRepository
-          .getIdsBySelection(BackupSelection.select);
+      final List<String> excludedIds = await _backupAlbumRepository.getIdsBySelection(BackupSelection.exclude);
+      final List<String> selectedIds = await _backupAlbumRepository.getIdsBySelection(BackupSelection.select);
       if (selectedIds.isEmpty) {
         final numLocal = await _albumRepository.count(local: true);
         if (numLocal > 0) {
@@ -126,8 +124,7 @@ class AlbumService {
         onDevice.removeWhere((e) => !selectedIds.contains(e.localId));
         _log.info("'Recents' is not selected, keeping only selected albums");
       }
-      changes =
-          await _syncService.syncLocalAlbumAssetsToDb(onDevice, excludedAssets);
+      changes = await _syncService.syncLocalAlbumAssetsToDb(onDevice, excludedAssets);
       _log.info("Syncing completed. Changes: $changes");
     } finally {
       _localCompleter.complete(changes);
@@ -143,8 +140,7 @@ class AlbumService {
     final Set<String> result = HashSet<String>();
     for (Album album in albums) {
       if (excludedAlbumIds.contains(album.localId)) {
-        final assetIds =
-            await _albumMediaRepository.getAssetIds(album.localId!);
+        final assetIds = await _albumMediaRepository.getAssetIds(album.localId!);
         result.addAll(assetIds);
       }
     }
@@ -163,11 +159,9 @@ class AlbumService {
     bool changes = false;
     try {
       await _userService.refreshUsers();
-      final List<Album> sharedAlbum =
-          await _albumApiRepository.getAll(shared: true);
+      final List<Album> sharedAlbum = await _albumApiRepository.getAll(shared: true);
 
-      final List<Album> ownedAlbum =
-          await _albumApiRepository.getAll(shared: null);
+      final List<Album> ownedAlbum = await _albumApiRepository.getAll(shared: null);
 
       final albums = HashSet<Album>(
         equals: (a, b) => a.remoteId == b.remoteId,
@@ -233,9 +227,8 @@ class AlbumService {
         assets.map((asset) => asset.remoteId!),
       );
 
-      final List<Asset> addedAssets = result.added
-          .map((id) => assets.firstWhere((asset) => asset.remoteId == id))
-          .toList();
+      final List<Asset> addedAssets =
+          result.added.map((id) => assets.firstWhere((asset) => asset.remoteId == id)).toList();
 
       await _updateAssets(album.id, add: addedAssets);
 
@@ -285,8 +278,7 @@ class AlbumService {
         await _albumApiRepository.delete(album.remoteId!);
       }
       if (album.shared) {
-        final foreignAssets =
-            await _assetRepository.getByAlbum(album, notOwnedBy: [userId]);
+        final foreignAssets = await _assetRepository.getByAlbum(album, notOwnedBy: [userId]);
         await _albumRepository.delete(album.id);
 
         final List<Album> albums = await _albumRepository.getAll(shared: true);
@@ -296,8 +288,7 @@ class AlbumService {
             await _assetRepository.getByAlbum(album, notOwnedBy: [userId]),
           );
         }
-        final List<int> idsToRemove =
-            _syncService.sharedAssetsToRemove(foreignAssets, existing);
+        final List<int> idsToRemove = _syncService.sharedAssetsToRemove(foreignAssets, existing);
         if (idsToRemove.isNotEmpty) {
           await _assetRepository.deleteById(idsToRemove);
         }
@@ -330,8 +321,7 @@ class AlbumService {
         album.remoteId!,
         assets.map((asset) => asset.remoteId!),
       );
-      final toRemove = result.removed
-          .map((id) => assets.firstWhere((asset) => asset.remoteId == id));
+      final toRemove = result.removed.map((id) => assets.firstWhere((asset) => asset.remoteId == id));
       await _updateAssets(album.id, remove: toRemove.toList());
       return true;
     } catch (e) {
@@ -368,8 +358,7 @@ class AlbumService {
     List<String> userIds,
   ) async {
     try {
-      final updatedAlbum =
-          await _albumApiRepository.addUsers(album.remoteId!, userIds);
+      final updatedAlbum = await _albumApiRepository.addUsers(album.remoteId!, userIds);
 
       album.sharedUsers.addAll(updatedAlbum.remoteUsers);
       album.shared = true;

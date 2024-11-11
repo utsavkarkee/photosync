@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/widgets/search/thumbnail_with_info_container.dart';
-import 'package:immich_mobile/services/api.service.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/widgets/search/thumbnail_with_info_container.dart';
+import 'package:mediab/services/api.service.dart';
 
 class ThumbnailWithInfo extends StatelessWidget {
   const ThumbnailWithInfo({
@@ -22,8 +22,7 @@ class ThumbnailWithInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textAndIconColor =
-        context.isDarkTheme ? Colors.grey[100] : Colors.grey[700];
+    var textAndIconColor = context.isDarkTheme ? Colors.grey[100] : Colors.grey[700];
     return ThumbnailWithInfoContainer(
       onTap: onTap,
       borderRadius: borderRadius,
@@ -37,8 +36,7 @@ class ThumbnailWithInfo extends StatelessWidget {
                 fit: BoxFit.cover,
                 imageUrl: imageUrl!,
                 httpHeaders: ApiService.getRequestHeaders(),
-                errorWidget: (context, url, error) =>
-                    const Icon(Icons.image_not_supported_outlined),
+                errorWidget: (context, url, error) => const Icon(Icons.image_not_supported_outlined),
               ),
             )
           : Center(

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:immich_mobile/providers/gallery_permission.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
+import 'package:mediab/providers/gallery_permission.provider.dart';
+import 'package:mediab/routing/router.dart';
 
 class BackupPermissionGuard extends AutoRouteGuard {
   final GalleryPermissionNotifier _permission;

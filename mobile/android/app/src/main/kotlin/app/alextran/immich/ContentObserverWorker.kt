@@ -1,4 +1,4 @@
-package app.alextran.immich
+package com.mediab.app
 
 import android.content.Context
 import android.os.SystemClock

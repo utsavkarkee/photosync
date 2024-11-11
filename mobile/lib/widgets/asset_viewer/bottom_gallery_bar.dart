@@ -5,24 +5,24 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/providers/album/current_album.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/asset_stack.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/download.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/show_controls.provider.dart';
-import 'package:immich_mobile/services/stack.service.dart';
-import 'package:immich_mobile/widgets/asset_grid/asset_grid_data_structure.dart';
-import 'package:immich_mobile/widgets/asset_viewer/video_controls.dart';
-import 'package:immich_mobile/widgets/asset_grid/delete_dialog.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/widgets/common/immich_image.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/providers/server_info.provider.dart';
-import 'package:immich_mobile/providers/user.provider.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
-import 'package:immich_mobile/pages/editing/edit.page.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/providers/album/current_album.provider.dart';
+import 'package:mediab/providers/asset_viewer/asset_stack.provider.dart';
+import 'package:mediab/providers/asset_viewer/download.provider.dart';
+import 'package:mediab/providers/asset_viewer/show_controls.provider.dart';
+import 'package:mediab/services/stack.service.dart';
+import 'package:mediab/widgets/asset_grid/asset_grid_data_structure.dart';
+import 'package:mediab/widgets/asset_viewer/video_controls.dart';
+import 'package:mediab/widgets/asset_grid/delete_dialog.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/widgets/common/immich_image.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/providers/server_info.provider.dart';
+import 'package:mediab/providers/user.provider.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
+import 'package:mediab/pages/editing/edit.page.dart';
 
 class BottomGalleryBar extends ConsumerWidget {
   final Asset asset;
@@ -50,23 +50,17 @@ class BottomGalleryBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isOwner = asset.ownerId == ref.watch(currentUserProvider)?.isarId;
 
-    final stackItems = showStack && asset.stackCount > 0
-        ? ref.watch(assetStackStateProvider(asset))
-        : <Asset>[];
+    final stackItems = showStack && asset.stackCount > 0 ? ref.watch(assetStackStateProvider(asset)) : <Asset>[];
     bool isStackPrimaryAsset = asset.stackPrimaryAssetId == null;
     final navStack = AutoRouter.of(context).stackData;
-    final isTrashEnabled =
-        ref.watch(serverInfoProvider.select((v) => v.serverFeatures.trash));
-    final isFromTrash = isTrashEnabled &&
-        navStack.length > 2 &&
-        navStack.elementAt(navStack.length - 2).name == TrashRoute.name;
+    final isTrashEnabled = ref.watch(serverInfoProvider.select((v) => v.serverFeatures.trash));
+    final isFromTrash =
+        isTrashEnabled && navStack.length > 2 && navStack.elementAt(navStack.length - 2).name == TrashRoute.name;
     final isInAlbum = ref.watch(currentAlbumProvider)?.isRemote ?? false;
 
     void removeAssetFromStack() {
       if (stackIndex > 0 && showStack) {
-        ref
-            .read(assetStackStateProvider(asset).notifier)
-            .removeChild(stackIndex - 1);
+        ref.read(assetStackStateProvider(asset).notifier).removeChild(stackIndex - 1);
       }
     }
 
@@ -82,8 +76,7 @@ class BottomGalleryBar extends ConsumerWidget {
 
           // `assetIndex == totalAssets.value - 1` handle the case of removing the last asset
           // to not throw the error when the next preCache index is called
-          if (totalAssets.value == 1 ||
-              assetIndex.value == totalAssets.value - 1) {
+          if (totalAssets.value == 1 || assetIndex.value == totalAssets.value - 1) {
             // Handle only one asset
             context.maybePop();
           }
@@ -132,9 +125,7 @@ class BottomGalleryBar extends ConsumerWidget {
         return;
       }
 
-      await ref
-          .read(stackServiceProvider)
-          .deleteStack(asset.stackId!, [asset, ...stackItems]);
+      await ref.read(stackServiceProvider).deleteStack(asset.stackId!, [asset, ...stackItems]);
     }
 
     void showStackActionItems() {
@@ -229,8 +220,7 @@ class BottomGalleryBar extends ConsumerWidget {
 
     handleRemoveFromAlbum() async {
       final album = ref.read(currentAlbumProvider);
-      final bool isSuccess = album != null &&
-          await ref.read(albumProvider.notifier).removeAsset(album, [asset]);
+      final bool isSuccess = album != null && await ref.read(albumProvider.notifier).removeAsset(album, [asset]);
 
       if (isSuccess) {
         // Workaround for asset remaining in the gallery
@@ -353,8 +343,7 @@ class BottomGalleryBar extends ConsumerWidget {
               unselectedItemColor: Colors.white,
               showSelectedLabels: true,
               showUnselectedLabels: true,
-              items:
-                  albumActions.map((e) => e.keys.first).toList(growable: false),
+              items: albumActions.map((e) => e.keys.first).toList(growable: false),
               onTap: (index) {
                 albumActions[index].values.first.call(index);
               },

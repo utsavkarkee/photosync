@@ -1,16 +1,15 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/interfaces/album.interface.dart';
-import 'package:immich_mobile/models/albums/album_search.model.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/repositories/database.repository.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/interfaces/album.interface.dart';
+import 'package:mediab/models/albums/album_search.model.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/repositories/database.repository.dart';
 import 'package:isar/isar.dart';
 
-final albumRepositoryProvider =
-    Provider((ref) => AlbumRepository(ref.watch(dbProvider)));
+final albumRepositoryProvider = Provider((ref) => AlbumRepository(ref.watch(dbProvider)));
 
 class AlbumRepository extends DatabaseRepository implements IAlbumRepository {
   AlbumRepository(super.db);
@@ -69,8 +68,7 @@ class AlbumRepository extends DatabaseRepository implements IAlbumRepository {
     } else {
       afterWhere = baseQuery.localIdIsNotNull();
     }
-    QueryBuilder<Album, Album, QAfterFilterCondition> filterQuery =
-        afterWhere.filter().noOp();
+    QueryBuilder<Album, Album, QAfterFilterCondition> filterQuery = afterWhere.filter().noOp();
     if (shared != null) {
       filterQuery = filterQuery.sharedEqualTo(true);
     }
@@ -93,43 +91,34 @@ class AlbumRepository extends DatabaseRepository implements IAlbumRepository {
   Future<Album?> get(int id) => db.albums.get(id);
 
   @override
-  Future<void> removeUsers(Album album, List<User> users) =>
-      txn(() => album.sharedUsers.update(unlink: users));
+  Future<void> removeUsers(Album album, List<User> users) => txn(() => album.sharedUsers.update(unlink: users));
 
   @override
-  Future<void> addAssets(Album album, List<Asset> assets) =>
-      txn(() => album.assets.update(link: assets));
+  Future<void> addAssets(Album album, List<Asset> assets) => txn(() => album.assets.update(link: assets));
 
   @override
-  Future<void> removeAssets(Album album, List<Asset> assets) =>
-      txn(() => album.assets.update(unlink: assets));
+  Future<void> removeAssets(Album album, List<Asset> assets) => txn(() => album.assets.update(unlink: assets));
 
   @override
   Future<Album> recalculateMetadata(Album album) async {
     album.startDate = await album.assets.filter().fileCreatedAtProperty().min();
     album.endDate = await album.assets.filter().fileCreatedAtProperty().max();
-    album.lastModifiedAssetTimestamp =
-        await album.assets.filter().updatedAtProperty().max();
+    album.lastModifiedAssetTimestamp = await album.assets.filter().updatedAtProperty().max();
     return album;
   }
 
   @override
-  Future<void> addUsers(Album album, List<User> users) =>
-      txn(() => album.sharedUsers.update(link: users));
+  Future<void> addUsers(Album album, List<User> users) => txn(() => album.sharedUsers.update(link: users));
 
   @override
-  Future<void> deleteAllLocal() =>
-      txn(() => db.albums.where().localIdIsNotNull().deleteAll());
+  Future<void> deleteAllLocal() => txn(() => db.albums.where().localIdIsNotNull().deleteAll());
 
   @override
   Future<List<Album>> search(
     String searchTerm,
     QuickFilterMode filterMode,
   ) async {
-    var query = db.albums
-        .filter()
-        .nameContains(searchTerm, caseSensitive: false)
-        .remoteIdIsNotNull();
+    var query = db.albums.filter().nameContains(searchTerm, caseSensitive: false).remoteIdIsNotNull();
 
     switch (filterMode) {
       case QuickFilterMode.sharedWithMe:

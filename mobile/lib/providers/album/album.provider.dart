@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/models/albums/album_search.model.dart';
-import 'package:immich_mobile/services/album.service.dart';
-import 'package:immich_mobile/widgets/asset_grid/asset_grid_data_structure.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/utils/renderlist_generator.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/models/albums/album_search.model.dart';
+import 'package:mediab/services/album.service.dart';
+import 'package:mediab/widgets/asset_grid/asset_grid_data_structure.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/utils/renderlist_generator.dart';
 import 'package:isar/isar.dart';
 
 final isRefreshingRemoteAlbumProvider = StateProvider<bool>((ref) => false);
@@ -113,8 +113,7 @@ class AlbumNotifier extends StateNotifier<List<Album>> {
   }
 }
 
-final albumProvider =
-    StateNotifierProvider.autoDispose<AlbumNotifier, List<Album>>((ref) {
+final albumProvider = StateNotifierProvider.autoDispose<AlbumNotifier, List<Album>>((ref) {
   return AlbumNotifier(
     ref.watch(albumServiceProvider),
     ref.watch(dbProvider),
@@ -122,8 +121,7 @@ final albumProvider =
   );
 });
 
-final albumWatcher =
-    StreamProvider.autoDispose.family<Album, int>((ref, albumId) async* {
+final albumWatcher = StreamProvider.autoDispose.family<Album, int>((ref, albumId) async* {
   final db = ref.watch(dbProvider);
   final a = await db.albums.get(albumId);
   if (a != null) yield a;
@@ -132,12 +130,10 @@ final albumWatcher =
   }
 });
 
-final albumRenderlistProvider =
-    StreamProvider.autoDispose.family<RenderList, int>((ref, albumId) {
+final albumRenderlistProvider = StreamProvider.autoDispose.family<RenderList, int>((ref, albumId) {
   final album = ref.watch(albumWatcher(albumId)).value;
   if (album != null) {
-    final query =
-        album.assets.filter().isTrashedEqualTo(false).sortByFileCreatedAtDesc();
+    final query = album.assets.filter().isTrashedEqualTo(false).sortByFileCreatedAtDesc();
     return renderListGeneratorWithGroupBy(query, GroupAssetsBy.none);
   }
   return const Stream.empty();
@@ -166,7 +162,6 @@ class LocalAlbumsNotifier extends StateNotifier<List<Album>> {
   }
 }
 
-final localAlbumsProvider =
-    StateNotifierProvider.autoDispose<LocalAlbumsNotifier, List<Album>>((ref) {
+final localAlbumsProvider = StateNotifierProvider.autoDispose<LocalAlbumsNotifier, List<Album>>((ref) {
   return LocalAlbumsNotifier(ref.watch(dbProvider));
 });

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/utils/datetime_comparison.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/utils/datetime_comparison.dart';
 import 'package:isar/isar.dart';
 // ignore: implementation_imports
 import 'package:isar/src/common/isar_links_common.dart';
@@ -89,13 +89,11 @@ class Album {
   // accessible in an object freshly created (not loaded from DB)
 
   @ignore
-  Iterable<User> get remoteUsers => sharedUsers.isEmpty
-      ? (sharedUsers as IsarLinksCommon<User>).addedObjects
-      : sharedUsers;
+  Iterable<User> get remoteUsers =>
+      sharedUsers.isEmpty ? (sharedUsers as IsarLinksCommon<User>).addedObjects : sharedUsers;
 
   @ignore
-  Iterable<Asset> get remoteAssets =>
-      assets.isEmpty ? (assets as IsarLinksCommon<Asset>).addedObjects : assets;
+  Iterable<Asset> get remoteAssets => assets.isEmpty ? (assets as IsarLinksCommon<Asset>).addedObjects : assets;
 
   @override
   bool operator ==(other) {
@@ -155,10 +153,7 @@ class Album {
     a.remoteAssetCount = dto.assetCount;
     a.owner.value = await db.users.getById(dto.ownerId);
     if (dto.albumThumbnailAssetId != null) {
-      a.thumbnail.value = await db.assets
-          .where()
-          .remoteIdEqualTo(dto.albumThumbnailAssetId)
-          .findFirst();
+      a.thumbnail.value = await db.assets.where().remoteIdEqualTo(dto.albumThumbnailAssetId).findFirst();
     }
     if (dto.albumUsers.isNotEmpty) {
       final users = await db.users.getAllById(
@@ -167,8 +162,7 @@ class Album {
       a.sharedUsers.addAll(users.cast());
     }
     if (dto.assets.isNotEmpty) {
-      final assets =
-          await db.assets.getAllByRemoteId(dto.assets.map((e) => e.id));
+      final assets = await db.assets.getAllByRemoteId(dto.assets.map((e) => e.id));
       a.assets.addAll(assets);
     }
     return a;

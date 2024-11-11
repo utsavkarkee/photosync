@@ -1,10 +1,10 @@
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/interfaces/asset.interface.dart';
-import 'package:immich_mobile/interfaces/asset_api.interface.dart';
-import 'package:immich_mobile/interfaces/person_api.interface.dart';
-import 'package:immich_mobile/repositories/asset.repository.dart';
-import 'package:immich_mobile/repositories/asset_api.repository.dart';
-import 'package:immich_mobile/repositories/person_api.repository.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/interfaces/asset.interface.dart';
+import 'package:mediab/interfaces/asset_api.interface.dart';
+import 'package:mediab/interfaces/person_api.interface.dart';
+import 'package:mediab/repositories/asset.repository.dart';
+import 'package:mediab/repositories/asset_api.repository.dart';
+import 'package:mediab/repositories/person_api.repository.dart';
 import 'package:logging/logging.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -41,8 +41,7 @@ class PersonService {
   Future<List<Asset>> getPersonAssets(String id) async {
     try {
       final assets = await _assetApiRepository.search(personIds: [id]);
-      return await _assetRepository
-          .getAllByRemoteId(assets.map((a) => a.remoteId!));
+      return await _assetRepository.getAllByRemoteId(assets.map((a) => a.remoteId!));
     } catch (error, stack) {
       _log.severe("Error while fetching person assets", error, stack);
     }

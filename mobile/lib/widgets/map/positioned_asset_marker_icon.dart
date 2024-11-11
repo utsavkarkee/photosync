@@ -3,9 +3,9 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/utils/image_url_builder.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/utils/image_url_builder.dart';
 
 class PositionedAssetMarkerIcon extends StatelessWidget {
   final Point<num> point;
@@ -89,8 +89,7 @@ class _AssetMarkerIcon extends StatelessWidget {
                     imageUrl,
                     cacheKey: cacheKey,
                     headers: ApiService.getRequestHeaders(),
-                    errorListener: (_) =>
-                        const Icon(Icons.image_not_supported_outlined),
+                    errorListener: (_) => const Icon(Icons.image_not_supported_outlined),
                   ),
                 ),
               ),
@@ -175,7 +174,6 @@ class _PinPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_PinPainter old) {
-    return old.primaryColor != primaryColor ||
-        old.secondaryColor != secondaryColor;
+    return old.primaryColor != primaryColor || old.secondaryColor != secondaryColor;
   }
 }

@@ -2,13 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/partner.provider.dart';
-import 'package:immich_mobile/services/partner.service.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/widgets/common/confirm_dialog.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
-import 'package:immich_mobile/widgets/common/user_avatar.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/partner.provider.dart';
+import 'package:mediab/services/partner.service.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/widgets/common/confirm_dialog.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
+import 'package:mediab/widgets/common/user_avatar.dart';
 
 @RoutePage()
 class PartnerPage extends HookConsumerWidget {
@@ -53,8 +53,7 @@ class PartnerPage extends HookConsumerWidget {
         },
       );
       if (selectedUser != null) {
-        final ok =
-            await ref.read(partnerServiceProvider).addPartner(selectedUser);
+        final ok = await ref.read(partnerServiceProvider).addPartner(selectedUser);
         if (ok) {
           ref.invalidate(partnerSharedByProvider);
         } else {
@@ -148,8 +147,7 @@ class PartnerPage extends HookConsumerWidget {
         centerTitle: false,
         actions: [
           IconButton(
-            onPressed:
-                availableUsers.whenOrNull(data: (data) => addNewUsersHandler),
+            onPressed: availableUsers.whenOrNull(data: (data) => addNewUsersHandler),
             icon: const Icon(Icons.person_add),
             tooltip: "partner_page_add_partner".tr(),
           ),

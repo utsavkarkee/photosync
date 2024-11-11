@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
-import 'package:immich_mobile/widgets/common/immich_thumbnail.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
+import 'package:mediab/widgets/common/immich_thumbnail.dart';
 
 class AlbumThumbnailCard extends StatelessWidget {
   final Function()? onTap;
@@ -73,10 +73,8 @@ class AlbumThumbnailCard extends StatelessWidget {
               children: [
                 TextSpan(
                   text: album.assetCount == 1
-                      ? 'album_thumbnail_card_item'
-                          .tr(args: ['${album.assetCount}'])
-                      : 'album_thumbnail_card_items'
-                          .tr(args: ['${album.assetCount}']),
+                      ? 'album_thumbnail_card_item'.tr(args: ['${album.assetCount}'])
+                      : 'album_thumbnail_card_items'.tr(args: ['${album.assetCount}']),
                 ),
                 if (owner != null) const TextSpan(text: ' • '),
                 if (owner != null) TextSpan(text: owner),
@@ -99,9 +97,7 @@ class AlbumThumbnailCard extends StatelessWidget {
                       height: cardSize,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
-                        child: album.thumbnail.value == null
-                            ? buildEmptyThumbnail()
-                            : buildAlbumThumbnail(),
+                        child: album.thumbnail.value == null ? buildEmptyThumbnail() : buildAlbumThumbnail(),
                       ),
                     ),
                     if (showTitle) ...[

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
 
 class ThumbnailPlaceholder extends StatelessWidget {
   final EdgeInsets margin;

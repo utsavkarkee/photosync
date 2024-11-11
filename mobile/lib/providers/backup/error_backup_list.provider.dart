@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/models/backup/error_upload_asset.model.dart';
+import 'package:mediab/models/backup/error_upload_asset.model.dart';
 
 class ErrorBackupListNotifier extends StateNotifier<Set<ErrorUploadAsset>> {
   ErrorBackupListNotifier() : super({});
@@ -17,7 +17,6 @@ class ErrorBackupListNotifier extends StateNotifier<Set<ErrorUploadAsset>> {
   }
 }
 
-final errorBackupListProvider =
-    StateNotifierProvider<ErrorBackupListNotifier, Set<ErrorUploadAsset>>(
+final errorBackupListProvider = StateNotifierProvider<ErrorBackupListNotifier, Set<ErrorUploadAsset>>(
   (ref) => ErrorBackupListNotifier(),
 );

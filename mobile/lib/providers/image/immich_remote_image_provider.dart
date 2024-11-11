@@ -3,20 +3,19 @@ import 'dart:ui' as ui;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:immich_mobile/providers/image/cache/image_loader.dart';
-import 'package:immich_mobile/providers/image/cache/remote_image_cache_manager.dart';
+import 'package:mediab/providers/image/cache/image_loader.dart';
+import 'package:mediab/providers/image/cache/remote_image_cache_manager.dart';
 import 'package:openapi/api.dart' as api;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/utils/image_url_builder.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/utils/image_url_builder.dart';
 
 /// The remote image provider for full size remote images
-class ImmichRemoteImageProvider
-    extends ImageProvider<ImmichRemoteImageProvider> {
+class ImmichRemoteImageProvider extends ImageProvider<ImmichRemoteImageProvider> {
   /// The [Asset.remoteId] of the asset to fetch
   final String assetId;
 

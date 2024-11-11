@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/models/memories/memory.model.dart';
-import 'package:immich_mobile/providers/haptic_feedback.provider.dart';
-import 'package:immich_mobile/widgets/common/immich_image.dart';
-import 'package:immich_mobile/widgets/memories/memory_bottom_info.dart';
-import 'package:immich_mobile/widgets/memories/memory_card.dart';
-import 'package:immich_mobile/widgets/memories/memory_epilogue.dart';
-import 'package:immich_mobile/widgets/memories/memory_progress_indicator.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/models/memories/memory.model.dart';
+import 'package:mediab/providers/haptic_feedback.provider.dart';
+import 'package:mediab/widgets/common/immich_image.dart';
+import 'package:mediab/widgets/memories/memory_bottom_info.dart';
+import 'package:mediab/widgets/memories/memory_card.dart';
+import 'package:mediab/widgets/memories/memory_epilogue.dart';
+import 'package:mediab/widgets/memories/memory_progress_indicator.dart';
 
 @RoutePage()
 class MemoryPage extends HookConsumerWidget {
@@ -34,8 +34,7 @@ class MemoryPage extends HookConsumerWidget {
     const bgColor = Colors.black;
 
     /// The list of all of the asset page controllers
-    final memoryAssetPageControllers =
-        List.generate(memories.length, (i) => usePageController());
+    final memoryAssetPageControllers = List.generate(memories.length, (i) => usePageController());
 
     /// The main vertically scrolling page controller with each list of memories
     final memoryPageController = usePageController(initialPage: memoryIndex);
@@ -59,8 +58,7 @@ class MemoryPage extends HookConsumerWidget {
     toNextAsset(int currentAssetIndex) {
       if (currentAssetIndex + 1 < currentMemory.value.assets.length) {
         // Go to the next asset
-        PageController controller =
-            memoryAssetPageControllers[currentMemoryIndex.value];
+        PageController controller = memoryAssetPageControllers[currentMemoryIndex.value];
 
         controller.nextPage(
           curve: Curves.easeInOut,
@@ -73,8 +71,7 @@ class MemoryPage extends HookConsumerWidget {
     }
 
     updateProgressText() {
-      assetProgress.value =
-          "${currentAssetPage.value + 1}|${currentMemory.value.assets.length}";
+      assetProgress.value = "${currentAssetPage.value + 1}|${currentMemory.value.assets.length}";
     }
 
     /// Downloads and caches the image for the asset at this [currentMemory]'s index
@@ -123,8 +120,7 @@ class MemoryPage extends HookConsumerWidget {
 
     // Precache the next page right away if we are on the first page
     if (currentAssetPage.value == 0) {
-      Future.delayed(const Duration(milliseconds: 200))
-          .then((_) => precacheAsset(1));
+      Future.delayed(const Duration(milliseconds: 200)).then((_) => precacheAsset(1));
     }
 
     Future<void> onAssetChanged(int otherIndex) async {
@@ -147,12 +143,10 @@ class MemoryPage extends HookConsumerWidget {
         // maxScrollExtend contains the sum of horizontal pixels of all assets for depth = 1
         // or sum of vertical pixels of all memories for depth = 0
         if (notification is ScrollUpdateNotification) {
-          final isEpiloguePage =
-              (memoryPageController.page?.floor() ?? 0) >= memories.length;
+          final isEpiloguePage = (memoryPageController.page?.floor() ?? 0) >= memories.length;
 
           final offset = notification.metrics.pixels;
-          if (isEpiloguePage &&
-              (offset > notification.metrics.maxScrollExtent + 150)) {
+          if (isEpiloguePage && (offset > notification.metrics.maxScrollExtent + 150)) {
             context.maybePop();
             return true;
           }

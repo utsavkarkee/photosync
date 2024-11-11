@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/asset_viewer/show_controls.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/video_player_controls_provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/video_player_value_provider.dart';
+import 'package:mediab/providers/asset_viewer/show_controls.provider.dart';
+import 'package:mediab/providers/asset_viewer/video_player_controls_provider.dart';
+import 'package:mediab/providers/asset_viewer/video_player_value_provider.dart';
 
 /// The video controls for the [videPlayerControlsProvider]
 class VideoControls extends ConsumerWidget {
@@ -12,10 +12,8 @@ class VideoControls extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final duration =
-        ref.watch(videoPlaybackValueProvider.select((v) => v.duration));
-    final position =
-        ref.watch(videoPlaybackValueProvider.select((v) => v.position));
+    final duration = ref.watch(videoPlaybackValueProvider.select((v) => v.duration));
+    final position = ref.watch(videoPlaybackValueProvider.select((v) => v.position));
 
     return AnimatedOpacity(
       opacity: ref.watch(showControlsProvider) ? 1.0 : 0.0,
@@ -45,9 +43,7 @@ class VideoControls extends ConsumerWidget {
                     value: duration == Duration.zero
                         ? 0.0
                         : min(
-                            position.inMicroseconds /
-                                duration.inMicroseconds *
-                                100,
+                            position.inMicroseconds / duration.inMicroseconds * 100,
                             100,
                           ),
                     min: 0,
@@ -56,8 +52,7 @@ class VideoControls extends ConsumerWidget {
                     activeColor: Colors.white,
                     inactiveColor: Colors.white.withOpacity(0.75),
                     onChanged: (position) {
-                      ref.read(videoPlayerControlsProvider.notifier).position =
-                          position;
+                      ref.read(videoPlayerControlsProvider.notifier).position = position;
                     },
                   ),
                 ),
@@ -77,9 +72,7 @@ class VideoControls extends ConsumerWidget {
                         ? Icons.volume_off
                         : Icons.volume_up,
                   ),
-                  onPressed: () => ref
-                      .read(videoPlayerControlsProvider.notifier)
-                      .toggleMute(),
+                  onPressed: () => ref.read(videoPlayerControlsProvider.notifier).toggleMute(),
                   color: Colors.white,
                 ),
               ],
@@ -117,8 +110,7 @@ class VideoControls extends ConsumerWidget {
             ? '00'
             : '0$seconds';
 
-    final formattedTime =
-        '${hoursString == '00' ? '' : '$hoursString:'}$minutesString:$secondsString';
+    final formattedTime = '${hoursString == '00' ? '' : '$hoursString:'}$minutesString:$secondsString';
 
     return formattedTime;
   }

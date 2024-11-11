@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/models/server_info/server_disk_info.model.dart';
+import 'package:mediab/models/server_info/server_disk_info.model.dart';
 
-import 'package:immich_mobile/models/server_info/server_info.model.dart';
-import 'package:immich_mobile/services/server_info.service.dart';
-import 'package:immich_mobile/models/server_info/server_config.model.dart';
-import 'package:immich_mobile/models/server_info/server_features.model.dart';
-import 'package:immich_mobile/models/server_info/server_version.model.dart';
+import 'package:mediab/models/server_info/server_info.model.dart';
+import 'package:mediab/services/server_info.service.dart';
+import 'package:mediab/models/server_info/server_config.model.dart';
+import 'package:mediab/models/server_info/server_features.model.dart';
+import 'package:mediab/models/server_info/server_version.model.dart';
 import 'package:logging/logging.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -34,8 +34,7 @@ class ServerInfoNotifier extends StateNotifier<ServerInfo> {
               trashDays: 30,
               oauthButtonText: '',
               externalDomain: '',
-              mapLightStyleUrl:
-                  'https://tiles.immich.cloud/v1/style/light.json',
+              mapLightStyleUrl: 'https://tiles.immich.cloud/v1/style/light.json',
               mapDarkStyleUrl: 'https://tiles.immich.cloud/v1/style/dark.json',
             ),
             serverDiskInfo: const ServerDiskInfo(
@@ -91,8 +90,7 @@ class ServerInfoNotifier extends StateNotifier<ServerInfo> {
     if (appVersion["major"]! > serverVersion.major) {
       state = state.copyWith(
         isVersionMismatch: true,
-        versionMismatchErrorMessage:
-            "profile_drawer_server_out_of_date_major".tr(),
+        versionMismatchErrorMessage: "profile_drawer_server_out_of_date_major".tr(),
       );
       return;
     }
@@ -100,8 +98,7 @@ class ServerInfoNotifier extends StateNotifier<ServerInfo> {
     if (appVersion["major"]! < serverVersion.major) {
       state = state.copyWith(
         isVersionMismatch: true,
-        versionMismatchErrorMessage:
-            "profile_drawer_client_out_of_date_major".tr(),
+        versionMismatchErrorMessage: "profile_drawer_client_out_of_date_major".tr(),
       );
       return;
     }
@@ -109,8 +106,7 @@ class ServerInfoNotifier extends StateNotifier<ServerInfo> {
     if (appVersion["minor"]! > serverVersion.minor) {
       state = state.copyWith(
         isVersionMismatch: true,
-        versionMismatchErrorMessage:
-            "profile_drawer_server_out_of_date_minor".tr(),
+        versionMismatchErrorMessage: "profile_drawer_server_out_of_date_minor".tr(),
       );
       return;
     }
@@ -118,8 +114,7 @@ class ServerInfoNotifier extends StateNotifier<ServerInfo> {
     if (appVersion["minor"]! < serverVersion.minor) {
       state = state.copyWith(
         isVersionMismatch: true,
-        versionMismatchErrorMessage:
-            "profile_drawer_client_out_of_date_minor".tr(),
+        versionMismatchErrorMessage: "profile_drawer_client_out_of_date_minor".tr(),
       );
       return;
     }
@@ -180,7 +175,6 @@ class ServerInfoNotifier extends StateNotifier<ServerInfo> {
   }
 }
 
-final serverInfoProvider =
-    StateNotifierProvider<ServerInfoNotifier, ServerInfo>((ref) {
+final serverInfoProvider = StateNotifierProvider<ServerInfoNotifier, ServerInfo>((ref) {
   return ServerInfoNotifier(ref.read(serverInfoServiceProvider));
 });

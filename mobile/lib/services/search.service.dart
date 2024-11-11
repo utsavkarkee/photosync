@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/string_extensions.dart';
-import 'package:immich_mobile/interfaces/asset.interface.dart';
-import 'package:immich_mobile/models/search/search_filter.model.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/models/search/search_result.model.dart';
-import 'package:immich_mobile/providers/api.provider.dart';
-import 'package:immich_mobile/repositories/asset.repository.dart';
-import 'package:immich_mobile/services/api.service.dart';
+import 'package:mediab/extensions/string_extensions.dart';
+import 'package:mediab/interfaces/asset.interface.dart';
+import 'package:mediab/models/search/search_filter.model.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/models/search/search_result.model.dart';
+import 'package:mediab/providers/api.provider.dart';
+import 'package:mediab/repositories/asset.repository.dart';
+import 'package:mediab/services/api.service.dart';
 import 'package:logging/logging.dart';
 import 'package:openapi/api.dart';
 
@@ -79,10 +79,7 @@ class SearchService {
       } else {
         response = await _apiService.searchApi.searchMetadata(
           MetadataSearchDto(
-            originalFileName:
-                filter.filename != null && filter.filename!.isNotEmpty
-                    ? filter.filename
-                    : null,
+            originalFileName: filter.filename != null && filter.filename!.isNotEmpty ? filter.filename : null,
             country: filter.location.country,
             state: filter.location.state,
             city: filter.location.city,

@@ -1,4 +1,4 @@
-import 'package:immich_mobile/utils/hash.dart';
+import 'package:mediab/utils/hash.dart';
 import 'package:isar/isar.dart';
 
 part 'duplicated_asset.entity.g.dart';

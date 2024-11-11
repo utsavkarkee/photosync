@@ -6,17 +6,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
-import 'package:immich_mobile/models/albums/album_search.model.dart';
-import 'package:immich_mobile/pages/common/large_leading_tile.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/providers/album/album_sort_by_options.provider.dart';
-import 'package:immich_mobile/providers/user.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/widgets/album/album_thumbnail_card.dart';
-import 'package:immich_mobile/widgets/common/immich_app_bar.dart';
-import 'package:immich_mobile/widgets/common/immich_thumbnail.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
+import 'package:mediab/models/albums/album_search.model.dart';
+import 'package:mediab/pages/common/large_leading_tile.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/providers/album/album_sort_by_options.provider.dart';
+import 'package:mediab/providers/user.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/widgets/album/album_thumbnail_card.dart';
+import 'package:mediab/widgets/common/immich_app_bar.dart';
+import 'package:mediab/widgets/common/immich_thumbnail.dart';
 
 @RoutePage()
 class AlbumsPage extends HookConsumerWidget {
@@ -24,8 +24,7 @@ class AlbumsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final albums =
-        ref.watch(albumProvider).where((album) => album.isRemote).toList();
+    final albums = ref.watch(albumProvider).where((album) => album.isRemote).toList();
     final albumSortOption = ref.watch(albumSortByOptionsProvider);
     final albumSortIsReverse = ref.watch(albumSortOrderProvider);
     final sorted = albumSortOption.sortFn(albums, albumSortIsReverse);
@@ -156,8 +155,7 @@ class AlbumsPage extends HookConsumerWidget {
                       : const SizedBox.shrink(),
                 ),
                 controller: searchController,
-                onChanged: (_) =>
-                    onSearch(searchController.text, filterMode.value),
+                onChanged: (_) => onSearch(searchController.text, filterMode.value),
                 focusNode: searchFocusNode,
                 onTapOutside: (_) => searchFocusNode.unfocus(),
               ),
@@ -205,9 +203,7 @@ class AlbumsPage extends HookConsumerWidget {
                 const SortButton(),
                 IconButton(
                   icon: Icon(
-                    isGrid.value
-                        ? Icons.view_list_outlined
-                        : Icons.grid_view_outlined,
+                    isGrid.value ? Icons.view_list_outlined : Icons.grid_view_outlined,
                     size: 24,
                   ),
                   onPressed: toggleViewMode,
@@ -221,8 +217,7 @@ class AlbumsPage extends HookConsumerWidget {
                   ? GridView.builder(
                       shrinkWrap: true,
                       physics: const ClampingScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 250,
                         mainAxisSpacing: 12,
                         crossAxisSpacing: 12,
@@ -259,10 +254,8 @@ class AlbumsPage extends HookConsumerWidget {
                                 ? Text(
                                     '${sorted[index].assetCount} items',
                                     overflow: TextOverflow.ellipsis,
-                                    style:
-                                        context.textTheme.bodyMedium?.copyWith(
-                                      color: context
-                                          .colorScheme.onSurfaceSecondary,
+                                    style: context.textTheme.bodyMedium?.copyWith(
+                                      color: context.colorScheme.onSurfaceSecondary,
                                     ),
                                   )
                                 : sorted[index].ownerName != null
@@ -273,10 +266,8 @@ class AlbumsPage extends HookConsumerWidget {
                                           ],
                                         )}',
                                         overflow: TextOverflow.ellipsis,
-                                        style: context.textTheme.bodyMedium
-                                            ?.copyWith(
-                                          color: context
-                                              .colorScheme.onSurfaceSecondary,
+                                        style: context.textTheme.bodyMedium?.copyWith(
+                                          color: context.colorScheme.onSurfaceSecondary,
                                         ),
                                       )
                                     : null,
@@ -342,9 +333,7 @@ class QuickFilterButton extends StatelessWidget {
       child: Text(
         label,
         style: TextStyle(
-          color: isSelected
-              ? context.colorScheme.onPrimary
-              : context.colorScheme.onSurface,
+          color: isSelected ? context.colorScheme.onPrimary : context.colorScheme.onSurface,
           fontSize: 14,
         ),
       ),
@@ -380,28 +369,22 @@ class SortButton extends ConsumerWidget {
                   ? albumSortIsReverse
                       ? Icon(
                           Icons.keyboard_arrow_down,
-                          color: albumSortOption == mode
-                              ? context.colorScheme.onPrimary
-                              : context.colorScheme.onSurface,
+                          color:
+                              albumSortOption == mode ? context.colorScheme.onPrimary : context.colorScheme.onSurface,
                         )
                       : Icon(
                           Icons.keyboard_arrow_up_rounded,
-                          color: albumSortOption == mode
-                              ? context.colorScheme.onPrimary
-                              : context.colorScheme.onSurface,
+                          color:
+                              albumSortOption == mode ? context.colorScheme.onPrimary : context.colorScheme.onSurface,
                         )
                   : const Icon(Icons.abc, color: Colors.transparent),
               onPressed: () {
                 final selected = albumSortOption == mode;
                 // Switch direction
                 if (selected) {
-                  ref
-                      .read(albumSortOrderProvider.notifier)
-                      .changeSortDirection(!albumSortIsReverse);
+                  ref.read(albumSortOrderProvider.notifier).changeSortDirection(!albumSortIsReverse);
                 } else {
-                  ref
-                      .read(albumSortByOptionsProvider.notifier)
-                      .changeSortMode(mode);
+                  ref.read(albumSortByOptionsProvider.notifier).changeSortMode(mode);
                 }
               },
               style: ButtonStyle(
@@ -409,9 +392,7 @@ class SortButton extends ConsumerWidget {
                   const EdgeInsets.fromLTRB(16, 16, 32, 16),
                 ),
                 backgroundColor: WidgetStateProperty.all(
-                  albumSortOption == mode
-                      ? context.colorScheme.primary
-                      : Colors.transparent,
+                  albumSortOption == mode ? context.colorScheme.primary : Colors.transparent,
                 ),
                 shape: WidgetStateProperty.all(
                   RoundedRectangleBorder(

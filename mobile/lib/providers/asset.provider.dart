@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/memory.provider.dart';
-import 'package:immich_mobile/repositories/asset_media.repository.dart';
-import 'package:immich_mobile/services/album.service.dart';
-import 'package:immich_mobile/entities/exif_info.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/providers/user.provider.dart';
-import 'package:immich_mobile/services/asset.service.dart';
-import 'package:immich_mobile/widgets/asset_grid/asset_grid_data_structure.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/services/sync.service.dart';
-import 'package:immich_mobile/services/user.service.dart';
-import 'package:immich_mobile/utils/db.dart';
-import 'package:immich_mobile/utils/renderlist_generator.dart';
+import 'package:mediab/providers/memory.provider.dart';
+import 'package:mediab/repositories/asset_media.repository.dart';
+import 'package:mediab/services/album.service.dart';
+import 'package:mediab/entities/exif_info.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/providers/user.provider.dart';
+import 'package:mediab/services/asset.service.dart';
+import 'package:mediab/widgets/asset_grid/asset_grid_data_structure.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/services/sync.service.dart';
+import 'package:mediab/services/user.service.dart';
+import 'package:mediab/utils/db.dart';
+import 'package:mediab/utils/renderlist_generator.dart';
 import 'package:isar/isar.dart';
 import 'package:logging/logging.dart';
 
@@ -85,9 +85,7 @@ class AssetNotifier extends StateNotifier<bool> {
     state = true;
     try {
       // Filter the assets based on the backed-up status
-      final assets = onlyBackedUp
-          ? deleteAssets.where((e) => e.storage == AssetState.merged)
-          : deleteAssets;
+      final assets = onlyBackedUp ? deleteAssets.where((e) => e.storage == AssetState.merged) : deleteAssets;
 
       if (assets.isEmpty) {
         return false; // No assets to delete
@@ -97,14 +95,10 @@ class AssetNotifier extends StateNotifier<bool> {
       final localDeleted = await _deleteLocalAssets(assets);
 
       if (localDeleted.isNotEmpty) {
-        final localOnlyIds = assets
-            .where((e) => e.storage == AssetState.local)
-            .map((e) => e.id)
-            .toList();
+        final localOnlyIds = assets.where((e) => e.storage == AssetState.local).map((e) => e.id).toList();
 
         // Update merged assets to remote-only
-        final mergedAssets =
-            assets.where((e) => e.storage == AssetState.merged).map((e) {
+        final mergedAssets = assets.where((e) => e.storage == AssetState.merged).map((e) {
           e.localId = null;
           return e;
         }).toList();
@@ -112,8 +106,7 @@ class AssetNotifier extends StateNotifier<bool> {
         // Update the local database
         await _db.writeTxn(() async {
           if (mergedAssets.isNotEmpty) {
-            await _db.assets
-                .putAll(mergedAssets); // Use the filtered merged assets
+            await _db.assets.putAll(mergedAssets); // Use the filtered merged assets
           }
           await _db.exifInfos.deleteAll(localOnlyIds);
           await _db.assets.deleteAll(localOnlyIds);
@@ -141,9 +134,7 @@ class AssetNotifier extends StateNotifier<bool> {
         final assetsToUpdate = force
 
             /// If force, only update merged only assets and remove remote assets
-            ? remoteDeleted
-                .where((e) => e.storage == AssetState.merged)
-                .map((e) {
+            ? remoteDeleted.where((e) => e.storage == AssetState.merged).map((e) {
                 e.remoteId = null;
                 return e;
               })
@@ -158,10 +149,7 @@ class AssetNotifier extends StateNotifier<bool> {
             await _db.assets.putAll(assetsToUpdate.toList());
           }
           if (force) {
-            final remoteOnly = remoteDeleted
-                .where((e) => e.storage == AssetState.remote)
-                .map((e) => e.id)
-                .toList();
+            final remoteOnly = remoteDeleted.where((e) => e.storage == AssetState.remote).map((e) => e.id).toList();
             await _db.exifInfos.deleteAll(remoteOnly);
             await _db.assets.deleteAll(remoteOnly);
           }
@@ -184,9 +172,8 @@ class AssetNotifier extends StateNotifier<bool> {
     try {
       final hasLocal = deleteAssets.any((a) => a.storage != AssetState.remote);
       final localDeleted = await _deleteLocalAssets(deleteAssets);
-      final remoteDeleted = (hasLocal && localDeleted.isNotEmpty) || !hasLocal
-          ? await _deleteRemoteAssets(deleteAssets, force)
-          : [];
+      final remoteDeleted =
+          (hasLocal && localDeleted.isNotEmpty) || !hasLocal ? await _deleteRemoteAssets(deleteAssets, force) : [];
       if (localDeleted.isNotEmpty || remoteDeleted.isNotEmpty) {
         final dbIds = <int>[];
         final dbUpdates = <Asset>[];
@@ -195,9 +182,7 @@ class AssetNotifier extends StateNotifier<bool> {
         if (localDeleted.isNotEmpty) {
           // Permanently remove local only assets from isar
           dbIds.addAll(
-            deleteAssets
-                .where((a) => a.storage == AssetState.local)
-                .map((e) => e.id),
+            deleteAssets.where((a) => a.storage == AssetState.local).map((e) => e.id),
           );
 
           if (remoteDeleted.any((e) => e.isLocal)) {
@@ -222,9 +207,7 @@ class AssetNotifier extends StateNotifier<bool> {
           if (force) {
             // Remove remote only assets
             dbIds.addAll(
-              deleteAssets
-                  .where((a) => a.storage == AssetState.remote)
-                  .map((e) => e.id),
+              deleteAssets.where((a) => a.storage == AssetState.remote).map((e) => e.id),
             );
             // Local assets are not removed and there are merged assets
             final hasLocal = remoteDeleted.any((e) => e.isLocal);
@@ -266,8 +249,7 @@ class AssetNotifier extends StateNotifier<bool> {
   Future<List<String>> _deleteLocalAssets(
     Iterable<Asset> assetsToDelete,
   ) async {
-    final List<String> local =
-        assetsToDelete.where((a) => a.isLocal).map((a) => a.localId!).toList();
+    final List<String> local = assetsToDelete.where((a) => a.isLocal).map((a) => a.localId!).toList();
     // Delete asset from device
     if (local.isNotEmpty) {
       try {
@@ -311,8 +293,7 @@ final assetProvider = StateNotifierProvider<AssetNotifier, bool>((ref) {
   );
 });
 
-final assetDetailProvider =
-    StreamProvider.autoDispose.family<Asset, Asset>((ref, asset) async* {
+final assetDetailProvider = StreamProvider.autoDispose.family<Asset, Asset>((ref, asset) async* {
   yield await ref.watch(assetServiceProvider).loadExif(asset);
   final db = ref.watch(dbProvider);
   await for (final a in db.assets.watchObject(asset.id)) {
@@ -322,8 +303,7 @@ final assetDetailProvider =
   }
 });
 
-final assetWatcher =
-    StreamProvider.autoDispose.family<Asset?, Asset>((ref, asset) {
+final assetWatcher = StreamProvider.autoDispose.family<Asset?, Asset>((ref, asset) {
   final db = ref.watch(dbProvider);
   return db.assets.watchObject(asset.id, fireImmediately: true);
 });
@@ -336,13 +316,10 @@ final assetsProvider = StreamProvider.family<RenderList, int?>((ref, userId) {
   return renderListGenerator(query, ref);
 });
 
-final multiUserAssetsProvider =
-    StreamProvider.family<RenderList, List<int>>((ref, userIds) {
+final multiUserAssetsProvider = StreamProvider.family<RenderList, List<int>>((ref, userIds) {
   if (userIds.isEmpty) return const Stream.empty();
   final query = _commonFilterAndSort(
-    _assets(ref)
-        .where()
-        .anyOf(userIds, (q, u) => q.ownerIdEqualToAnyChecksum(u)),
+    _assets(ref).where().anyOf(userIds, (q, u) => q.ownerIdEqualToAnyChecksum(u)),
   );
   return renderListGenerator(query, ref);
 });
@@ -364,8 +341,7 @@ QueryBuilder<Asset, Asset, QAfterSortBy>? getRemoteAssetQuery(WidgetRef ref) {
       .sortByFileCreatedAtDesc();
 }
 
-IsarCollection<Asset> _assets(StreamProviderRef<RenderList> ref) =>
-    ref.watch(dbProvider).assets;
+IsarCollection<Asset> _assets(StreamProviderRef<RenderList> ref) => ref.watch(dbProvider).assets;
 
 QueryBuilder<Asset, Asset, QAfterSortBy> _commonFilterAndSort(
   QueryBuilder<Asset, Asset, QAfterWhereClause> query,

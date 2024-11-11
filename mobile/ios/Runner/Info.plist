@@ -4,8 +4,8 @@
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>app.alextran.immich.backgroundFetch</string>
-		<string>app.alextran.immich.backgroundProcessing</string>
+		<string>com.mediab.app.backgroundFetch</string>
+		<string>com.mediab.app.backgroundProcessing</string>
 	</array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
@@ -54,7 +54,7 @@
 		<string>zh</string>
 	</array>
 	<key>CFBundleName</key>
-	<string>immich_mobile</string>
+	<string>mediab</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

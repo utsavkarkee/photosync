@@ -1,12 +1,11 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/backup_album.entity.dart';
-import 'package:immich_mobile/interfaces/backup.interface.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/repositories/database.repository.dart';
+import 'package:mediab/entities/backup_album.entity.dart';
+import 'package:mediab/interfaces/backup.interface.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/repositories/database.repository.dart';
 import 'package:isar/isar.dart';
 
-final backupRepositoryProvider =
-    Provider((ref) => BackupRepository(ref.watch(dbProvider)));
+final backupRepositoryProvider = Provider((ref) => BackupRepository(ref.watch(dbProvider)));
 
 class BackupRepository extends DatabaseRepository implements IBackupRepository {
   BackupRepository(super.db);
@@ -33,10 +32,8 @@ class BackupRepository extends DatabaseRepository implements IBackupRepository {
       db.backupAlbums.filter().selectionEqualTo(backup).findAll();
 
   @override
-  Future<void> deleteAll(List<int> ids) =>
-      txn(() => db.backupAlbums.deleteAll(ids));
+  Future<void> deleteAll(List<int> ids) => txn(() => db.backupAlbums.deleteAll(ids));
 
   @override
-  Future<void> updateAll(List<BackupAlbum> backupAlbums) =>
-      txn(() => db.backupAlbums.putAll(backupAlbums));
+  Future<void> updateAll(List<BackupAlbum> backupAlbums) => txn(() => db.backupAlbums.putAll(backupAlbums));
 }

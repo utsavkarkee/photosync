@@ -1,6 +1,6 @@
-import 'package:immich_mobile/models/activities/activity.model.dart';
-import 'package:immich_mobile/providers/activity_service.provider.dart';
-import 'package:immich_mobile/providers/activity_statistics.provider.dart';
+import 'package:mediab/models/activities/activity.model.dart';
+import 'package:mediab/providers/activity_service.provider.dart';
+import 'package:mediab/providers/activity_statistics.provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'activity.provider.g.dart';
@@ -10,9 +10,7 @@ part 'activity.provider.g.dart';
 class AlbumActivity extends _$AlbumActivity {
   @override
   Future<List<Activity>> build(String albumId, [String? assetId]) async {
-    return ref
-        .watch(activityServiceProvider)
-        .getAllActivities(albumId, assetId: assetId);
+    return ref.watch(activityServiceProvider).getAllActivities(albumId, assetId: assetId);
   }
 
   Future<void> removeActivity(String id) async {
@@ -23,17 +21,13 @@ class AlbumActivity extends _$AlbumActivity {
       state = AsyncData(activities);
       // Decrement activity count only for comments
       if (removedActivity.type == ActivityType.comment) {
-        ref
-            .watch(activityStatisticsProvider(albumId, assetId).notifier)
-            .removeActivity();
+        ref.watch(activityStatisticsProvider(albumId, assetId).notifier).removeActivity();
       }
     }
   }
 
   Future<void> addLike() async {
-    final activity = await ref
-        .watch(activityServiceProvider)
-        .addActivity(albumId, ActivityType.like, assetId: assetId);
+    final activity = await ref.watch(activityServiceProvider).addActivity(albumId, ActivityType.like, assetId: assetId);
     if (activity.hasValue) {
       final activities = state.asData?.value ?? [];
       state = AsyncData([...activities, activity.requireValue]);
@@ -51,9 +45,7 @@ class AlbumActivity extends _$AlbumActivity {
     if (activity.hasValue) {
       final activities = state.valueOrNull ?? [];
       state = AsyncData([...activities, activity.requireValue]);
-      ref
-          .watch(activityStatisticsProvider(albumId, assetId).notifier)
-          .addActivity();
+      ref.watch(activityStatisticsProvider(albumId, assetId).notifier).addActivity();
       // The previous addActivity call would increase the count of an asset if assetId != null
       // To also increase the activity count of the album, calling it once again with assetId set to null
       if (assetId != null) {

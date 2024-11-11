@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/utils/hash.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/utils/hash.dart';
 import 'package:isar/isar.dart';
 import 'package:openapi/api.dart';
 

@@ -1,8 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/interfaces/asset_api.interface.dart';
-import 'package:immich_mobile/providers/api.provider.dart';
-import 'package:immich_mobile/repositories/api.repository.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/interfaces/asset_api.interface.dart';
+import 'package:mediab/providers/api.provider.dart';
+import 'package:mediab/repositories/api.repository.dart';
 import 'package:openapi/api.dart';
 
 final assetApiRepositoryProvider = Provider(

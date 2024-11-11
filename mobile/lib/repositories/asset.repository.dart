@@ -1,20 +1,19 @@
 import 'dart:io';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/android_device_asset.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/device_asset.entity.dart';
-import 'package:immich_mobile/entities/duplicated_asset.entity.dart';
-import 'package:immich_mobile/entities/exif_info.entity.dart';
-import 'package:immich_mobile/entities/ios_device_asset.entity.dart';
-import 'package:immich_mobile/interfaces/asset.interface.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/repositories/database.repository.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/android_device_asset.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/device_asset.entity.dart';
+import 'package:mediab/entities/duplicated_asset.entity.dart';
+import 'package:mediab/entities/exif_info.entity.dart';
+import 'package:mediab/entities/ios_device_asset.entity.dart';
+import 'package:mediab/interfaces/asset.interface.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/repositories/database.repository.dart';
 import 'package:isar/isar.dart';
 
-final assetRepositoryProvider =
-    Provider((ref) => AssetRepository(ref.watch(dbProvider)));
+final assetRepositoryProvider = Provider((ref) => AssetRepository(ref.watch(dbProvider)));
 
 class AssetRepository extends DatabaseRepository implements IAssetRepository {
   AssetRepository(super.db);
@@ -31,8 +30,7 @@ class AssetRepository extends DatabaseRepository implements IAssetRepository {
     if (notOwnedBy.length == 1) {
       query = query.not().ownerIdEqualTo(notOwnedBy.first);
     } else if (notOwnedBy.isNotEmpty) {
-      query =
-          query.not().anyOf(notOwnedBy, (q, int id) => q.ownerIdEqualTo(id));
+      query = query.not().anyOf(notOwnedBy, (q, int id) => q.ownerIdEqualTo(id));
     }
     if (ownerId != null) {
       query = query.ownerIdEqualTo(ownerId);
@@ -109,23 +107,11 @@ class AssetRepository extends DatabaseRepository implements IAssetRepository {
       case null:
         filteredQuery = baseQuery.ownerIdEqualToAnyChecksum(ownerId).noOp();
       case AssetState.local:
-        filteredQuery = baseQuery
-            .remoteIdIsNull()
-            .filter()
-            .localIdIsNotNull()
-            .ownerIdEqualTo(ownerId);
+        filteredQuery = baseQuery.remoteIdIsNull().filter().localIdIsNotNull().ownerIdEqualTo(ownerId);
       case AssetState.remote:
-        filteredQuery = baseQuery
-            .localIdIsNull()
-            .filter()
-            .remoteIdIsNotNull()
-            .ownerIdEqualTo(ownerId);
+        filteredQuery = baseQuery.localIdIsNull().filter().remoteIdIsNotNull().ownerIdEqualTo(ownerId);
       case AssetState.merged:
-        filteredQuery = baseQuery
-            .ownerIdEqualToAnyChecksum(ownerId)
-            .filter()
-            .remoteIdIsNotNull()
-            .localIdIsNotNull();
+        filteredQuery = baseQuery.ownerIdEqualToAnyChecksum(ownerId).filter().remoteIdIsNotNull().localIdIsNotNull();
     }
 
     final QueryBuilder<Asset, Asset, QAfterSortBy> query;
@@ -171,9 +157,7 @@ class AssetRepository extends DatabaseRepository implements IAssetRepository {
 
   @override
   Future<List<DeviceAsset?>> getDeviceAssetsById(List<Object> ids) =>
-      Platform.isAndroid
-          ? db.androidDeviceAssets.getAll(ids.cast())
-          : db.iOSDeviceAssets.getAllById(ids.cast());
+      Platform.isAndroid ? db.androidDeviceAssets.getAll(ids.cast()) : db.iOSDeviceAssets.getAllById(ids.cast());
 
   @override
   Future<void> upsertDeviceAssets(List<DeviceAsset> deviceAssets) => txn(
@@ -190,13 +174,11 @@ class AssetRepository extends DatabaseRepository implements IAssetRepository {
 
   @override
   Future<void> upsertDuplicatedAssets(Iterable<String> duplicatedAssets) => txn(
-        () => db.duplicatedAssets
-            .putAll(duplicatedAssets.map(DuplicatedAsset.new).toList()),
+        () => db.duplicatedAssets.putAll(duplicatedAssets.map(DuplicatedAsset.new).toList()),
       );
 
   @override
-  Future<List<String>> getAllDuplicatedAssetIds() =>
-      db.duplicatedAssets.where().idProperty().findAll();
+  Future<List<String>> getAllDuplicatedAssetIds() => db.duplicatedAssets.where().idProperty().findAll();
 
   @override
   Future<Asset?> getByOwnerIdChecksum(int ownerId, String checksum) =>
@@ -210,8 +192,7 @@ class AssetRepository extends DatabaseRepository implements IAssetRepository {
       db.assets.getAllByOwnerIdChecksum(ids, checksums);
 
   @override
-  Future<List<Asset>> getAllLocal() =>
-      db.assets.where().localIdIsNotNull().findAll();
+  Future<List<Asset>> getAllLocal() => db.assets.where().localIdIsNotNull().findAll();
 
   @override
   Future<void> deleteAllByRemoteId(List<String> ids, {AssetState? state}) =>

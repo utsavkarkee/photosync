@@ -5,17 +5,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/providers/multiselect.provider.dart';
-import 'package:immich_mobile/widgets/memories/memory_lane.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/providers/server_info.provider.dart';
-import 'package:immich_mobile/providers/user.provider.dart';
-import 'package:immich_mobile/providers/websocket.provider.dart';
-import 'package:immich_mobile/widgets/asset_grid/multiselect_grid.dart';
-import 'package:immich_mobile/widgets/common/immich_app_bar.dart';
-import 'package:immich_mobile/widgets/common/immich_loading_indicator.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/providers/multiselect.provider.dart';
+import 'package:mediab/widgets/memories/memory_lane.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/providers/server_info.provider.dart';
+import 'package:mediab/providers/user.provider.dart';
+import 'package:mediab/providers/websocket.provider.dart';
+import 'package:mediab/widgets/asset_grid/multiselect_grid.dart';
+import 'package:mediab/widgets/common/immich_app_bar.dart';
+import 'package:mediab/widgets/common/immich_loading_indicator.dart';
 
 @RoutePage()
 class PhotosPage extends HookConsumerWidget {
@@ -95,12 +95,9 @@ class PhotosPage extends HookConsumerWidget {
     return Stack(
       children: [
         MultiselectGrid(
-          topWidget: (currentUser != null && currentUser.memoryEnabled)
-              ? const MemoryLane()
-              : const SizedBox(),
-          renderListProvider: timelineUsers.length > 1
-              ? multiUserAssetsProvider(timelineUsers)
-              : assetsProvider(currentUser?.isarId),
+          topWidget: (currentUser != null && currentUser.memoryEnabled) ? const MemoryLane() : const SizedBox(),
+          renderListProvider:
+              timelineUsers.length > 1 ? multiUserAssetsProvider(timelineUsers) : assetsProvider(currentUser?.isarId),
           buildLoadingIndicator: buildLoadingIndicator,
           onRefresh: refreshAssets,
           stackEnabled: true,
@@ -109,9 +106,7 @@ class PhotosPage extends HookConsumerWidget {
         ),
         AnimatedPositioned(
           duration: const Duration(milliseconds: 300),
-          top: ref.watch(multiselectProvider)
-              ? -(kToolbarHeight + MediaQuery.of(context).padding.top)
-              : 0,
+          top: ref.watch(multiselectProvider) ? -(kToolbarHeight + MediaQuery.of(context).padding.top) : 0,
           left: 0,
           right: 0,
           child: Container(

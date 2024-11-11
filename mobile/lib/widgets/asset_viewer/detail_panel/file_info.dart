@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/utils/bytes_units.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/utils/bytes_units.dart';
 
 class FileInfo extends StatelessWidget {
   final Asset asset;
@@ -15,12 +15,8 @@ class FileInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final textColor = context.isDarkTheme ? Colors.white : Colors.black;
 
-    String resolution = asset.width != null && asset.height != null
-        ? "${asset.height} x ${asset.width}  "
-        : "";
-    String fileSize = asset.exifInfo?.fileSize != null
-        ? formatBytes(asset.exifInfo!.fileSize!)
-        : "";
+    String resolution = asset.width != null && asset.height != null ? "${asset.height} x ${asset.width}  " : "";
+    String fileSize = asset.exifInfo?.fileSize != null ? formatBytes(asset.exifInfo!.fileSize!) : "";
     String text = resolution + fileSize;
     final imgSizeString = text.isNotEmpty ? text : null;
 

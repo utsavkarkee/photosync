@@ -1,4 +1,4 @@
-import 'package:immich_mobile/entities/user.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
 
 enum ActivityType { comment, like }
 
@@ -56,12 +56,7 @@ class Activity {
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        assetId.hashCode ^
-        comment.hashCode ^
-        createdAt.hashCode ^
-        type.hashCode ^
-        user.hashCode;
+    return id.hashCode ^ assetId.hashCode ^ comment.hashCode ^ createdAt.hashCode ^ type.hashCode ^ user.hashCode;
   }
 }
 

@@ -2,8 +2,8 @@ import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/duration_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/duration_extensions.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/timezone.dart';
 
@@ -125,18 +125,15 @@ class _DateTimePicker extends HookWidget {
     }
 
     void popWithDateTime() {
-      final formattedDateTime =
-          DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(date.value);
-      final dtWithOffset = formattedDateTime +
-          Duration(milliseconds: tzOffset.value.offsetInMilliseconds)
-              .formatAsOffset();
+      final formattedDateTime = DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(date.value);
+      final dtWithOffset =
+          formattedDateTime + Duration(milliseconds: tzOffset.value.offsetInMilliseconds).formatAsOffset();
       context.pop(dtWithOffset);
     }
 
     return LayoutBuilder(
       builder: (context, constraint) => AlertDialog(
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 32, horizontal: 18),
+        contentPadding: const EdgeInsets.symmetric(vertical: 32, horizontal: 18),
         actions: [
           TextButton(
             onPressed: () => context.pop(),
@@ -246,19 +243,15 @@ class _TimeZoneOffset implements Comparable<_TimeZoneOffset> {
   }
 
   @override
-  String toString() =>
-      '_TimeZoneOffset(display: $display, location: $location)';
+  String toString() => '_TimeZoneOffset(display: $display, location: $location)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is _TimeZoneOffset &&
-        other.display == display &&
-        other.offsetInMilliseconds == offsetInMilliseconds;
+    return other is _TimeZoneOffset && other.display == display && other.offsetInMilliseconds == offsetInMilliseconds;
   }
 
   @override
-  int get hashCode =>
-      display.hashCode ^ offsetInMilliseconds.hashCode ^ location.hashCode;
+  int get hashCode => display.hashCode ^ offsetInMilliseconds.hashCode ^ location.hashCode;
 }

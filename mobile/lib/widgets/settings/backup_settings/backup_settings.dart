@@ -4,16 +4,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/backup/backup_verification.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/services/asset.service.dart';
-import 'package:immich_mobile/widgets/settings/backup_settings/background_settings.dart';
-import 'package:immich_mobile/widgets/settings/backup_settings/foreground_settings.dart';
-import 'package:immich_mobile/widgets/settings/settings_button_list_tile.dart';
-import 'package:immich_mobile/widgets/settings/settings_sub_page_scaffold.dart';
-import 'package:immich_mobile/widgets/settings/settings_switch_list_tile.dart';
-import 'package:immich_mobile/utils/hooks/app_settings_update_hook.dart';
-import 'package:immich_mobile/widgets/common/immich_loading_indicator.dart';
+import 'package:mediab/providers/backup/backup_verification.provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/services/asset.service.dart';
+import 'package:mediab/widgets/settings/backup_settings/background_settings.dart';
+import 'package:mediab/widgets/settings/backup_settings/foreground_settings.dart';
+import 'package:mediab/widgets/settings/settings_button_list_tile.dart';
+import 'package:mediab/widgets/settings/settings_sub_page_scaffold.dart';
+import 'package:mediab/widgets/settings/settings_switch_list_tile.dart';
+import 'package:mediab/utils/hooks/app_settings_update_hook.dart';
+import 'package:mediab/widgets/common/immich_loading_indicator.dart';
 
 class BackupSettings extends HookConsumerWidget {
   const BackupSettings({
@@ -22,10 +22,8 @@ class BackupSettings extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ignoreIcloudAssets =
-        useAppSettingsState(AppSettingsEnum.ignoreIcloudAssets);
-    final isAdvancedTroubleshooting =
-        useAppSettingsState(AppSettingsEnum.advancedTroubleshooting);
+    final ignoreIcloudAssets = useAppSettingsState(AppSettingsEnum.ignoreIcloudAssets);
+    final isAdvancedTroubleshooting = useAppSettingsState(AppSettingsEnum.advancedTroubleshooting);
     final albumSync = useAppSettingsState(AppSettingsEnum.syncAlbums);
     final isCorruptCheckInProgress = ref.watch(backupVerificationProvider);
     final isAlbumSyncInProgress = useState(false);
@@ -69,9 +67,7 @@ class BackupSettings extends HookConsumerWidget {
               : null,
           buttonText: 'Perform check',
           onButtonTap: !isCorruptCheckInProgress
-              ? () => ref
-                  .read(backupVerificationProvider.notifier)
-                  .performBackupCheck(context)
+              ? () => ref.read(backupVerificationProvider.notifier).performBackupCheck(context)
               : null,
         ),
       if (albumSync.value)

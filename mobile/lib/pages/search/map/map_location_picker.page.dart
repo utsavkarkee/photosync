@@ -5,12 +5,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/asyncvalue_extensions.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/maplibrecontroller_extensions.dart';
-import 'package:immich_mobile/widgets/map/map_theme_override.dart';
+import 'package:mediab/extensions/asyncvalue_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/maplibrecontroller_extensions.dart';
+import 'package:mediab/widgets/map/map_theme_override.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
-import 'package:immich_mobile/utils/map_utils.dart';
+import 'package:mediab/utils/map_utils.dart';
 
 @RoutePage()
 class MapLocationPickerPage extends HookConsumerWidget {
@@ -35,8 +35,7 @@ class MapLocationPickerPage extends HookConsumerWidget {
       selectedLatLng.value = centre;
       controller.value?.animateCamera(CameraUpdate.newLatLng(centre));
       if (marker.value != null) {
-        await controller.value
-            ?.updateSymbol(marker.value!, SymbolOptions(geometry: centre));
+        await controller.value?.updateSymbol(marker.value!, SymbolOptions(geometry: centre));
       }
     }
 
@@ -45,15 +44,13 @@ class MapLocationPickerPage extends HookConsumerWidget {
     }
 
     Future<void> getCurrentLocation() async {
-      var (currentLocation, _) =
-          await MapUtils.checkPermAndGetLocation(context);
+      var (currentLocation, _) = await MapUtils.checkPermAndGetLocation(context);
 
       if (currentLocation == null) {
         return;
       }
 
-      var currentLatLng =
-          LatLng(currentLocation.latitude, currentLocation.longitude);
+      var currentLatLng = LatLng(currentLocation.latitude, currentLocation.longitude);
       selectedLatLng.value = currentLatLng;
       controller.value?.animateCamera(CameraUpdate.newLatLng(currentLatLng));
     }
@@ -75,11 +72,9 @@ class MapLocationPickerPage extends HookConsumerWidget {
                 ),
               ),
               child: MaplibreMap(
-                initialCameraPosition:
-                    CameraPosition(target: initialLatLng, zoom: 12),
+                initialCameraPosition: CameraPosition(target: initialLatLng, zoom: 12),
                 styleString: style,
-                onMapCreated: (mapController) =>
-                    controller.value = mapController,
+                onMapCreated: (mapController) => controller.value = mapController,
                 onStyleLoadedCallback: onStyleLoaded,
                 onMapClick: onMapClick,
                 dragEnabled: false,
@@ -165,8 +160,7 @@ class _BottomBar extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: onUseLocation,
-                  child:
-                      const Text("map_location_picker_page_use_location").tr(),
+                  child: const Text("map_location_picker_page_use_location").tr(),
                 ),
                 ElevatedButton(
                   onPressed: onGetCurrentLocation,

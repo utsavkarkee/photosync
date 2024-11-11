@@ -2,12 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
-import 'package:immich_mobile/repositories/album_media.repository.dart';
-import 'package:immich_mobile/widgets/common/immich_thumbnail.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
+import 'package:mediab/repositories/album_media.repository.dart';
+import 'package:mediab/widgets/common/immich_thumbnail.dart';
 
 @RoutePage()
 class AlbumPreviewPage extends HookConsumerWidget {
@@ -19,9 +19,7 @@ class AlbumPreviewPage extends HookConsumerWidget {
     final assets = useState<List<Asset>>([]);
 
     getAssetsInAlbum() async {
-      assets.value = await ref
-          .read(albumMediaRepositoryProvider)
-          .getAssets(album.localId!);
+      assets.value = await ref.read(albumMediaRepositoryProvider).getAssets(album.localId!);
     }
 
     useEffect(

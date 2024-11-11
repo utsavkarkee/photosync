@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/asyncvalue_extensions.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/interfaces/person_api.interface.dart';
-import 'package:immich_mobile/providers/search/people.provider.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/utils/image_url_builder.dart';
+import 'package:mediab/extensions/asyncvalue_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/interfaces/person_api.interface.dart';
+import 'package:mediab/providers/search/people.provider.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/utils/image_url_builder.dart';
 
 class PeoplePicker extends HookConsumerWidget {
   const PeoplePicker({super.key, required this.onSelect, this.filter});

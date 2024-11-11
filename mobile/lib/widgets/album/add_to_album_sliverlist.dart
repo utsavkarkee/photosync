@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/album/album_sort_by_options.provider.dart';
-import 'package:immich_mobile/widgets/album/album_thumbnail_listtile.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
+import 'package:mediab/providers/album/album_sort_by_options.provider.dart';
+import 'package:mediab/widgets/album/album_thumbnail_listtile.dart';
+import 'package:mediab/entities/album.entity.dart';
 
 class AddToAlbumSliverList extends HookConsumerWidget {
   /// The asset to add to an album
@@ -25,13 +25,11 @@ class AddToAlbumSliverList extends HookConsumerWidget {
     final albumSortMode = ref.watch(albumSortByOptionsProvider);
     final albumSortIsReverse = ref.watch(albumSortOrderProvider);
     final sortedAlbums = albumSortMode.sortFn(albums, albumSortIsReverse);
-    final sortedSharedAlbums =
-        albumSortMode.sortFn(sharedAlbums, albumSortIsReverse);
+    final sortedSharedAlbums = albumSortMode.sortFn(sharedAlbums, albumSortIsReverse);
 
     return SliverList(
-      delegate: SliverChildBuilderDelegate(
-          childCount: albums.length + (sharedAlbums.isEmpty ? 0 : 1),
-          (context, index) {
+      delegate:
+          SliverChildBuilderDelegate(childCount: albums.length + (sharedAlbums.isEmpty ? 0 : 1), (context, index) {
         // Build shared expander
         if (index == 0 && sortedSharedAlbums.isNotEmpty) {
           return Padding(
@@ -47,9 +45,7 @@ class AddToAlbumSliverList extends HookConsumerWidget {
                   itemCount: sortedSharedAlbums.length,
                   itemBuilder: (context, index) => AlbumThumbnailListTile(
                     album: sortedSharedAlbums[index],
-                    onTap: enabled
-                        ? () => onAddToAlbum(sortedSharedAlbums[index])
-                        : () {},
+                    onTap: enabled ? () => onAddToAlbum(sortedSharedAlbums[index]) : () {},
                   ),
                 ),
               ],

@@ -1,12 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/widgets/asset_grid/asset_grid_data_structure.dart';
-import 'package:immich_mobile/services/trash.service.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/providers/user.provider.dart';
-import 'package:immich_mobile/services/sync.service.dart';
-import 'package:immich_mobile/utils/renderlist_generator.dart';
+import 'package:mediab/widgets/asset_grid/asset_grid_data_structure.dart';
+import 'package:mediab/services/trash.service.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/providers/user.provider.dart';
+import 'package:mediab/services/sync.service.dart';
+import 'package:mediab/utils/renderlist_generator.dart';
 import 'package:isar/isar.dart';
 import 'package:logging/logging.dart';
 
@@ -40,9 +40,7 @@ class TrashNotifier extends StateNotifier<bool> {
           .findAll();
 
       // TODO: handle local asset removal on emptyTrash
-      _ref
-          .read(syncServiceProvider)
-          .handleRemoteAssetRemoval(idsToRemove.cast<String>().toList());
+      _ref.read(syncServiceProvider).handleRemoteAssetRemoval(idsToRemove.cast<String>().toList());
     } catch (error, stack) {
       _log.severe("Cannot empty trash", error, stack);
     }
@@ -55,17 +53,12 @@ class TrashNotifier extends StateNotifier<bool> {
         return false;
       }
 
-      final isRemoved = await _ref
-          .read(assetProvider.notifier)
-          .deleteRemoteOnlyAssets(assetList, force: true);
+      final isRemoved = await _ref.read(assetProvider.notifier).deleteRemoteOnlyAssets(assetList, force: true);
 
       if (isRemoved) {
-        final idsToRemove =
-            assetList.where((a) => a.isRemote).map((a) => a.remoteId!).toList();
+        final idsToRemove = assetList.where((a) => a.isRemote).map((a) => a.remoteId!).toList();
 
-        _ref
-            .read(syncServiceProvider)
-            .handleRemoteAssetRemoval(idsToRemove.cast<String>().toList());
+        _ref.read(syncServiceProvider).handleRemoteAssetRemoval(idsToRemove.cast<String>().toList());
       }
 
       return isRemoved;

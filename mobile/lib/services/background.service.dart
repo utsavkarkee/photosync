@@ -9,38 +9,38 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/interfaces/backup.interface.dart';
-import 'package:immich_mobile/main.dart';
-import 'package:immich_mobile/models/backup/backup_candidate.model.dart';
-import 'package:immich_mobile/models/backup/success_upload_asset.model.dart';
-import 'package:immich_mobile/repositories/album.repository.dart';
-import 'package:immich_mobile/repositories/album_api.repository.dart';
-import 'package:immich_mobile/repositories/asset.repository.dart';
-import 'package:immich_mobile/repositories/asset_media.repository.dart';
-import 'package:immich_mobile/repositories/backup.repository.dart';
-import 'package:immich_mobile/repositories/album_media.repository.dart';
-import 'package:immich_mobile/repositories/etag.repository.dart';
-import 'package:immich_mobile/repositories/exif_info.repository.dart';
-import 'package:immich_mobile/repositories/file_media.repository.dart';
-import 'package:immich_mobile/repositories/partner_api.repository.dart';
-import 'package:immich_mobile/repositories/user.repository.dart';
-import 'package:immich_mobile/repositories/user_api.repository.dart';
-import 'package:immich_mobile/services/album.service.dart';
-import 'package:immich_mobile/services/entity.service.dart';
-import 'package:immich_mobile/services/hash.service.dart';
-import 'package:immich_mobile/services/localization.service.dart';
-import 'package:immich_mobile/entities/backup_album.entity.dart';
-import 'package:immich_mobile/models/backup/current_upload_asset.model.dart';
-import 'package:immich_mobile/models/backup/error_upload_asset.model.dart';
-import 'package:immich_mobile/services/backup.service.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/services/sync.service.dart';
-import 'package:immich_mobile/services/user.service.dart';
-import 'package:immich_mobile/utils/backup_progress.dart';
-import 'package:immich_mobile/utils/diff.dart';
-import 'package:immich_mobile/utils/http_ssl_cert_override.dart';
+import 'package:mediab/interfaces/backup.interface.dart';
+import 'package:mediab/main.dart';
+import 'package:mediab/models/backup/backup_candidate.model.dart';
+import 'package:mediab/models/backup/success_upload_asset.model.dart';
+import 'package:mediab/repositories/album.repository.dart';
+import 'package:mediab/repositories/album_api.repository.dart';
+import 'package:mediab/repositories/asset.repository.dart';
+import 'package:mediab/repositories/asset_media.repository.dart';
+import 'package:mediab/repositories/backup.repository.dart';
+import 'package:mediab/repositories/album_media.repository.dart';
+import 'package:mediab/repositories/etag.repository.dart';
+import 'package:mediab/repositories/exif_info.repository.dart';
+import 'package:mediab/repositories/file_media.repository.dart';
+import 'package:mediab/repositories/partner_api.repository.dart';
+import 'package:mediab/repositories/user.repository.dart';
+import 'package:mediab/repositories/user_api.repository.dart';
+import 'package:mediab/services/album.service.dart';
+import 'package:mediab/services/entity.service.dart';
+import 'package:mediab/services/hash.service.dart';
+import 'package:mediab/services/localization.service.dart';
+import 'package:mediab/entities/backup_album.entity.dart';
+import 'package:mediab/models/backup/current_upload_asset.model.dart';
+import 'package:mediab/models/backup/error_upload_asset.model.dart';
+import 'package:mediab/services/backup.service.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/services/sync.service.dart';
+import 'package:mediab/services/user.service.dart';
+import 'package:mediab/utils/backup_progress.dart';
+import 'package:mediab/utils/diff.dart';
+import 'package:mediab/utils/http_ssl_cert_override.dart';
 import 'package:path_provider_ios/path_provider_ios.dart';
 import 'package:photo_manager/photo_manager.dart' show PMProgressHandler;
 
@@ -51,10 +51,8 @@ final backgroundServiceProvider = Provider(
 /// Background backup service
 class BackgroundService {
   static const String _portNameLock = "immichLock";
-  static const MethodChannel _foregroundChannel =
-      MethodChannel('immich/foregroundChannel');
-  static const MethodChannel _backgroundChannel =
-      MethodChannel('immich/backgroundChannel');
+  static const MethodChannel _foregroundChannel = MethodChannel('immich/foregroundChannel');
+  static const MethodChannel _backgroundChannel = MethodChannel('immich/backgroundChannel');
   static const notifyInterval = Duration(milliseconds: 400);
   bool _isBackgroundInitialized = false;
   CancellationToken? _cancellationToken;
@@ -68,8 +66,7 @@ class BackgroundService {
   int _assetsToUploadCount = 0;
   String _lastPrintedDetailContent = "";
   String? _lastPrintedDetailTitle;
-  late final ThrottleProgressUpdate _throttledNotifiy =
-      ThrottleProgressUpdate(_updateProgress, notifyInterval);
+  late final ThrottleProgressUpdate _throttledNotifiy = ThrottleProgressUpdate(_updateProgress, notifyInterval);
   late final ThrottleProgressUpdate _throttledDetailNotify =
       ThrottleProgressUpdate(_updateDetailProgress, notifyInterval);
 
@@ -86,10 +83,8 @@ class BackgroundService {
   Future<bool> enableService({bool immediate = false}) async {
     try {
       final callback = PluginUtilities.getCallbackHandle(_nativeEntry)!;
-      final String title =
-          "backup_background_service_default_notification".tr();
-      final bool ok = await _foregroundChannel
-          .invokeMethod('enable', [callback.toRawHandle(), title, immediate]);
+      final String title = "backup_background_service_default_notification".tr();
+      final bool ok = await _foregroundChannel.invokeMethod('enable', [callback.toRawHandle(), title, immediate]);
       return ok;
     } catch (error) {
       return false;
@@ -145,8 +140,7 @@ class BackgroundService {
       return true;
     }
     try {
-      return await _foregroundChannel
-          .invokeMethod('isIgnoringBatteryOptimizations');
+      return await _foregroundChannel.invokeMethod('isIgnoringBatteryOptimizations');
     } catch (error) {
       return false;
     }
@@ -195,8 +189,7 @@ class BackgroundService {
   }) async {
     try {
       if (_isBackgroundInitialized && _errorGracePeriodExceeded) {
-        return await _backgroundChannel
-            .invokeMethod('showError', [title, content, individualTag]);
+        return await _backgroundChannel.invokeMethod('showError', [title, content, individualTag]);
       }
     } catch (error) {
       debugPrint("[_showErrorNotification] failed to communicate with plugin");
@@ -252,8 +245,7 @@ class BackgroundService {
       final bs = tempRp.asBroadcastStream();
       while (_wantsLockTime == lockTime) {
         other.send(tempSp);
-        final dynamic answer = await bs.first
-            .timeout(const Duration(seconds: 3), onTimeout: () => null);
+        final dynamic answer = await bs.first.timeout(const Duration(seconds: 3), onTimeout: () => null);
         if (_wantsLockTime != lockTime) {
           break;
         }
@@ -269,8 +261,7 @@ class BackgroundService {
         } else if (answer == false) {
           // other isolate is still active
         }
-        final dynamic isFinished = await bs.first
-            .timeout(const Duration(seconds: 3), onTimeout: () => false);
+        final dynamic isFinished = await bs.first.timeout(const Duration(seconds: 3), onTimeout: () => false);
         if (isFinished == true) {
           break;
         }
@@ -375,16 +366,11 @@ class BackgroundService {
     FileMediaRepository fileMediaRepository = FileMediaRepository();
     AssetMediaRepository assetMediaRepository = AssetMediaRepository();
     UserRepository userRepository = UserRepository(db);
-    UserApiRepository userApiRepository =
-        UserApiRepository(apiService.usersApi);
-    AlbumApiRepository albumApiRepository =
-        AlbumApiRepository(apiService.albumsApi);
-    PartnerApiRepository partnerApiRepository =
-        PartnerApiRepository(apiService.partnersApi);
-    HashService hashService =
-        HashService(assetRepository, this, albumMediaRepository);
-    EntityService entityService =
-        EntityService(assetRepository, userRepository);
+    UserApiRepository userApiRepository = UserApiRepository(apiService.usersApi);
+    AlbumApiRepository albumApiRepository = AlbumApiRepository(apiService.albumsApi);
+    PartnerApiRepository partnerApiRepository = PartnerApiRepository(apiService.partnersApi);
+    HashService hashService = HashService(assetRepository, this, albumMediaRepository);
+    EntityService entityService = EntityService(assetRepository, userRepository);
     SyncService syncSerive = SyncService(
       hashService,
       entityService,
@@ -422,10 +408,8 @@ class BackgroundService {
       assetMediaRepository,
     );
 
-    final selectedAlbums =
-        await backupRepository.getAllBySelection(BackupSelection.select);
-    final excludedAlbums =
-        await backupRepository.getAllBySelection(BackupSelection.exclude);
+    final selectedAlbums = await backupRepository.getAllBySelection(BackupSelection.select);
+    final excludedAlbums = await backupRepository.getAllBySelection(BackupSelection.exclude);
     if (selectedAlbums.isEmpty) {
       return true;
     }
@@ -444,8 +428,7 @@ class BackgroundService {
         final backupAlbums = [...selectedAlbums, ...excludedAlbums];
         backupAlbums.sortBy((e) => e.id);
 
-        final dbAlbums =
-            await backupRepository.getAll(sort: BackupAlbumSort.id);
+        final dbAlbums = await backupRepository.getAll(sort: BackupAlbumSort.id);
         final List<int> toDelete = [];
         final List<BackupAlbum> toUpsert = [];
         // stores the most recent `lastBackup` per album but always keeps the `selection` from the most recent DB state
@@ -454,9 +437,7 @@ class BackgroundService {
           backupAlbums,
           compare: (BackupAlbum a, BackupAlbum b) => a.id.compareTo(b.id),
           both: (BackupAlbum a, BackupAlbum b) {
-            a.lastBackup = a.lastBackup.isAfter(b.lastBackup)
-                ? a.lastBackup
-                : b.lastBackup;
+            a.lastBackup = a.lastBackup.isAfter(b.lastBackup) ? a.lastBackup : b.lastBackup;
             toUpsert.add(a);
             return true;
           },
@@ -470,9 +451,7 @@ class BackgroundService {
         return false;
       }
       // Android should check for new assets added while performing backup
-    } while (Platform.isAndroid &&
-        true ==
-            await _backgroundChannel.invokeMethod<bool>("hasContentChanged"));
+    } while (Platform.isAndroid && true == await _backgroundChannel.invokeMethod<bool>("hasContentChanged"));
     return true;
   }
 
@@ -483,10 +462,8 @@ class BackgroundService {
     List<BackupAlbum> excludedAlbums,
   ) async {
     _errorGracePeriodExceeded = _isErrorGracePeriodExceeded(settingsService);
-    final bool notifyTotalProgress = settingsService
-        .getSetting<bool>(AppSettingsEnum.backgroundBackupTotalProgress);
-    final bool notifySingleProgress = settingsService
-        .getSetting<bool>(AppSettingsEnum.backgroundBackupSingleProgress);
+    final bool notifyTotalProgress = settingsService.getSetting<bool>(AppSettingsEnum.backgroundBackupTotalProgress);
+    final bool notifySingleProgress = settingsService.getSetting<bool>(AppSettingsEnum.backgroundBackupSingleProgress);
 
     if (_canceledBySystem) {
       return false;
@@ -541,10 +518,8 @@ class BackgroundService {
         result: result,
         shouldNotify: notifyTotalProgress,
       ),
-      onProgress: (bytes, totalBytes) =>
-          _onProgress(bytes, totalBytes, shouldNotify: notifySingleProgress),
-      onCurrentAsset: (asset) =>
-          _onSetCurrentBackupAsset(asset, shouldNotify: notifySingleProgress),
+      onProgress: (bytes, totalBytes) => _onProgress(bytes, totalBytes, shouldNotify: notifySingleProgress),
+      onCurrentAsset: (asset) => _onSetCurrentBackupAsset(asset, shouldNotify: notifySingleProgress),
       onError: _onBackupError,
       isBackground: true,
     );
@@ -580,8 +555,7 @@ class BackgroundService {
   }
 
   void _updateDetailProgress(String? title, int progress, int total) {
-    final String msg =
-        total > 0 ? humanReadableBytesProgress(progress, total) : "";
+    final String msg = total > 0 ? humanReadableBytesProgress(progress, total) : "";
     // only update if message actually differs (to stop many useless notification updates on large assets or slow connections)
     if (msg != _lastPrintedDetailContent || _lastPrintedDetailTitle != title) {
       _lastPrintedDetailContent = msg;
@@ -610,8 +584,7 @@ class BackgroundService {
 
   void _onBackupError(ErrorUploadAsset errorAssetInfo) {
     _showErrorNotification(
-      title: "backup_background_service_upload_failure_notification"
-          .tr(args: [errorAssetInfo.fileName]),
+      title: "backup_background_service_upload_failure_notification".tr(args: [errorAssetInfo.fileName]),
       individualTag: errorAssetInfo.id,
     );
   }
@@ -625,15 +598,13 @@ class BackgroundService {
     }
 
     _throttledDetailNotify.title =
-        "backup_background_service_current_upload_notification"
-            .tr(args: [currentUploadAsset.fileName]);
+        "backup_background_service_current_upload_notification".tr(args: [currentUploadAsset.fileName]);
     _throttledDetailNotify.progress = 0;
     _throttledDetailNotify.total = 0;
   }
 
   bool _isErrorGracePeriodExceeded(AppSettingsService appSettingsService) {
-    final int value = appSettingsService
-        .getSetting(AppSettingsEnum.uploadErrorNotificationGracePeriod);
+    final int value = appSettingsService.getSetting(AppSettingsEnum.uploadErrorNotificationGracePeriod);
     if (value == 0) {
       return true;
     } else if (value == 5) {

@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/services/api.service.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/services/api.service.dart';
 import 'package:logging/logging.dart';
 import 'package:openapi/api.dart';
 

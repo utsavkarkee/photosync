@@ -1,16 +1,15 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/exif_info.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/interfaces/asset_media.interface.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/exif_info.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/interfaces/asset_media.interface.dart';
 import 'package:photo_manager/photo_manager.dart' hide AssetType;
 
 final assetMediaRepositoryProvider = Provider((ref) => AssetMediaRepository());
 
 class AssetMediaRepository implements IAssetMediaRepository {
   @override
-  Future<List<String>> deleteAll(List<String> ids) =>
-      PhotoManager.editor.deleteWithIds(ids);
+  Future<List<String>> deleteAll(List<String> ids) => PhotoManager.editor.deleteWithIds(ids);
 
   @override
   Future<Asset?> get(String id) async {

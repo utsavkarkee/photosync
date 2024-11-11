@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:immich_mobile/services/user.service.dart';
+import 'package:mediab/services/user.service.dart';
 
 enum UploadProfileStatus {
   idle,
@@ -50,28 +50,23 @@ class UploadProfileImageState {
 
   String toJson() => json.encode(toMap());
 
-  factory UploadProfileImageState.fromJson(String source) =>
-      UploadProfileImageState.fromMap(json.decode(source));
+  factory UploadProfileImageState.fromJson(String source) => UploadProfileImageState.fromMap(json.decode(source));
 
   @override
-  String toString() =>
-      'UploadProfileImageState(status: $status, profileImagePath: $profileImagePath)';
+  String toString() => 'UploadProfileImageState(status: $status, profileImagePath: $profileImagePath)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is UploadProfileImageState &&
-        other.status == status &&
-        other.profileImagePath == profileImagePath;
+    return other is UploadProfileImageState && other.status == status && other.profileImagePath == profileImagePath;
   }
 
   @override
   int get hashCode => status.hashCode ^ profileImagePath.hashCode;
 }
 
-class UploadProfileImageNotifier
-    extends StateNotifier<UploadProfileImageState> {
+class UploadProfileImageNotifier extends StateNotifier<UploadProfileImageState> {
   UploadProfileImageNotifier(this._userSErvice)
       : super(
           UploadProfileImageState(
@@ -101,7 +96,6 @@ class UploadProfileImageNotifier
   }
 }
 
-final uploadProfileImageProvider =
-    StateNotifierProvider<UploadProfileImageNotifier, UploadProfileImageState>(
+final uploadProfileImageProvider = StateNotifierProvider<UploadProfileImageNotifier, UploadProfileImageState>(
   ((ref) => UploadProfileImageNotifier(ref.watch(userServiceProvider))),
 );

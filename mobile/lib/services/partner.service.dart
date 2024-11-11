@@ -1,9 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/interfaces/partner_api.interface.dart';
-import 'package:immich_mobile/interfaces/user.interface.dart';
-import 'package:immich_mobile/repositories/partner_api.repository.dart';
-import 'package:immich_mobile/repositories/user.repository.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/interfaces/partner_api.interface.dart';
+import 'package:mediab/interfaces/user.interface.dart';
+import 'package:mediab/repositories/partner_api.repository.dart';
+import 'package:mediab/repositories/user.repository.dart';
 import 'package:logging/logging.dart';
 
 final partnerServiceProvider = Provider(

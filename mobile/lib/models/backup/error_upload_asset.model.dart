@@ -1,4 +1,4 @@
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
 
 class ErrorUploadAsset {
   final String id;

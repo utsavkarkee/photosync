@@ -3,11 +3,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/asyncvalue_extensions.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/models/shared_link/shared_link.model.dart';
-import 'package:immich_mobile/providers/shared_link.provider.dart';
-import 'package:immich_mobile/widgets/shared_link/shared_link_item.dart';
+import 'package:mediab/extensions/asyncvalue_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/models/shared_link/shared_link.model.dart';
+import 'package:mediab/providers/shared_link.provider.dart';
+import 'package:mediab/widgets/shared_link/shared_link_item.dart';
 
 @RoutePage()
 class SharedLinkPage extends HookConsumerWidget {
@@ -85,8 +85,7 @@ class SharedLinkPage extends HookConsumerWidget {
                 if (constraints.maxWidth > 600) {
                   // Two column
                   return GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisExtent: 180,
                     ),
@@ -120,8 +119,7 @@ class SharedLinkPage extends HookConsumerWidget {
       body: SafeArea(
         child: sharedLinks.widgetWhen(
           onError: (error, stackTrace) => buildNoShares(),
-          onData: (links) =>
-              links.isNotEmpty ? buildSharesList(links) : buildNoShares(),
+          onData: (links) => links.isNotEmpty ? buildSharesList(links) : buildNoShares(),
         ),
       ),
     );

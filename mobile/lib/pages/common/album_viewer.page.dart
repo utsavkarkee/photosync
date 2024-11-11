@@ -6,24 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/asyncvalue_extensions.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/models/albums/asset_selection_page_result.model.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/providers/album/current_album.provider.dart';
-import 'package:immich_mobile/utils/immich_loading_overlay.dart';
-import 'package:immich_mobile/widgets/album/album_action_filled_button.dart';
-import 'package:immich_mobile/widgets/album/album_viewer_editable_title.dart';
-import 'package:immich_mobile/providers/multiselect.provider.dart';
-import 'package:immich_mobile/providers/authentication.provider.dart';
-import 'package:immich_mobile/widgets/album/album_viewer_appbar.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/widgets/asset_grid/multiselect_grid.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
-import 'package:immich_mobile/widgets/common/user_circle_avatar.dart';
+import 'package:mediab/extensions/asyncvalue_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/models/albums/asset_selection_page_result.model.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/providers/album/current_album.provider.dart';
+import 'package:mediab/utils/immich_loading_overlay.dart';
+import 'package:mediab/widgets/album/album_action_filled_button.dart';
+import 'package:mediab/widgets/album/album_viewer_editable_title.dart';
+import 'package:mediab/providers/multiselect.provider.dart';
+import 'package:mediab/providers/authentication.provider.dart';
+import 'package:mediab/widgets/album/album_viewer_appbar.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/widgets/asset_grid/multiselect_grid.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
+import 'package:mediab/widgets/common/user_circle_avatar.dart';
 
 @RoutePage()
 class AlbumViewerPage extends HookConsumerWidget {
@@ -47,8 +47,7 @@ class AlbumViewerPage extends HookConsumerWidget {
 
     Future<bool> onRemoveFromAlbumPressed(Iterable<Asset> assets) async {
       final a = album.valueOrNull;
-      final bool isSuccess = a != null &&
-          await ref.read(albumProvider.notifier).removeAsset(a, assets);
+      final bool isSuccess = a != null && await ref.read(albumProvider.notifier).removeAsset(a, assets);
 
       if (!isSuccess) {
         ImmichToast.show(
@@ -64,8 +63,7 @@ class AlbumViewerPage extends HookConsumerWidget {
     /// Find out if the assets in album exist on the device
     /// If they exist, add to selected asset state to show they are already selected.
     void onAddPhotosPressed(Album albumInfo) async {
-      AssetSelectionPageResult? returnPayload =
-          await context.pushRoute<AssetSelectionPageResult?>(
+      AssetSelectionPageResult? returnPayload = await context.pushRoute<AssetSelectionPageResult?>(
         AlbumAssetSelectionRoute(
           existingAssets: albumInfo.assets,
           canDeselect: false,
@@ -152,15 +150,11 @@ class AlbumViewerPage extends HookConsumerWidget {
       }
 
       final String dateRangeText;
-      if (startDate.day == endDate.day &&
-          startDate.month == endDate.month &&
-          startDate.year == endDate.year) {
+      if (startDate.day == endDate.day && startDate.month == endDate.month && startDate.year == endDate.year) {
         dateRangeText = DateFormat.yMMMd().format(startDate);
       } else {
-        final String startDateText = (startDate.year == endDate.year
-                ? DateFormat.MMMd()
-                : DateFormat.yMMMd())
-            .format(startDate);
+        final String startDateText =
+            (startDate.year == endDate.year ? DateFormat.MMMd() : DateFormat.yMMMd()).format(startDate);
         final String endDateText = DateFormat.yMMMd().format(endDate);
         dateRangeText = "$startDateText - $endDateText";
       }
@@ -242,9 +236,7 @@ class AlbumViewerPage extends HookConsumerWidget {
           ),
           AnimatedPositioned(
             duration: const Duration(milliseconds: 300),
-            top: ref.watch(multiselectProvider)
-                ? -(kToolbarHeight + MediaQuery.of(context).padding.top)
-                : 0,
+            top: ref.watch(multiselectProvider) ? -(kToolbarHeight + MediaQuery.of(context).padding.top) : 0,
             left: 0,
             right: 0,
             child: album.when(

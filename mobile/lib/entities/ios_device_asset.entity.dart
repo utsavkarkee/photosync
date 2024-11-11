@@ -1,5 +1,5 @@
-import 'package:immich_mobile/entities/device_asset.entity.dart';
-import 'package:immich_mobile/utils/hash.dart';
+import 'package:mediab/entities/device_asset.entity.dart';
+import 'package:mediab/utils/hash.dart';
 import 'package:isar/isar.dart';
 
 part 'ios_device_asset.entity.g.dart';

@@ -2,14 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/exif_info.entity.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/providers/user.provider.dart';
-import 'package:immich_mobile/services/asset.service.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
+import 'package:mediab/entities/exif_info.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/providers/user.provider.dart';
+import 'package:mediab/services/asset.service.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
 import 'package:logging/logging.dart';
 
 class DescriptionInput extends HookConsumerWidget {
@@ -36,9 +36,7 @@ class DescriptionInput extends HookConsumerWidget {
 
     useEffect(
       () {
-        assetService
-            .getDescription(asset)
-            .then((value) => controller.text = value);
+        assetService.getDescription(asset).then((value) => controller.text = value);
         return null;
       },
       [assetWithExif.value],

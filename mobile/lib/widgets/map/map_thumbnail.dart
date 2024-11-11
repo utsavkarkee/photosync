@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/asyncvalue_extensions.dart';
-import 'package:immich_mobile/extensions/maplibrecontroller_extensions.dart';
-import 'package:immich_mobile/widgets/map/map_theme_override.dart';
-import 'package:immich_mobile/widgets/map/positioned_asset_marker_icon.dart';
+import 'package:mediab/extensions/asyncvalue_extensions.dart';
+import 'package:mediab/extensions/maplibrecontroller_extensions.dart';
+import 'package:mediab/widgets/map/map_theme_override.dart';
+import 'package:mediab/widgets/map/positioned_asset_marker_icon.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 
 /// A non-interactive thumbnail of a map in the given coordinates with optional markers
@@ -50,8 +50,7 @@ class MapThumbnail extends HookConsumerWidget {
         // The iOS impl returns wrong toScreenLocation without the delay
         Future.delayed(
           const Duration(milliseconds: 100),
-          () async =>
-              position.value = await mapController.toScreenLocation(centre),
+          () async => position.value = await mapController.toScreenLocation(centre),
         );
       }
     }
@@ -74,8 +73,7 @@ class MapThumbnail extends HookConsumerWidget {
             children: [
               style.widgetWhen(
                 onData: (style) => MaplibreMap(
-                  initialCameraPosition:
-                      CameraPosition(target: offsettedCentre, zoom: zoom),
+                  initialCameraPosition: CameraPosition(target: offsettedCentre, zoom: zoom),
                   styleString: style,
                   onMapCreated: onMapCreated,
                   onStyleLoadedCallback: onStyleLoaded,
@@ -87,8 +85,7 @@ class MapThumbnail extends HookConsumerWidget {
                   scrollGesturesEnabled: false,
                   rotateGesturesEnabled: false,
                   myLocationEnabled: false,
-                  attributionButtonMargins:
-                      showAttribution == false ? const Point(-100, 0) : null,
+                  attributionButtonMargins: showAttribution == false ? const Point(-100, 0) : null,
                 ),
               ),
               ValueListenableBuilder(

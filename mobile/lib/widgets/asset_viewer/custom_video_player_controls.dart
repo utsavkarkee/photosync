@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/asset_viewer/show_controls.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/video_player_controls_provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/video_player_value_provider.dart';
-import 'package:immich_mobile/widgets/asset_viewer/center_play_button.dart';
-import 'package:immich_mobile/widgets/common/delayed_loading_indicator.dart';
-import 'package:immich_mobile/utils/hooks/timer_hook.dart';
+import 'package:mediab/providers/asset_viewer/show_controls.provider.dart';
+import 'package:mediab/providers/asset_viewer/video_player_controls_provider.dart';
+import 'package:mediab/providers/asset_viewer/video_player_value_provider.dart';
+import 'package:mediab/widgets/asset_viewer/center_play_button.dart';
+import 'package:mediab/widgets/common/delayed_loading_indicator.dart';
+import 'package:mediab/utils/hooks/timer_hook.dart';
 
 class CustomVideoPlayerControls extends HookConsumerWidget {
   final Duration hideTimerDuration;
@@ -31,8 +31,7 @@ class CustomVideoPlayerControls extends HookConsumerWidget {
     );
 
     final showBuffering = useState(false);
-    final VideoPlaybackState state =
-        ref.watch(videoPlaybackValueProvider).state;
+    final VideoPlaybackState state = ref.watch(videoPlaybackValueProvider).state;
 
     /// Shows the controls and starts the timer to hide them
     void showControlsAndStartHideTimer() {
@@ -41,19 +40,16 @@ class CustomVideoPlayerControls extends HookConsumerWidget {
     }
 
     // When we mute, show the controls
-    ref.listen(videoPlayerControlsProvider.select((v) => v.mute),
-        (previous, next) {
+    ref.listen(videoPlayerControlsProvider.select((v) => v.mute), (previous, next) {
       showControlsAndStartHideTimer();
     });
 
     // When we change position, show or hide timer
-    ref.listen(videoPlayerControlsProvider.select((v) => v.position),
-        (previous, next) {
+    ref.listen(videoPlayerControlsProvider.select((v) => v.position), (previous, next) {
       showControlsAndStartHideTimer();
     });
 
-    ref.listen(videoPlaybackValueProvider.select((value) => value.state),
-        (_, state) {
+    ref.listen(videoPlaybackValueProvider.select((value) => value.state), (_, state) {
       // Show buffering
       showBuffering.value = state == VideoPlaybackState.buffering;
     });

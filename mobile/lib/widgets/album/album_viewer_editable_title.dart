@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/album/album_viewer.provider.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/album/album_viewer.provider.dart';
+import 'package:mediab/entities/album.entity.dart';
 
 class AlbumViewerEditableTitle extends HookConsumerWidget {
   final Album album;
@@ -59,8 +59,7 @@ class AlbumViewerEditableTitle extends HookConsumerWidget {
           }
         },
         decoration: InputDecoration(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           suffixIcon: titleFocusNode.hasFocus
               ? IconButton(
                   onPressed: () {

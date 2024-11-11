@@ -5,23 +5,23 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
-import 'package:immich_mobile/interfaces/person_api.interface.dart';
-import 'package:immich_mobile/models/search/search_filter.model.dart';
-import 'package:immich_mobile/providers/search/paginated_search.provider.dart';
-import 'package:immich_mobile/providers/search/search_input_focus.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/widgets/asset_grid/multiselect_grid.dart';
-import 'package:immich_mobile/widgets/search/search_filter/camera_picker.dart';
-import 'package:immich_mobile/widgets/search/search_filter/display_option_picker.dart';
-import 'package:immich_mobile/widgets/search/search_filter/filter_bottom_sheet_scaffold.dart';
-import 'package:immich_mobile/widgets/search/search_filter/location_picker.dart';
-import 'package:immich_mobile/widgets/search/search_filter/media_type_picker.dart';
-import 'package:immich_mobile/widgets/search/search_filter/people_picker.dart';
-import 'package:immich_mobile/widgets/search/search_filter/search_filter_chip.dart';
-import 'package:immich_mobile/widgets/search/search_filter/search_filter_utils.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
+import 'package:mediab/interfaces/person_api.interface.dart';
+import 'package:mediab/models/search/search_filter.model.dart';
+import 'package:mediab/providers/search/paginated_search.provider.dart';
+import 'package:mediab/providers/search/search_input_focus.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/widgets/asset_grid/multiselect_grid.dart';
+import 'package:mediab/widgets/search/search_filter/camera_picker.dart';
+import 'package:mediab/widgets/search/search_filter/display_option_picker.dart';
+import 'package:mediab/widgets/search/search_filter/filter_bottom_sheet_scaffold.dart';
+import 'package:mediab/widgets/search/search_filter/location_picker.dart';
+import 'package:mediab/widgets/search/search_filter/media_type_picker.dart';
+import 'package:mediab/widgets/search/search_filter/people_picker.dart';
+import 'package:mediab/widgets/search/search_filter/search_filter_chip.dart';
+import 'package:mediab/widgets/search/search_filter/search_filter_utils.dart';
 
 @RoutePage()
 class SearchPage extends HookConsumerWidget {
@@ -375,8 +375,7 @@ class SearchPage extends HookConsumerWidget {
                 ),
               );
               if (value) {
-                filterText
-                    .add('search_filter_display_option_not_in_album'.tr());
+                filterText.add('search_filter_display_option_not_in_album'.tr());
               }
               break;
             case DisplayOption.archive:
@@ -468,9 +467,7 @@ class SearchPage extends HookConsumerWidget {
           Padding(
             padding: const EdgeInsets.only(right: 14.0),
             child: IconButton(
-              icon: isContextualSearch.value
-                  ? const Icon(Icons.abc_rounded)
-                  : const Icon(Icons.image_search_rounded),
+              icon: isContextualSearch.value ? const Icon(Icons.abc_rounded) : const Icon(Icons.image_search_rounded),
               onPressed: () {
                 isContextualSearch.value = !isContextualSearch.value;
                 textSearchController.clear();
@@ -498,18 +495,14 @@ class SearchPage extends HookConsumerWidget {
           child: TextField(
             controller: textSearchController,
             decoration: InputDecoration(
-              contentPadding: prefilter != null
-                  ? EdgeInsets.only(left: 24)
-                  : EdgeInsets.all(8),
+              contentPadding: prefilter != null ? EdgeInsets.only(left: 24) : EdgeInsets.all(8),
               prefixIcon: prefilter != null
                   ? null
                   : Icon(
                       Icons.search_rounded,
                       color: context.colorScheme.primary,
                     ),
-              hintText: isContextualSearch.value
-                  ? 'contextual_search'.tr()
-                  : 'filename_search'.tr(),
+              hintText: isContextualSearch.value ? 'contextual_search'.tr() : 'filename_search'.tr(),
               hintStyle: context.textTheme.bodyLarge?.copyWith(
                 color: context.themeData.colorScheme.onSurfaceSecondary,
               ),
@@ -622,17 +615,13 @@ class SearchResultGrid extends StatelessWidget {
         padding: const EdgeInsets.only(top: 8.0),
         child: NotificationListener<ScrollEndNotification>(
           onNotification: (notification) {
-            final isBottomSheetNotification = notification.context
-                    ?.findAncestorWidgetOfExactType<
-                        DraggableScrollableSheet>() !=
-                null;
+            final isBottomSheetNotification =
+                notification.context?.findAncestorWidgetOfExactType<DraggableScrollableSheet>() != null;
 
             final metrics = notification.metrics;
             final isVerticalScroll = metrics.axis == Axis.vertical;
 
-            if (metrics.pixels >= metrics.maxScrollExtent &&
-                isVerticalScroll &&
-                !isBottomSheetNotification) {
+            if (metrics.pixels >= metrics.maxScrollExtent && isVerticalScroll && !isBottomSheetNotification) {
               onScrollEnd();
             }
 
@@ -668,9 +657,7 @@ class SearchEmptyContent extends StatelessWidget {
         SizedBox(height: 40),
         Center(
           child: Image.asset(
-            context.isDarkTheme
-                ? 'assets/polaroid-dark.png'
-                : 'assets/polaroid-light.png',
+            context.isDarkTheme ? 'assets/polaroid-dark.png' : 'assets/polaroid-light.png',
             height: 125,
           ),
         ),

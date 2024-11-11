@@ -3,15 +3,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/models/search/search_filter.model.dart';
-import 'package:immich_mobile/pages/common/large_leading_tile.dart';
-import 'package:immich_mobile/providers/search/search_page_state.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/widgets/map/map_thumbnail.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/models/search/search_filter.model.dart';
+import 'package:mediab/pages/common/large_leading_tile.dart';
+import 'package:mediab/providers/search/search_page_state.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/widgets/map/map_thumbnail.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 
 @RoutePage()
@@ -41,8 +41,7 @@ class PlacesCollectionPage extends HookConsumerWidget {
                   -157.91959,
                 ),
                 showAttribution: false,
-                themeMode:
-                    context.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+                themeMode: context.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
               ),
             ),
           ),
@@ -76,8 +75,7 @@ class PlaceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final thumbnailUrl =
-        '${Store.get(StoreKey.serverEndpoint)}/assets/$id/thumbnail';
+    final thumbnailUrl = '${Store.get(StoreKey.serverEndpoint)}/assets/$id/thumbnail';
 
     void navigateToPlace() {
       context.pushRoute(
@@ -116,8 +114,7 @@ class PlaceTile extends StatelessWidget {
           fit: BoxFit.cover,
           imageUrl: thumbnailUrl,
           httpHeaders: ApiService.getRequestHeaders(),
-          errorWidget: (context, url, error) =>
-              const Icon(Icons.image_not_supported_outlined),
+          errorWidget: (context, url, error) => const Icon(Icons.image_not_supported_outlined),
         ),
       ),
     );

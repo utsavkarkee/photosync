@@ -1,5 +1,5 @@
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
 
 abstract interface class IAlbumMediaRepository {
   Future<List<Album>> getAll();

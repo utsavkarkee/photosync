@@ -2,12 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/search/people.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/utils/image_url_builder.dart';
-import 'package:immich_mobile/widgets/search/person_name_edit_form.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/search/people.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/utils/image_url_builder.dart';
+import 'package:mediab/widgets/search/person_name_edit_form.dart';
 
 @RoutePage()
 class PeopleCollectionPage extends HookConsumerWidget {
@@ -32,8 +32,7 @@ class PeopleCollectionPage extends HookConsumerWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isTablet = constraints.maxWidth > 600;
-        final isPortrait =
-            MediaQuery.of(context).orientation == Orientation.portrait;
+        final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
         return Scaffold(
           appBar: AppBar(

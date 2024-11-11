@@ -2,10 +2,10 @@ import 'dart:typed_data';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/interfaces/user_api.interface.dart';
-import 'package:immich_mobile/providers/api.provider.dart';
-import 'package:immich_mobile/repositories/api.repository.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/interfaces/user_api.interface.dart';
+import 'package:mediab/providers/api.provider.dart';
+import 'package:mediab/repositories/api.repository.dart';
 import 'package:openapi/api.dart';
 
 final userApiRepositoryProvider = Provider(

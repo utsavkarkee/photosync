@@ -6,33 +6,32 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/backup_album.entity.dart';
-import 'package:immich_mobile/models/backup/backup_candidate.model.dart';
-import 'package:immich_mobile/models/backup/success_upload_asset.model.dart';
-import 'package:immich_mobile/repositories/backup.repository.dart';
-import 'package:immich_mobile/repositories/file_media.repository.dart';
-import 'package:immich_mobile/services/background.service.dart';
-import 'package:immich_mobile/models/backup/backup_state.model.dart';
-import 'package:immich_mobile/models/backup/current_upload_asset.model.dart';
-import 'package:immich_mobile/models/backup/error_upload_asset.model.dart';
-import 'package:immich_mobile/models/backup/manual_upload_state.model.dart';
-import 'package:immich_mobile/providers/backup/backup.provider.dart';
-import 'package:immich_mobile/providers/backup/error_backup_list.provider.dart';
-import 'package:immich_mobile/services/backup.service.dart';
-import 'package:immich_mobile/providers/gallery_permission.provider.dart';
-import 'package:immich_mobile/providers/app_settings.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/app_life_cycle.provider.dart';
-import 'package:immich_mobile/services/local_notification.service.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
-import 'package:immich_mobile/utils/backup_progress.dart';
+import 'package:mediab/entities/backup_album.entity.dart';
+import 'package:mediab/models/backup/backup_candidate.model.dart';
+import 'package:mediab/models/backup/success_upload_asset.model.dart';
+import 'package:mediab/repositories/backup.repository.dart';
+import 'package:mediab/repositories/file_media.repository.dart';
+import 'package:mediab/services/background.service.dart';
+import 'package:mediab/models/backup/backup_state.model.dart';
+import 'package:mediab/models/backup/current_upload_asset.model.dart';
+import 'package:mediab/models/backup/error_upload_asset.model.dart';
+import 'package:mediab/models/backup/manual_upload_state.model.dart';
+import 'package:mediab/providers/backup/backup.provider.dart';
+import 'package:mediab/providers/backup/error_backup_list.provider.dart';
+import 'package:mediab/services/backup.service.dart';
+import 'package:mediab/providers/gallery_permission.provider.dart';
+import 'package:mediab/providers/app_settings.provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/app_life_cycle.provider.dart';
+import 'package:mediab/services/local_notification.service.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
+import 'package:mediab/utils/backup_progress.dart';
 import 'package:logging/logging.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photo_manager/photo_manager.dart' show PMProgressHandler;
 
-final manualUploadProvider =
-    StateNotifierProvider<ManualUploadNotifier, ManualUploadState>((ref) {
+final manualUploadProvider = StateNotifierProvider<ManualUploadNotifier, ManualUploadState>((ref) {
   return ManualUploadNotifier(
     ref.watch(localNotificationService),
     ref.watch(backupProvider.notifier),
@@ -82,8 +81,7 @@ class ManualUploadNotifier extends StateNotifier<ManualUploadState> {
   String? _lastPrintedDetailTitle;
 
   static const notifyInterval = Duration(milliseconds: 500);
-  late final ThrottleProgressUpdate _throttledNotifiy =
-      ThrottleProgressUpdate(_updateProgress, notifyInterval);
+  late final ThrottleProgressUpdate _throttledNotifiy = ThrottleProgressUpdate(_updateProgress, notifyInterval);
   late final ThrottleProgressUpdate _throttledDetailNotify =
       ThrottleProgressUpdate(_updateDetailProgress, notifyInterval);
 
@@ -106,11 +104,9 @@ class ManualUploadNotifier extends StateNotifier<ManualUploadState> {
   void _updateDetailProgress(String? title, int progress, int total) {
     // Guard against throttling calling this method after the upload is done
     if (_backupProvider.backupProgress == BackUpProgressEnum.manualInProgress) {
-      final String msg =
-          total > 0 ? humanReadableBytesProgress(progress, total) : "";
+      final String msg = total > 0 ? humanReadableBytesProgress(progress, total) : "";
       // only update if message actually differs (to stop many useless notification updates on large assets or slow connections)
-      if (msg != _lastPrintedDetailContent ||
-          title != _lastPrintedDetailTitle) {
+      if (msg != _lastPrintedDetailContent || title != _lastPrintedDetailTitle) {
         _lastPrintedDetailContent = msg;
         _lastPrintedDetailTitle = title;
         _localNotificationService.showOrUpdateManualUploadStatus(
@@ -169,8 +165,8 @@ class ManualUploadNotifier extends StateNotifier<ManualUploadState> {
     );
 
     if (state.showDetailedNotification) {
-      final title = "backup_background_service_current_upload_notification"
-          .tr(args: [state.currentUploadAsset.fileName]);
+      final title =
+          "backup_background_service_current_upload_notification".tr(args: [state.currentUploadAsset.fileName]);
       _throttledDetailNotify(title: title, progress: sent, total: total);
     }
   }
@@ -185,8 +181,7 @@ class ManualUploadNotifier extends StateNotifier<ManualUploadState> {
     }
     if (state.showDetailedNotification) {
       _throttledDetailNotify.title =
-          "backup_background_service_current_upload_notification"
-              .tr(args: [currentUploadAsset.fileName]);
+          "backup_background_service_current_upload_notification".tr(args: [currentUploadAsset.fileName]);
       _throttledDetailNotify.progress = 0;
       _throttledDetailNotify.total = 0;
     }
@@ -200,8 +195,7 @@ class ManualUploadNotifier extends StateNotifier<ManualUploadState> {
       if (ref.read(galleryPermissionNotifier.notifier).hasPermission) {
         await ref.read(fileMediaRepositoryProvider).clearFileCache();
 
-        final allAssetsFromDevice =
-            allManualUploads.where((e) => e.isLocal && !e.isRemote).toList();
+        final allAssetsFromDevice = allManualUploads.where((e) => e.isLocal && !e.isRemote).toList();
 
         if (allAssetsFromDevice.length != allManualUploads.length) {
           _log.warning(
@@ -209,14 +203,11 @@ class ManualUploadNotifier extends StateNotifier<ManualUploadState> {
           );
         }
 
-        final selectedBackupAlbums =
-            await _backupRepository.getAllBySelection(BackupSelection.select);
-        final excludedBackupAlbums =
-            await _backupRepository.getAllBySelection(BackupSelection.exclude);
+        final selectedBackupAlbums = await _backupRepository.getAllBySelection(BackupSelection.select);
+        final excludedBackupAlbums = await _backupRepository.getAllBySelection(BackupSelection.exclude);
 
         // Get candidates from selected albums and excluded albums
-        Set<BackupCandidate> candidates =
-            await _backupService.buildUploadCandidates(
+        Set<BackupCandidate> candidates = await _backupService.buildUploadCandidates(
           selectedBackupAlbums,
           excludedBackupAlbums,
           useTimeFilter: false,
@@ -260,13 +251,11 @@ class ManualUploadNotifier extends StateNotifier<ManualUploadState> {
         }
 
         // Show detailed asset if enabled in settings or if a single asset is uploaded
-        bool showDetailedNotification =
-            ref.read(appSettingsServiceProvider).getSetting<bool>(
-                      AppSettingsEnum.backgroundBackupSingleProgress,
-                    ) ||
-                state.totalAssetsToUpload == 1;
-        state =
-            state.copyWith(showDetailedNotification: showDetailedNotification);
+        bool showDetailedNotification = ref.read(appSettingsServiceProvider).getSetting<bool>(
+                  AppSettingsEnum.backgroundBackupSingleProgress,
+                ) ||
+            state.totalAssetsToUpload == 1;
+        state = state.copyWith(showDetailedNotification: showDetailedNotification);
         final pmProgressHandler = Platform.isIOS ? PMProgressHandler() : null;
 
         final bool ok = await ref.read(backupServiceProvider).backupAsset(
@@ -297,8 +286,7 @@ class ManualUploadNotifier extends StateNotifier<ManualUploadState> {
             presentBanner: true,
           );
           hasErrors = true;
-        } else if (state.successfulUploads == 0 ||
-            (!ok && !state.cancelToken.isCancelled)) {
+        } else if (state.successfulUploads == 0 || (!ok && !state.cancelToken.isCancelled)) {
           await _localNotificationService.showOrUpdateManualUploadStatus(
             "backup_manual_title".tr(),
             "backup_manual_failed".tr(),
@@ -334,8 +322,7 @@ class ManualUploadNotifier extends StateNotifier<ManualUploadState> {
     final appState = ref.read(appStateProvider.notifier).getAppState();
     // The app is currently in background. Perform the necessary cleanups which
     // are on-hold for upload completion
-    if (appState != AppLifeCycleEnum.active &&
-        appState != AppLifeCycleEnum.resumed) {
+    if (appState != AppLifeCycleEnum.active && appState != AppLifeCycleEnum.resumed) {
       ref.read(backupProvider.notifier).cancelBackup();
     }
   }
@@ -364,8 +351,7 @@ class ManualUploadNotifier extends StateNotifier<ManualUploadState> {
   ) async {
     // assumes the background service is currently running and
     // waits until it has stopped to start the backup.
-    final bool hasLock =
-        await ref.read(backgroundServiceProvider).acquireLock();
+    final bool hasLock = await ref.read(backgroundServiceProvider).acquireLock();
     if (!hasLock) {
       debugPrint("[uploadAssets] could not acquire lock, exiting");
       ImmichToast.show(

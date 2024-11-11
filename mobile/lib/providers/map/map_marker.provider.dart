@@ -1,6 +1,6 @@
-import 'package:immich_mobile/models/map/map_marker.model.dart';
-import 'package:immich_mobile/providers/map/map_service.provider.dart';
-import 'package:immich_mobile/providers/map/map_state.provider.dart';
+import 'package:mediab/models/map/map_marker.model.dart';
+import 'package:mediab/providers/map/map_service.provider.dart';
+import 'package:mediab/providers/map/map_state.provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'map_marker.provider.g.dart';
@@ -15,8 +15,7 @@ Future<List<MapMarker>> mapMarkers(MapMarkersRef ref) async {
   bool? isWithPartners;
 
   if (mapState.relativeTime != 0) {
-    fileCreatedAfter =
-        DateTime.now().subtract(Duration(days: mapState.relativeTime));
+    fileCreatedAfter = DateTime.now().subtract(Duration(days: mapState.relativeTime));
   }
 
   if (mapState.showFavoriteOnly) {

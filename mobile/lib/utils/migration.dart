@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/utils/db.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/utils/db.dart';
 import 'package:isar/isar.dart';
 
 const int targetVersion = 6;

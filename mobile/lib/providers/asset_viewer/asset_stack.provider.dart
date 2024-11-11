@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/db.provider.dart';
 import 'package:isar/isar.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -30,13 +30,11 @@ class AssetStackNotifier extends StateNotifier<List<Asset>> {
   }
 }
 
-final assetStackStateProvider = StateNotifierProvider.autoDispose
-    .family<AssetStackNotifier, List<Asset>, Asset>(
+final assetStackStateProvider = StateNotifierProvider.autoDispose.family<AssetStackNotifier, List<Asset>, Asset>(
   (ref, asset) => AssetStackNotifier(asset, ref),
 );
 
-final assetStackProvider =
-    FutureProvider.autoDispose.family<List<Asset>, Asset>((ref, asset) async {
+final assetStackProvider = FutureProvider.autoDispose.family<List<Asset>, Asset>((ref, asset) async {
   // Guard [local asset]
   if (asset.remoteId == null) {
     return [];

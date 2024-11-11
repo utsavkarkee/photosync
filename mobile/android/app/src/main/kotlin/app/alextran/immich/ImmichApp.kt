@@ -1,4 +1,4 @@
-package app.alextran.immich
+package com.mediab.app
 
 import android.app.Application
 import androidx.work.Configuration

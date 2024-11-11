@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/map/map_state.provider.dart';
-import 'package:immich_mobile/utils/immich_app_theme.dart';
+import 'package:mediab/providers/map/map_state.provider.dart';
+import 'package:mediab/utils/immich_app_theme.dart';
 
 /// Overrides the theme below the widget tree to use the theme data based on the
 /// map settings instead of the one from the app settings
@@ -16,25 +16,20 @@ class MapThemeOveride extends StatefulHookConsumerWidget {
   ConsumerState createState() => _MapThemeOverideState();
 }
 
-class _MapThemeOverideState extends ConsumerState<MapThemeOveride>
-    with WidgetsBindingObserver {
+class _MapThemeOverideState extends ConsumerState<MapThemeOveride> with WidgetsBindingObserver {
   late ThemeMode _theme;
   bool _isDarkTheme = false;
 
-  bool get _isSystemDark =>
-      WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-      Brightness.dark;
+  bool get _isSystemDark => WidgetsBinding.instance.platformDispatcher.platformBrightness == Brightness.dark;
 
   bool checkDarkTheme() {
-    return _theme == ThemeMode.dark ||
-        _theme == ThemeMode.system && _isSystemDark;
+    return _theme == ThemeMode.dark || _theme == ThemeMode.system && _isSystemDark;
   }
 
   @override
   void initState() {
     super.initState();
-    _theme = widget.themeMode ??
-        ref.read(mapStateNotifierProvider.select((v) => v.themeMode));
+    _theme = widget.themeMode ?? ref.read(mapStateNotifierProvider.select((v) => v.themeMode));
     setState(() {
       _isDarkTheme = checkDarkTheme();
     });
@@ -68,8 +63,7 @@ class _MapThemeOverideState extends ConsumerState<MapThemeOveride>
 
   @override
   Widget build(BuildContext context) {
-    _theme = widget.themeMode ??
-        ref.watch(mapStateNotifierProvider.select((v) => v.themeMode));
+    _theme = widget.themeMode ?? ref.watch(mapStateNotifierProvider.select((v) => v.themeMode));
     var appTheme = ref.watch(immichThemeProvider);
 
     useValueChanged<ThemeMode, void>(_theme, (_, __) {
@@ -84,9 +78,7 @@ class _MapThemeOverideState extends ConsumerState<MapThemeOveride>
     });
 
     return Theme(
-      data: _isDarkTheme
-          ? getThemeData(colorScheme: appTheme.dark)
-          : getThemeData(colorScheme: appTheme.light),
+      data: _isDarkTheme ? getThemeData(colorScheme: appTheme.dark) : getThemeData(colorScheme: appTheme.light),
       child: widget.mapBuilder.call(
         ref.watch(
           mapStateNotifierProvider.select(

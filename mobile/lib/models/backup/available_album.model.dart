@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:immich_mobile/entities/album.entity.dart';
+import 'package:mediab/entities/album.entity.dart';
 
 class AvailableAlbum {
   final Album album;
@@ -32,8 +32,7 @@ class AvailableAlbum {
   bool get isAll => album.isAll;
 
   @override
-  String toString() =>
-      'AvailableAlbum(albumEntity: $album, lastBackup: $lastBackup)';
+  String toString() => 'AvailableAlbum(albumEntity: $album, lastBackup: $lastBackup)';
 
   @override
   bool operator ==(Object other) {

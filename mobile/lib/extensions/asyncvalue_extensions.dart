@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/widgets/common/immich_loading_indicator.dart';
-import 'package:immich_mobile/widgets/common/scaffold_error_body.dart';
+import 'package:mediab/widgets/common/immich_loading_indicator.dart';
+import 'package:mediab/widgets/common/scaffold_error_body.dart';
 import 'package:logging/logging.dart';
 
 extension LogOnError<T> on AsyncValue<T> {
@@ -31,8 +31,7 @@ extension LogOnError<T> on AsyncValue<T> {
 
     if (hasError && !hasValue) {
       _asyncErrorLogger.severe('Could not load value', error, stackTrace);
-      return onError?.call(error, stackTrace) ??
-          ScaffoldErrorBody(errorMsg: error?.toString());
+      return onError?.call(error, stackTrace) ?? ScaffoldErrorBody(errorMsg: error?.toString());
     }
 
     return onData(requireValue);

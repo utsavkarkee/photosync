@@ -1,12 +1,11 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/etag.entity.dart';
-import 'package:immich_mobile/interfaces/etag.interface.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/repositories/database.repository.dart';
+import 'package:mediab/entities/etag.entity.dart';
+import 'package:mediab/interfaces/etag.interface.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/repositories/database.repository.dart';
 import 'package:isar/isar.dart';
 
-final etagRepositoryProvider =
-    Provider((ref) => ETagRepository(ref.watch(dbProvider)));
+final etagRepositoryProvider = Provider((ref) => ETagRepository(ref.watch(dbProvider)));
 
 class ETagRepository extends DatabaseRepository implements IETagRepository {
   ETagRepository(super.db);
@@ -21,8 +20,7 @@ class ETagRepository extends DatabaseRepository implements IETagRepository {
   Future<void> upsertAll(List<ETag> etags) => txn(() => db.eTags.putAll(etags));
 
   @override
-  Future<void> deleteByIds(List<String> ids) =>
-      txn(() => db.eTags.deleteAllById(ids));
+  Future<void> deleteByIds(List<String> ids) => txn(() => db.eTags.deleteAllById(ids));
 
   @override
   Future<ETag?> getById(String id) => db.eTags.getById(id);

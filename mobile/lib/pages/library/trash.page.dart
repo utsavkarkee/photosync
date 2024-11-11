@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/asyncvalue_extensions.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/widgets/asset_grid/immich_asset_grid.dart';
-import 'package:immich_mobile/widgets/asset_grid/delete_dialog.dart';
-import 'package:immich_mobile/providers/trash.provider.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/server_info.provider.dart';
-import 'package:immich_mobile/widgets/common/confirm_dialog.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
-import 'package:immich_mobile/utils/immich_loading_overlay.dart';
+import 'package:mediab/extensions/asyncvalue_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/widgets/asset_grid/immich_asset_grid.dart';
+import 'package:mediab/widgets/asset_grid/delete_dialog.dart';
+import 'package:mediab/providers/trash.provider.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/server_info.provider.dart';
+import 'package:mediab/widgets/common/confirm_dialog.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
+import 'package:mediab/utils/immich_loading_overlay.dart';
 
 @RoutePage()
 class TrashPage extends HookConsumerWidget {
@@ -22,8 +22,7 @@ class TrashPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final trashedAssets = ref.watch(trashedAssetsProvider);
-    final trashDays =
-        ref.watch(serverInfoProvider.select((v) => v.serverConfig.trashDays));
+    final trashDays = ref.watch(serverInfoProvider.select((v) => v.serverConfig.trashDays));
     final selectionEnabledHook = useState(false);
     final selection = useState(<Asset>{});
     final processing = useProcessingOverlay();
@@ -66,16 +65,13 @@ class TrashPage extends HookConsumerWidget {
       processing.value = true;
       try {
         if (selection.value.isNotEmpty) {
-          final isRemoved = await ref
-              .read(trashProvider.notifier)
-              .removeAssets(selection.value);
+          final isRemoved = await ref.read(trashProvider.notifier).removeAssets(selection.value);
 
           if (isRemoved) {
             if (context.mounted) {
               ImmichToast.show(
                 context: context,
-                msg: 'assets_deleted_permanently'
-                    .tr(args: ["${selection.value.length}"]),
+                msg: 'assets_deleted_permanently'.tr(args: ["${selection.value.length}"]),
                 gravity: ToastGravity.BOTTOM,
               );
             }
@@ -108,15 +104,12 @@ class TrashPage extends HookConsumerWidget {
       processing.value = true;
       try {
         if (selection.value.isNotEmpty) {
-          final result = await ref
-              .read(trashProvider.notifier)
-              .restoreAssets(selection.value);
+          final result = await ref.read(trashProvider.notifier).restoreAssets(selection.value);
 
           if (result && context.mounted) {
             ImmichToast.show(
               context: context,
-              msg: 'assets_restored_successfully'
-                  .tr(args: ["${selection.value.length}"]),
+              msg: 'assets_restored_successfully'.tr(args: ["${selection.value.length}"]),
               gravity: ToastGravity.BOTTOM,
             );
           }
@@ -129,9 +122,7 @@ class TrashPage extends HookConsumerWidget {
 
     String getAppBarTitle(String count) {
       if (selectionEnabledHook.value) {
-        return selection.value.isNotEmpty
-            ? "${selection.value.length}"
-            : "trash_page_select_assets_btn".tr();
+        return selection.value.isNotEmpty ? "${selection.value.length}" : "trash_page_select_assets_btn".tr();
       }
       return 'trash_page_title'.tr(args: [count]);
     }
@@ -145,9 +136,8 @@ class TrashPage extends HookConsumerWidget {
                   selectionEnabledHook.value = false;
                   selection.value = {};
                 },
-          icon: !selectionEnabledHook.value
-              ? const Icon(Icons.arrow_back_ios_rounded)
-              : const Icon(Icons.close_rounded),
+          icon:
+              !selectionEnabledHook.value ? const Icon(Icons.arrow_back_ios_rounded) : const Icon(Icons.close_rounded),
         ),
         centerTitle: !selectionEnabledHook.value,
         automaticallyImplyLeading: false,
@@ -190,9 +180,7 @@ class TrashPage extends HookConsumerWidget {
                       color: Colors.red[400],
                     ),
                     label: Text(
-                      selection.value.isEmpty
-                          ? 'trash_page_delete_all'.tr()
-                          : 'trash_page_delete'.tr(),
+                      selection.value.isEmpty ? 'trash_page_delete_all'.tr() : 'trash_page_delete'.tr(),
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.red[400],
@@ -210,9 +198,7 @@ class TrashPage extends HookConsumerWidget {
                       Icons.history_rounded,
                     ),
                     label: Text(
-                      selection.value.isEmpty
-                          ? 'trash_page_restore_all'.tr()
-                          : 'trash_page_restore'.tr(),
+                      selection.value.isEmpty ? 'trash_page_restore_all'.tr() : 'trash_page_restore'.tr(),
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,

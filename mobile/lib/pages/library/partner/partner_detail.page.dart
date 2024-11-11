@@ -2,13 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/multiselect.provider.dart';
-import 'package:immich_mobile/providers/partner.provider.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/widgets/asset_grid/multiselect_grid.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/multiselect.provider.dart';
+import 'package:mediab/providers/partner.provider.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/widgets/asset_grid/multiselect_grid.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
 
 @RoutePage()
 class PartnerDetailPage extends HookConsumerWidget {
@@ -37,9 +37,8 @@ class PartnerDetailPage extends HookConsumerWidget {
       if (toggleInProcess) return;
       toggleInProcess = true;
       try {
-        final ok = await ref
-            .read(partnerSharedWithProvider.notifier)
-            .updatePartner(partner, inTimeline: !inTimeline.value);
+        final ok =
+            await ref.read(partnerSharedWithProvider.notifier).updatePartner(partner, inTimeline: !inTimeline.value);
         if (ok) {
           inTimeline.value = !inTimeline.value;
           final action = inTimeline.value ? "shown on" : "hidden from";

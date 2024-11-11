@@ -2,7 +2,7 @@
 
 import 'package:collection/collection.dart';
 
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
 
 class Memory {
   final String title;
@@ -30,9 +30,7 @@ class Memory {
     if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
 
-    return other is Memory &&
-        other.title == title &&
-        listEquals(other.assets, assets);
+    return other is Memory && other.title == title && listEquals(other.assets, assets);
   }
 
   @override

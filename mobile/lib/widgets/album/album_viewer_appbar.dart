@@ -3,17 +3,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/activity_statistics.provider.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/providers/album/album_viewer.provider.dart';
-import 'package:immich_mobile/utils/immich_loading_overlay.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/activity_statistics.provider.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/providers/album/album_viewer.provider.dart';
+import 'package:mediab/utils/immich_loading_overlay.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
 
-class AlbumViewerAppbar extends HookConsumerWidget
-    implements PreferredSizeWidget {
+class AlbumViewerAppbar extends HookConsumerWidget implements PreferredSizeWidget {
   const AlbumViewerAppbar({
     super.key,
     required this.album,
@@ -36,9 +35,7 @@ class AlbumViewerAppbar extends HookConsumerWidget
     final newAlbumTitle = ref.watch(albumViewerProvider).editTitleText;
     final isEditAlbum = ref.watch(albumViewerProvider).isEditAlbum;
     final isProcessing = useProcessingOverlay();
-    final comments = album.shared
-        ? ref.watch(activityStatisticsProvider(album.remoteId!))
-        : 0;
+    final comments = album.shared ? ref.watch(activityStatisticsProvider(album.remoteId!)) : 0;
 
     deleteAlbum() async {
       isProcessing.value = true;
@@ -49,8 +46,7 @@ class AlbumViewerAppbar extends HookConsumerWidget
         context.navigateTo(TabControllerRoute(children: [AlbumsRoute()]));
       } else {
         success = await ref.watch(albumProvider.notifier).deleteAlbum(album);
-        context
-            .navigateTo(const TabControllerRoute(children: [LibraryRoute()]));
+        context.navigateTo(const TabControllerRoute(children: [LibraryRoute()]));
       }
       if (!success) {
         ImmichToast.show(
@@ -109,8 +105,7 @@ class AlbumViewerAppbar extends HookConsumerWidget
     void onLeaveAlbumPressed() async {
       isProcessing.value = true;
 
-      bool isSuccess =
-          await ref.watch(albumProvider.notifier).leaveAlbum(album);
+      bool isSuccess = await ref.watch(albumProvider.notifier).leaveAlbum(album);
 
       if (isSuccess) {
         context.navigateTo(TabControllerRoute(children: [AlbumsRoute()]));
@@ -210,8 +205,7 @@ class AlbumViewerAppbar extends HookConsumerWidget
                 children: [
                   ...buildBottomSheetActions(),
                   if (onAddPhotos != null) ...commonActions,
-                  if (onAddPhotos != null && userId == album.ownerId)
-                    ...ownerActions,
+                  if (onAddPhotos != null && userId == album.ownerId) ...ownerActions,
                 ],
               ),
             ),
@@ -251,9 +245,7 @@ class AlbumViewerAppbar extends HookConsumerWidget
       if (isEditAlbum) {
         return IconButton(
           onPressed: () async {
-            bool isSuccess = await ref
-                .watch(albumViewerProvider.notifier)
-                .changeAlbumTitle(album, newAlbumTitle);
+            bool isSuccess = await ref.watch(albumViewerProvider.notifier).changeAlbumTitle(album, newAlbumTitle);
 
             if (!isSuccess) {
               ImmichToast.show(
@@ -283,8 +275,7 @@ class AlbumViewerAppbar extends HookConsumerWidget
       leading: buildLeadingButton(),
       centerTitle: false,
       actions: [
-        if (album.shared && (album.activityEnabled || comments != 0))
-          buildActivitiesButton(),
+        if (album.shared && (album.activityEnabled || comments != 0)) buildActivitiesButton(),
         if (album.isRemote)
           IconButton(
             splashRadius: 25,

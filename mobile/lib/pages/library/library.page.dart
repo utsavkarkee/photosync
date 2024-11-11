@@ -2,20 +2,20 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/extensions/asyncvalue_extensions.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/providers/partner.provider.dart';
-import 'package:immich_mobile/providers/search/people.provider.dart';
-import 'package:immich_mobile/providers/server_info.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/utils/image_url_builder.dart';
-import 'package:immich_mobile/widgets/album/album_thumbnail_card.dart';
-import 'package:immich_mobile/widgets/common/immich_app_bar.dart';
-import 'package:immich_mobile/widgets/common/user_avatar.dart';
-import 'package:immich_mobile/widgets/map/map_thumbnail.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/extensions/asyncvalue_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/providers/partner.provider.dart';
+import 'package:mediab/providers/search/people.provider.dart';
+import 'package:mediab/providers/server_info.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/utils/image_url_builder.dart';
+import 'package:mediab/widgets/album/album_thumbnail_card.dart';
+import 'package:mediab/widgets/common/immich_app_bar.dart';
+import 'package:mediab/widgets/common/user_avatar.dart';
+import 'package:mediab/widgets/map/map_thumbnail.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 
 @RoutePage()
@@ -23,8 +23,7 @@ class LibraryPage extends ConsumerWidget {
   const LibraryPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final trashEnabled =
-        ref.watch(serverInfoProvider.select((v) => v.serverFeatures.trash));
+    final trashEnabled = ref.watch(serverInfoProvider.select((v) => v.serverFeatures.trash));
 
     return Scaffold(
       appBar: ImmichAppBar(),
@@ -356,8 +355,7 @@ class PlacesCollectionCard extends StatelessWidget {
                       -157.91959,
                     ),
                     showAttribution: false,
-                    themeMode:
-                        context.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+                    themeMode: context.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
                   ),
                 ),
               ),

@@ -1,8 +1,8 @@
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/interfaces/database.interface.dart';
-import 'package:immich_mobile/models/albums/album_search.model.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/interfaces/database.interface.dart';
+import 'package:mediab/models/albums/album_search.model.dart';
 
 abstract interface class IAlbumRepository implements IDatabaseRepository {
   Future<Album> create(Album album);

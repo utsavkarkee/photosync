@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/widgets/common/transparent_image.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/widgets/common/transparent_image.dart';
 
 // ignore: must_be_immutable
 class UserCircleAvatar extends ConsumerWidget {
@@ -32,9 +32,7 @@ class UserCircleAvatar extends ConsumerWidget {
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 12,
-        color: isDarkTheme && user.avatarColor == AvatarColorEnum.primary
-            ? Colors.black
-            : Colors.white,
+        color: isDarkTheme && user.avatarColor == AvatarColorEnum.primary ? Colors.black : Colors.white,
       ),
     );
     return CircleAvatar(

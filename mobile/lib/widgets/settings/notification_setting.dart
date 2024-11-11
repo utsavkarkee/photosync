@@ -1,14 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/notification_permission.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/widgets/settings/settings_button_list_tile.dart';
-import 'package:immich_mobile/widgets/settings/settings_slider_list_tile.dart';
-import 'package:immich_mobile/widgets/settings/settings_sub_page_scaffold.dart';
-import 'package:immich_mobile/widgets/settings/settings_switch_list_tile.dart';
-import 'package:immich_mobile/utils/hooks/app_settings_update_hook.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/notification_permission.provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/widgets/settings/settings_button_list_tile.dart';
+import 'package:mediab/widgets/settings/settings_slider_list_tile.dart';
+import 'package:mediab/widgets/settings/settings_sub_page_scaffold.dart';
+import 'package:mediab/widgets/settings/settings_switch_list_tile.dart';
+import 'package:mediab/utils/hooks/app_settings_update_hook.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class NotificationSetting extends HookConsumerWidget {
@@ -20,12 +20,9 @@ class NotificationSetting extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final permissionService = ref.watch(notificationPermissionProvider);
 
-    final sliderValue =
-        useAppSettingsState(AppSettingsEnum.uploadErrorNotificationGracePeriod);
-    final totalProgressValue =
-        useAppSettingsState(AppSettingsEnum.backgroundBackupTotalProgress);
-    final singleProgressValue =
-        useAppSettingsState(AppSettingsEnum.backgroundBackupSingleProgress);
+    final sliderValue = useAppSettingsState(AppSettingsEnum.uploadErrorNotificationGracePeriod);
+    final totalProgressValue = useAppSettingsState(AppSettingsEnum.backgroundBackupTotalProgress);
+    final singleProgressValue = useAppSettingsState(AppSettingsEnum.backgroundBackupSingleProgress);
 
     final hasPermission = permissionService == PermissionStatus.granted;
 
@@ -55,8 +52,7 @@ class NotificationSetting extends HookConsumerWidget {
       );
     }
 
-    final String formattedValue =
-        _formatSliderValue(sliderValue.value.toDouble());
+    final String formattedValue = _formatSliderValue(sliderValue.value.toDouble());
 
     final notificationSettings = [
       if (!hasPermission)
@@ -65,10 +61,8 @@ class NotificationSetting extends HookConsumerWidget {
           title: 'notification_permission_list_tile_title'.tr(),
           subtileText: 'notification_permission_list_tile_content'.tr(),
           buttonText: 'notification_permission_list_tile_enable_button'.tr(),
-          onButtonTap: () => ref
-              .watch(notificationPermissionProvider.notifier)
-              .requestNotificationPermission()
-              .then((permission) {
+          onButtonTap: () =>
+              ref.watch(notificationPermissionProvider.notifier).requestNotificationPermission().then((permission) {
             if (permission == PermissionStatus.permanentlyDenied) {
               showPermissionsDialog();
             }
@@ -89,8 +83,7 @@ class NotificationSetting extends HookConsumerWidget {
       SettingsSliderListTile(
         enabled: hasPermission,
         valueNotifier: sliderValue,
-        text: 'setting_notifications_notify_failures_grace_period'
-            .tr(args: [formattedValue]),
+        text: 'setting_notifications_notify_failures_grace_period'.tr(args: [formattedValue]),
         maxValue: 5.0,
         noDivisons: 5,
         label: formattedValue,

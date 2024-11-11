@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/models/search/search_curated_content.model.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/utils/image_url_builder.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/models/search/search_curated_content.model.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/utils/image_url_builder.dart';
 
 class CuratedPeopleRow extends StatelessWidget {
   static const double imageSize = 60.0;

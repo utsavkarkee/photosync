@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/asset_viewer/show_controls.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/video_player_controller_provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/video_player_controls_provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/video_player_value_provider.dart';
-import 'package:immich_mobile/widgets/asset_viewer/video_player.dart';
-import 'package:immich_mobile/widgets/common/delayed_loading_indicator.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/asset_viewer/show_controls.provider.dart';
+import 'package:mediab/providers/asset_viewer/video_player_controller_provider.dart';
+import 'package:mediab/providers/asset_viewer/video_player_controls_provider.dart';
+import 'package:mediab/providers/asset_viewer/video_player_value_provider.dart';
+import 'package:mediab/widgets/asset_viewer/video_player.dart';
+import 'package:mediab/widgets/common/delayed_loading_indicator.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 class VideoViewerPage extends HookConsumerWidget {
@@ -32,14 +32,12 @@ class VideoViewerPage extends HookConsumerWidget {
 
   @override
   build(BuildContext context, WidgetRef ref) {
-    final controller =
-        ref.watch(videoPlayerControllerProvider(asset: asset)).value;
+    final controller = ref.watch(videoPlayerControllerProvider(asset: asset)).value;
     // The last volume of the video used when mute is toggled
     final lastVolume = useState(0.5);
 
     // When the volume changes, set the volume
-    ref.listen(videoPlayerControlsProvider.select((value) => value.mute),
-        (_, mute) {
+    ref.listen(videoPlayerControlsProvider.select((value) => value.mute), (_, mute) {
       if (mute) {
         controller?.setVolume(0.0);
       } else {
@@ -48,8 +46,7 @@ class VideoViewerPage extends HookConsumerWidget {
     });
 
     // When the position changes, seek to the position
-    ref.listen(videoPlayerControlsProvider.select((value) => value.position),
-        (_, position) {
+    ref.listen(videoPlayerControlsProvider.select((value) => value.position), (_, position) {
       if (controller == null) {
         // No seeeking if there is no video
         return;
@@ -61,8 +58,7 @@ class VideoViewerPage extends HookConsumerWidget {
     });
 
     // When the custom video controls paus or plays
-    ref.listen(videoPlayerControlsProvider.select((value) => value.pause),
-        (lastPause, pause) {
+    ref.listen(videoPlayerControlsProvider.select((value) => value.pause), (lastPause, pause) {
       if (pause) {
         controller?.pause();
       } else {
@@ -124,8 +120,7 @@ class VideoViewerPage extends HookConsumerWidget {
 
     return PopScope(
       onPopInvokedWithResult: (didPop, _) {
-        ref.read(videoPlaybackValueProvider.notifier).value =
-            VideoPlaybackValue.uninitialized();
+        ref.read(videoPlaybackValueProvider.notifier).value = VideoPlaybackValue.uninitialized();
       },
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 400),

@@ -2,12 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/models/memories/memory.model.dart';
-import 'package:immich_mobile/widgets/asset_grid/thumbnail_placeholder.dart';
-import 'package:immich_mobile/providers/memory.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/providers/haptic_feedback.provider.dart';
-import 'package:immich_mobile/widgets/common/immich_image.dart';
+import 'package:mediab/models/memories/memory.model.dart';
+import 'package:mediab/widgets/asset_grid/thumbnail_placeholder.dart';
+import 'package:mediab/providers/memory.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/providers/haptic_feedback.provider.dart';
+import 'package:mediab/widgets/common/immich_image.dart';
 
 class MemoryLane extends HookConsumerWidget {
   const MemoryLane({super.key});

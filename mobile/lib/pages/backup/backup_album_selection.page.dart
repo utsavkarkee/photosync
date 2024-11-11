@@ -3,15 +3,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/providers/backup/backup.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/utils/hooks/app_settings_update_hook.dart';
-import 'package:immich_mobile/widgets/backup/album_info_card.dart';
-import 'package:immich_mobile/widgets/backup/album_info_list_tile.dart';
-import 'package:immich_mobile/widgets/common/immich_loading_indicator.dart';
-import 'package:immich_mobile/widgets/settings/settings_switch_list_tile.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/providers/backup/backup.provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/utils/hooks/app_settings_update_hook.dart';
+import 'package:mediab/widgets/backup/album_info_card.dart';
+import 'package:mediab/widgets/backup/album_info_list_tile.dart';
+import 'package:mediab/widgets/common/immich_loading_indicator.dart';
+import 'package:mediab/widgets/settings/settings_switch_list_tile.dart';
 
 @RoutePage()
 class BackupAlbumSelectionPage extends HookConsumerWidget {
@@ -20,8 +20,7 @@ class BackupAlbumSelectionPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedBackupAlbums = ref.watch(backupProvider).selectedBackupAlbums;
     final excludedBackupAlbums = ref.watch(backupProvider).excludedBackupAlbums;
-    final enableSyncUploadAlbum =
-        useAppSettingsState(AppSettingsEnum.syncAlbums);
+    final enableSyncUploadAlbum = useAppSettingsState(AppSettingsEnum.syncAlbums);
     final isDarkTheme = context.isDarkTheme;
     final albums = ref.watch(backupProvider).availableAlbums;
 
@@ -86,8 +85,7 @@ class BackupAlbumSelectionPage extends HookConsumerWidget {
 
     buildSelectedAlbumNameChip() {
       return selectedBackupAlbums.map((album) {
-        void removeSelection() =>
-            ref.read(backupProvider.notifier).removeAlbumForBackup(album);
+        void removeSelection() => ref.read(backupProvider.notifier).removeAlbumForBackup(album);
 
         return Padding(
           padding: const EdgeInsets.only(right: 8.0),
@@ -118,9 +116,7 @@ class BackupAlbumSelectionPage extends HookConsumerWidget {
     buildExcludedAlbumNameChip() {
       return excludedBackupAlbums.map((album) {
         void removeSelection() {
-          ref
-              .watch(backupProvider.notifier)
-              .removeExcludedAlbumForBackup(album);
+          ref.watch(backupProvider.notifier).removeExcludedAlbumForBackup(album);
         }
 
         return GestureDetector(
@@ -216,11 +212,7 @@ class BackupAlbumSelectionPage extends HookConsumerWidget {
                   title: Text(
                     "backup_album_selection_page_albums_device".tr(
                       args: [
-                        ref
-                            .watch(backupProvider)
-                            .availableAlbums
-                            .length
-                            .toString(),
+                        ref.watch(backupProvider).availableAlbums.length.toString(),
                       ],
                     ),
                     style: context.textTheme.titleSmall,

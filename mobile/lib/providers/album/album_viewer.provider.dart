@@ -1,11 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/models/albums/album_viewer_page_state.model.dart';
-import 'package:immich_mobile/services/album.service.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
+import 'package:mediab/models/albums/album_viewer_page_state.model.dart';
+import 'package:mediab/services/album.service.dart';
+import 'package:mediab/entities/album.entity.dart';
 
 class AlbumViewerNotifier extends StateNotifier<AlbumViewerPageState> {
-  AlbumViewerNotifier(this.ref)
-      : super(AlbumViewerPageState(editTitleText: "", isEditAlbum: false));
+  AlbumViewerNotifier(this.ref) : super(AlbumViewerPageState(editTitleText: "", isEditAlbum: false));
 
   final Ref ref;
 
@@ -48,7 +47,6 @@ class AlbumViewerNotifier extends StateNotifier<AlbumViewerPageState> {
   }
 }
 
-final albumViewerProvider =
-    StateNotifierProvider<AlbumViewerNotifier, AlbumViewerPageState>((ref) {
+final albumViewerProvider = StateNotifierProvider<AlbumViewerNotifier, AlbumViewerPageState>((ref) {
   return AlbumViewerNotifier(ref);
 });

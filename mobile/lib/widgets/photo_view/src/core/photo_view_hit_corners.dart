@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:immich_mobile/widgets/photo_view/src/controller/photo_view_controller_delegate.dart'
+import 'package:mediab/widgets/photo_view/src/controller/photo_view_controller_delegate.dart'
     show PhotoViewControllerDelegate;
 
 mixin HitCornersDetector on PhotoViewControllerDelegate {
@@ -37,8 +37,7 @@ mixin HitCornersDetector on PhotoViewControllerDelegate {
     if (!hitCorners.hasHitAny) {
       return true;
     }
-    final axisBlocked = hitCorners.hasHitBoth ||
-        (hitCorners.hasHitMax ? mainAxisMove > 0 : mainAxisMove < 0);
+    final axisBlocked = hitCorners.hasHitBoth || (hitCorners.hasHitMax ? mainAxisMove > 0 : mainAxisMove < 0);
     if (axisBlocked) {
       return false;
     }

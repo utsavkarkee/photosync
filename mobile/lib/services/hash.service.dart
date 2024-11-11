@@ -2,17 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/interfaces/album_media.interface.dart';
-import 'package:immich_mobile/interfaces/asset.interface.dart';
-import 'package:immich_mobile/repositories/album_media.repository.dart';
-import 'package:immich_mobile/repositories/asset.repository.dart';
-import 'package:immich_mobile/services/background.service.dart';
-import 'package:immich_mobile/entities/android_device_asset.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/device_asset.entity.dart';
-import 'package:immich_mobile/entities/ios_device_asset.entity.dart';
-import 'package:immich_mobile/extensions/string_extensions.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/interfaces/album_media.interface.dart';
+import 'package:mediab/interfaces/asset.interface.dart';
+import 'package:mediab/repositories/album_media.repository.dart';
+import 'package:mediab/repositories/asset.repository.dart';
+import 'package:mediab/services/background.service.dart';
+import 'package:mediab/entities/android_device_asset.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/device_asset.entity.dart';
+import 'package:mediab/entities/ios_device_asset.entity.dart';
+import 'package:mediab/extensions/string_extensions.dart';
 import 'package:logging/logging.dart';
 
 class HashService {
@@ -42,9 +42,8 @@ class HashService {
       modifiedFrom: modifiedFrom,
       modifiedUntil: modifiedUntil,
     );
-    final filtered = excludedAssets == null
-        ? entities
-        : entities.where((e) => !excludedAssets.contains(e.localId!)).toList();
+    final filtered =
+        excludedAssets == null ? entities : entities.where((e) => !excludedAssets.contains(e.localId!)).toList();
     return _hashAssets(filtered);
   }
 
@@ -56,11 +55,8 @@ class HashService {
     const int batchFileCount = 128;
     const int batchDataSize = 1024 * 1024 * 1024; // 1GB
 
-    final ids = assets
-        .map(Platform.isAndroid ? (a) => a.localId!.toInt() : (a) => a.localId!)
-        .toList();
-    final List<DeviceAsset?> hashes =
-        await _assetRepository.getDeviceAssetsById(ids);
+    final ids = assets.map(Platform.isAndroid ? (a) => a.localId!.toInt() : (a) => a.localId!).toList();
+    final List<DeviceAsset?> hashes = await _assetRepository.getDeviceAssetsById(ids);
     final List<DeviceAsset> toAdd = [];
     final List<String> toHash = [];
 
@@ -127,20 +123,16 @@ class HashService {
         anyNull = true;
       }
     }
-    final validHashes = anyNull
-        ? toAdd.where((e) => e.hash.length == 20).toList(growable: false)
-        : toAdd;
+    final validHashes = anyNull ? toAdd.where((e) => e.hash.length == 20).toList(growable: false) : toAdd;
 
-    await _assetRepository
-        .transaction(() => _assetRepository.upsertDeviceAssets(validHashes));
+    await _assetRepository.transaction(() => _assetRepository.upsertDeviceAssets(validHashes));
     _log.fine("Hashed ${validHashes.length}/${toHash.length} assets");
   }
 
   /// Hashes the given files and returns a list of the same length
   /// files that could not be hashed have a `null` value
   Future<List<Uint8List?>> _hashFiles(List<String> paths) async {
-    final List<Uint8List?>? hashes =
-        await _backgroundService.digestFiles(paths);
+    final List<Uint8List?>? hashes = await _backgroundService.digestFiles(paths);
     if (hashes == null) {
       throw Exception("Hashing ${paths.length} files failed");
     }

@@ -8,18 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
-import 'package:immich_mobile/models/backup/backup_state.model.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/providers/backup/backup.provider.dart';
-import 'package:immich_mobile/providers/backup/error_backup_list.provider.dart';
-import 'package:immich_mobile/providers/backup/ios_background_settings.provider.dart';
-import 'package:immich_mobile/providers/backup/manual_upload.provider.dart';
-import 'package:immich_mobile/providers/websocket.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/widgets/backup/backup_info_card.dart';
-import 'package:immich_mobile/widgets/backup/current_backup_asset_info_box.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
+import 'package:mediab/models/backup/backup_state.model.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/providers/backup/backup.provider.dart';
+import 'package:mediab/providers/backup/error_backup_list.provider.dart';
+import 'package:mediab/providers/backup/ios_background_settings.provider.dart';
+import 'package:mediab/providers/backup/manual_upload.provider.dart';
+import 'package:mediab/providers/websocket.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/widgets/backup/backup_info_card.dart';
+import 'package:mediab/widgets/backup/current_backup_asset_info_box.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 @RoutePage()
@@ -34,11 +34,8 @@ class BackupControllerPage extends HookConsumerWidget {
     final isScreenDarkened = useState(false);
     final darkenScreenTimer = useRef<Timer?>(null);
 
-    bool hasExclusiveAccess =
-        backupState.backupProgress != BackUpProgressEnum.inBackground;
-    bool shouldBackup = backupState.allUniqueAssets.length -
-                    backupState.selectedAlbumsBackupAssetsIds.length ==
-                0 ||
+    bool hasExclusiveAccess = backupState.backupProgress != BackUpProgressEnum.inBackground;
+    bool shouldBackup = backupState.allUniqueAssets.length - backupState.selectedAlbumsBackupAssetsIds.length == 0 ||
             !hasExclusiveAccess
         ? false
         : true;
@@ -71,9 +68,7 @@ class BackupControllerPage extends HookConsumerWidget {
           ref.watch(iOSBackgroundSettingsProvider.notifier).refresh();
         }
 
-        ref
-            .watch(websocketProvider.notifier)
-            .stopListenToEvent('on_upload_success');
+        ref.watch(websocketProvider.notifier).stopListenToEvent('on_upload_success');
 
         return () {
           WakelockPlus.disable();
@@ -86,8 +81,7 @@ class BackupControllerPage extends HookConsumerWidget {
 
     useEffect(
       () {
-        if (backupState.backupProgress == BackUpProgressEnum.idle &&
-            !didGetBackupInfo.value) {
+        if (backupState.backupProgress == BackUpProgressEnum.idle && !didGetBackupInfo.value) {
           ref.watch(backupProvider.notifier).getBackupInfo();
           didGetBackupInfo.value = true;
         }
@@ -208,9 +202,7 @@ class BackupControllerPage extends HookConsumerWidget {
               onPressed: () async {
                 await context.pushRoute(const BackupAlbumSelectionRoute());
                 // waited until returning from selection
-                await ref
-                    .read(backupProvider.notifier)
-                    .backupAlbumSelectionDone();
+                await ref.read(backupProvider.notifier).backupAlbumSelectionDone();
                 // waited until backup albums are stored in DB
                 ref.read(albumProvider.notifier).refreshDeviceAlbums();
               },
@@ -228,8 +220,7 @@ class BackupControllerPage extends HookConsumerWidget {
 
     void startBackup() {
       ref.watch(errorBackupListProvider.notifier).empty();
-      if (ref.watch(backupProvider).backupProgress !=
-          BackUpProgressEnum.inBackground) {
+      if (ref.watch(backupProvider).backupProgress != BackUpProgressEnum.inBackground) {
         ref.watch(backupProvider.notifier).startBackupProcess();
       }
     }
@@ -241,8 +232,7 @@ class BackupControllerPage extends HookConsumerWidget {
         ),
         child: Container(
           child: backupState.backupProgress == BackUpProgressEnum.inProgress ||
-                  backupState.backupProgress ==
-                      BackUpProgressEnum.manualInProgress
+                  backupState.backupProgress == BackUpProgressEnum.manualInProgress
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.grey[50],
@@ -250,8 +240,7 @@ class BackupControllerPage extends HookConsumerWidget {
                     // padding: const EdgeInsets.all(14),
                   ),
                   onPressed: () {
-                    if (backupState.backupProgress ==
-                        BackUpProgressEnum.manualInProgress) {
+                    if (backupState.backupProgress == BackUpProgressEnum.manualInProgress) {
                       ref.read(manualUploadProvider.notifier).cancelBackup();
                     } else {
                       ref.read(backupProvider.notifier).cancelBackup();
@@ -329,8 +318,7 @@ class BackupControllerPage extends HookConsumerWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: IconButton(
-                  onPressed: () =>
-                      context.pushRoute(const BackupOptionsRoute()),
+                  onPressed: () => context.pushRoute(const BackupOptionsRoute()),
                   splashRadius: 24,
                   icon: const Icon(
                     Icons.settings_outlined,
@@ -342,8 +330,7 @@ class BackupControllerPage extends HookConsumerWidget {
           body: Stack(
             children: [
               Padding(
-                padding:
-                    const EdgeInsets.only(left: 16.0, right: 16, bottom: 32),
+                padding: const EdgeInsets.only(left: 16.0, right: 16, bottom: 32),
                 child: ListView(
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   children: hasAnyAlbum
@@ -352,31 +339,21 @@ class BackupControllerPage extends HookConsumerWidget {
                           BackupInfoCard(
                             title: "backup_controller_page_total".tr(),
                             subtitle: "backup_controller_page_total_sub".tr(),
-                            info: ref
-                                    .watch(backupProvider)
-                                    .availableAlbums
-                                    .isEmpty
+                            info: ref.watch(backupProvider).availableAlbums.isEmpty
                                 ? "..."
                                 : "${backupState.allUniqueAssets.length}",
                           ),
                           BackupInfoCard(
                             title: "backup_controller_page_backup".tr(),
                             subtitle: "backup_controller_page_backup_sub".tr(),
-                            info: ref
-                                    .watch(backupProvider)
-                                    .availableAlbums
-                                    .isEmpty
+                            info: ref.watch(backupProvider).availableAlbums.isEmpty
                                 ? "..."
                                 : "${backupState.selectedAlbumsBackupAssetsIds.length}",
                           ),
                           BackupInfoCard(
                             title: "backup_controller_page_remainder".tr(),
-                            subtitle:
-                                "backup_controller_page_remainder_sub".tr(),
-                            info: ref
-                                    .watch(backupProvider)
-                                    .availableAlbums
-                                    .isEmpty
+                            subtitle: "backup_controller_page_remainder_sub".tr(),
+                            info: ref.watch(backupProvider).availableAlbums.isEmpty
                                 ? "..."
                                 : "${max(0, backupState.allUniqueAssets.length - backupState.selectedAlbumsBackupAssetsIds.length)}",
                           ),

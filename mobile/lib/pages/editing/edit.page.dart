@@ -5,13 +5,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/repositories/file_media.repository.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/repositories/file_media.repository.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/providers/album/album.provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:path/path.dart' as p;
 
@@ -40,9 +40,7 @@ class EditImagePage extends ConsumerWidget {
     image.image.resolve(const ImageConfiguration()).addListener(
           ImageStreamListener(
             (ImageInfo info, bool _) {
-              info.image
-                  .toByteData(format: ImageByteFormat.png)
-                  .then((byteData) {
+              info.image.toByteData(format: ImageByteFormat.png).then((byteData) {
                 if (byteData != null) {
                   completer.complete(byteData.buffer.asUint8List());
                 } else {
@@ -50,8 +48,7 @@ class EditImagePage extends ConsumerWidget {
                 }
               });
             },
-            onError: (exception, stackTrace) =>
-                completer.completeError(exception),
+            onError: (exception, stackTrace) => completer.completeError(exception),
           ),
         );
     return completer.future;
@@ -99,14 +96,11 @@ class EditImagePage extends ConsumerWidget {
             color: context.primaryColor,
             size: 24,
           ),
-          onPressed: () =>
-              Navigator.of(context).popUntil((route) => route.isFirst),
+          onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
         ),
         actions: <Widget>[
           TextButton(
-            onPressed: isEdited
-                ? () => _saveEditedImage(context, asset, image, ref)
-                : null,
+            onPressed: isEdited ? () => _saveEditedImage(context, asset, image, ref) : null,
             child: Text(
               "save_to_gallery".tr(),
               style: TextStyle(

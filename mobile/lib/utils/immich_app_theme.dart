@@ -1,10 +1,10 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/immich_colors.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
-import 'package:immich_mobile/providers/app_settings.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
+import 'package:mediab/constants/immich_colors.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
+import 'package:mediab/providers/app_settings.provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
 
 class ImmichTheme {
   ColorScheme light;
@@ -17,9 +17,7 @@ ImmichTheme? _immichDynamicTheme;
 bool get isDynamicThemeAvailable => _immichDynamicTheme != null;
 
 final immichThemeModeProvider = StateProvider<ThemeMode>((ref) {
-  var themeMode = ref
-      .watch(appSettingsServiceProvider)
-      .getSetting(AppSettingsEnum.themeMode);
+  var themeMode = ref.watch(appSettingsServiceProvider).getSetting(AppSettingsEnum.themeMode);
 
   debugPrint("Current themeMode $themeMode");
 
@@ -34,14 +32,12 @@ final immichThemeModeProvider = StateProvider<ThemeMode>((ref) {
 
 final immichThemePresetProvider = StateProvider<ImmichColorPreset>((ref) {
   var appSettingsProvider = ref.watch(appSettingsServiceProvider);
-  var primaryColorName =
-      appSettingsProvider.getSetting(AppSettingsEnum.primaryColor);
+  var primaryColorName = appSettingsProvider.getSetting(AppSettingsEnum.primaryColor);
 
   debugPrint("Current theme preset $primaryColorName");
 
   try {
-    return ImmichColorPreset.values
-        .firstWhere((e) => e.name == primaryColorName);
+    return ImmichColorPreset.values.firstWhere((e) => e.name == primaryColorName);
   } catch (e) {
     debugPrint(
       "Theme preset $primaryColorName not found. Applying default preset.",
@@ -55,15 +51,11 @@ final immichThemePresetProvider = StateProvider<ImmichColorPreset>((ref) {
 });
 
 final dynamicThemeSettingProvider = StateProvider<bool>((ref) {
-  return ref
-      .watch(appSettingsServiceProvider)
-      .getSetting(AppSettingsEnum.dynamicTheme);
+  return ref.watch(appSettingsServiceProvider).getSetting(AppSettingsEnum.dynamicTheme);
 });
 
 final colorfulInterfaceSettingProvider = StateProvider<bool>((ref) {
-  return ref
-      .watch(appSettingsServiceProvider)
-      .getSetting(AppSettingsEnum.colorfulInterface);
+  return ref.watch(appSettingsServiceProvider).getSetting(AppSettingsEnum.colorfulInterface);
 });
 
 // Provider for current selected theme
@@ -72,13 +64,9 @@ final immichThemeProvider = StateProvider<ImmichTheme>((ref) {
   var useSystemColor = ref.watch(dynamicThemeSettingProvider);
   var useColorfulInterface = ref.watch(colorfulInterfaceSettingProvider);
 
-  var currentTheme = (useSystemColor && _immichDynamicTheme != null)
-      ? _immichDynamicTheme!
-      : primaryColor.getTheme();
+  var currentTheme = (useSystemColor && _immichDynamicTheme != null) ? _immichDynamicTheme! : primaryColor.getTheme();
 
-  return useColorfulInterface
-      ? currentTheme
-      : _decolorizeSurfaces(theme: currentTheme);
+  return useColorfulInterface ? currentTheme : _decolorizeSurfaces(theme: currentTheme);
 });
 
 // Method to fetch dynamic system colors
@@ -179,8 +167,7 @@ ThemeData getThemeData({required ColorScheme colorScheme}) {
         fontWeight: FontWeight.bold,
         fontSize: 18,
       ),
-      backgroundColor:
-          isDark ? colorScheme.surfaceContainer : colorScheme.surface,
+      backgroundColor: isDark ? colorScheme.surfaceContainer : colorScheme.surface,
       foregroundColor: primaryColor,
       elevation: 0,
       scrolledUnderElevation: 0,
@@ -234,8 +221,7 @@ ThemeData getThemeData({required ColorScheme colorScheme}) {
       ),
     ),
     navigationBarTheme: NavigationBarThemeData(
-      backgroundColor:
-          isDark ? colorScheme.surfaceContainer : colorScheme.surface,
+      backgroundColor: isDark ? colorScheme.surfaceContainer : colorScheme.surface,
       labelTextStyle: const WidgetStatePropertyAll(
         TextStyle(
           fontSize: 14,

@@ -4,16 +4,16 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/authentication.provider.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/models/server_info/server_version.model.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/providers/server_info.provider.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/services/sync.service.dart';
-import 'package:immich_mobile/utils/debounce.dart';
+import 'package:mediab/providers/authentication.provider.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/models/server_info/server_version.model.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/providers/server_info.provider.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/services/sync.service.dart';
+import 'package:mediab/utils/debounce.dart';
 import 'package:logging/logging.dart';
 import 'package:openapi/api.dart';
 import 'package:socket_io_client/socket_io_client.dart';
@@ -73,16 +73,13 @@ class WebsocketState {
   }
 
   @override
-  String toString() =>
-      'WebsocketState(socket: $socket, isConnected: $isConnected)';
+  String toString() => 'WebsocketState(socket: $socket, isConnected: $isConnected)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is WebsocketState &&
-        other.socket == socket &&
-        other.isConnected == isConnected;
+    return other is WebsocketState && other.socket == socket && other.isConnected == isConnected;
   }
 
   @override
@@ -97,8 +94,7 @@ class WebsocketNotifier extends StateNotifier<WebsocketState> {
 
   final _log = Logger('WebsocketNotifier');
   final Ref _ref;
-  final Debouncer _debounce =
-      Debouncer(interval: const Duration(milliseconds: 500));
+  final Debouncer _debounce = Debouncer(interval: const Duration(milliseconds: 500));
 
   /// Connects websocket to server unless already connected
   void connect() {
@@ -110,8 +106,7 @@ class WebsocketNotifier extends StateNotifier<WebsocketState> {
         final endpoint = Uri.parse(Store.get(StoreKey.serverEndpoint));
         final headers = ApiService.getRequestHeaders();
         if (endpoint.userInfo.isNotEmpty) {
-          headers["Authorization"] =
-              "Basic ${base64.encode(utf8.encode(endpoint.userInfo))}";
+          headers["Authorization"] = "Basic ${base64.encode(utf8.encode(endpoint.userInfo))}";
         }
 
         debugPrint("Attempting to connect to websocket");
@@ -207,29 +202,20 @@ class WebsocketNotifier extends StateNotifier<WebsocketState> {
   }
 
   Future<void> _handlePendingDeletes() async {
-    final deleteChanges = state.pendingChanges
-        .where((c) => c.action == PendingAction.assetDelete)
-        .toList();
+    final deleteChanges = state.pendingChanges.where((c) => c.action == PendingAction.assetDelete).toList();
     if (deleteChanges.isNotEmpty) {
-      List<String> remoteIds =
-          deleteChanges.map((a) => a.value.toString()).toList();
+      List<String> remoteIds = deleteChanges.map((a) => a.value.toString()).toList();
       await _ref.read(syncServiceProvider).handleRemoteAssetRemoval(remoteIds);
       state = state.copyWith(
-        pendingChanges: state.pendingChanges
-            .whereNot((c) => deleteChanges.contains(c))
-            .toList(),
+        pendingChanges: state.pendingChanges.whereNot((c) => deleteChanges.contains(c)).toList(),
       );
     }
   }
 
   Future<void> _handlePendingUploaded() async {
-    final uploadedChanges = state.pendingChanges
-        .where((c) => c.action == PendingAction.assetUploaded)
-        .toList();
+    final uploadedChanges = state.pendingChanges.where((c) => c.action == PendingAction.assetUploaded).toList();
     if (uploadedChanges.isNotEmpty) {
-      List<AssetResponseDto?> remoteAssets = uploadedChanges
-          .map((a) => AssetResponseDto.fromJson(a.value))
-          .toList();
+      List<AssetResponseDto?> remoteAssets = uploadedChanges.map((a) => AssetResponseDto.fromJson(a.value)).toList();
       for (final dto in remoteAssets) {
         if (dto != null) {
           final newAsset = Asset.remote(dto);
@@ -237,27 +223,20 @@ class WebsocketNotifier extends StateNotifier<WebsocketState> {
         }
       }
       state = state.copyWith(
-        pendingChanges: state.pendingChanges
-            .whereNot((c) => uploadedChanges.contains(c))
-            .toList(),
+        pendingChanges: state.pendingChanges.whereNot((c) => uploadedChanges.contains(c)).toList(),
       );
     }
   }
 
   Future<void> _handlingPendingHidden() async {
-    final hiddenChanges = state.pendingChanges
-        .where((c) => c.action == PendingAction.assetHidden)
-        .toList();
+    final hiddenChanges = state.pendingChanges.where((c) => c.action == PendingAction.assetHidden).toList();
     if (hiddenChanges.isNotEmpty) {
-      List<String> remoteIds =
-          hiddenChanges.map((a) => a.value.toString()).toList();
+      List<String> remoteIds = hiddenChanges.map((a) => a.value.toString()).toList();
       final db = _ref.watch(dbProvider);
       await db.writeTxn(() => db.assets.deleteAllByRemoteId(remoteIds));
 
       state = state.copyWith(
-        pendingChanges: state.pendingChanges
-            .whereNot((c) => hiddenChanges.contains(c))
-            .toList(),
+        pendingChanges: state.pendingChanges.whereNot((c) => hiddenChanges.contains(c)).toList(),
       );
     }
   }
@@ -278,14 +257,11 @@ class WebsocketNotifier extends StateNotifier<WebsocketState> {
     _ref.read(assetProvider.notifier).getAllAsset();
   }
 
-  void _handleOnUploadSuccess(dynamic data) =>
-      addPendingChange(PendingAction.assetUploaded, data);
+  void _handleOnUploadSuccess(dynamic data) => addPendingChange(PendingAction.assetUploaded, data);
 
-  void _handleOnAssetDelete(dynamic data) =>
-      addPendingChange(PendingAction.assetDelete, data);
+  void _handleOnAssetDelete(dynamic data) => addPendingChange(PendingAction.assetDelete, data);
 
-  void _handleOnAssetHidden(dynamic data) =>
-      addPendingChange(PendingAction.assetHidden, data);
+  void _handleOnAssetHidden(dynamic data) => addPendingChange(PendingAction.assetHidden, data);
 
   _handleReleaseUpdates(dynamic data) {
     // Json guard
@@ -294,31 +270,24 @@ class WebsocketNotifier extends StateNotifier<WebsocketState> {
     }
 
     final json = data.cast<String, dynamic>();
-    final serverVersionJson =
-        json.containsKey('serverVersion') ? json['serverVersion'] : null;
-    final releaseVersionJson =
-        json.containsKey('releaseVersion') ? json['releaseVersion'] : null;
+    final serverVersionJson = json.containsKey('serverVersion') ? json['serverVersion'] : null;
+    final releaseVersionJson = json.containsKey('releaseVersion') ? json['releaseVersion'] : null;
     if (serverVersionJson == null || releaseVersionJson == null) {
       return;
     }
 
-    final serverVersionDto =
-        ServerVersionResponseDto.fromJson(serverVersionJson);
-    final releaseVersionDto =
-        ServerVersionResponseDto.fromJson(releaseVersionJson);
+    final serverVersionDto = ServerVersionResponseDto.fromJson(serverVersionJson);
+    final releaseVersionDto = ServerVersionResponseDto.fromJson(releaseVersionJson);
     if (serverVersionDto == null || releaseVersionDto == null) {
       return;
     }
 
     final serverVersion = ServerVersion.fromDto(serverVersionDto);
     final releaseVersion = ServerVersion.fromDto(releaseVersionDto);
-    _ref
-        .read(serverInfoProvider.notifier)
-        .handleNewRelease(serverVersion, releaseVersion);
+    _ref.read(serverInfoProvider.notifier).handleNewRelease(serverVersion, releaseVersion);
   }
 }
 
-final websocketProvider =
-    StateNotifierProvider<WebsocketNotifier, WebsocketState>((ref) {
+final websocketProvider = StateNotifierProvider<WebsocketNotifier, WebsocketState>((ref) {
   return WebsocketNotifier(ref);
 });

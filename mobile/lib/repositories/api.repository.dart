@@ -1,4 +1,4 @@
-import 'package:immich_mobile/constants/errors.dart';
+import 'package:mediab/constants/errors.dart';
 
 abstract class ApiRepository {
   Future<T> checkNull<T>(Future<T?> future) async {

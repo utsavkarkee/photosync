@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/widgets/search/search_row_title.dart';
+import 'package:mediab/widgets/search/search_row_title.dart';
 
 class SearchRowSection extends StatelessWidget {
   const SearchRowSection({

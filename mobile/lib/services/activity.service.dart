@@ -1,6 +1,6 @@
-import 'package:immich_mobile/interfaces/activity_api.interface.dart';
-import 'package:immich_mobile/mixins/error_logger.mixin.dart';
-import 'package:immich_mobile/models/activities/activity.model.dart';
+import 'package:mediab/interfaces/activity_api.interface.dart';
+import 'package:mediab/mixins/error_logger.mixin.dart';
+import 'package:mediab/models/activities/activity.model.dart';
 import 'package:logging/logging.dart';
 
 class ActivityService with ErrorLoggerMixin {

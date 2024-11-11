@@ -5,23 +5,22 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
-import 'package:immich_mobile/models/backup/backup_state.model.dart';
-import 'package:immich_mobile/providers/backup/backup.provider.dart';
-import 'package:immich_mobile/providers/backup/error_backup_list.provider.dart';
-import 'package:immich_mobile/providers/backup/manual_upload.provider.dart';
-import 'package:immich_mobile/repositories/asset_media.repository.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/widgets/common/immich_thumbnail.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
+import 'package:mediab/models/backup/backup_state.model.dart';
+import 'package:mediab/providers/backup/backup.provider.dart';
+import 'package:mediab/providers/backup/error_backup_list.provider.dart';
+import 'package:mediab/providers/backup/manual_upload.provider.dart';
+import 'package:mediab/repositories/asset_media.repository.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/widgets/common/immich_thumbnail.dart';
 
 class CurrentUploadingAssetInfoBox extends HookConsumerWidget {
   const CurrentUploadingAssetInfoBox({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var isManualUpload = ref.watch(backupProvider).backupProgress ==
-        BackUpProgressEnum.manualInProgress;
+    var isManualUpload = ref.watch(backupProvider).backupProgress == BackUpProgressEnum.manualInProgress;
     var asset = !isManualUpload
         ? ref.watch(backupProvider).currentUploadAsset
         : ref.watch(manualUploadProvider).currentUploadAsset;
@@ -34,8 +33,7 @@ class CurrentUploadingAssetInfoBox extends HookConsumerWidget {
     var uploadFileSpeed = !isManualUpload
         ? ref.watch(backupProvider).progressInFileSpeed
         : ref.watch(manualUploadProvider).progressInFileSpeed;
-    var iCloudDownloadProgress =
-        ref.watch(backupProvider).iCloudDownloadProgress;
+    var iCloudDownloadProgress = ref.watch(backupProvider).iCloudDownloadProgress;
     final isShowThumbnail = useState(false);
 
     String formatUploadFileSpeed(double uploadFileSpeed) {
@@ -265,9 +263,7 @@ class CurrentUploadingAssetInfoBox extends HookConsumerWidget {
               size: 30,
             ),
           ),
-          crossFadeState: isShowThumbnail.value
-              ? CrossFadeState.showFirst
-              : CrossFadeState.showSecond,
+          crossFadeState: isShowThumbnail.value ? CrossFadeState.showFirst : CrossFadeState.showSecond,
           duration: const Duration(milliseconds: 200),
         ),
         title: Row(

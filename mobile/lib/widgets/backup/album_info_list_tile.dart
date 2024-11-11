@@ -2,15 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/models/backup/available_album.model.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/providers/app_settings.provider.dart';
-import 'package:immich_mobile/providers/backup/backup.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/providers/haptic_feedback.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/models/backup/available_album.model.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/providers/app_settings.provider.dart';
+import 'package:mediab/providers/backup/backup.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/providers/haptic_feedback.provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
 
 class AlbumInfoListTile extends HookConsumerWidget {
   final AvailableAlbum album;
@@ -19,23 +19,15 @@ class AlbumInfoListTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool isSelected =
-        ref.watch(backupProvider).selectedBackupAlbums.contains(album);
-    final bool isExcluded =
-        ref.watch(backupProvider).excludedBackupAlbums.contains(album);
-    final syncAlbum = ref
-        .watch(appSettingsServiceProvider)
-        .getSetting(AppSettingsEnum.syncAlbums);
+    final bool isSelected = ref.watch(backupProvider).selectedBackupAlbums.contains(album);
+    final bool isExcluded = ref.watch(backupProvider).excludedBackupAlbums.contains(album);
+    final syncAlbum = ref.watch(appSettingsServiceProvider).getSetting(AppSettingsEnum.syncAlbums);
 
     buildTileColor() {
       if (isSelected) {
-        return context.isDarkTheme
-            ? context.primaryColor.withAlpha(100)
-            : context.primaryColor.withAlpha(25);
+        return context.isDarkTheme ? context.primaryColor.withAlpha(100) : context.primaryColor.withAlpha(25);
       } else if (isExcluded) {
-        return context.isDarkTheme
-            ? Colors.red[300]?.withAlpha(150)
-            : Colors.red[100]?.withAlpha(150);
+        return context.isDarkTheme ? Colors.red[300]?.withAlpha(150) : Colors.red[100]?.withAlpha(150);
       } else {
         return Colors.transparent;
       }

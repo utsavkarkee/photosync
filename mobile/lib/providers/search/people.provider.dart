@@ -1,8 +1,8 @@
-import 'package:immich_mobile/interfaces/person_api.interface.dart';
-import 'package:immich_mobile/widgets/asset_grid/asset_grid_data_structure.dart';
-import 'package:immich_mobile/services/person.service.dart';
-import 'package:immich_mobile/providers/app_settings.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
+import 'package:mediab/interfaces/person_api.interface.dart';
+import 'package:mediab/widgets/asset_grid/asset_grid_data_structure.dart';
+import 'package:mediab/services/person.service.dart';
+import 'package:mediab/providers/app_settings.provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'people.provider.g.dart';
@@ -24,8 +24,7 @@ Future<RenderList> personAssets(PersonAssetsRef ref, String personId) async {
   final assets = await personService.getPersonAssets(personId);
 
   final settings = ref.read(appSettingsServiceProvider);
-  final groupBy =
-      GroupAssetsBy.values[settings.getSetting(AppSettingsEnum.groupAssetsBy)];
+  final groupBy = GroupAssetsBy.values[settings.getSetting(AppSettingsEnum.groupAssetsBy)];
   return await RenderList.fromAssets(assets, groupBy);
 }
 

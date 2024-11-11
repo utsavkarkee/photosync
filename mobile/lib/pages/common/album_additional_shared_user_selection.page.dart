@@ -3,12 +3,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/asyncvalue_extensions.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/album/suggested_shared_users.provider.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/widgets/common/user_circle_avatar.dart';
+import 'package:mediab/extensions/asyncvalue_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/album/suggested_shared_users.provider.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/widgets/common/user_circle_avatar.dart';
 
 @RoutePage()
 class AlbumAdditionalSharedUserSelectionPage extends HookConsumerWidget {
@@ -21,8 +21,7 @@ class AlbumAdditionalSharedUserSelectionPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<User>> suggestedShareUsers =
-        ref.watch(otherUsersProvider);
+    final AsyncValue<List<User>> suggestedShareUsers = ref.watch(otherUsersProvider);
     final sharedUsersList = useState<Set<User>>({});
 
     addNewUsersHandler() {
@@ -138,8 +137,7 @@ class AlbumAdditionalSharedUserSelectionPage extends HookConsumerWidget {
         ),
         actions: [
           TextButton(
-            onPressed:
-                sharedUsersList.value.isEmpty ? null : addNewUsersHandler,
+            onPressed: sharedUsersList.value.isEmpty ? null : addNewUsersHandler,
             child: const Text(
               "share_add",
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),

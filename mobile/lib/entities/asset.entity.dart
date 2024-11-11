@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:immich_mobile/entities/exif_info.entity.dart';
-import 'package:immich_mobile/utils/hash.dart';
+import 'package:mediab/entities/exif_info.entity.dart';
+import 'package:mediab/utils/hash.dart';
 import 'package:isar/isar.dart';
 import 'package:openapi/api.dart';
 import 'package:photo_manager/photo_manager.dart' show AssetEntity;
-import 'package:immich_mobile/extensions/string_extensions.dart';
+import 'package:mediab/extensions/string_extensions.dart';
 import 'package:path/path.dart' as p;
 
 part 'asset.entity.g.dart';
@@ -22,25 +22,20 @@ class Asset {
         durationInSeconds = remote.duration.toDuration()?.inSeconds ?? 0,
         type = remote.type.toAssetType(),
         fileName = remote.originalFileName,
-        height = isFlipped(remote)
-            ? remote.exifInfo?.exifImageWidth?.toInt()
-            : remote.exifInfo?.exifImageHeight?.toInt(),
-        width = isFlipped(remote)
-            ? remote.exifInfo?.exifImageHeight?.toInt()
-            : remote.exifInfo?.exifImageWidth?.toInt(),
+        height =
+            isFlipped(remote) ? remote.exifInfo?.exifImageWidth?.toInt() : remote.exifInfo?.exifImageHeight?.toInt(),
+        width =
+            isFlipped(remote) ? remote.exifInfo?.exifImageHeight?.toInt() : remote.exifInfo?.exifImageWidth?.toInt(),
         livePhotoVideoId = remote.livePhotoVideoId,
         ownerId = fastHash(remote.ownerId),
-        exifInfo =
-            remote.exifInfo != null ? ExifInfo.fromDto(remote.exifInfo!) : null,
+        exifInfo = remote.exifInfo != null ? ExifInfo.fromDto(remote.exifInfo!) : null,
         isFavorite = remote.isFavorite,
         isArchived = remote.isArchived,
         isTrashed = remote.isTrashed,
         isOffline = remote.isOffline,
         // workaround to nullify stackPrimaryAssetId for the parent asset until we refactor the mobile app
         // stack handling to properly handle it
-        stackPrimaryAssetId = remote.stack?.primaryAssetId == remote.id
-            ? null
-            : remote.stack?.primaryAssetId,
+        stackPrimaryAssetId = remote.stack?.primaryAssetId == remote.id ? null : remote.stack?.primaryAssetId,
         stackCount = remote.stack?.assetCount ?? 0,
         stackId = remote.stack?.id,
         thumbhash = remote.thumbhash;
@@ -152,8 +147,7 @@ class Asset {
 
   /// Aspect ratio of the asset
   @ignore
-  double? get aspectRatio =>
-      width == null || height == null ? 0 : width! / height!;
+  double? get aspectRatio => width == null || height == null ? 0 : width! / height!;
 
   /// `true` if this [Asset] is present on the device
   @ignore
@@ -298,8 +292,7 @@ class Asset {
           // workaround to nullify stackPrimaryAssetId for the parent asset until we refactor the mobile app
           // stack handling to properly handle it
           stackId: stackId,
-          stackPrimaryAssetId:
-              stackPrimaryAssetId == remoteId ? null : stackPrimaryAssetId,
+          stackPrimaryAssetId: stackPrimaryAssetId == remoteId ? null : stackPrimaryAssetId,
           stackCount: stackCount,
           isFavorite: isFavorite,
           isArchived: isArchived,
@@ -319,9 +312,7 @@ class Asset {
           // workaround to nullify stackPrimaryAssetId for the parent asset until we refactor the mobile app
           // stack handling to properly handle it
           stackId: a.stackId,
-          stackPrimaryAssetId: a.stackPrimaryAssetId == a.remoteId
-              ? null
-              : a.stackPrimaryAssetId,
+          stackPrimaryAssetId: a.stackPrimaryAssetId == a.remoteId ? null : a.stackPrimaryAssetId,
           stackCount: a.stackCount,
           // isFavorite + isArchived are not set by device-only assets
           isFavorite: a.isFavorite,
@@ -404,8 +395,7 @@ class Asset {
 
   static int compareById(Asset a, Asset b) => a.id.compareTo(b.id);
 
-  static int compareByChecksum(Asset a, Asset b) =>
-      a.checksum.compareTo(b.checksum);
+  static int compareByChecksum(Asset a, Asset b) => a.checksum.compareTo(b.checksum);
 
   static int compareByOwnerChecksum(Asset a, Asset b) {
     final int ownerIdOrder = a.ownerId.compareTo(b.ownerId);
@@ -490,16 +480,11 @@ enum AssetState {
 }
 
 extension AssetsHelper on IsarCollection<Asset> {
-  Future<int> deleteAllByRemoteId(Iterable<String> ids) =>
-      ids.isEmpty ? Future.value(0) : remote(ids).deleteAll();
-  Future<int> deleteAllByLocalId(Iterable<String> ids) =>
-      ids.isEmpty ? Future.value(0) : local(ids).deleteAll();
-  Future<List<Asset>> getAllByRemoteId(Iterable<String> ids) =>
-      ids.isEmpty ? Future.value([]) : remote(ids).findAll();
-  Future<List<Asset>> getAllByLocalId(Iterable<String> ids) =>
-      ids.isEmpty ? Future.value([]) : local(ids).findAll();
-  Future<Asset?> getByRemoteId(String id) =>
-      where().remoteIdEqualTo(id).findFirst();
+  Future<int> deleteAllByRemoteId(Iterable<String> ids) => ids.isEmpty ? Future.value(0) : remote(ids).deleteAll();
+  Future<int> deleteAllByLocalId(Iterable<String> ids) => ids.isEmpty ? Future.value(0) : local(ids).deleteAll();
+  Future<List<Asset>> getAllByRemoteId(Iterable<String> ids) => ids.isEmpty ? Future.value([]) : remote(ids).findAll();
+  Future<List<Asset>> getAllByLocalId(Iterable<String> ids) => ids.isEmpty ? Future.value([]) : local(ids).findAll();
+  Future<Asset?> getByRemoteId(String id) => where().remoteIdEqualTo(id).findFirst();
 
   QueryBuilder<Asset, Asset, QAfterWhereClause> remote(
     Iterable<String> ids,
@@ -524,8 +509,6 @@ bool isRotated270CW(int orientation) {
 
 /// Returns `true` if this [Asset] is flipped 90° or 270° clockwise
 bool isFlipped(AssetResponseDto response) {
-  final int orientation =
-      int.tryParse(response.exifInfo?.orientation ?? '0') ?? 0;
-  return orientation != 0 &&
-      (isRotated90CW(orientation) || isRotated270CW(orientation));
+  final int orientation = int.tryParse(response.exifInfo?.orientation ?? '0') ?? 0;
+  return orientation != 0 && (isRotated90CW(orientation) || isRotated270CW(orientation));
 }

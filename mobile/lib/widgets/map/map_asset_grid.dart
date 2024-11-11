@@ -4,17 +4,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/collection_extensions.dart';
-import 'package:immich_mobile/providers/asset_viewer/render_list.provider.dart';
-import 'package:immich_mobile/widgets/asset_grid/asset_grid_data_structure.dart';
-import 'package:immich_mobile/widgets/asset_grid/immich_asset_grid.dart';
-import 'package:immich_mobile/models/map/map_event.model.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/widgets/common/drag_sheet.dart';
-import 'package:immich_mobile/utils/color_filter_generator.dart';
-import 'package:immich_mobile/utils/throttle.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/collection_extensions.dart';
+import 'package:mediab/providers/asset_viewer/render_list.provider.dart';
+import 'package:mediab/widgets/asset_grid/asset_grid_data_structure.dart';
+import 'package:mediab/widgets/asset_grid/immich_asset_grid.dart';
+import 'package:mediab/models/map/map_event.model.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/widgets/common/drag_sheet.dart';
+import 'package:mediab/utils/color_filter_generator.dart';
+import 'package:mediab/utils/throttle.dart';
 import 'package:logging/logging.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -43,15 +43,11 @@ class MapAssetGrid extends HookConsumerWidget {
     final cachedRenderList = useRef<RenderList?>(null);
     final lastRenderElementIndex = useRef<int?>(null);
     final assetInSheet = useValueNotifier<String?>(null);
-    final gridScrollThrottler =
-        useThrottler(interval: const Duration(milliseconds: 300));
+    final gridScrollThrottler = useThrottler(interval: const Duration(milliseconds: 300));
 
     void handleMapEvents(MapEvent event) async {
       if (event is MapAssetsInBoundsUpdated) {
-        assetsInBounds.value = await ref
-            .read(dbProvider)
-            .assets
-            .getAllByRemoteId(event.assetRemoteIds);
+        assetsInBounds.value = await ref.read(dbProvider).assets.getAllByRemoteId(event.assetRemoteIds);
         return;
       }
     }
@@ -65,8 +61,7 @@ class MapAssetGrid extends HookConsumerWidget {
       final orderedPos = positions.sortedByField((p) => p.index);
       // Index of row where the items are mostly visible
       const partialOffset = 0.20;
-      final item = orderedPos
-          .firstWhereOrNull((p) => p.itemTrailingEdge > partialOffset);
+      final item = orderedPos.firstWhereOrNull((p) => p.itemTrailingEdge > partialOffset);
 
       // Guard no elements, reset state
       // Also fail fast when the sheet is just opened and the user is yet to scroll (i.e leading = 0)
@@ -75,8 +70,7 @@ class MapAssetGrid extends HookConsumerWidget {
         return;
       }
 
-      final renderElement =
-          cachedRenderList.value?.elements.elementAtOrNull(item.index);
+      final renderElement = cachedRenderList.value?.elements.elementAtOrNull(item.index);
       // Guard no render list or render element
       if (renderElement == null) {
         return;
@@ -100,13 +94,9 @@ class MapAssetGrid extends HookConsumerWidget {
           ((renderElement.totalCount / assetsPerRow) * assetsPerRow).floor();
 
       // trailing should never be above the totalOffset
-      final columnOffset =
-          (totalOffset - math.min(item.itemTrailingEdge, totalOffset)) ~/
-              edgeOffset;
+      final columnOffset = (totalOffset - math.min(item.itemTrailingEdge, totalOffset)) ~/ edgeOffset;
       final assetOffset = rowOffset + columnOffset;
-      final selectedAsset = cachedRenderList.value?.allAssets
-          ?.elementAtOrNull(assetOffset)
-          ?.remoteId;
+      final selectedAsset = cachedRenderList.value?.allAssets?.elementAtOrNull(assetOffset)?.remoteId;
 
       if (selectedAsset != null) {
         onGridAssetChanged?.call(selectedAsset);
@@ -140,8 +130,7 @@ class MapAssetGrid extends HookConsumerWidget {
                               showMultiSelectIndicator: false,
                               selectionActive: value.isNotEmpty,
                               listener: onAssetsSelected,
-                              visibleItemsListener: (pos) => gridScrollThrottler
-                                  .run(() => handleVisibleItems(pos)),
+                              visibleItemsListener: (pos) => gridScrollThrottler.run(() => handleVisibleItems(pos)),
                             ),
                           );
                         },

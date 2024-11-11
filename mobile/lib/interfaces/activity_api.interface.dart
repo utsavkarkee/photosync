@@ -1,4 +1,4 @@
-import 'package:immich_mobile/models/activities/activity.model.dart';
+import 'package:mediab/models/activities/activity.model.dart';
 
 abstract interface class IActivityApiRepository {
   Future<List<Activity>> getAll(

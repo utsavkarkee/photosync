@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/datetime_extensions.dart';
-import 'package:immich_mobile/models/activities/activity.model.dart';
-import 'package:immich_mobile/providers/image/immich_remote_thumbnail_provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/current_asset.provider.dart';
-import 'package:immich_mobile/widgets/common/user_circle_avatar.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/datetime_extensions.dart';
+import 'package:mediab/models/activities/activity.model.dart';
+import 'package:mediab/providers/image/immich_remote_thumbnail_provider.dart';
+import 'package:mediab/providers/asset_viewer/current_asset.provider.dart';
+import 'package:mediab/widgets/common/user_circle_avatar.dart';
 
 class ActivityTile extends HookConsumerWidget {
   final Activity activity;
@@ -38,11 +38,8 @@ class ActivityTile extends HookConsumerWidget {
         leftAlign: isLike || showAssetThumbnail,
       ),
       // No subtitle for like, so center title
-      titleAlignment:
-          !isLike ? ListTileTitleAlignment.top : ListTileTitleAlignment.center,
-      trailing: showAssetThumbnail
-          ? _ActivityAssetThumbnail(activity.assetId!)
-          : null,
+      titleAlignment: !isLike ? ListTileTitleAlignment.top : ListTileTitleAlignment.center,
+      trailing: showAssetThumbnail ? _ActivityAssetThumbnail(activity.assetId!) : null,
       subtitle: !isLike ? Text(activity.comment!) : null,
     );
   }
@@ -62,12 +59,10 @@ class _ActivityTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textColor = context.isDarkTheme ? Colors.white : Colors.black;
-    final textStyle = context.textTheme.bodyMedium
-        ?.copyWith(color: textColor.withOpacity(0.6));
+    final textStyle = context.textTheme.bodyMedium?.copyWith(color: textColor.withOpacity(0.6));
 
     return Row(
-      mainAxisAlignment:
-          leftAlign ? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: leftAlign ? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
       mainAxisSize: leftAlign ? MainAxisSize.min : MainAxisSize.max,
       children: [
         Text(

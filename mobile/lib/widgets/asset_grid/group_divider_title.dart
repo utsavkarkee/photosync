@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
-import 'package:immich_mobile/widgets/asset_grid/asset_grid_data_structure.dart';
-import 'package:immich_mobile/providers/app_settings.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/providers/haptic_feedback.provider.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
+import 'package:mediab/widgets/asset_grid/asset_grid_data_structure.dart';
+import 'package:mediab/providers/app_settings.provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/providers/haptic_feedback.provider.dart';
 
 class GroupDividerTitle extends HookConsumerWidget {
   const GroupDividerTitle({
@@ -31,8 +31,7 @@ class GroupDividerTitle extends HookConsumerWidget {
 
     useEffect(
       () {
-        groupBy.value = GroupAssetsBy.values[
-            appSettingService.getSetting<int>(AppSettingsEnum.groupAssetsBy)];
+        groupBy.value = GroupAssetsBy.values[appSettingService.getSetting<int>(AppSettingsEnum.groupAssetsBy)];
         return null;
       },
       [],

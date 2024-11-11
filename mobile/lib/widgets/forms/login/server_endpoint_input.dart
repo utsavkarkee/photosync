@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/utils/url_helper.dart';
+import 'package:mediab/utils/url_helper.dart';
 
 class ServerEndpointInput extends StatelessWidget {
   final TextEditingController controller;
@@ -18,10 +18,7 @@ class ServerEndpointInput extends StatelessWidget {
     if (url == null || url.isEmpty) return null;
 
     final parsedUrl = Uri.tryParse(sanitizeUrl(url));
-    if (parsedUrl == null ||
-        !parsedUrl.isAbsolute ||
-        !parsedUrl.scheme.startsWith("http") ||
-        parsedUrl.host.isEmpty) {
+    if (parsedUrl == null || !parsedUrl.isAbsolute || !parsedUrl.scheme.startsWith("http") || parsedUrl.host.isEmpty) {
       return 'login_form_err_invalid_url'.tr();
     }
 

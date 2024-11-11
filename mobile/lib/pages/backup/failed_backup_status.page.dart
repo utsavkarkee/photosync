@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/backup/error_backup_list.provider.dart';
-import 'package:immich_mobile/providers/image/immich_local_thumbnail_provider.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/backup/error_backup_list.provider.dart';
+import 'package:mediab/providers/image/immich_local_thumbnail_provider.dart';
 import 'package:intl/intl.dart';
 
 @RoutePage()
@@ -95,9 +95,7 @@ class FailedBackupStatusPage extends HookConsumerWidget {
                                 ),
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  color: context.isDarkTheme
-                                      ? Colors.white70
-                                      : Colors.grey[800],
+                                  color: context.isDarkTheme ? Colors.white70 : Colors.grey[800],
                                 ),
                               ),
                               Icon(
@@ -123,9 +121,7 @@ class FailedBackupStatusPage extends HookConsumerWidget {
                             errorAsset.errorMessage,
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: context.isDarkTheme
-                                  ? Colors.white70
-                                  : Colors.grey[800],
+                              color: context.isDarkTheme ? Colors.white70 : Colors.grey[800],
                             ),
                           ),
                         ],

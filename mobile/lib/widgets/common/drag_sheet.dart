@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
 
 class CustomDraggingHandle extends StatelessWidget {
   const CustomDraggingHandle({super.key});

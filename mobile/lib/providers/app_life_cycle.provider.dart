@@ -1,19 +1,19 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/services/background.service.dart';
-import 'package:immich_mobile/models/backup/backup_state.model.dart';
-import 'package:immich_mobile/providers/backup/backup.provider.dart';
-import 'package:immich_mobile/providers/backup/ios_background_settings.provider.dart';
-import 'package:immich_mobile/providers/backup/manual_upload.provider.dart';
-import 'package:immich_mobile/providers/authentication.provider.dart';
-import 'package:immich_mobile/providers/memory.provider.dart';
-import 'package:immich_mobile/providers/gallery_permission.provider.dart';
-import 'package:immich_mobile/providers/notification_permission.provider.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/providers/server_info.provider.dart';
-import 'package:immich_mobile/providers/tab.provider.dart';
-import 'package:immich_mobile/providers/websocket.provider.dart';
-import 'package:immich_mobile/services/immich_logger.service.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/services/background.service.dart';
+import 'package:mediab/models/backup/backup_state.model.dart';
+import 'package:mediab/providers/backup/backup.provider.dart';
+import 'package:mediab/providers/backup/ios_background_settings.provider.dart';
+import 'package:mediab/providers/backup/manual_upload.provider.dart';
+import 'package:mediab/providers/authentication.provider.dart';
+import 'package:mediab/providers/memory.provider.dart';
+import 'package:mediab/providers/gallery_permission.provider.dart';
+import 'package:mediab/providers/notification_permission.provider.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/providers/server_info.provider.dart';
+import 'package:mediab/providers/tab.provider.dart';
+import 'package:mediab/providers/websocket.provider.dart';
+import 'package:mediab/services/immich_logger.service.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 enum AppLifeCycleEnum {
@@ -66,9 +66,7 @@ class AppLifeCycleNotifier extends StateNotifier<AppLifeCycleEnum> {
 
     _ref.read(websocketProvider.notifier).connect();
 
-    _ref
-        .read(notificationPermissionProvider.notifier)
-        .getNotificationPermission();
+    _ref.read(notificationPermissionProvider.notifier).getNotificationPermission();
     _ref.read(galleryPermissionNotifier.notifier).getGalleryPermissionStatus();
 
     _ref.read(iOSBackgroundSettingsProvider.notifier).refresh();
@@ -87,8 +85,7 @@ class AppLifeCycleNotifier extends StateNotifier<AppLifeCycleEnum> {
 
     if (_ref.read(authenticationProvider).isAuthenticated) {
       // Do not cancel backup if manual upload is in progress
-      if (_ref.read(backupProvider.notifier).backupProgress !=
-          BackUpProgressEnum.manualInProgress) {
+      if (_ref.read(backupProvider.notifier).backupProgress != BackUpProgressEnum.manualInProgress) {
         _ref.read(backupProvider.notifier).cancelBackup();
       }
       _ref.read(websocketProvider.notifier).disconnect();
@@ -109,7 +106,6 @@ class AppLifeCycleNotifier extends StateNotifier<AppLifeCycleEnum> {
   }
 }
 
-final appStateProvider =
-    StateNotifierProvider<AppLifeCycleNotifier, AppLifeCycleEnum>((ref) {
+final appStateProvider = StateNotifierProvider<AppLifeCycleNotifier, AppLifeCycleEnum>((ref) {
   return AppLifeCycleNotifier(ref);
 });

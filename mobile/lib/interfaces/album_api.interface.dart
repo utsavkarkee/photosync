@@ -1,4 +1,4 @@
-import 'package:immich_mobile/entities/album.entity.dart';
+import 'package:mediab/entities/album.entity.dart';
 
 abstract interface class IAlbumApiRepository {
   Future<Album> get(String id);

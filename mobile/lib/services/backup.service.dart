@@ -6,27 +6,27 @@ import 'package:cancellation_token_http/http.dart' as http;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/backup_album.entity.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/interfaces/album_media.interface.dart';
-import 'package:immich_mobile/interfaces/asset.interface.dart';
-import 'package:immich_mobile/interfaces/asset_media.interface.dart';
-import 'package:immich_mobile/interfaces/file_media.interface.dart';
-import 'package:immich_mobile/models/backup/backup_candidate.model.dart';
-import 'package:immich_mobile/models/backup/current_upload_asset.model.dart';
-import 'package:immich_mobile/models/backup/error_upload_asset.model.dart';
-import 'package:immich_mobile/models/backup/success_upload_asset.model.dart';
-import 'package:immich_mobile/providers/api.provider.dart';
-import 'package:immich_mobile/providers/app_settings.provider.dart';
-import 'package:immich_mobile/repositories/album_media.repository.dart';
-import 'package:immich_mobile/repositories/asset.repository.dart';
-import 'package:immich_mobile/repositories/asset_media.repository.dart';
-import 'package:immich_mobile/repositories/file_media.repository.dart';
-import 'package:immich_mobile/services/album.service.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/backup_album.entity.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/interfaces/album_media.interface.dart';
+import 'package:mediab/interfaces/asset.interface.dart';
+import 'package:mediab/interfaces/asset_media.interface.dart';
+import 'package:mediab/interfaces/file_media.interface.dart';
+import 'package:mediab/models/backup/backup_candidate.model.dart';
+import 'package:mediab/models/backup/current_upload_asset.model.dart';
+import 'package:mediab/models/backup/error_upload_asset.model.dart';
+import 'package:mediab/models/backup/success_upload_asset.model.dart';
+import 'package:mediab/providers/api.provider.dart';
+import 'package:mediab/providers/app_settings.provider.dart';
+import 'package:mediab/repositories/album_media.repository.dart';
+import 'package:mediab/repositories/asset.repository.dart';
+import 'package:mediab/repositories/asset_media.repository.dart';
+import 'package:mediab/repositories/file_media.repository.dart';
+import 'package:mediab/services/album.service.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/services/app_settings.service.dart';
 import 'package:logging/logging.dart';
 import 'package:openapi/api.dart';
 import 'package:path/path.dart' as p;
@@ -77,8 +77,7 @@ class BackupService {
     }
   }
 
-  Future<void> _saveDuplicatedAssetIds(List<String> deviceAssetIds) =>
-      _assetRepository.transaction(
+  Future<void> _saveDuplicatedAssetIds(List<String> deviceAssetIds) => _assetRepository.transaction(
         () => _assetRepository.upsertDuplicatedAssets(deviceAssetIds),
       );
 
@@ -130,8 +129,7 @@ class BackupService {
         continue;
       }
 
-      if (useTimeFilter &&
-          localAlbum.modifiedAt.isBefore(backupAlbum.lastBackup)) {
+      if (useTimeFilter && localAlbum.modifiedAt.isBefore(backupAlbum.lastBackup)) {
         continue;
       }
       final List<Asset> assets;
@@ -192,8 +190,7 @@ class BackupService {
     final Set<String> existing = {};
     try {
       final String deviceId = Store.get(StoreKey.deviceId);
-      final CheckExistingAssetsResponseDto? duplicates =
-          await _apiService.assetsApi.checkExistingAssets(
+      final CheckExistingAssetsResponseDto? duplicates = await _apiService.assetsApi.checkExistingAssets(
         CheckExistingAssetsDto(
           deviceAssetIds: candidates.map((c) => c.asset.localId!).toList(),
           deviceId: deviceId,
@@ -218,8 +215,7 @@ class BackupService {
   }
 
   Future<bool> _checkPermissions() async {
-    if (Platform.isAndroid &&
-        !(await pm.Permission.accessMediaLocation.status).isGranted) {
+    if (Platform.isAndroid && !(await pm.Permission.accessMediaLocation.status).isGranted) {
       // double check that permission is granted here, to guard against
       // uploading corrupt assets without EXIF information
       _log.warning("Media location permission is not granted. "
@@ -258,8 +254,7 @@ class BackupService {
     required void Function(CurrentUploadAsset asset) onCurrentAsset,
     required void Function(ErrorUploadAsset error) onError,
   }) async {
-    final bool isIgnoreIcloudAssets =
-        _appSetting.getSetting(AppSettingsEnum.ignoreIcloudAssets);
+    final bool isIgnoreIcloudAssets = _appSetting.getSetting(AppSettingsEnum.ignoreIcloudAssets);
     final shouldSyncAlbums = _appSetting.getSetting(AppSettingsEnum.syncAlbums);
     final String deviceId = Store.get(StoreKey.deviceId);
     final String savedEndpoint = Store.get(StoreKey.serverEndpoint);
@@ -282,8 +277,7 @@ class BackupService {
       File? livePhotoFile;
 
       try {
-        final isAvailableLocally =
-            await asset.local!.isLocallyAvailable(isOrigin: true);
+        final isAvailableLocally = await asset.local!.isLocallyAvailable(isOrigin: true);
 
         // Handle getting files from iCloud
         if (!isAvailableLocally && Platform.isIOS) {
@@ -295,17 +289,14 @@ class BackupService {
           onCurrentAsset(
             CurrentUploadAsset(
               id: asset.localId!,
-              fileCreatedAt: asset.fileCreatedAt.year == 1970
-                  ? asset.fileModifiedAt
-                  : asset.fileCreatedAt,
+              fileCreatedAt: asset.fileCreatedAt.year == 1970 ? asset.fileModifiedAt : asset.fileCreatedAt,
               fileName: asset.fileName,
               fileType: _getAssetType(asset.type),
               iCloudAsset: true,
             ),
           );
 
-          file =
-              await asset.local!.loadFile(progressHandler: pmProgressHandler);
+          file = await asset.local!.loadFile(progressHandler: pmProgressHandler);
           if (asset.local!.isLivePhoto) {
             livePhotoFile = await asset.local!.loadFile(
               withSubtype: true,
@@ -316,18 +307,15 @@ class BackupService {
           if (asset.type == AssetType.video) {
             file = await asset.local!.originFile;
           } else {
-            file = await asset.local!.originFile
-                .timeout(const Duration(seconds: 5));
+            file = await asset.local!.originFile.timeout(const Duration(seconds: 5));
             if (asset.local!.isLivePhoto) {
-              livePhotoFile = await asset.local!.originFileWithSubtype
-                  .timeout(const Duration(seconds: 5));
+              livePhotoFile = await asset.local!.originFileWithSubtype.timeout(const Duration(seconds: 5));
             }
           }
         }
 
         if (file != null) {
-          String? originalFileName =
-              await _assetMediaRepository.getOriginalFilename(asset.localId!);
+          String? originalFileName = await _assetMediaRepository.getOriginalFilename(asset.localId!);
           originalFileName ??= asset.fileName;
 
           if (asset.local!.isLivePhoto) {
@@ -356,10 +344,8 @@ class BackupService {
           baseRequest.headers["Transfer-Encoding"] = "chunked";
           baseRequest.fields['deviceAssetId'] = asset.localId!;
           baseRequest.fields['deviceId'] = deviceId;
-          baseRequest.fields['fileCreatedAt'] =
-              asset.fileCreatedAt.toUtc().toIso8601String();
-          baseRequest.fields['fileModifiedAt'] =
-              asset.fileModifiedAt.toUtc().toIso8601String();
+          baseRequest.fields['fileCreatedAt'] = asset.fileCreatedAt.toUtc().toIso8601String();
+          baseRequest.fields['fileModifiedAt'] = asset.fileModifiedAt.toUtc().toIso8601String();
           baseRequest.fields['isFavorite'] = asset.isFavorite.toString();
           baseRequest.fields['duration'] = asset.duration.toString();
           baseRequest.files.add(assetRawUploadData);
@@ -367,9 +353,7 @@ class BackupService {
           onCurrentAsset(
             CurrentUploadAsset(
               id: asset.localId!,
-              fileCreatedAt: asset.fileCreatedAt.year == 1970
-                  ? asset.fileModifiedAt
-                  : asset.fileCreatedAt,
+              fileCreatedAt: asset.fileCreatedAt.year == 1970 ? asset.fileModifiedAt : asset.fileCreatedAt,
               fileName: originalFileName,
               fileType: _getAssetType(asset.type),
               fileSize: file.lengthSync(),
@@ -396,8 +380,7 @@ class BackupService {
             cancellationToken: cancelToken,
           );
 
-          final responseBody =
-              jsonDecode(await response.stream.bytesToString());
+          final responseBody = jsonDecode(await response.stream.bytesToString());
 
           if (![200, 201].contains(response.statusCode)) {
             final error = responseBody;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/models/map/map_state.model.dart';
-import 'package:immich_mobile/providers/app_settings.provider.dart';
-import 'package:immich_mobile/providers/server_info.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
+import 'package:mediab/models/map/map_state.model.dart';
+import 'package:mediab/providers/app_settings.provider.dart';
+import 'package:mediab/providers/server_info.provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'map_state.provider.g.dart';
@@ -13,22 +13,15 @@ class MapStateNotifier extends _$MapStateNotifier {
   MapState build() {
     final appSettingsProvider = ref.read(appSettingsServiceProvider);
 
-    final lightStyleUrl =
-        ref.read(serverInfoProvider).serverConfig.mapLightStyleUrl;
-    final darkStyleUrl =
-        ref.read(serverInfoProvider).serverConfig.mapDarkStyleUrl;
+    final lightStyleUrl = ref.read(serverInfoProvider).serverConfig.mapLightStyleUrl;
+    final darkStyleUrl = ref.read(serverInfoProvider).serverConfig.mapDarkStyleUrl;
 
     return MapState(
-      themeMode: ThemeMode.values[
-          appSettingsProvider.getSetting<int>(AppSettingsEnum.mapThemeMode)],
-      showFavoriteOnly: appSettingsProvider
-          .getSetting<bool>(AppSettingsEnum.mapShowFavoriteOnly),
-      includeArchived: appSettingsProvider
-          .getSetting<bool>(AppSettingsEnum.mapIncludeArchived),
-      withPartners:
-          appSettingsProvider.getSetting<bool>(AppSettingsEnum.mapwithPartners),
-      relativeTime:
-          appSettingsProvider.getSetting<int>(AppSettingsEnum.mapRelativeDate),
+      themeMode: ThemeMode.values[appSettingsProvider.getSetting<int>(AppSettingsEnum.mapThemeMode)],
+      showFavoriteOnly: appSettingsProvider.getSetting<bool>(AppSettingsEnum.mapShowFavoriteOnly),
+      includeArchived: appSettingsProvider.getSetting<bool>(AppSettingsEnum.mapIncludeArchived),
+      withPartners: appSettingsProvider.getSetting<bool>(AppSettingsEnum.mapwithPartners),
+      relativeTime: appSettingsProvider.getSetting<int>(AppSettingsEnum.mapRelativeDate),
       lightStyleFetched: AsyncData(lightStyleUrl),
       darkStyleFetched: AsyncData(darkStyleUrl),
     );

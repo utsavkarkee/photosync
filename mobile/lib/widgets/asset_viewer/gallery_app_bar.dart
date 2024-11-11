@@ -3,20 +3,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/album/current_album.provider.dart';
-import 'package:immich_mobile/widgets/album/add_to_album_bottom_sheet.dart';
-import 'package:immich_mobile/providers/asset_viewer/download.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/show_controls.provider.dart';
-import 'package:immich_mobile/widgets/asset_viewer/top_control_app_bar.dart';
-import 'package:immich_mobile/providers/backup/manual_upload.provider.dart';
-import 'package:immich_mobile/providers/trash.provider.dart';
-import 'package:immich_mobile/widgets/asset_grid/upload_dialog.dart';
-import 'package:immich_mobile/providers/partner.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/providers/user.provider.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
+import 'package:mediab/providers/album/current_album.provider.dart';
+import 'package:mediab/widgets/album/add_to_album_bottom_sheet.dart';
+import 'package:mediab/providers/asset_viewer/download.provider.dart';
+import 'package:mediab/providers/asset_viewer/show_controls.provider.dart';
+import 'package:mediab/widgets/asset_viewer/top_control_app_bar.dart';
+import 'package:mediab/providers/backup/manual_upload.provider.dart';
+import 'package:mediab/providers/trash.provider.dart';
+import 'package:mediab/widgets/asset_grid/upload_dialog.dart';
+import 'package:mediab/providers/partner.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/providers/user.provider.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
 
 class GalleryAppBar extends ConsumerWidget {
   final Asset asset;
@@ -37,13 +37,9 @@ class GalleryAppBar extends ConsumerWidget {
     final album = ref.watch(currentAlbumProvider);
     final isOwner = asset.ownerId == ref.watch(currentUserProvider)?.isarId;
 
-    final isPartner = ref
-        .watch(partnerSharedWithProvider)
-        .map((e) => e.isarId)
-        .contains(asset.ownerId);
+    final isPartner = ref.watch(partnerSharedWithProvider).map((e) => e.isarId).contains(asset.ownerId);
 
-    toggleFavorite(Asset asset) =>
-        ref.read(assetProvider.notifier).toggleFavorite([asset]);
+    toggleFavorite(Asset asset) => ref.read(assetProvider.notifier).toggleFavorite([asset]);
 
     handleActivities() {
       if (album != null && album.shared && album.remoteId != null) {
@@ -69,9 +65,7 @@ class GalleryAppBar extends ConsumerWidget {
         builder: (BuildContext _) {
           return UploadDialog(
             onUpload: () {
-              ref
-                  .read(manualUploadProvider.notifier)
-                  .uploadAssets(context, [asset]);
+              ref.read(manualUploadProvider.notifier).uploadAssets(context, [asset]);
             },
           );
         },

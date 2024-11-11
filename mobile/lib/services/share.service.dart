@@ -2,16 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/response_extensions.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/api.provider.dart';
+import 'package:mediab/extensions/response_extensions.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/api.provider.dart';
 import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'api.service.dart';
 
-final shareServiceProvider =
-    Provider((ref) => ShareService(ref.watch(apiServiceProvider)));
+final shareServiceProvider = Provider((ref) => ShareService(ref.watch(apiServiceProvider)));
 
 class ShareService {
   final ApiService _apiService;
@@ -37,8 +36,7 @@ class ShareService {
           final tempDir = await getTemporaryDirectory();
           final fileName = asset.fileName;
           final tempFile = await File('${tempDir.path}/$fileName').create();
-          final res = await _apiService.assetsApi
-              .downloadAssetWithHttpInfo(asset.remoteId!);
+          final res = await _apiService.assetsApi.downloadAssetWithHttpInfo(asset.remoteId!);
 
           if (res.statusCode != 200) {
             _log.severe(

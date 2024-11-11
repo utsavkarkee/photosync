@@ -1,5 +1,5 @@
-import 'package:immich_mobile/entities/backup_album.entity.dart';
-import 'package:immich_mobile/interfaces/database.interface.dart';
+import 'package:mediab/entities/backup_album.entity.dart';
+import 'package:mediab/interfaces/database.interface.dart';
 
 abstract interface class IBackupRepository implements IDatabaseRepository {
   Future<List<BackupAlbum>> getAll({BackupAlbumSort? sort});

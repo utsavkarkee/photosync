@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/interfaces/asset.interface.dart';
-import 'package:immich_mobile/providers/api.provider.dart';
-import 'package:immich_mobile/repositories/asset.repository.dart';
-import 'package:immich_mobile/services/api.service.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/interfaces/asset.interface.dart';
+import 'package:mediab/providers/api.provider.dart';
+import 'package:mediab/repositories/asset.repository.dart';
+import 'package:mediab/services/api.service.dart';
 import 'package:openapi/api.dart';
 
 class StackService {
@@ -61,8 +61,7 @@ class StackService {
 
         removeAssets.add(asset);
       }
-      await _assetRepository
-          .transaction(() => _assetRepository.updateAll(removeAssets));
+      await _assetRepository.transaction(() => _assetRepository.updateAll(removeAssets));
     } catch (error) {
       debugPrint("Error while deleting stack: $error");
     }

@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/activity_statistics.provider.dart';
-import 'package:immich_mobile/providers/album/current_album.provider.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
+import 'package:mediab/providers/activity_statistics.provider.dart';
+import 'package:mediab/providers/album/current_album.provider.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/asset.provider.dart';
 
 class TopControlAppBar extends HookConsumerWidget {
   const TopControlAppBar({
@@ -41,9 +41,7 @@ class TopControlAppBar extends HookConsumerWidget {
     const double iconSize = 22.0;
     final a = ref.watch(assetWatcher(asset)).value ?? asset;
     final album = ref.watch(currentAlbumProvider);
-    final comments = album != null &&
-            album.remoteId != null &&
-            asset.remoteId != null
+    final comments = album != null && album.remoteId != null && asset.remoteId != null
         ? ref.watch(activityStatisticsProvider(album.remoteId!, asset.remoteId))
         : 0;
 
@@ -184,8 +182,7 @@ class TopControlAppBar extends HookConsumerWidget {
         if (asset.livePhotoVideoId != null) buildLivePhotoButton(),
         if (asset.isLocal && !asset.isRemote) buildUploadButton(),
         if (asset.isRemote && !asset.isLocal && isOwner) buildDownloadButton(),
-        if (asset.isRemote && (isOwner || isPartner) && !asset.isTrashed)
-          buildAddToAlbumButton(),
+        if (asset.isRemote && (isOwner || isPartner) && !asset.isTrashed) buildAddToAlbumButton(),
         if (asset.isTrashed) buildRestoreButton(),
         if (album != null && album.shared) buildActivitiesButton(),
         buildMoreInfoButton(),

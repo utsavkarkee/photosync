@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/models/map/map_marker.model.dart';
-import 'package:immich_mobile/widgets/common/confirm_dialog.dart';
+import 'package:mediab/models/map/map_marker.model.dart';
+import 'package:mediab/widgets/common/confirm_dialog.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:logging/logging.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
@@ -90,11 +90,9 @@ class MapUtils {
         }
       }
 
-      if (permission == LocationPermission.denied ||
-          permission == LocationPermission.deniedForever) {
+      if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
         // Open app settings only if you did not request for permission before
-        if (permission == LocationPermission.deniedForever &&
-            !shouldRequestPermission) {
+        if (permission == LocationPermission.deniedForever && !shouldRequestPermission) {
           await Geolocator.openAppSettings();
         }
         return (null, LocationPermission.deniedForever);

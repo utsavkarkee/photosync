@@ -1,7 +1,7 @@
-import 'package:immich_mobile/models/server_info/server_config.model.dart';
-import 'package:immich_mobile/models/server_info/server_disk_info.model.dart';
-import 'package:immich_mobile/models/server_info/server_features.model.dart';
-import 'package:immich_mobile/models/server_info/server_version.model.dart';
+import 'package:mediab/models/server_info/server_config.model.dart';
+import 'package:mediab/models/server_info/server_disk_info.model.dart';
+import 'package:mediab/models/server_info/server_features.model.dart';
+import 'package:mediab/models/server_info/server_version.model.dart';
 
 class ServerInfo {
   final ServerVersion serverVersion;
@@ -41,10 +41,8 @@ class ServerInfo {
       serverConfig: serverConfig ?? this.serverConfig,
       serverDiskInfo: serverDiskInfo ?? this.serverDiskInfo,
       isVersionMismatch: isVersionMismatch ?? this.isVersionMismatch,
-      isNewReleaseAvailable:
-          isNewReleaseAvailable ?? this.isNewReleaseAvailable,
-      versionMismatchErrorMessage:
-          versionMismatchErrorMessage ?? this.versionMismatchErrorMessage,
+      isNewReleaseAvailable: isNewReleaseAvailable ?? this.isNewReleaseAvailable,
+      versionMismatchErrorMessage: versionMismatchErrorMessage ?? this.versionMismatchErrorMessage,
     );
   }
 

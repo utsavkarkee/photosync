@@ -3,28 +3,28 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/backup_album.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/interfaces/asset.interface.dart';
-import 'package:immich_mobile/interfaces/asset_api.interface.dart';
-import 'package:immich_mobile/interfaces/backup.interface.dart';
-import 'package:immich_mobile/interfaces/etag.interface.dart';
-import 'package:immich_mobile/interfaces/exif_info.interface.dart';
-import 'package:immich_mobile/interfaces/user.interface.dart';
-import 'package:immich_mobile/models/backup/backup_candidate.model.dart';
-import 'package:immich_mobile/providers/api.provider.dart';
-import 'package:immich_mobile/repositories/asset.repository.dart';
-import 'package:immich_mobile/repositories/asset_api.repository.dart';
-import 'package:immich_mobile/repositories/backup.repository.dart';
-import 'package:immich_mobile/repositories/etag.repository.dart';
-import 'package:immich_mobile/repositories/exif_info.repository.dart';
-import 'package:immich_mobile/repositories/user.repository.dart';
-import 'package:immich_mobile/services/album.service.dart';
-import 'package:immich_mobile/services/api.service.dart';
-import 'package:immich_mobile/services/backup.service.dart';
-import 'package:immich_mobile/services/sync.service.dart';
-import 'package:immich_mobile/services/user.service.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/backup_album.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/interfaces/asset.interface.dart';
+import 'package:mediab/interfaces/asset_api.interface.dart';
+import 'package:mediab/interfaces/backup.interface.dart';
+import 'package:mediab/interfaces/etag.interface.dart';
+import 'package:mediab/interfaces/exif_info.interface.dart';
+import 'package:mediab/interfaces/user.interface.dart';
+import 'package:mediab/models/backup/backup_candidate.model.dart';
+import 'package:mediab/providers/api.provider.dart';
+import 'package:mediab/repositories/asset.repository.dart';
+import 'package:mediab/repositories/asset_api.repository.dart';
+import 'package:mediab/repositories/backup.repository.dart';
+import 'package:mediab/repositories/etag.repository.dart';
+import 'package:mediab/repositories/exif_info.repository.dart';
+import 'package:mediab/repositories/user.repository.dart';
+import 'package:mediab/services/album.service.dart';
+import 'package:mediab/services/api.service.dart';
+import 'package:mediab/services/backup.service.dart';
+import 'package:mediab/services/sync.service.dart';
+import 'package:mediab/services/user.service.dart';
 import 'package:logging/logging.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 import 'package:openapi/api.dart';
@@ -77,9 +77,7 @@ class AssetService {
   /// required. Returns `true` if there were any changes.
   Future<bool> refreshRemoteAssets() async {
     final syncedUserIds = await _etagRepository.getAllIds();
-    final List<User> syncedUsers = syncedUserIds.isEmpty
-        ? []
-        : await _userRepository.getByIds(syncedUserIds);
+    final List<User> syncedUsers = syncedUserIds.isEmpty ? [] : await _userRepository.getByIds(syncedUserIds);
     final Stopwatch sw = Stopwatch()..start();
     final bool changes = await _syncService.syncRemoteAssetsToDb(
       users: syncedUsers,
@@ -92,8 +90,8 @@ class AssetService {
   }
 
   /// Returns `(null, null)` if changes are invalid -> requires full sync
-  Future<(List<Asset>? toUpsert, List<String>? toDelete)>
-      _getRemoteAssetChanges(List<User> users, DateTime since) async {
+  Future<(List<Asset>? toUpsert, List<String>? toDelete)> _getRemoteAssetChanges(
+      List<User> users, DateTime since) async {
     final dto = AssetDeltaSyncDto(
       updatedAfter: since,
       userIds: users.map((e) => e.id).toList(),
@@ -110,8 +108,7 @@ class AssetService {
     String remoteId,
   ) async {
     try {
-      final AssetResponseDto? dto =
-          await _apiService.assetsApi.getAssetInfo(remoteId);
+      final AssetResponseDto? dto = await _apiService.assetsApi.getAssetInfo(remoteId);
 
       return dto?.people;
     } catch (error, stack) {
@@ -140,8 +137,7 @@ class AssetService {
           userId: user.id,
         );
         log.fine("Requesting $chunkSize assets from $lastId");
-        final List<AssetResponseDto>? assets =
-            await _apiService.syncApi.getFullSyncForUser(dto);
+        final List<AssetResponseDto>? assets = await _apiService.syncApi.getFullSyncForUser(dto);
         if (assets == null) return null;
         log.fine(
           "Received ${assets.length} assets from ${assets.firstOrNull?.id} to ${assets.lastOrNull?.id}",
@@ -316,10 +312,8 @@ class AssetService {
 
   Future<void> syncUploadedAssetToAlbums() async {
     try {
-      final selectedAlbums =
-          await _backupRepository.getAllBySelection(BackupSelection.select);
-      final excludedAlbums =
-          await _backupRepository.getAllBySelection(BackupSelection.exclude);
+      final selectedAlbums = await _backupRepository.getAllBySelection(BackupSelection.select);
+      final excludedAlbums = await _backupRepository.getAllBySelection(BackupSelection.exclude);
 
       final candidates = await _backupService.buildUploadCandidates(
         selectedAlbums,

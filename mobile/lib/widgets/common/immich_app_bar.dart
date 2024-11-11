@@ -3,17 +3,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/providers/immich_logo_provider.dart';
-import 'package:immich_mobile/widgets/common/app_bar_dialog/app_bar_dialog.dart';
-import 'package:immich_mobile/widgets/common/user_circle_avatar.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/providers/immich_logo_provider.dart';
+import 'package:mediab/widgets/common/app_bar_dialog/app_bar_dialog.dart';
+import 'package:mediab/widgets/common/user_circle_avatar.dart';
 
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/models/backup/backup_state.model.dart';
-import 'package:immich_mobile/models/server_info/server_info.model.dart';
-import 'package:immich_mobile/providers/backup/backup.provider.dart';
-import 'package:immich_mobile/providers/server_info.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/models/backup/backup_state.model.dart';
+import 'package:mediab/models/server_info/server_info.model.dart';
+import 'package:mediab/providers/backup/backup.provider.dart';
+import 'package:mediab/providers/server_info.provider.dart';
 
 class ImmichAppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
@@ -26,8 +26,7 @@ class ImmichAppBar extends ConsumerWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final BackUpState backupState = ref.watch(backupProvider);
-    final bool isEnableAutoBackup =
-        backupState.backgroundBackup || backupState.autoBackup;
+    final bool isEnableAutoBackup = backupState.backgroundBackup || backupState.autoBackup;
     final ServerInfo serverInfoState = ref.watch(serverInfoProvider);
     final immichLogo = ref.watch(immichLogoProvider);
     final user = Store.tryGet(StoreKey.currentUser);
@@ -56,9 +55,8 @@ class ImmichAppBar extends ConsumerWidget implements PreferredSizeWidget {
           ),
           backgroundColor: Colors.transparent,
           alignment: Alignment.bottomRight,
-          isLabelVisible: serverInfoState.isVersionMismatch ||
-              ((user?.isAdmin ?? false) &&
-                  serverInfoState.isNewReleaseAvailable),
+          isLabelVisible:
+              serverInfoState.isVersionMismatch || ((user?.isAdmin ?? false) && serverInfoState.isNewReleaseAvailable),
           offset: const Offset(-2, -12),
           child: user == null
               ? const Icon(
@@ -88,8 +86,7 @@ class ImmichAppBar extends ConsumerWidget implements PreferredSizeWidget {
               semanticsLabel: 'backup_controller_page_backup'.tr(),
             ),
           );
-        } else if (backupState.backupProgress !=
-                BackUpProgressEnum.inBackground &&
+        } else if (backupState.backupProgress != BackUpProgressEnum.inBackground &&
             backupState.backupProgress != BackUpProgressEnum.manualInProgress) {
           return Icon(
             Icons.check_outlined,

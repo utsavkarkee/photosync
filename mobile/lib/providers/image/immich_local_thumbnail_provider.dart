@@ -5,13 +5,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
 import 'package:photo_manager/photo_manager.dart' show ThumbnailSize;
 
 /// The local image provider for an asset
 /// Only viable
-class ImmichLocalThumbnailProvider
-    extends ImageProvider<ImmichLocalThumbnailProvider> {
+class ImmichLocalThumbnailProvider extends ImageProvider<ImmichLocalThumbnailProvider> {
   final Asset asset;
   final int height;
   final int width;
@@ -66,8 +65,7 @@ class ImmichLocalThumbnailProvider
       debugPrint("Loading thumb for ${asset.fileName} failed");
     }
 
-    final normalThumbBytes =
-        await asset.local?.thumbnailDataWithSize(ThumbnailSize(width, height));
+    final normalThumbBytes = await asset.local?.thumbnailDataWithSize(ThumbnailSize(width, height));
     if (normalThumbBytes == null) {
       throw StateError(
         "Loading thumb for local photo ${asset.fileName} failed",

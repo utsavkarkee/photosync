@@ -3,15 +3,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/models/backup/available_album.model.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/providers/app_settings.provider.dart';
-import 'package:immich_mobile/providers/backup/backup.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/providers/haptic_feedback.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/models/backup/available_album.model.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/providers/app_settings.provider.dart';
+import 'package:mediab/providers/backup/backup.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/providers/haptic_feedback.provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
 
 class AlbumInfoCard extends HookConsumerWidget {
   final AvailableAlbum album;
@@ -23,13 +23,9 @@ class AlbumInfoCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool isSelected =
-        ref.watch(backupProvider).selectedBackupAlbums.contains(album);
-    final bool isExcluded =
-        ref.watch(backupProvider).excludedBackupAlbums.contains(album);
-    final syncAlbum = ref
-        .watch(appSettingsServiceProvider)
-        .getSetting(AppSettingsEnum.syncAlbums);
+    final bool isSelected = ref.watch(backupProvider).selectedBackupAlbums.contains(album);
+    final bool isExcluded = ref.watch(backupProvider).excludedBackupAlbums.contains(album);
+    final syncAlbum = ref.watch(appSettingsServiceProvider).getSetting(AppSettingsEnum.syncAlbums);
 
     final isDarkTheme = context.isDarkTheme;
 
@@ -37,10 +33,8 @@ class AlbumInfoCard extends HookConsumerWidget {
       context.primaryColor.withAlpha(100),
       BlendMode.darken,
     );
-    ColorFilter excludedFilter =
-        ColorFilter.mode(Colors.red.withAlpha(75), BlendMode.darken);
-    ColorFilter unselectedFilter =
-        const ColorFilter.mode(Colors.black, BlendMode.color);
+    ColorFilter excludedFilter = ColorFilter.mode(Colors.red.withAlpha(75), BlendMode.darken);
+    ColorFilter unselectedFilter = const ColorFilter.mode(Colors.black, BlendMode.color);
 
     buildSelectedTextBox() {
       if (isSelected) {
@@ -127,9 +121,7 @@ class AlbumInfoCard extends HookConsumerWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12), // if you need this
           side: BorderSide(
-            color: isDarkTheme
-                ? const Color.fromARGB(255, 37, 35, 35)
-                : const Color(0xFFC9C9C9),
+            color: isDarkTheme ? const Color.fromARGB(255, 37, 35, 35) : const Color(0xFFC9C9C9),
             width: 1,
           ),
         ),
@@ -184,8 +176,7 @@ class AlbumInfoCard extends HookConsumerWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 2.0),
                           child: Text(
-                            album.assetCount.toString() +
-                                (album.isAll ? " (${'backup_all'.tr()})" : ""),
+                            album.assetCount.toString() + (album.isAll ? " (${'backup_all'.tr()})" : ""),
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey[600],

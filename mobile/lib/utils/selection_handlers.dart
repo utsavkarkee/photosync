@@ -2,16 +2,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/asset_extensions.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/services/asset.service.dart';
-import 'package:immich_mobile/services/share.service.dart';
-import 'package:immich_mobile/widgets/common/date_time_picker.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
-import 'package:immich_mobile/widgets/common/location_picker.dart';
-import 'package:immich_mobile/widgets/common/share_dialog.dart';
+import 'package:mediab/extensions/asset_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/services/asset.service.dart';
+import 'package:mediab/services/share.service.dart';
+import 'package:mediab/widgets/common/date_time_picker.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
+import 'package:mediab/widgets/common/location_picker.dart';
+import 'package:mediab/widgets/common/share_dialog.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 
 void handleShareAssets(
@@ -22,10 +22,7 @@ void handleShareAssets(
   showDialog(
     context: context,
     builder: (BuildContext buildContext) {
-      ref
-          .watch(shareServiceProvider)
-          .shareAssets(selection.toList(), context)
-          .then(
+      ref.watch(shareServiceProvider).shareAssets(selection.toList(), context).then(
         (bool status) {
           if (!status) {
             ImmichToast.show(
@@ -53,9 +50,7 @@ Future<void> handleArchiveAssets(
 }) async {
   if (selection.isNotEmpty) {
     shouldArchive ??= !selection.every((a) => a.isArchived);
-    await ref
-        .read(assetProvider.notifier)
-        .toggleArchive(selection, shouldArchive);
+    await ref.read(assetProvider.notifier).toggleArchive(selection, shouldArchive);
 
     final assetOrAssets = selection.length > 1 ? 'assets' : 'asset';
     final archiveOrLibrary = shouldArchive ? 'archive' : 'library';
@@ -78,9 +73,7 @@ Future<void> handleFavoriteAssets(
 }) async {
   if (selection.isNotEmpty) {
     shouldFavorite ??= !selection.every((a) => a.isFavorite);
-    await ref
-        .watch(assetProvider.notifier)
-        .toggleFavorite(selection, shouldFavorite);
+    await ref.watch(assetProvider.notifier).toggleFavorite(selection, shouldFavorite);
 
     final assetOrAssets = selection.length > 1 ? 'assets' : 'asset';
     final toastMessage = shouldFavorite
@@ -135,8 +128,7 @@ Future<void> handleEditLocation(
   if (selection.length == 1) {
     final asset = selection.first;
     final assetWithExif = await ref.watch(assetServiceProvider).loadExif(asset);
-    if (assetWithExif.exifInfo?.latitude != null &&
-        assetWithExif.exifInfo?.longitude != null) {
+    if (assetWithExif.exifInfo?.latitude != null && assetWithExif.exifInfo?.longitude != null) {
       initialLatLng = LatLng(
         assetWithExif.exifInfo!.latitude!,
         assetWithExif.exifInfo!.longitude!,

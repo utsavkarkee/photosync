@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
 
 class SearchFilterChip extends StatelessWidget {
   final String label;
@@ -27,8 +27,7 @@ class SearchFilterChip extends StatelessWidget {
             side: BorderSide(color: context.colorScheme.secondaryContainer),
           ),
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 2.0, horizontal: 14.0),
+            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 14.0),
             child: Row(
               children: [
                 Icon(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/entities/exif_info.entity.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
+import 'package:mediab/entities/exif_info.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
 
 class CameraInfo extends StatelessWidget {
   final ExifInfo exifInfo;
@@ -24,10 +24,7 @@ class CameraInfo extends StatelessWidget {
         "${exifInfo.make} ${exifInfo.model}",
         style: context.textTheme.labelLarge,
       ),
-      subtitle: exifInfo.f != null ||
-              exifInfo.exposureSeconds != null ||
-              exifInfo.mm != null ||
-              exifInfo.iso != null
+      subtitle: exifInfo.f != null || exifInfo.exposureSeconds != null || exifInfo.mm != null || exifInfo.iso != null
           ? Text(
               "ƒ/${exifInfo.fNumber}   ${exifInfo.exposureTime}   ${exifInfo.focalLength} mm   ISO ${exifInfo.iso ?? ''} ",
               style: context.textTheme.bodySmall,

@@ -1,15 +1,15 @@
 import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:immich_mobile/interfaces/partner_api.interface.dart';
-import 'package:immich_mobile/interfaces/user.interface.dart';
-import 'package:immich_mobile/interfaces/user_api.interface.dart';
-import 'package:immich_mobile/repositories/partner_api.repository.dart';
-import 'package:immich_mobile/repositories/user.repository.dart';
-import 'package:immich_mobile/repositories/user_api.repository.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/services/sync.service.dart';
-import 'package:immich_mobile/utils/diff.dart';
+import 'package:mediab/interfaces/partner_api.interface.dart';
+import 'package:mediab/interfaces/user.interface.dart';
+import 'package:mediab/interfaces/user_api.interface.dart';
+import 'package:mediab/repositories/partner_api.repository.dart';
+import 'package:mediab/repositories/user.repository.dart';
+import 'package:mediab/repositories/user_api.repository.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/services/sync.service.dart';
+import 'package:mediab/utils/diff.dart';
 import 'package:logging/logging.dart';
 
 final userServiceProvider = Provider(
@@ -35,8 +35,7 @@ class UserService {
     this._syncService,
   );
 
-  Future<List<User>> getUsers({bool self = false}) =>
-      _userRepository.getAll(self: self);
+  Future<List<User>> getUsers({bool self = false}) => _userRepository.getAll(self: self);
 
   Future<({String profileImagePath})?> uploadProfileImage(XFile image) async {
     try {
@@ -58,10 +57,8 @@ class UserService {
       _log.warning("Failed to fetch users", e);
       users = null;
     }
-    final List<User> sharedBy =
-        await _partnerApiRepository.getAll(Direction.sharedByMe);
-    final List<User> sharedWith =
-        await _partnerApiRepository.getAll(Direction.sharedWithMe);
+    final List<User> sharedBy = await _partnerApiRepository.getAll(Direction.sharedByMe);
+    final List<User> sharedWith = await _partnerApiRepository.getAll(Direction.sharedWithMe);
 
     if (users == null) {
       _log.warning("Failed to refresh users");

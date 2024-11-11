@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:collection/collection.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
 import 'package:isar/isar.dart';
 import 'package:logging/logging.dart';
 
@@ -14,8 +14,7 @@ part 'store.entity.g.dart';
 class Store {
   static final Logger _log = Logger("Store");
   static late final Isar _db;
-  static final List<dynamic> _cache =
-      List.filled(StoreKey.values.map((e) => e.id).max + 1, null);
+  static final List<dynamic> _cache = List.filled(StoreKey.values.map((e) => e.id).max + 1, null);
 
   /// Initializes the store (call exactly once per app start)
   static void init(Isar db) {
@@ -41,8 +40,7 @@ class Store {
   }
 
   /// Watches a specific key for changes
-  static Stream<T?> watch<T>(StoreKey<T> key) =>
-      _db.storeValues.watchObject(key.id).map((e) => e?._extract(key));
+  static Stream<T?> watch<T>(StoreKey<T> key) => _db.storeValues.watchObject(key.id).map((e) => e?._extract(key));
 
   /// Returns the stored value for the given key (possibly null)
   static T? tryGet<T>(StoreKey<T> key) => _cache[key.id];
@@ -103,9 +101,7 @@ class StoreValue {
       case const (bool):
         return intValue == null ? null : (intValue! == 1) as T;
       case const (DateTime):
-        return intValue == null
-            ? null
-            : DateTime.fromMicrosecondsSinceEpoch(intValue!) as T;
+        return intValue == null ? null : DateTime.fromMicrosecondsSinceEpoch(intValue!) as T;
       case const (String):
         return strValue as T?;
       default:

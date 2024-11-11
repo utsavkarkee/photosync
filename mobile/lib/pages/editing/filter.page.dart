@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/constants/filters.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/constants/filters.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:immich_mobile/routing/router.dart';
+import 'package:mediab/routing/router.dart';
 
 /// A widget for filtering an image.
 /// This widget uses [HookWidget] to manage its lifecycle and state. It allows
@@ -34,18 +34,14 @@ class FilterImagePage extends HookWidget {
       ColorFilter filter,
     ) {
       final completer = Completer<ui.Image>();
-      final size =
-          Size(inputImage.width.toDouble(), inputImage.height.toDouble());
+      final size = Size(inputImage.width.toDouble(), inputImage.height.toDouble());
       final recorder = ui.PictureRecorder();
       final canvas = Canvas(recorder);
 
       final paint = Paint()..colorFilter = filter;
       canvas.drawImage(inputImage, Offset.zero, paint);
 
-      recorder
-          .endRecording()
-          .toImage(size.width.round(), size.height.round())
-          .then((image) {
+      recorder.endRecording().toImage(size.width.round(), size.height.round()).then((image) {
         completer.complete(image);
       });
 
@@ -67,8 +63,7 @@ class FilterImagePage extends HookWidget {
       final uiImage = await completer.future;
 
       final filteredUiImage = await createFilteredImage(uiImage, filter);
-      final byteData =
-          await filteredUiImage.toByteData(format: ui.ImageByteFormat.png);
+      final byteData = await filteredUiImage.toByteData(format: ui.ImageByteFormat.png);
       final pngBytes = byteData!.buffer.asUint8List();
 
       return Image.memory(pngBytes, fit: BoxFit.contain);
@@ -87,8 +82,7 @@ class FilterImagePage extends HookWidget {
               size: 24,
             ),
             onPressed: () async {
-              final filteredImage =
-                  await applyFilterAndConvert(colorFilter.value);
+              final filteredImage = await applyFilterAndConvert(colorFilter.value);
               context.pushRoute(
                 EditImageRoute(
                   asset: asset,
@@ -163,9 +157,7 @@ class _FilterButton extends StatelessWidget {
             height: 80,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              border: isSelected
-                  ? Border.all(color: context.primaryColor, width: 3)
-                  : null,
+              border: isSelected ? Border.all(color: context.primaryColor, width: 3) : null,
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),

@@ -2,15 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/widgets/settings/advanced_settings.dart';
-import 'package:immich_mobile/widgets/settings/asset_list_settings/asset_list_settings.dart';
-import 'package:immich_mobile/widgets/settings/asset_viewer_settings/asset_viewer_settings.dart';
-import 'package:immich_mobile/widgets/settings/backup_settings/backup_settings.dart';
-import 'package:immich_mobile/widgets/settings/language_settings.dart';
-import 'package:immich_mobile/widgets/settings/notification_setting.dart';
-import 'package:immich_mobile/widgets/settings/preference_settings/preference_setting.dart';
-import 'package:immich_mobile/routing/router.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/widgets/settings/advanced_settings.dart';
+import 'package:mediab/widgets/settings/asset_list_settings/asset_list_settings.dart';
+import 'package:mediab/widgets/settings/asset_viewer_settings/asset_viewer_settings.dart';
+import 'package:mediab/widgets/settings/backup_settings/backup_settings.dart';
+import 'package:mediab/widgets/settings/language_settings.dart';
+import 'package:mediab/widgets/settings/notification_setting.dart';
+import 'package:mediab/widgets/settings/preference_settings/preference_setting.dart';
+import 'package:mediab/routing/router.dart';
 
 enum SettingSection {
   notifications(
@@ -63,8 +63,7 @@ class _MobileLayout extends StatelessWidget {
       children: SettingSection.values
           .map(
             (s) => ListTile(
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
+              contentPadding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
               leading: Icon(s.icon),
               title: Padding(
                 padding: const EdgeInsets.only(left: 8.0),
@@ -86,8 +85,7 @@ class _MobileLayout extends StatelessWidget {
 class _TabletLayout extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final selectedSection =
-        useState<SettingSection>(SettingSection.values.first);
+    final selectedSection = useState<SettingSection>(SettingSection.values.first);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,

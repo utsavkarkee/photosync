@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/utils/url_helper.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/utils/url_helper.dart';
 import 'package:logging/logging.dart';
 import 'package:openapi/api.dart';
 import 'package:http/http.dart';

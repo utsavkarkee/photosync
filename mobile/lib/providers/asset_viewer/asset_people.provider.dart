@@ -1,5 +1,5 @@
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/services/asset.service.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/services/asset.service.dart';
 import 'package:logging/logging.dart';
 import 'package:openapi/api.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,9 +17,7 @@ class AssetPeopleNotifier extends _$AssetPeopleNotifier {
       return [];
     }
 
-    final list = await ref
-        .watch(assetServiceProvider)
-        .getRemotePeopleOfAsset(asset.remoteId!);
+    final list = await ref.watch(assetServiceProvider).getRemotePeopleOfAsset(asset.remoteId!);
     if (list == null) {
       return [];
     }

@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/extensions/asset_extensions.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/duration_extensions.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/utils/selection_handlers.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/extensions/asset_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/duration_extensions.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/utils/selection_handlers.dart';
 
 class AssetDateTime extends ConsumerWidget {
   final Asset asset;

@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/providers/db.provider.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:isar/isar.dart';
 // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
-import 'package:immich_mobile/main.dart' as app;
+import 'package:mediab/main.dart' as app;
 
 import 'login_helper.dart';
 
@@ -74,8 +74,7 @@ Future<void> pumpUntilFound(
   Duration timeout = const Duration(seconds: 120),
 }) async {
   bool found = false;
-  final timer =
-      Timer(timeout, () => throw TimeoutException("Pump until has timed out"));
+  final timer = Timer(timeout, () => throw TimeoutException("Pump until has timed out"));
   while (found != true) {
     await tester.pump();
     found = tester.any(finder);

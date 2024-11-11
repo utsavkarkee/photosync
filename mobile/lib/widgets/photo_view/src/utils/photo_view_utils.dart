@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 import 'dart:ui' show Size;
 
-import "package:immich_mobile/widgets/photo_view/src/photo_view_computed_scale.dart";
-import 'package:immich_mobile/widgets/photo_view/src/photo_view_scale_state.dart';
+import "package:mediab/widgets/photo_view/src/photo_view_computed_scale.dart";
+import 'package:mediab/widgets/photo_view/src/photo_view_scale_state.dart';
 
 /// Given a [PhotoViewScaleState], returns a scale value considering [scaleBoundaries].
 double getScaleForScaleState(
@@ -106,11 +106,7 @@ class ScaleBoundaries {
 
   @override
   int get hashCode =>
-      _minScale.hashCode ^
-      _maxScale.hashCode ^
-      _initialScale.hashCode ^
-      outerSize.hashCode ^
-      childSize.hashCode;
+      _minScale.hashCode ^ _maxScale.hashCode ^ _initialScale.hashCode ^ outerSize.hashCode ^ childSize.hashCode;
 }
 
 double _scaleForContained(Size size, Size childSize) {

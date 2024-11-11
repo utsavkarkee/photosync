@@ -1,18 +1,17 @@
 import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/providers/api.provider.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/services/api.service.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/providers/api.provider.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/services/api.service.dart';
 import 'package:isar/isar.dart';
 
 class CurrentUserProvider extends StateNotifier<User?> {
   CurrentUserProvider(this._apiService) : super(null) {
     state = Store.tryGet(StoreKey.currentUser);
-    streamSub =
-        Store.watch(StoreKey.currentUser).listen((user) => state = user);
+    streamSub = Store.watch(StoreKey.currentUser).listen((user) => state = user);
   }
 
   final ApiService _apiService;
@@ -38,8 +37,7 @@ class CurrentUserProvider extends StateNotifier<User?> {
   }
 }
 
-final currentUserProvider =
-    StateNotifierProvider<CurrentUserProvider, User?>((ref) {
+final currentUserProvider = StateNotifierProvider<CurrentUserProvider, User?>((ref) {
   return CurrentUserProvider(
     ref.watch(apiServiceProvider),
   );
@@ -66,8 +64,7 @@ class TimelineUserIdsProvider extends StateNotifier<List<int>> {
   }
 }
 
-final timelineUsersIdsProvider =
-    StateNotifierProvider<TimelineUserIdsProvider, List<int>>((ref) {
+final timelineUsersIdsProvider = StateNotifierProvider<TimelineUserIdsProvider, List<int>>((ref) {
   return TimelineUserIdsProvider(
     ref.watch(dbProvider),
     ref.watch(currentUserProvider),

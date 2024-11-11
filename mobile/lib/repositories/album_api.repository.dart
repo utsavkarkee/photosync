@@ -1,10 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/entities/user.entity.dart';
-import 'package:immich_mobile/interfaces/album_api.interface.dart';
-import 'package:immich_mobile/providers/api.provider.dart';
-import 'package:immich_mobile/repositories/api.repository.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
+import 'package:mediab/interfaces/album_api.interface.dart';
+import 'package:mediab/providers/api.provider.dart';
+import 'package:mediab/repositories/api.repository.dart';
 import 'package:openapi/api.dart';
 
 final albumApiRepositoryProvider = Provider(
@@ -125,8 +125,7 @@ class AlbumApiRepository extends ApiRepository implements IAlbumApiRepository {
 
   @override
   Future<Album> addUsers(String albumId, Iterable<String> userIds) async {
-    final albumUsers =
-        userIds.map((userId) => AlbumUserAddDto(userId: userId)).toList();
+    final albumUsers = userIds.map((userId) => AlbumUserAddDto(userId: userId)).toList();
     final response = await checkNull(
       _api.addUsersToAlbum(
         albumId,
@@ -156,8 +155,7 @@ class AlbumApiRepository extends ApiRepository implements IAlbumApiRepository {
     album.remoteAssetCount = dto.assetCount;
     album.owner.value = User.fromSimpleUserDto(dto.owner);
     album.remoteThumbnailAssetId = dto.albumThumbnailAssetId;
-    final users = dto.albumUsers
-        .map((albumUser) => User.fromSimpleUserDto(albumUser.user));
+    final users = dto.albumUsers.map((albumUser) => User.fromSimpleUserDto(albumUser.user));
     album.sharedUsers.addAll(users);
     final assets = dto.assets.map(Asset.remote).toList();
     album.assets.addAll(assets);

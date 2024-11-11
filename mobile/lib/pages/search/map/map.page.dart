@@ -8,27 +8,27 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/extensions/asyncvalue_extensions.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/latlngbounds_extension.dart';
-import 'package:immich_mobile/extensions/maplibrecontroller_extensions.dart';
-import 'package:immich_mobile/models/map/map_event.model.dart';
-import 'package:immich_mobile/models/map/map_marker.model.dart';
-import 'package:immich_mobile/providers/db.provider.dart';
-import 'package:immich_mobile/providers/map/map_marker.provider.dart';
-import 'package:immich_mobile/providers/map/map_state.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/utils/debounce.dart';
-import 'package:immich_mobile/utils/immich_loading_overlay.dart';
-import 'package:immich_mobile/utils/map_utils.dart';
-import 'package:immich_mobile/widgets/asset_grid/asset_grid_data_structure.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
-import 'package:immich_mobile/widgets/map/map_app_bar.dart';
-import 'package:immich_mobile/widgets/map/map_asset_grid.dart';
-import 'package:immich_mobile/widgets/map/map_bottom_sheet.dart';
-import 'package:immich_mobile/widgets/map/map_theme_override.dart';
-import 'package:immich_mobile/widgets/map/positioned_asset_marker_icon.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/extensions/asyncvalue_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/latlngbounds_extension.dart';
+import 'package:mediab/extensions/maplibrecontroller_extensions.dart';
+import 'package:mediab/models/map/map_event.model.dart';
+import 'package:mediab/models/map/map_marker.model.dart';
+import 'package:mediab/providers/db.provider.dart';
+import 'package:mediab/providers/map/map_marker.provider.dart';
+import 'package:mediab/providers/map/map_state.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/utils/debounce.dart';
+import 'package:mediab/utils/immich_loading_overlay.dart';
+import 'package:mediab/utils/map_utils.dart';
+import 'package:mediab/widgets/asset_grid/asset_grid_data_structure.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
+import 'package:mediab/widgets/map/map_app_bar.dart';
+import 'package:mediab/widgets/map/map_asset_grid.dart';
+import 'package:mediab/widgets/map/map_bottom_sheet.dart';
+import 'package:mediab/widgets/map/map_theme_override.dart';
+import 'package:mediab/widgets/map/positioned_asset_marker_icon.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 
 @RoutePage()
@@ -46,8 +46,7 @@ class MapPage extends HookConsumerWidget {
     final layerDebouncer = useDebouncer(interval: const Duration(seconds: 1));
     final isLoading = useProcessingOverlay();
     final scrollController = useScrollController();
-    final markerDebouncer =
-        useDebouncer(interval: const Duration(milliseconds: 800));
+    final markerDebouncer = useDebouncer(interval: const Duration(milliseconds: 800));
     final selectedAssets = useValueNotifier<Set<Asset>>({});
     const mapZoomToAssetLevel = 12.0;
 
@@ -62,8 +61,7 @@ class MapPage extends HookConsumerWidget {
       final bounds = await mapController.value!.getVisibleRegion();
       final inBounds = markers.value
           .where(
-            (m) =>
-                bounds.contains(LatLng(m.latLng.latitude, m.latLng.longitude)),
+            (m) => bounds.contains(LatLng(m.latLng.latitude, m.latLng.longitude)),
           )
           .toList();
       // Notify bottom sheet to update asset grid only when there are new assets
@@ -123,8 +121,7 @@ class MapPage extends HookConsumerWidget {
       MapMarker marker, {
       bool shouldAnimate = true,
     }) async {
-      final assetPoint =
-          await mapController.value!.toScreenLocation(marker.latLng);
+      final assetPoint = await mapController.value!.toScreenLocation(marker.latLng);
       selectedMarker.value = _AssetMarkerMeta(
         point: assetPoint,
         marker: marker,
@@ -139,11 +136,9 @@ class MapPage extends HookConsumerWidget {
       if (mapController.value == null) {
         return;
       }
-      final latlngBound =
-          await mapController.value!.getBoundsFromPoint(point, 50);
+      final latlngBound = await mapController.value!.getBoundsFromPoint(point, 50);
       final marker = markersInBounds.value.firstWhereOrNull(
-        (m) =>
-            latlngBound.contains(LatLng(m.latLng.latitude, m.latLng.longitude)),
+        (m) => latlngBound.contains(LatLng(m.latLng.latitude, m.latLng.longitude)),
       );
 
       if (marker != null) {
@@ -202,16 +197,14 @@ class MapPage extends HookConsumerWidget {
     }
 
     void onBottomSheetScrolled(String assetRemoteId) {
-      final assetMarker = markersInBounds.value
-          .firstWhereOrNull((m) => m.assetRemoteId == assetRemoteId);
+      final assetMarker = markersInBounds.value.firstWhereOrNull((m) => m.assetRemoteId == assetRemoteId);
       if (assetMarker != null) {
         updateAssetMarkerPosition(assetMarker);
       }
     }
 
     void onZoomToAsset(String assetRemoteId) {
-      final assetMarker = markersInBounds.value
-          .firstWhereOrNull((m) => m.assetRemoteId == assetRemoteId);
+      final assetMarker = markersInBounds.value.firstWhereOrNull((m) => m.assetRemoteId == assetRemoteId);
       if (mapController.value != null && assetMarker != null) {
         // Offset the latitude a little to show the marker just above the viewports center
         final offset = context.isMobile ? 0.02 : 0;
@@ -348,8 +341,7 @@ class _AssetMarkerMeta {
   });
 
   @override
-  String toString() =>
-      '_AssetMarkerMeta(point: $point, marker: $marker, shouldAnimate: $shouldAnimate)';
+  String toString() => '_AssetMarkerMeta(point: $point, marker: $marker, shouldAnimate: $shouldAnimate)';
 }
 
 class _MapWithMarker extends StatelessWidget {
@@ -381,8 +373,7 @@ class _MapWithMarker extends StatelessWidget {
           children: [
             style.widgetWhen(
               onData: (style) => MaplibreMap(
-                initialCameraPosition:
-                    const CameraPosition(target: LatLng(0, 0)),
+                initialCameraPosition: const CameraPosition(target: LatLng(0, 0)),
                 styleString: style,
                 // This is needed to update the selectedMarker's position on map camera updates
                 // The changes are notified through the mapController ValueListener which is added in [onMapCreated]

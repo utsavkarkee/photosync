@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/providers/backup/manual_upload.provider.dart';
-import 'package:immich_mobile/providers/notification_permission.provider.dart';
+import 'package:mediab/providers/backup/manual_upload.provider.dart';
+import 'package:mediab/providers/notification_permission.provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 final localNotificationService = Provider(
@@ -13,8 +13,7 @@ final localNotificationService = Provider(
 );
 
 class LocalNotificationService {
-  final FlutterLocalNotificationsPlugin _localNotificationPlugin =
-      FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin _localNotificationPlugin = FlutterLocalNotificationsPlugin();
   final PermissionStatus _permissionStatus;
   final Ref ref;
 
@@ -29,17 +28,14 @@ class LocalNotificationService {
   static const cancelUploadActionID = 'cancel_upload';
 
   Future<void> setup() async {
-    const androidSetting =
-        AndroidInitializationSettings('@drawable/notification_icon');
+    const androidSetting = AndroidInitializationSettings('@drawable/notification_icon');
     const iosSetting = DarwinInitializationSettings();
 
-    const initSettings =
-        InitializationSettings(android: androidSetting, iOS: iosSetting);
+    const initSettings = InitializationSettings(android: androidSetting, iOS: iosSetting);
 
     await _localNotificationPlugin.initialize(
       initSettings,
-      onDidReceiveNotificationResponse:
-          _onDidReceiveForegroundNotificationResponse,
+      onDidReceiveNotificationResponse: _onDidReceiveForegroundNotificationResponse,
     );
   }
 

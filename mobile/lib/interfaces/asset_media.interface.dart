@@ -1,4 +1,4 @@
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
 
 abstract interface class IAssetMediaRepository {
   Future<List<String>> deleteAll(List<String> ids);

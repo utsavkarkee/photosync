@@ -1,7 +1,7 @@
 import 'package:background_downloader/background_downloader.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/interfaces/download.interface.dart';
-import 'package:immich_mobile/utils/download.dart';
+import 'package:mediab/interfaces/download.interface.dart';
+import 'package:mediab/utils/download.dart';
 
 final downloadRepositoryProvider = Provider((ref) => DownloadRepository());
 

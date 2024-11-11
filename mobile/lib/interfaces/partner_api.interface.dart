@@ -1,4 +1,4 @@
-import 'package:immich_mobile/entities/user.entity.dart';
+import 'package:mediab/entities/user.entity.dart';
 
 abstract interface class IPartnerApiRepository {
   Future<List<User>> getAll(Direction direction);

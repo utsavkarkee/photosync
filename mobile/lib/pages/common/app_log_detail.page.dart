@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/entities/logger_message.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/entities/logger_message.entity.dart';
 import 'package:flutter/services.dart';
 
 @RoutePage()
@@ -126,10 +126,8 @@ class AppLogDetailPage extends HookConsumerWidget {
         child: ListView(
           children: [
             buildTextWithCopyButton("MESSAGE", logMessage.message),
-            if (logMessage.details != null)
-              buildTextWithCopyButton("DETAILS", logMessage.details.toString()),
-            if (logMessage.context1 != null)
-              buildLogContext1(logMessage.context1.toString()),
+            if (logMessage.details != null) buildTextWithCopyButton("DETAILS", logMessage.details.toString()),
+            if (logMessage.context1 != null) buildLogContext1(logMessage.context1.toString()),
             if (logMessage.context2 != null)
               buildTextWithCopyButton(
                 "STACK TRACE",

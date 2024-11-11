@@ -6,28 +6,28 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart' hide Store;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/oauth.provider.dart';
-import 'package:immich_mobile/providers/gallery_permission.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/entities/store.entity.dart';
-import 'package:immich_mobile/providers/api.provider.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/providers/authentication.provider.dart';
-import 'package:immich_mobile/providers/backup/backup.provider.dart';
-import 'package:immich_mobile/providers/server_info.provider.dart';
-import 'package:immich_mobile/utils/provider_utils.dart';
-import 'package:immich_mobile/utils/version_compatibility.dart';
-import 'package:immich_mobile/widgets/common/immich_logo.dart';
-import 'package:immich_mobile/widgets/common/immich_title_text.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
-import 'package:immich_mobile/utils/url_helper.dart';
-import 'package:immich_mobile/widgets/forms/login/email_input.dart';
-import 'package:immich_mobile/widgets/forms/login/loading_icon.dart';
-import 'package:immich_mobile/widgets/forms/login/login_button.dart';
-import 'package:immich_mobile/widgets/forms/login/o_auth_login_button.dart';
-import 'package:immich_mobile/widgets/forms/login/password_input.dart';
-import 'package:immich_mobile/widgets/forms/login/server_endpoint_input.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/oauth.provider.dart';
+import 'package:mediab/providers/gallery_permission.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/entities/store.entity.dart';
+import 'package:mediab/providers/api.provider.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/providers/authentication.provider.dart';
+import 'package:mediab/providers/backup/backup.provider.dart';
+import 'package:mediab/providers/server_info.provider.dart';
+import 'package:mediab/utils/provider_utils.dart';
+import 'package:mediab/utils/version_compatibility.dart';
+import 'package:mediab/widgets/common/immich_logo.dart';
+import 'package:mediab/widgets/common/immich_title_text.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
+import 'package:mediab/utils/url_helper.dart';
+import 'package:mediab/widgets/forms/login/email_input.dart';
+import 'package:mediab/widgets/forms/login/loading_icon.dart';
+import 'package:mediab/widgets/forms/login/login_button.dart';
+import 'package:mediab/widgets/forms/login/o_auth_login_button.dart';
+import 'package:mediab/widgets/forms/login/password_input.dart';
+import 'package:mediab/widgets/forms/login/server_endpoint_input.dart';
 import 'package:logging/logging.dart';
 import 'package:openapi/api.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -40,12 +40,9 @@ class LoginForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final usernameController =
-        useTextEditingController.fromValue(TextEditingValue.empty);
-    final passwordController =
-        useTextEditingController.fromValue(TextEditingValue.empty);
-    final serverEndpointController =
-        useTextEditingController.fromValue(TextEditingValue.empty);
+    final usernameController = useTextEditingController.fromValue(TextEditingValue.empty);
+    final passwordController = useTextEditingController.fromValue(TextEditingValue.empty);
+    final serverEndpointController = useTextEditingController.fromValue(TextEditingValue.empty);
     final apiService = ref.watch(apiServiceProvider);
     final emailFocusNode = useFocusNode();
     final passwordFocusNode = useFocusNode();
@@ -112,9 +109,7 @@ class LoginForm extends HookConsumerWidget {
 
         isOauthEnable.value = features.oauthEnabled;
         isPasswordLoginEnable.value = features.passwordLogin;
-        oAuthButtonLabel.value = config.oauthButtonText.isNotEmpty
-            ? config.oauthButtonText
-            : 'OAuth';
+        oAuthButtonLabel.value = config.oauthButtonText.isNotEmpty ? config.oauthButtonText : 'OAuth';
 
         serverEndpoint.value = endpoint;
       } on ApiException catch (e) {
@@ -191,21 +186,17 @@ class LoginForm extends HookConsumerWidget {
       invalidateAllApiRepositoryProviders(ref);
 
       try {
-        final isAuthenticated =
-            await ref.read(authenticationProvider.notifier).login(
-                  usernameController.text,
-                  passwordController.text,
-                  sanitizeUrl(serverEndpointController.text),
-                );
+        final isAuthenticated = await ref.read(authenticationProvider.notifier).login(
+              usernameController.text,
+              passwordController.text,
+              sanitizeUrl(serverEndpointController.text),
+            );
         if (isAuthenticated) {
           // Resume backup (if enable) then navigate
-          if (ref.read(authenticationProvider).shouldChangePassword &&
-              !ref.read(authenticationProvider).isAdmin) {
+          if (ref.read(authenticationProvider).shouldChangePassword && !ref.read(authenticationProvider).isAdmin) {
             context.pushRoute(const ChangePasswordRoute());
           } else {
-            final hasPermission = await ref
-                .read(galleryPermissionNotifier.notifier)
-                .hasPermission;
+            final hasPermission = await ref.read(galleryPermissionNotifier.notifier).hasPermission;
             if (hasPermission) {
               // Don't resume the backup until we have gallery permission
               ref.read(backupProvider.notifier).resumeBackup();
@@ -232,8 +223,7 @@ class LoginForm extends HookConsumerWidget {
       String? oAuthServerUrl;
 
       try {
-        oAuthServerUrl = await oAuthService
-            .getOAuthServerUrl(sanitizeUrl(serverEndpointController.text));
+        oAuthServerUrl = await oAuthService.getOAuthServerUrl(sanitizeUrl(serverEndpointController.text));
 
         isLoading.value = true;
       } catch (error, stack) {
@@ -251,8 +241,7 @@ class LoginForm extends HookConsumerWidget {
 
       if (oAuthServerUrl != null) {
         try {
-          final loginResponseDto =
-              await oAuthService.oAuthLogin(oAuthServerUrl);
+          final loginResponseDto = await oAuthService.oAuthLogin(oAuthServerUrl);
 
           if (loginResponseDto == null) {
             return;
@@ -262,9 +251,7 @@ class LoginForm extends HookConsumerWidget {
             "Finished OAuth login with response: ${loginResponseDto.userEmail}",
           );
 
-          final isSuccess = await ref
-              .watch(authenticationProvider.notifier)
-              .setSuccessLoginInfo(
+          final isSuccess = await ref.watch(authenticationProvider.notifier).setSuccessLoginInfo(
                 accessToken: loginResponseDto.accessToken,
                 serverUrl: sanitizeUrl(serverEndpointController.text),
               );
@@ -343,8 +330,7 @@ class LoginForm extends HookConsumerWidget {
                       ),
                     ),
                   ),
-                  onPressed:
-                      isLoadingServer.value ? null : getServerLoginCredential,
+                  onPressed: isLoadingServer.value ? null : getServerLoginCredential,
                   icon: const Icon(Icons.arrow_forward_rounded),
                   label: const Text(
                     'login_form_next_button',
@@ -372,12 +358,10 @@ class LoginForm extends HookConsumerWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color:
-                context.isDarkTheme ? Colors.red.shade700 : Colors.red.shade100,
+            color: context.isDarkTheme ? Colors.red.shade700 : Colors.red.shade100,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color:
-                  context.isDarkTheme ? Colors.red.shade900 : Colors.red[200]!,
+              color: context.isDarkTheme ? Colors.red.shade900 : Colors.red[200]!,
             ),
           ),
           child: Text(
@@ -423,8 +407,7 @@ class LoginForm extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 18),
-                      if (isPasswordLoginEnable.value)
-                        LoginButton(onPressed: login),
+                      if (isPasswordLoginEnable.value) LoginButton(onPressed: login),
                       if (isOauthEnable.value) ...[
                         if (isPasswordLoginEnable.value)
                           Padding(
@@ -432,9 +415,7 @@ class LoginForm extends HookConsumerWidget {
                               horizontal: 16.0,
                             ),
                             child: Divider(
-                              color: context.isDarkTheme
-                                  ? Colors.white
-                                  : Colors.black,
+                              color: context.isDarkTheme ? Colors.white : Colors.black,
                             ),
                           ),
                         OAuthLoginButton(
@@ -461,8 +442,7 @@ class LoginForm extends HookConsumerWidget {
       );
     }
 
-    final serverSelectionOrLogin =
-        serverEndpoint.value == null ? buildSelectServer() : buildLogin();
+    final serverSelectionOrLogin = serverEndpoint.value == null ? buildSelectServer() : buildLogin();
 
     return LayoutBuilder(
       builder: (context, constraints) {

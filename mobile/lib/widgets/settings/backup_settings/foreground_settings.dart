@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/backup/backup.provider.dart';
-import 'package:immich_mobile/widgets/settings/settings_button_list_tile.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/backup/backup.provider.dart';
+import 'package:mediab/widgets/settings/settings_button_list_tile.dart';
 
 class ForegroundBackupSettings extends ConsumerWidget {
   const ForegroundBackupSettings({super.key});
@@ -12,8 +12,7 @@ class ForegroundBackupSettings extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isAutoBackup = ref.watch(backupProvider.select((s) => s.autoBackup));
 
-    void onButtonTap() =>
-        ref.read(backupProvider.notifier).setAutoBackup(!isAutoBackup);
+    void onButtonTap() => ref.read(backupProvider.notifier).setAutoBackup(!isAutoBackup);
 
     if (isAutoBackup) {
       return SettingsButtonListTile(

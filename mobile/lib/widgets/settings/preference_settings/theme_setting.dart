@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/widgets/settings/preference_settings/primary_color_setting.dart';
-import 'package:immich_mobile/widgets/settings/settings_sub_title.dart';
-import 'package:immich_mobile/widgets/settings/settings_switch_list_tile.dart';
-import 'package:immich_mobile/utils/hooks/app_settings_update_hook.dart';
-import 'package:immich_mobile/utils/immich_app_theme.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/widgets/settings/preference_settings/primary_color_setting.dart';
+import 'package:mediab/widgets/settings/settings_sub_title.dart';
+import 'package:mediab/widgets/settings/settings_switch_list_tile.dart';
+import 'package:mediab/utils/hooks/app_settings_update_hook.dart';
+import 'package:mediab/utils/immich_app_theme.dart';
 
 class ThemeSetting extends HookConsumerWidget {
   const ThemeSetting({
@@ -19,13 +19,10 @@ class ThemeSetting extends HookConsumerWidget {
     final currentThemeString = useAppSettingsState(AppSettingsEnum.themeMode);
     final currentTheme = useValueNotifier(ref.read(immichThemeModeProvider));
     final isDarkTheme = useValueNotifier(currentTheme.value == ThemeMode.dark);
-    final isSystemTheme =
-        useValueNotifier(currentTheme.value == ThemeMode.system);
+    final isSystemTheme = useValueNotifier(currentTheme.value == ThemeMode.system);
 
-    final applyThemeToBackgroundSetting =
-        useAppSettingsState(AppSettingsEnum.colorfulInterface);
-    final applyThemeToBackgroundProvider =
-        useValueNotifier(ref.read(colorfulInterfaceSettingProvider));
+    final applyThemeToBackgroundSetting = useAppSettingsState(AppSettingsEnum.colorfulInterface);
+    final applyThemeToBackgroundProvider = useValueNotifier(ref.read(colorfulInterfaceSettingProvider));
 
     useValueChanged(
       currentThemeString.value,
@@ -38,8 +35,7 @@ class ThemeSetting extends HookConsumerWidget {
 
     useValueChanged(
       applyThemeToBackgroundSetting.value,
-      (_, __) => applyThemeToBackgroundProvider.value =
-          applyThemeToBackgroundSetting.value,
+      (_, __) => applyThemeToBackgroundProvider.value = applyThemeToBackgroundSetting.value,
     );
 
     void onThemeChange(bool isDark) {
@@ -58,8 +54,7 @@ class ThemeSetting extends HookConsumerWidget {
         isSystemTheme.value = true;
         ref.watch(immichThemeModeProvider.notifier).state = ThemeMode.system;
       } else {
-        final currentSystemBrightness =
-            MediaQuery.platformBrightnessOf(context);
+        final currentSystemBrightness = MediaQuery.platformBrightnessOf(context);
         isSystemTheme.value = false;
         isDarkTheme.value = currentSystemBrightness == Brightness.dark;
         if (currentSystemBrightness == Brightness.light) {
@@ -74,8 +69,7 @@ class ThemeSetting extends HookConsumerWidget {
 
     void onSurfaceColorSettingChange(bool useColorfulInterface) {
       applyThemeToBackgroundSetting.value = useColorfulInterface;
-      ref.watch(colorfulInterfaceSettingProvider.notifier).state =
-          useColorfulInterface;
+      ref.watch(colorfulInterfaceSettingProvider.notifier).state = useColorfulInterface;
     }
 
     return Column(

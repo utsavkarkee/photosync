@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/pages/common/large_leading_tile.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/widgets/common/immich_thumbnail.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/pages/common/large_leading_tile.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/widgets/common/immich_thumbnail.dart';
 
 @RoutePage()
 class LocalAlbumsPage extends HookConsumerWidget {
@@ -44,8 +44,7 @@ class LocalAlbumsPage extends HookConsumerWidget {
                 ),
               ),
               subtitle: Text('${albums[index].assetCount} items'),
-              onTap: () => context
-                  .pushRoute(AlbumViewerRoute(albumId: albums[index].id)),
+              onTap: () => context.pushRoute(AlbumViewerRoute(albumId: albums[index].id)),
             ),
           );
         },

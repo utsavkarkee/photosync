@@ -5,13 +5,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/asyncvalue_extensions.dart';
-import 'package:immich_mobile/providers/asset_viewer/render_list.provider.dart';
-import 'package:immich_mobile/widgets/asset_grid/asset_grid_data_structure.dart';
-import 'package:immich_mobile/widgets/asset_grid/immich_asset_grid_view.dart';
-import 'package:immich_mobile/providers/app_settings.provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/extensions/asyncvalue_extensions.dart';
+import 'package:mediab/providers/asset_viewer/render_list.provider.dart';
+import 'package:mediab/widgets/asset_grid/asset_grid_data_structure.dart';
+import 'package:mediab/widgets/asset_grid/immich_asset_grid_view.dart';
+import 'package:mediab/providers/app_settings.provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/entities/asset.entity.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class ImmichAssetGrid extends HookConsumerWidget {
@@ -27,8 +27,7 @@ class ImmichAssetGrid extends HookConsumerWidget {
   final bool canDeselect;
   final bool? dynamicLayout;
   final bool showMultiSelectIndicator;
-  final void Function(Iterable<ItemPosition> itemPositions)?
-      visibleItemsListener;
+  final void Function(Iterable<ItemPosition> itemPositions)? visibleItemsListener;
   final Widget? topWidget;
   final bool shrinkWrap;
   final bool showDragScroll;
@@ -80,10 +79,8 @@ class ImmichAssetGrid extends HookConsumerWidget {
     Widget buildAssetGridView(RenderList renderList) {
       return RawGestureDetector(
         gestures: {
-          CustomScaleGestureRecognizer: GestureRecognizerFactoryWithHandlers<
-                  CustomScaleGestureRecognizer>(
-              () => CustomScaleGestureRecognizer(),
-              (CustomScaleGestureRecognizer scale) {
+          CustomScaleGestureRecognizer: GestureRecognizerFactoryWithHandlers<CustomScaleGestureRecognizer>(
+              () => CustomScaleGestureRecognizer(), (CustomScaleGestureRecognizer scale) {
             scale.onStart = (details) {
               baseScaleFactor.value = scaleFactor.value;
             };
@@ -103,15 +100,13 @@ class ImmichAssetGrid extends HookConsumerWidget {
           onRefresh: onRefresh,
           assetsPerRow: perRow.value,
           listener: listener,
-          showStorageIndicator: showStorageIndicator ??
-              settings.getSetting(AppSettingsEnum.storageIndicator),
+          showStorageIndicator: showStorageIndicator ?? settings.getSetting(AppSettingsEnum.storageIndicator),
           renderList: renderList,
           margin: margin,
           selectionActive: selectionActive,
           preselectedAssets: preselectedAssets,
           canDeselect: canDeselect,
-          dynamicLayout: dynamicLayout ??
-              settings.getSetting(AppSettingsEnum.dynamicLayout),
+          dynamicLayout: dynamicLayout ?? settings.getSetting(AppSettingsEnum.dynamicLayout),
           showMultiSelectIndicator: showMultiSelectIndicator,
           visibleItemsListener: visibleItemsListener,
           topWidget: topWidget,

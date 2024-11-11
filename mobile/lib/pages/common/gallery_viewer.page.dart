@@ -8,30 +8,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart' hide Store;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/constants/constants.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/pages/common/download_panel.dart';
-import 'package:immich_mobile/pages/common/video_viewer.page.dart';
-import 'package:immich_mobile/providers/app_settings.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/asset_stack.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/current_asset.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/show_controls.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/video_player_value_provider.dart';
-import 'package:immich_mobile/providers/haptic_feedback.provider.dart';
-import 'package:immich_mobile/providers/image/immich_remote_image_provider.dart';
-import 'package:immich_mobile/services/app_settings.service.dart';
-import 'package:immich_mobile/widgets/asset_grid/asset_grid_data_structure.dart';
-import 'package:immich_mobile/widgets/asset_viewer/advanced_bottom_sheet.dart';
-import 'package:immich_mobile/widgets/asset_viewer/bottom_gallery_bar.dart';
-import 'package:immich_mobile/widgets/asset_viewer/detail_panel/detail_panel.dart';
-import 'package:immich_mobile/widgets/asset_viewer/gallery_app_bar.dart';
-import 'package:immich_mobile/widgets/common/immich_image.dart';
-import 'package:immich_mobile/widgets/common/immich_thumbnail.dart';
-import 'package:immich_mobile/widgets/photo_view/photo_view_gallery.dart';
-import 'package:immich_mobile/widgets/photo_view/src/photo_view_computed_scale.dart';
-import 'package:immich_mobile/widgets/photo_view/src/photo_view_scale_state.dart';
-import 'package:immich_mobile/widgets/photo_view/src/utils/photo_view_hero_attributes.dart';
+import 'package:mediab/constants/constants.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/pages/common/download_panel.dart';
+import 'package:mediab/pages/common/video_viewer.page.dart';
+import 'package:mediab/providers/app_settings.provider.dart';
+import 'package:mediab/providers/asset_viewer/asset_stack.provider.dart';
+import 'package:mediab/providers/asset_viewer/current_asset.provider.dart';
+import 'package:mediab/providers/asset_viewer/show_controls.provider.dart';
+import 'package:mediab/providers/asset_viewer/video_player_value_provider.dart';
+import 'package:mediab/providers/haptic_feedback.provider.dart';
+import 'package:mediab/providers/image/immich_remote_image_provider.dart';
+import 'package:mediab/services/app_settings.service.dart';
+import 'package:mediab/widgets/asset_grid/asset_grid_data_structure.dart';
+import 'package:mediab/widgets/asset_viewer/advanced_bottom_sheet.dart';
+import 'package:mediab/widgets/asset_viewer/bottom_gallery_bar.dart';
+import 'package:mediab/widgets/asset_viewer/detail_panel/detail_panel.dart';
+import 'package:mediab/widgets/asset_viewer/gallery_app_bar.dart';
+import 'package:mediab/widgets/common/immich_image.dart';
+import 'package:mediab/widgets/common/immich_thumbnail.dart';
+import 'package:mediab/widgets/photo_view/photo_view_gallery.dart';
+import 'package:mediab/widgets/photo_view/src/photo_view_computed_scale.dart';
+import 'package:mediab/widgets/photo_view/src/photo_view_scale_state.dart';
+import 'package:mediab/widgets/photo_view/src/utils/photo_view_hero_attributes.dart';
 
 @RoutePage()
 // ignore: must_be_immutable
@@ -69,16 +69,13 @@ class GalleryViewerPage extends HookConsumerWidget {
     });
 
     final stackIndex = useState(-1);
-    final stack = showStack && currentAsset.stackCount > 0
-        ? ref.watch(assetStackStateProvider(currentAsset))
-        : <Asset>[];
+    final stack =
+        showStack && currentAsset.stackCount > 0 ? ref.watch(assetStackStateProvider(currentAsset)) : <Asset>[];
     final stackElements = showStack ? [currentAsset, ...stack] : <Asset>[];
     // Assets from response DTOs do not have an isar id, querying which would give us the default autoIncrement id
     final isFromDto = currentAsset.id == noDbId;
 
-    Asset asset = stackIndex.value == -1
-        ? currentAsset
-        : stackElements.elementAt(stackIndex.value);
+    Asset asset = stackIndex.value == -1 ? currentAsset : stackElements.elementAt(stackIndex.value);
 
     final isMotionPhoto = asset.livePhotoVideoId != null;
     // Listen provider to prevent autoDispose when navigating to other routes from within the gallery page
@@ -96,8 +93,7 @@ class GalleryViewerPage extends HookConsumerWidget {
 
     useEffect(
       () {
-        shouldLoopVideo.value =
-            settings.getSetting<bool>(AppSettingsEnum.loopVideo);
+        shouldLoopVideo.value = settings.getSetting<bool>(AppSettingsEnum.loopVideo);
         return null;
       },
       [],
@@ -143,9 +139,7 @@ class GalleryViewerPage extends HookConsumerWidget {
               padding: EdgeInsets.only(
                 bottom: MediaQuery.viewInsetsOf(context).bottom,
               ),
-              child: ref
-                      .watch(appSettingsServiceProvider)
-                      .getSetting<bool>(AppSettingsEnum.advancedTroubleshooting)
+              child: ref.watch(appSettingsServiceProvider).getSetting<bool>(AppSettingsEnum.advancedTroubleshooting)
                   ? AdvancedBottomSheet(assetDetail: asset)
                   : DetailPanel(asset: asset),
             ),
@@ -241,8 +235,7 @@ class GalleryViewerPage extends HookConsumerWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(6),
-                  border: (stackIndex.value == -1 && index == 0) ||
-                          index == stackIndex.value
+                  border: (stackIndex.value == -1 && index == 0) || index == stackIndex.value
                       ? Border.all(
                           color: Colors.white,
                           width: 2,
@@ -265,8 +258,7 @@ class GalleryViewerPage extends HookConsumerWidget {
 
     return PopScope(
       // Change immersive mode back to normal "edgeToEdge" mode
-      onPopInvokedWithResult: (didPop, _) =>
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge),
+      onPopInvokedWithResult: (didPop, _) => SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge),
       child: Scaffold(
         backgroundColor: Colors.black,
         body: Stack(
@@ -317,18 +309,14 @@ class GalleryViewerPage extends HookConsumerWidget {
                 unawaited(precacheNextImage(next));
               },
               builder: (context, index) {
-                final a =
-                    index == currentIndex.value ? asset : loadAsset(index);
+                final a = index == currentIndex.value ? asset : loadAsset(index);
 
-                final ImageProvider provider =
-                    ImmichImage.imageProvider(asset: a);
+                final ImageProvider provider = ImmichImage.imageProvider(asset: a);
 
                 if (a.isImage && !isPlayingVideo.value) {
                   return PhotoViewGalleryPageOptions(
-                    onDragStart: (_, details, __) =>
-                        localPosition.value = details.localPosition,
-                    onDragUpdate: (_, details, __) =>
-                        handleSwipeUpDown(details),
+                    onDragStart: (_, details, __) => localPosition.value = details.localPosition,
+                    onDragUpdate: (_, details, __) => handleSwipeUpDown(details),
                     onTapDown: (_, __, ___) {
                       ref.read(showControlsProvider.notifier).toggle();
                     },
@@ -339,9 +327,7 @@ class GalleryViewerPage extends HookConsumerWidget {
                     },
                     imageProvider: provider,
                     heroAttributes: PhotoViewHeroAttributes(
-                      tag: isFromDto
-                          ? '${currentAsset.remoteId}-$heroOffset'
-                          : currentAsset.id + heroOffset,
+                      tag: isFromDto ? '${currentAsset.remoteId}-$heroOffset' : currentAsset.id + heroOffset,
                       transitionOnUserGestures: true,
                     ),
                     filterQuality: FilterQuality.high,
@@ -354,14 +340,10 @@ class GalleryViewerPage extends HookConsumerWidget {
                   );
                 } else {
                   return PhotoViewGalleryPageOptions.customChild(
-                    onDragStart: (_, details, __) =>
-                        localPosition.value = details.localPosition,
-                    onDragUpdate: (_, details, __) =>
-                        handleSwipeUpDown(details),
+                    onDragStart: (_, details, __) => localPosition.value = details.localPosition,
+                    onDragUpdate: (_, details, __) => handleSwipeUpDown(details),
                     heroAttributes: PhotoViewHeroAttributes(
-                      tag: isFromDto
-                          ? '${currentAsset.remoteId}-$heroOffset'
-                          : currentAsset.id + heroOffset,
+                      tag: isFromDto ? '${currentAsset.remoteId}-$heroOffset' : currentAsset.id + heroOffset,
                     ),
                     filterQuality: FilterQuality.high,
                     maxScale: 1.0,
@@ -392,8 +374,7 @@ class GalleryViewerPage extends HookConsumerWidget {
                 asset: asset,
                 showInfo: showInfo,
                 isPlayingVideo: isPlayingVideo.value,
-                onToggleMotionVideo: () =>
-                    isPlayingVideo.value = !isPlayingVideo.value,
+                onToggleMotionVideo: () => isPlayingVideo.value = !isPlayingVideo.value,
               ),
             ),
             Positioned(

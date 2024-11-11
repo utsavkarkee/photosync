@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/extensions/theme_extensions.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/extensions/theme_extensions.dart';
 
 class ThumbnailWithInfoContainer extends StatelessWidget {
   const ThumbnailWithInfoContainer({
@@ -43,9 +43,7 @@ class ThumbnailWithInfoContainer extends StatelessWidget {
                 end: FractionalOffset.bottomCenter,
                 colors: [
                   Colors.transparent,
-                  label == ''
-                      ? Colors.black.withOpacity(0.1)
-                      : Colors.black.withOpacity(0.5),
+                  label == '' ? Colors.black.withOpacity(0.1) : Colors.black.withOpacity(0.5),
                 ],
                 stops: const [0.0, 1.0],
               ),
@@ -53,8 +51,7 @@ class ThumbnailWithInfoContainer extends StatelessWidget {
             child: child,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8) +
-                const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8) + const EdgeInsets.only(bottom: 8),
             child: Text(
               label,
               style: const TextStyle(

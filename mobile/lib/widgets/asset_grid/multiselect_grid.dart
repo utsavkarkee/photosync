@@ -7,25 +7,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/collection_extensions.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/services/album.service.dart';
-import 'package:immich_mobile/services/stack.service.dart';
-import 'package:immich_mobile/providers/backup/manual_upload.provider.dart';
-import 'package:immich_mobile/models/asset_selection_state.dart';
-import 'package:immich_mobile/providers/multiselect.provider.dart';
-import 'package:immich_mobile/widgets/asset_grid/asset_grid_data_structure.dart';
-import 'package:immich_mobile/widgets/asset_grid/immich_asset_grid.dart';
-import 'package:immich_mobile/widgets/asset_grid/control_bottom_app_bar.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/entities/album.entity.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/providers/user.provider.dart';
-import 'package:immich_mobile/widgets/common/immich_loading_indicator.dart';
-import 'package:immich_mobile/widgets/common/immich_toast.dart';
-import 'package:immich_mobile/utils/immich_loading_overlay.dart';
-import 'package:immich_mobile/utils/selection_handlers.dart';
+import 'package:mediab/extensions/collection_extensions.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/services/album.service.dart';
+import 'package:mediab/services/stack.service.dart';
+import 'package:mediab/providers/backup/manual_upload.provider.dart';
+import 'package:mediab/models/asset_selection_state.dart';
+import 'package:mediab/providers/multiselect.provider.dart';
+import 'package:mediab/widgets/asset_grid/asset_grid_data_structure.dart';
+import 'package:mediab/widgets/asset_grid/immich_asset_grid.dart';
+import 'package:mediab/widgets/asset_grid/control_bottom_app_bar.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/entities/album.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/providers/user.provider.dart';
+import 'package:mediab/widgets/common/immich_loading_indicator.dart';
+import 'package:mediab/widgets/common/immich_toast.dart';
+import 'package:mediab/utils/immich_loading_overlay.dart';
+import 'package:mediab/utils/selection_handlers.dart';
 
 class MultiselectGrid extends HookConsumerWidget {
   const MultiselectGrid({
@@ -58,11 +58,9 @@ class MultiselectGrid extends HookConsumerWidget {
   final bool unfavorite;
   final bool editEnabled;
   final Widget? emptyIndicator;
-  Widget buildDefaultLoadingIndicator() =>
-      const Center(child: ImmichLoadingIndicator());
+  Widget buildDefaultLoadingIndicator() => const Center(child: ImmichLoadingIndicator());
 
-  Widget buildEmptyIndicator() =>
-      emptyIndicator ?? Center(child: const Text("no_assets_to_show").tr());
+  Widget buildEmptyIndicator() => emptyIndicator ?? Center(child: const Text("no_assets_to_show").tr());
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -96,8 +94,7 @@ class MultiselectGrid extends HookConsumerWidget {
     ) {
       selectionEnabledHook.value = multiselect;
       selection.value = selectedAssets;
-      selectionAssetState.value =
-          AssetSelectionState.fromSelection(selectedAssets);
+      selectionAssetState.value = AssetSelectionState.fromSelection(selectedAssets);
     }
 
     errorBuilder(String? msg) => msg != null && msg.isNotEmpty
@@ -113,16 +110,13 @@ class MultiselectGrid extends HookConsumerWidget {
       String? ownerErrorMessage,
     }) {
       final assets = selection.value;
-      return assets
-          .remoteOnly(errorCallback: errorBuilder(localErrorMessage))
-          .ownedOnly(
+      return assets.remoteOnly(errorCallback: errorBuilder(localErrorMessage)).ownedOnly(
             currentUser,
             errorCallback: errorBuilder(ownerErrorMessage),
           );
     }
 
-    Iterable<Asset> remoteSelection({String? errorMessage}) =>
-        selection.value.remoteOnly(
+    Iterable<Asset> remoteSelection({String? errorMessage}) => selection.value.remoteOnly(
           errorCallback: errorBuilder(errorMessage),
         );
 
@@ -132,9 +126,7 @@ class MultiselectGrid extends HookConsumerWidget {
         // Share = Download + Send to OS specific share sheet
         handleShareAssets(ref, context, selection.value);
       } else {
-        final ids =
-            remoteSelection(errorMessage: "home_page_share_err_local".tr())
-                .map((e) => e.remoteId!);
+        final ids = remoteSelection(errorMessage: "home_page_share_err_local".tr()).map((e) => e.remoteId!);
         context.pushRoute(SharedLinkEditRoute(assetsList: ids.toList()));
       }
       processing.value = false;
@@ -180,16 +172,13 @@ class MultiselectGrid extends HookConsumerWidget {
               errorCallback: errorBuilder('home_page_delete_err_partner'.tr()),
             )
             .toList();
-        final isDeleted = await ref
-            .read(assetProvider.notifier)
-            .deleteAssets(toDelete, force: force);
+        final isDeleted = await ref.read(assetProvider.notifier).deleteAssets(toDelete, force: force);
 
         if (isDeleted) {
           ImmichToast.show(
             context: context,
             msg: force
-                ? 'assets_deleted_permanently'
-                    .tr(args: ["${selection.value.length}"])
+                ? 'assets_deleted_permanently'.tr(args: ["${selection.value.length}"])
                 : 'assets_trashed'.tr(args: ["${selection.value.length}"]),
             gravity: ToastGravity.BOTTOM,
           );
@@ -207,9 +196,8 @@ class MultiselectGrid extends HookConsumerWidget {
         final localIds = selection.value.where((a) => a.isLocal).toList();
 
         // Delete only the backed-up assets if 'onlyBackedUp' is true
-        final isDeleted = await ref
-            .read(assetProvider.notifier)
-            .deleteLocalOnlyAssets(localIds, onlyBackedUp: onlyBackedUp);
+        final isDeleted =
+            await ref.read(assetProvider.notifier).deleteLocalOnlyAssets(localIds, onlyBackedUp: onlyBackedUp);
 
         if (isDeleted) {
           // Show a toast with the correct number of deleted assets
@@ -221,8 +209,7 @@ class MultiselectGrid extends HookConsumerWidget {
 
           ImmichToast.show(
             context: context,
-            msg: 'assets_removed_permanently_from_device'
-                .tr(args: ["$deletedCount"]),
+            msg: 'assets_removed_permanently_from_device'.tr(args: ["$deletedCount"]),
             gravity: ToastGravity.BOTTOM,
           );
 
@@ -242,15 +229,12 @@ class MultiselectGrid extends HookConsumerWidget {
           ownerErrorMessage: 'home_page_delete_err_partner'.tr(),
         ).toList();
 
-        final isDeleted = await ref
-            .read(assetProvider.notifier)
-            .deleteRemoteOnlyAssets(toDelete, force: force);
+        final isDeleted = await ref.read(assetProvider.notifier).deleteRemoteOnlyAssets(toDelete, force: force);
         if (isDeleted) {
           ImmichToast.show(
             context: context,
             msg: force
-                ? 'assets_deleted_permanently_from_server'
-                    .tr(args: ["${toDelete.length}"])
+                ? 'assets_deleted_permanently_from_server'.tr(args: ["${toDelete.length}"])
                 : 'assets_trashed_from_server'.tr(args: ["${toDelete.length}"]),
             gravity: ToastGravity.BOTTOM,
           );
@@ -328,9 +312,7 @@ class MultiselectGrid extends HookConsumerWidget {
         if (assets.isEmpty) {
           return;
         }
-        final result = await ref
-            .read(albumServiceProvider)
-            .createAlbumWithGeneratedName(assets);
+        final result = await ref.read(albumServiceProvider).createAlbumWithGeneratedName(assets);
 
         if (result != null) {
           ref.watch(albumProvider.notifier).refreshRemoteAlbums();
@@ -412,8 +394,7 @@ class MultiselectGrid extends HookConsumerWidget {
       child: Stack(
         children: [
           ref.watch(renderListProvider).when(
-                data: (data) => data.isEmpty &&
-                        (buildLoadingIndicator != null || topWidget == null)
+                data: (data) => data.isEmpty && (buildLoadingIndicator != null || topWidget == null)
                     ? (buildLoadingIndicator ?? buildEmptyIndicator)()
                     : ImmichAssetGrid(
                         renderList: data,

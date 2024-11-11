@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/models/shared_link/shared_link.model.dart';
-import 'package:immich_mobile/providers/api.provider.dart';
-import 'package:immich_mobile/services/api.service.dart';
+import 'package:mediab/models/shared_link/shared_link.model.dart';
+import 'package:mediab/providers/api.provider.dart';
+import 'package:mediab/services/api.service.dart';
 import 'package:logging/logging.dart';
 import 'package:openapi/api.dart';
 
@@ -18,9 +18,7 @@ class SharedLinkService {
   Future<AsyncValue<List<SharedLink>>> getAllSharedLinks() async {
     try {
       final list = await _apiService.sharedLinksApi.getAllSharedLinks();
-      return list != null
-          ? AsyncData(list.map(SharedLink.fromDto).toList())
-          : const AsyncData([]);
+      return list != null ? AsyncData(list.map(SharedLink.fromDto).toList()) : const AsyncData([]);
     } catch (e, stack) {
       _log.severe("Failed to fetch shared links", e, stack);
       return AsyncError(e, stack);
@@ -46,8 +44,7 @@ class SharedLinkService {
     DateTime? expiresAt,
   }) async {
     try {
-      final type =
-          albumId != null ? SharedLinkType.ALBUM : SharedLinkType.INDIVIDUAL;
+      final type = albumId != null ? SharedLinkType.ALBUM : SharedLinkType.INDIVIDUAL;
       SharedLinkCreateDto? dto;
       if (type == SharedLinkType.ALBUM) {
         dto = SharedLinkCreateDto(
@@ -74,8 +71,7 @@ class SharedLinkService {
       }
 
       if (dto != null) {
-        final responseDto =
-            await _apiService.sharedLinksApi.createSharedLink(dto);
+        final responseDto = await _apiService.sharedLinksApi.createSharedLink(dto);
         if (responseDto != null) {
           return SharedLink.fromDto(responseDto);
         }

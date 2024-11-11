@@ -2,8 +2,8 @@ import 'package:background_downloader/background_downloader.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/asset_viewer/download.provider.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/asset_viewer/download.provider.dart';
 
 class DownloadPanel extends ConsumerWidget {
   const DownloadPanel({
@@ -34,8 +34,7 @@ class DownloadPanel extends ConsumerWidget {
         duration: const Duration(milliseconds: 300),
         child: showProgress
             ? ConstrainedBox(
-                constraints:
-                    BoxConstraints.loose(Size(context.width - 32, 300)),
+                constraints: BoxConstraints.loose(Size(context.width - 32, 300)),
                 child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: tasks.length,
@@ -130,8 +129,7 @@ class DownloadTaskTile extends StatelessWidget {
                     child: LinearProgressIndicator(
                       minHeight: 8.0,
                       value: progress,
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(10.0)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                     ),
                   ),
                   const SizedBox(width: 8),

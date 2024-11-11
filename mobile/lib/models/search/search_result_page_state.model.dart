@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
+import 'package:mediab/entities/asset.entity.dart';
 
 class SearchResultPageState {
   final bool isLoading;
@@ -52,10 +52,6 @@ class SearchResultPageState {
 
   @override
   int get hashCode {
-    return isLoading.hashCode ^
-        isSuccess.hashCode ^
-        isError.hashCode ^
-        isSmart.hashCode ^
-        searchResult.hashCode;
+    return isLoading.hashCode ^ isSuccess.hashCode ^ isError.hashCode ^ isSmart.hashCode ^ searchResult.hashCode;
   }
 }

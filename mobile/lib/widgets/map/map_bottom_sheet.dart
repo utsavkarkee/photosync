@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/models/map/map_event.model.dart';
-import 'package:immich_mobile/widgets/map/map_asset_grid.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/utils/draggable_scroll_controller.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/models/map/map_event.model.dart';
+import 'package:mediab/widgets/map/map_asset_grid.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/utils/draggable_scroll_controller.dart';
 
 class MapBottomSheet extends HookConsumerWidget {
   final Stream<MapEvent> mapEventStream;
@@ -45,8 +45,7 @@ class MapBottomSheet extends HookConsumerWidget {
     useOnStreamChange<MapEvent>(mapEventStream, onData: handleMapEvents);
 
     bool onScrollNotification(DraggableScrollableNotification notification) {
-      isBottomSheetOpened.value =
-          notification.extent > (notification.maxExtent * 0.9);
+      isBottomSheetOpened.value = notification.extent > (notification.maxExtent * 0.9);
       bottomSheetOffset.value = notification.extent;
       // do not bubble
       return true;
@@ -69,9 +68,7 @@ class MapBottomSheet extends HookConsumerWidget {
               selectedAssets: selectedAssets,
               onAssetsSelected: onAssetsSelected,
               // Do not bother with the event if the bottom sheet is not user scrolled
-              onGridAssetChanged: (assetId) => isBottomSheetOpened.value
-                  ? onGridAssetChanged?.call(assetId)
-                  : null,
+              onGridAssetChanged: (assetId) => isBottomSheetOpened.value ? onGridAssetChanged?.call(assetId) : null,
               onZoomToAsset: onZoomToAsset,
             ),
           ),

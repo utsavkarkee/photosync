@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:immich_mobile/widgets/photo_view/src/utils/ignorable_change_notifier.dart';
+import 'package:mediab/widgets/photo_view/src/utils/ignorable_change_notifier.dart';
 
 /// The interface in which controllers will be implemented.
 ///
@@ -99,11 +99,7 @@ class PhotoViewControllerValue {
           rotationFocusPoint == other.rotationFocusPoint;
 
   @override
-  int get hashCode =>
-      position.hashCode ^
-      scale.hashCode ^
-      rotation.hashCode ^
-      rotationFocusPoint.hashCode;
+  int get hashCode => position.hashCode ^ scale.hashCode ^ rotation.hashCode ^ rotationFocusPoint.hashCode;
 
   @override
   String toString() {
@@ -118,8 +114,7 @@ class PhotoViewControllerValue {
 ///
 /// For details of fields and methods, check [PhotoViewControllerBase].
 ///
-class PhotoViewController
-    implements PhotoViewControllerBase<PhotoViewControllerValue> {
+class PhotoViewController implements PhotoViewControllerBase<PhotoViewControllerValue> {
   PhotoViewController({
     Offset initialPosition = Offset.zero,
     double initialRotation = 0.0,

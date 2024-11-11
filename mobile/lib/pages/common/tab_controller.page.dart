@@ -2,15 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/extensions/build_context_extensions.dart';
-import 'package:immich_mobile/providers/album/album.provider.dart';
-import 'package:immich_mobile/providers/asset_viewer/scroll_notifier.provider.dart';
-import 'package:immich_mobile/providers/multiselect.provider.dart';
-import 'package:immich_mobile/providers/search/search_input_focus.provider.dart';
-import 'package:immich_mobile/routing/router.dart';
-import 'package:immich_mobile/providers/asset.provider.dart';
-import 'package:immich_mobile/providers/haptic_feedback.provider.dart';
-import 'package:immich_mobile/providers/tab.provider.dart';
+import 'package:mediab/extensions/build_context_extensions.dart';
+import 'package:mediab/providers/album/album.provider.dart';
+import 'package:mediab/providers/asset_viewer/scroll_notifier.provider.dart';
+import 'package:mediab/providers/multiselect.provider.dart';
+import 'package:mediab/providers/search/search_input_focus.provider.dart';
+import 'package:mediab/routing/router.dart';
+import 'package:mediab/providers/asset.provider.dart';
+import 'package:mediab/providers/haptic_feedback.provider.dart';
+import 'package:mediab/providers/tab.provider.dart';
 
 @RoutePage()
 class TabControllerPage extends HookConsumerWidget {
@@ -64,8 +64,7 @@ class TabControllerPage extends HookConsumerWidget {
     bottomNavigationBar(TabsRouter tabsRouter) {
       return NavigationBar(
         selectedIndex: tabsRouter.activeIndex,
-        onDestinationSelected: (index) =>
-            onNavigationSelected(tabsRouter, index),
+        onDestinationSelected: (index) => onNavigationSelected(tabsRouter, index),
         destinations: [
           NavigationDestination(
             label: 'tab_controller_nav_photos'.tr(),
@@ -137,15 +136,13 @@ class TabControllerPage extends HookConsumerWidget {
         final tabsRouter = AutoTabsRouter.of(context);
         return PopScope(
           canPop: tabsRouter.activeIndex == 0,
-          onPopInvokedWithResult: (didPop, _) =>
-              !didPop ? tabsRouter.setActiveIndex(0) : null,
+          onPopInvokedWithResult: (didPop, _) => !didPop ? tabsRouter.setActiveIndex(0) : null,
           child: Scaffold(
             body: HeroControllerScope(
               controller: HeroController(),
               child: child,
             ),
-            bottomNavigationBar:
-                multiselectEnabled ? null : bottomNavigationBar(tabsRouter),
+            bottomNavigationBar: multiselectEnabled ? null : bottomNavigationBar(tabsRouter),
           ),
         );
       },

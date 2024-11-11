@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:immich_mobile/entities/asset.entity.dart';
-import 'package:immich_mobile/interfaces/file_media.interface.dart';
-import 'package:immich_mobile/repositories/asset_media.repository.dart';
+import 'package:mediab/entities/asset.entity.dart';
+import 'package:mediab/interfaces/file_media.interface.dart';
+import 'package:mediab/repositories/asset_media.repository.dart';
 import 'package:photo_manager/photo_manager.dart' hide AssetType;
 
 final fileMediaRepositoryProvider = Provider((ref) => FileMediaRepository());
@@ -71,10 +71,8 @@ class FileMediaRepository implements IFileMediaRepository {
   Future<void> clearFileCache() => PhotoManager.clearFileCache();
 
   @override
-  Future<void> enableBackgroundAccess() =>
-      PhotoManager.setIgnorePermissionCheck(true);
+  Future<void> enableBackgroundAccess() => PhotoManager.setIgnorePermissionCheck(true);
 
   @override
-  Future<void> requestExtendedPermissions() =>
-      PhotoManager.requestPermissionExtend();
+  Future<void> requestExtendedPermissions() => PhotoManager.requestPermissionExtend();
 }
