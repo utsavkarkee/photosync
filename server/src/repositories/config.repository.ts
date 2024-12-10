@@ -102,7 +102,7 @@ const getEnv = (): EnvData => {
     environment,
     configFile: dto.IMMICH_CONFIG_FILE,
     logLevel: dto.IMMICH_LOG_LEVEL,
-
+    userQuotaSizeInBytes: dto.USER_QUOTASIZEINBYTES,
     buildMetadata: {
       build: dto.IMMICH_BUILD,
       buildUrl: dto.IMMICH_BUILD_URL,
