@@ -636,6 +636,7 @@
     "unable_to_connect_to_server": "Unable to connect to server",
     "unable_to_copy_to_clipboard": "Cannot copy to clipboard, make sure you are accessing the page through https",
     "unable_to_create_admin_account": "Unable to create admin account",
+    "unable_to_create_user_account": "Unable to create user account",
     "unable_to_create_api_key": "Unable to create a new API Key",
     "unable_to_create_library": "Unable to create library",
     "unable_to_create_user": "Unable to create user",

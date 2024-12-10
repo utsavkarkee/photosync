@@ -10,16 +10,20 @@ import {
   SignUpDto,
   ValidateAccessTokenResponseDto,
 } from 'src/dtos/auth.dto';
-import { UserAdminResponseDto } from 'src/dtos/user.dto';
+import { UserAdminCreateDto, UserAdminResponseDto } from 'src/dtos/user.dto';
 import { AuthType, ImmichCookie } from 'src/enum';
 import { Auth, Authenticated, GetLoginDetails } from 'src/middleware/auth.guard';
 import { AuthService, LoginDetails } from 'src/services/auth.service';
+import { UserAdminService } from 'src/services/user-admin.service';
 import { respondWithCookie, respondWithoutCookie } from 'src/utils/response';
 
 @ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
-  constructor(private service: AuthService) {}
+  constructor(
+    private service: AuthService,
+    private userAdminService: UserAdminService,
+  ) {}
 
   @Post('login')
   async login(
@@ -41,6 +45,11 @@ export class AuthController {
   @Post('admin-sign-up')
   signUpAdmin(@Body() dto: SignUpDto): Promise<UserAdminResponseDto> {
     return this.service.adminSignUp(dto);
+  }
+
+  @Post('user-sign-up')
+  createUserAdmin(@Body() createUserDto: UserAdminCreateDto): Promise<UserAdminResponseDto> {
+    return this.userAdminService.create(createUserDto);
   }
 
   @Post('validateToken')

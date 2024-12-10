@@ -19,6 +19,7 @@ export const load = (async ({ parent }) => {
   return {
     meta: {
       title: $t('login'),
+      titleSignUp: $t('signup')
     },
   };
 }) satisfies PageLoad;
