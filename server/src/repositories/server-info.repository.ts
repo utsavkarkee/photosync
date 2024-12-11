@@ -39,6 +39,7 @@ export class ServerInfoRepository implements IServerInfoRepository {
     @Inject(IConfigRepository) private configRepository: IConfigRepository,
     @Inject(ILoggerRepository) private logger: ILoggerRepository,
   ) {
+    
     this.logger.setContext(ServerInfoRepository.name);
   }
 

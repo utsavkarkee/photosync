@@ -103,6 +103,7 @@ const getEnv = (): EnvData => {
     configFile: dto.IMMICH_CONFIG_FILE,
     logLevel: dto.IMMICH_LOG_LEVEL,
     userQuotaSizeInBytes: dto.USER_QUOTASIZEINBYTES,
+
     buildMetadata: {
       build: dto.IMMICH_BUILD,
       buildUrl: dto.IMMICH_BUILD_URL,
@@ -209,6 +210,11 @@ const getEnv = (): EnvData => {
 
     storage: {
       ignoreMountCheckErrors: !!dto.IMMICH_IGNORE_MOUNT_CHECK_ERRORS,
+      awsAccessKeyId:dto.AWS_ACCESS_KEY_ID||"",
+      awsSecretAccessKey:dto.AWS_SECRET_ACCESS_KEY||"",
+      endpoint:dto.Endpoint||"",
+      s3BucketName: dto.S3_BUCKET_NAME||""
+      
     },
 
     telemetry: {

@@ -192,4 +192,20 @@ export class EnvDto {
   @Optional()
   @Type(() => Number)
   USER_QUOTASIZEINBYTES?: number;
+
+  @IsString()
+  @Optional()
+  AWS_ACCESS_KEY_ID?: string;
+
+  @IsString()
+  @Optional()
+  AWS_SECRET_ACCESS_KEY?: string;
+
+  @IsString()
+  @Optional()
+  Endpoint?: string;
+
+  @IsString()
+  @Optional()
+  S3_BUCKET_NAME?: string;
 }

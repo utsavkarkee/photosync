@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import archiver from 'archiver';
+import * as AWS from 'aws-sdk';
 import chokidar, { WatchOptions } from 'chokidar';
 import { escapePath, glob, globStream } from 'fast-glob';
 import { constants, createReadStream, createWriteStream, existsSync, mkdirSync } from 'node:fs';
@@ -7,6 +8,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { Writable } from 'node:stream';
 import { CrawlOptionsDto, WalkOptionsDto } from 'src/dtos/library.dto';
+import { IConfigRepository } from 'src/interfaces/config.interface';
 import { ILoggerRepository } from 'src/interfaces/logger.interface';
 import {
   DiskUsage,
@@ -19,8 +21,21 @@ import { mimeTypes } from 'src/utils/mime-types';
 
 @Injectable()
 export class StorageRepository implements IStorageRepository {
-  constructor(@Inject(ILoggerRepository) private logger: ILoggerRepository) {
+  private s3: AWS.S3;
+  private readonly bucketName: string;
+  constructor(
+    @Inject(IConfigRepository) private configRepository: IConfigRepository,
+    @Inject(ILoggerRepository) private logger: ILoggerRepository,
+  ) {
+    const { storage } = this.configRepository.getEnv();
+
     this.logger.setContext(StorageRepository.name);
+    this.s3 = new AWS.S3({
+      endpoint: storage.endpoint,
+      accessKeyId: storage.awsAccessKeyId, //your access-key
+      secretAccessKey: storage.awsSecretAccessKey, //your secret-key
+    });
+    this.bucketName = storage.s3BucketName || 'my-bucket';
   }
 
   realpath(filepath: string) {

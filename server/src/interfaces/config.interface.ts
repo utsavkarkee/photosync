@@ -83,6 +83,11 @@ export interface EnvData {
 
   storage: {
     ignoreMountCheckErrors: boolean;
+    
+    awsAccessKeyId: string;
+    awsSecretAccessKey: string;
+    endpoint: string; 
+    s3BucketName: string;
   };
 
   workers: ImmichWorker[];
