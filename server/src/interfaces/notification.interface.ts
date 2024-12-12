@@ -57,6 +57,12 @@ export interface VerifyEmailProps extends BaseEmailProps {
   verificationLink: string;
 }
 
+export interface ResetPasswordProps extends BaseEmailProps {
+  displayName: string;
+
+  resetLink: string;
+}
+
 export interface AlbumInviteEmailProps extends BaseEmailProps {
   albumName: string;
   albumId: string;
@@ -92,6 +98,10 @@ export type EmailRenderRequest =
   | {
       template: EmailTemplate.EMAIL_VERIFIY;
       data: VerifyEmailProps;
+    }
+  | {
+      template: EmailTemplate.RESET_PASSWORD;
+      data: ResetPasswordProps;
     };
 
 export type SendEmailResponse = {

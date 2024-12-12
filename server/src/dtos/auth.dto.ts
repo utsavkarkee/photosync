@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsEnum, IsNotEmpty, IsString, MinLength } from 'class-validator';
 import { APIKeyEntity } from 'src/entities/api-key.entity';
 import { SessionEntity } from 'src/entities/session.entity';
 import { SharedLinkEntity } from 'src/entities/shared-link.entity';
@@ -79,6 +79,52 @@ export class ChangePasswordDto {
   @MinLength(8)
   @ApiProperty({ example: 'password' })
   newPassword!: string;
+}
+
+export class ResetPasswordDto {
+  @IsString()
+  @IsNotEmpty()
+  token!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  email!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(8)
+  @ApiProperty({ example: 'password' })
+  newPassword!: string;
+}
+
+export class VerifyEmailDto {
+  @IsString()
+  @IsNotEmpty()
+  token!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  email!: string;
+}
+
+export class ForgetPasswordDto {
+  @IsString()
+  @IsNotEmpty()
+  email!: string;
+}
+export class ValidateTokenDto {
+  @IsString()
+  @IsNotEmpty()
+  token!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  email!: string;
+
+  @IsEnum(['RESET', 'VERIFYEMAIL'])
+  @IsNotEmpty()
+  @ApiProperty({ example: 'RESET', enum: ['RESET', 'VERIFYEMAIL'] })
+  type!: 'RESET' | 'VERIFYEMAIL';
 }
 
 export class ValidateAccessTokenResponseDto {

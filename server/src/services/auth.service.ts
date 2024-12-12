@@ -3,17 +3,21 @@ import { isNumber, isString } from 'class-validator';
 import cookieParser from 'cookie';
 import { DateTime } from 'luxon';
 import { IncomingHttpHeaders } from 'node:http';
-import { LOGIN_URL, MOBILE_REDIRECT, SALT_ROUNDS } from 'src/constants';
+import { LOGIN_URL, MOBILE_REDIRECT, SALT_ROUNDS, TOKEN_EXP_TIME } from 'src/constants';
 import { OnEvent } from 'src/decorators';
 import {
   AuthDto,
   ChangePasswordDto,
+  ForgetPasswordDto,
   LoginCredentialDto,
   LogoutResponseDto,
   OAuthAuthorizeResponseDto,
   OAuthCallbackDto,
   OAuthConfigDto,
+  ResetPasswordDto,
   SignUpDto,
+  ValidateTokenDto,
+  VerifyEmailDto,
   mapLoginResponse,
 } from 'src/dtos/auth.dto';
 import { UserAdminResponseDto, mapUserAdmin } from 'src/dtos/user.dto';
@@ -106,6 +110,104 @@ export class AuthService extends BaseService {
     const updatedUser = await this.userRepository.update(user.id, { password: hashedPassword });
 
     return mapUserAdmin(updatedUser);
+  }
+
+  async resetPassword(dto: ResetPasswordDto): Promise<UserAdminResponseDto> {
+    const { token, newPassword, email } = dto;
+    const user = await this.userRepository.getByEmail(email, true);
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+
+    const valid = this.validateToken(token, user, 'RESET');
+    if (!valid) {
+      throw new BadRequestException(
+        'Invalid or expired token. Please ensure your token is correct and has not expired.',
+      );
+    }
+
+    const hashedPassword = await this.cryptoRepository.hashBcrypt(newPassword, SALT_ROUNDS);
+
+    const updatedUser = await this.userRepository.update(user.id, {
+      password: hashedPassword,
+      resetToken: undefined,
+      expireResetToken: undefined,
+    });
+
+    return mapUserAdmin(updatedUser);
+  }
+
+  async verifyEmail(dto: VerifyEmailDto): Promise<boolean> {
+    const { token, email } = dto;
+    const user = await this.userRepository.getByEmail(email, true);
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+
+    const valid = this.validateToken(token, user, 'VERIFYEMAIL');
+    if (!valid) {
+      throw new BadRequestException(
+        'Invalid or expired token. Please ensure your token is correct and has not expired.',
+      );
+    }
+
+    const updatedUser = await this.userRepository.update(user.id, {
+      isEmailVerify: true,
+      resetToken: undefined,
+      expireResetToken: undefined,
+    });
+
+    return true;
+  }
+
+  async forgetPassword(dto: ForgetPasswordDto): Promise<boolean> {
+    const { email } = dto;
+    const user = await this.userRepository.getByEmail(email, true);
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+
+    const { token, expTime } = await this.generateTokenAndExp();
+
+    await this.userRepository.update(user.id, { ...user, resetToken: token, expireResetToken: expTime });
+
+    await this.eventRepository.emit('user.forgetPassword', {
+      id: user.id,
+    });
+
+    return true;
+  }
+
+  async sendVerificationEmail(auth: AuthDto): Promise<boolean> {
+    const { email } = auth.user;
+    const user = await this.userRepository.getByEmail(email, true);
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+
+    if (user.isEmailVerify) {
+      throw new BadRequestException('User already verified ');
+    }
+
+    const { token, expTime } = await this.generateTokenAndExp();
+
+    await this.userRepository.update(user.id, { ...user, emailVerifyToken: token, expireEmailVerifyToken: expTime });
+
+    await this.eventRepository.emit('user.forgetPassword', {
+      id: user.id,
+    });
+
+    return true;
+  }
+
+  async validateTokenInfo(dto: ValidateTokenDto): Promise<boolean> {
+    const { token, email, type } = dto;
+    const user = await this.userRepository.getByEmail(email, true);
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+
+    return await this.validateToken(token, user, type);
   }
 
   async adminSignUp(dto: SignUpDto): Promise<UserAdminResponseDto> {
@@ -321,19 +423,39 @@ export class AuthService extends BaseService {
     }
     return this.cryptoRepository.compareBcrypt(inputPassword, user.password);
   }
-  private validateToken(inputToken:string , user:UserEntity):boolean {
-   
-    if(!user || user.resetToken===''){
-      return false
+
+  private validateTokenExp(tokenExpDate: Date): boolean {
+    if (!tokenExpDate || !tokenExpDate) {
+      return true;
     }
 
+    const now = new Date();
 
+    return now <= tokenExpDate;
+  }
 
+  private validateToken(inputToken: string, user: UserEntity, type: 'RESET' | 'VERIFYEMAIL'): boolean {
+    switch (type) {
+      case 'RESET':
+        if (!user || !user.resetToken) {
+          return false;
+        }
+        return this.validateTokenExp(user.expireResetToken) && user.resetToken === inputToken;
 
-   
-      
-      return true;
+        break;
 
+      case 'VERIFYEMAIL':
+        if (!user || !user.emailVerifyToken) {
+          return false;
+        }
+        return this.validateTokenExp(user.expireEmailVerifyToken) && user.emailVerifyToken === inputToken;
+        break;
+
+      default:
+        break;
+    }
+
+    return true;
   }
 
   private async validateSession(tokenValue: string): Promise<AuthDto> {
@@ -353,6 +475,18 @@ export class AuthService extends BaseService {
 
     throw new UnauthorizedException('Invalid user token');
   }
+
+  private generateTokenAndExp = async () => {
+    const token = await this.cryptoRepository.hashBcrypt(DateTime.now.toString(), SALT_ROUNDS);
+
+    const expTime = new Date();
+    expTime.setMinutes(expTime.getMinutes() + TOKEN_EXP_TIME);
+
+    return {
+      token,
+      expTime,
+    };
+  };
 
   private async createLoginResponse(user: UserEntity, loginDetails: LoginDetails) {
     const key = this.cryptoRepository.newPassword(32);

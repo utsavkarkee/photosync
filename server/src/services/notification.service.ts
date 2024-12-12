@@ -104,6 +104,16 @@ export class NotificationService extends BaseService {
     }
   }
 
+  @OnEvent({ name: 'user.forgetPassword' })
+  async onUserForgetPassword({ id }: ArgOf<'user.forgetPassword'>) {
+    await this.jobRepository.queue({ name: JobName.NOTIFY_RESETPASSWORD, data: { id } });
+  }
+
+  @OnEvent({ name: 'user.send-verification-email' })
+  async onUserSendVerificationEmail({ id }: ArgOf<'user.send-verification-email'>) {
+    await this.jobRepository.queue({ name: JobName.NOTIFY_EMAIL_VERIFIY, data: { id } });
+  }
+
   @OnEvent({ name: 'album.update' })
   async onAlbumUpdate({ id, recipientIds }: ArgOf<'album.update'>) {
     // if recipientIds is empty, album likely only has one user part of it, don't queue notification if so
@@ -206,49 +216,16 @@ export class NotificationService extends BaseService {
       },
     });
 
-    await this.jobRepository.queue({
-      name: JobName.NOTIFY_EMAIL_VERIFIY,
-      data: {
-        id: user.id,
-      },
-    });
-
     return JobStatus.SUCCESS;
   }
-  generateRandomString = (length = 10) =>
-    Array.from({ length }, () =>
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?'.charAt(
-        Math.floor(Math.random() * 94),
-      ),
-    ).join('');
-
-  generateTokenAndExp = async () => {
-    const token = await this.cryptoRepository.hashBcrypt(this.generateRandomString(10), SALT_ROUNDS);
-
-    const expTime = new Date();
-    expTime.setMinutes(expTime.getMinutes() + TOKEN_EXP_TIME);
-
-    return {
-      token,
-      expTime,
-    };
-  };
 
   @OnJob({ name: JobName.NOTIFY_EMAIL_VERIFIY, queue: QueueName.NOTIFICATION })
   async handleUserVerify({ id }: JobOf<JobName.NOTIFY_EMAIL_VERIFIY>) {
     const user = await this.userRepository.get(id, { withDeleted: false });
 
-    const { token, expTime } = await this.generateTokenAndExp();
-
     if (!user) {
       return JobStatus.SKIPPED;
     }
-
-    const userUpdate = this.userRepository.update(id, {
-      ...user,
-      expireEmailVerifyToken: expTime,
-      emailVerifyToken: token,
-    });
 
     const { server } = await this.getConfig({ withCache: true });
     const { port } = this.configRepository.getEnv();
@@ -257,7 +234,8 @@ export class NotificationService extends BaseService {
       data: {
         baseUrl: getExternalDomain(server, port),
         displayName: user.name,
-        verificationLink: getExternalDomain(server, port) + '?email=' + user.email + '&token=' + token,
+        verificationLink:
+          getExternalDomain(server, port) + '/verify' + '?email=' + user.email + '&token=' + user.emailVerifyToken,
       },
     });
 
@@ -266,6 +244,38 @@ export class NotificationService extends BaseService {
       data: {
         to: user.email,
         subject: 'Verify Email',
+        html,
+        text,
+      },
+    });
+
+    return JobStatus.SUCCESS;
+  }
+  @OnJob({ name: JobName.NOTIFY_RESETPASSWORD, queue: QueueName.NOTIFICATION })
+  async handleResetPassword({ id }: JobOf<JobName.NOTIFY_RESETPASSWORD>) {
+    const user = await this.userRepository.get(id, { withDeleted: false });
+
+    if (!user) {
+      return JobStatus.SKIPPED;
+    }
+
+    const { server } = await this.getConfig({ withCache: true });
+    const { port } = this.configRepository.getEnv();
+    const { html, text } = await this.notificationRepository.renderEmail({
+      template: EmailTemplate.RESET_PASSWORD,
+      data: {
+        baseUrl: getExternalDomain(server, port),
+        displayName: user.name,
+        resetLink:
+          getExternalDomain(server, port) + '/resetpassword' + '?email=' + user.email + '&token=' + user.resetToken,
+      },
+    });
+
+    await this.jobRepository.queue({
+      name: JobName.SEND_EMAIL,
+      data: {
+        to: user.email,
+        subject: 'Reset Email',
         html,
         text,
       },

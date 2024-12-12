@@ -53,6 +53,8 @@ type EventMap = {
 
   // user events
   'user.signup': [{ notify: boolean; id: string; tempPassword?: string }];
+  'user.forgetPassword': [{ id: string }];
+  'user.send-verification-email': [{ id: string }];
 
   // websocket events
   'websocket.connect': [{ userId: string }];
