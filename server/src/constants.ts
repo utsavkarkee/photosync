@@ -14,6 +14,8 @@ export const ADDED_IN_PREFIX = 'This property was added in ';
 
 export const SALT_ROUNDS = 10;
 
+export const TOKEN_EXP_TIME = 10;
+
 export const IWorker = 'IWorker';
 
 const { version } = JSON.parse(readFileSync('./package.json', 'utf8'));
@@ -73,8 +75,6 @@ export const CLIP_MODEL_INFO: Record<string, ModelInfo> = {
   RN50x64__openai: { dimSize: 1024 },
   'ViT-H-14-378-quickgelu__dfn5b': { dimSize: 1024 },
   'ViT-H-14-quickgelu__dfn5b': { dimSize: 1024 },
-  'ViT-H-14__laion2b-s32b-b79k': { dimSize: 1024 },
-  'ViT-L-16-SigLIP-256__webli': { dimSize: 1024 },
   'ViT-L-16-SigLIP-384__webli': { dimSize: 1024 },
   'ViT-g-14__laion2b-s12b-b42k': { dimSize: 1024 },
   'XLM-Roberta-Large-ViT-H-14__frozen_laion5b_s13b_b90k': { dimSize: 1024 },

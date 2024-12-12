@@ -38,7 +38,7 @@ export class UserEntity {
   @Column({ default: '' })
   profileImagePath!: string;
 
-  @Column({ default: true })
+  @Column({ default: false })
   shouldChangePassword!: boolean;
 
   @CreateDateColumn({ type: 'timestamptz' })
@@ -70,4 +70,19 @@ export class UserEntity {
 
   @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   profileChangedAt!: Date;
+
+  @Column({ default: '' })
+  resetToken!: string;
+
+  @Column({ type: 'timestamptz', nullable: true })
+  expireResetToken!: Date;
+
+  @Column({ default: '' })
+  emailVerifyToken!: string;
+
+  @Column({ type: 'timestamptz', nullable: true })
+  expireEmailVerifyToken!: Date;
+
+  @Column({ default: false })
+  isEmailVerify!: boolean;
 }

@@ -1,4 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { DateTime } from 'luxon';
+import { SALT_ROUNDS, TOKEN_EXP_TIME } from 'src/constants';
 import { OnEvent, OnJob } from 'src/decorators';
 import { SystemConfigSmtpDto } from 'src/dtos/system-config.dto';
 import { AlbumEntity } from 'src/entities/album.entity';
@@ -199,6 +201,71 @@ export class NotificationService extends BaseService {
       data: {
         to: user.email,
         subject: 'Welcome to Immich',
+        html,
+        text,
+      },
+    });
+
+    await this.jobRepository.queue({
+      name: JobName.NOTIFY_EMAIL_VERIFIY,
+      data: {
+        id: user.id,
+      },
+    });
+
+    return JobStatus.SUCCESS;
+  }
+  generateRandomString = (length = 10) =>
+    Array.from({ length }, () =>
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?'.charAt(
+        Math.floor(Math.random() * 94),
+      ),
+    ).join('');
+
+  generateTokenAndExp = async () => {
+    const token = await this.cryptoRepository.hashBcrypt(this.generateRandomString(10), SALT_ROUNDS);
+
+    const expTime = new Date();
+    expTime.setMinutes(expTime.getMinutes() + TOKEN_EXP_TIME);
+
+    return {
+      token,
+      expTime,
+    };
+  };
+
+  @OnJob({ name: JobName.NOTIFY_EMAIL_VERIFIY, queue: QueueName.NOTIFICATION })
+  async handleUserVerify({ id }: JobOf<JobName.NOTIFY_EMAIL_VERIFIY>) {
+    const user = await this.userRepository.get(id, { withDeleted: false });
+
+    const { token, expTime } = await this.generateTokenAndExp();
+
+    if (!user) {
+      return JobStatus.SKIPPED;
+    }
+
+    const userUpdate = this.userRepository.update(id, {
+      ...user,
+      expireEmailVerifyToken: expTime,
+      emailVerifyToken: token,
+    });
+
+    const { server } = await this.getConfig({ withCache: true });
+    const { port } = this.configRepository.getEnv();
+    const { html, text } = await this.notificationRepository.renderEmail({
+      template: EmailTemplate.EMAIL_VERIFIY,
+      data: {
+        baseUrl: getExternalDomain(server, port),
+        displayName: user.name,
+        verificationLink: getExternalDomain(server, port) + '?email=' + user.email + '&token=' + token,
+      },
+    });
+
+    await this.jobRepository.queue({
+      name: JobName.SEND_EMAIL,
+      data: {
+        to: user.email,
+        subject: 'Verify Email',
         html,
         text,
       },

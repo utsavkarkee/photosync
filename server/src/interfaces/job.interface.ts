@@ -113,6 +113,7 @@ export enum JobName {
 
   // Notification
   NOTIFY_SIGNUP = 'notify-signup',
+  NOTIFY_EMAIL_VERIFIY = 'notify-email.verify',
   NOTIFY_ALBUM_INVITE = 'notify-album-invite',
   NOTIFY_ALBUM_UPDATE = 'notify-album-update',
   SEND_EMAIL = 'notification-send-email',
@@ -190,6 +191,9 @@ export interface INotifySignupJob extends IEntityJob {
   tempPassword?: string;
 }
 
+export interface INotifyVerifyJob extends IEntityJob {
+  tempPassword?: string;
+}
 export interface INotifyAlbumInviteJob extends IEntityJob {
   recipientId: string;
 }
@@ -294,6 +298,7 @@ export type JobItem =
 
   // Notification
   | { name: JobName.SEND_EMAIL; data: IEmailJob }
+   |{ name: JobName.NOTIFY_EMAIL_VERIFIY; data: INotifyVerifyJob }
   | { name: JobName.NOTIFY_ALBUM_INVITE; data: INotifyAlbumInviteJob }
   | { name: JobName.NOTIFY_ALBUM_UPDATE; data: INotifyAlbumUpdateJob }
   | { name: JobName.NOTIFY_SIGNUP; data: INotifySignupJob }

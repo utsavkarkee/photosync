@@ -4,6 +4,7 @@ import { createTransport } from 'nodemailer';
 import React from 'react';
 import { AlbumInviteEmail } from 'src/emails/album-invite.email';
 import { AlbumUpdateEmail } from 'src/emails/album-update.email';
+import VerifyEmail from 'src/emails/email.verify';
 import { TestEmail } from 'src/emails/test.email';
 import { WelcomeEmail } from 'src/emails/welcome.email';
 import { ILoggerRepository } from 'src/interfaces/logger.interface';
@@ -71,6 +72,9 @@ export class NotificationRepository implements INotificationRepository {
 
       case EmailTemplate.ALBUM_UPDATE: {
         return React.createElement(AlbumUpdateEmail, data);
+      }
+      case EmailTemplate.EMAIL_VERIFIY:{
+        return React.createElement(VerifyEmail, data)
       }
     }
   }

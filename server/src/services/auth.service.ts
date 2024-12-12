@@ -321,6 +321,20 @@ export class AuthService extends BaseService {
     }
     return this.cryptoRepository.compareBcrypt(inputPassword, user.password);
   }
+  private validateToken(inputToken:string , user:UserEntity):boolean {
+   
+    if(!user || user.resetToken===''){
+      return false
+    }
+
+
+
+
+   
+      
+      return true;
+
+  }
 
   private async validateSession(tokenValue: string): Promise<AuthDto> {
     const hashedToken = this.cryptoRepository.hashSha256(tokenValue);

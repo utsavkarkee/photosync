@@ -31,6 +31,7 @@ export enum EmailTemplate {
   // AUTH
   WELCOME = 'welcome',
   RESET_PASSWORD = 'reset-password',
+  EMAIL_VERIFIY = 'email-verify',
 
   // ALBUM
   ALBUM_INVITE = 'album-invite',
@@ -49,6 +50,11 @@ export interface WelcomeEmailProps extends BaseEmailProps {
   displayName: string;
   username: string;
   password?: string;
+}
+
+export interface VerifyEmailProps extends BaseEmailProps {
+  displayName: string;
+  verificationLink: string;
 }
 
 export interface AlbumInviteEmailProps extends BaseEmailProps {
@@ -82,6 +88,10 @@ export type EmailRenderRequest =
   | {
       template: EmailTemplate.ALBUM_UPDATE;
       data: AlbumUpdateEmailProps;
+    }
+  | {
+      template: EmailTemplate.EMAIL_VERIFIY;
+      data: VerifyEmailProps;
     };
 
 export type SendEmailResponse = {
