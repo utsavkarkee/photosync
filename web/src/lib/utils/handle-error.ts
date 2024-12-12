@@ -19,7 +19,7 @@ export function getServerErrorMessage(error: unknown) {
   return data?.message || error.message;
 }
 
-export function handleError(error: unknown, message: string) {
+export function handleError(error: unknown, message: string = 'Something Went Wrong!!') {
   if ((error as Error)?.name === 'AbortError') {
     return;
   }
@@ -33,7 +33,6 @@ export function handleError(error: unknown, message: string) {
     }
 
     const errorMessage = serverMessage || message;
-
     notificationController.show({ message: errorMessage, type: NotificationType.Error });
 
     return errorMessage;

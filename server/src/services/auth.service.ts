@@ -116,7 +116,7 @@ export class AuthService extends BaseService {
     const { token, newPassword, email } = dto;
     const user = await this.userRepository.getByEmail(email, true);
     if (!user) {
-      throw new UnauthorizedException();
+      throw new BadRequestException('User Not exits !!');
     }
 
     const valid = this.validateToken(token, user, 'RESET');
@@ -164,7 +164,7 @@ export class AuthService extends BaseService {
     const { email } = dto;
     const user = await this.userRepository.getByEmail(email, true);
     if (!user) {
-      throw new UnauthorizedException();
+      throw new BadRequestException('User Not exits !!');
     }
 
     const { token, expTime } = await this.generateTokenAndExp();
@@ -207,7 +207,7 @@ export class AuthService extends BaseService {
       throw new UnauthorizedException();
     }
 
-    return await this.validateToken(token, user, type);
+    return  this.validateToken(token, user, type);
   }
 
   async adminSignUp(dto: SignUpDto): Promise<UserAdminResponseDto> {
@@ -431,6 +431,8 @@ export class AuthService extends BaseService {
 
     const now = new Date();
 
+    console.log(now, tokenExpDate);
+    console.log(now < tokenExpDate);
     return now <= tokenExpDate;
   }
 

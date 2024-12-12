@@ -58,14 +58,12 @@ export class AuthController {
 
   @Post('validateToken')
   @HttpCode(HttpStatus.OK)
-  @Authenticated()
   validateAccessToken(): ValidateAccessTokenResponseDto {
     return { authStatus: true };
   }
 
   @Post('change-password')
   @HttpCode(HttpStatus.OK)
-  @Authenticated()
   changePassword(@Auth() auth: AuthDto, @Body() dto: ChangePasswordDto): Promise<UserAdminResponseDto> {
     return this.service.changePassword(auth, dto);
   }

@@ -267,7 +267,12 @@ export class NotificationService extends BaseService {
         baseUrl: getExternalDomain(server, port),
         displayName: user.name,
         resetLink:
-          getExternalDomain(server, port) + '/resetpassword' + '?email=' + user.email + '&token=' + user.resetToken,
+          getExternalDomain(server, port) +
+          '/auth/reset-password' +
+          '?email=' +
+          user.email +
+          '&token=' +
+          user.resetToken,
       },
     });
 

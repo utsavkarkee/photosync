@@ -2191,17 +2191,6 @@
             "description": ""
           }
         },
-        "security": [
-          {
-            "bearer": []
-          },
-          {
-            "cookie": []
-          },
-          {
-            "api_key": []
-          }
-        ],
         "tags": [
           "Authentication"
         ]
@@ -2442,17 +2431,6 @@
             "description": ""
           }
         },
-        "security": [
-          {
-            "bearer": []
-          },
-          {
-            "cookie": []
-          },
-          {
-            "api_key": []
-          }
-        ],
         "tags": [
           "Authentication"
         ]

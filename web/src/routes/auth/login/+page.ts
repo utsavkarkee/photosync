@@ -2,11 +2,15 @@ import { AppRoute } from '$lib/constants';
 import { serverConfig } from '$lib/stores/server-config.store';
 import { getFormatter } from '$lib/utils/i18n';
 
+import { user } from '$lib/stores/user.store';
+import { authenticate } from '$lib/utils/auth';
 import { redirect } from '@sveltejs/kit';
+import { isEmpty } from 'lodash-es';
 import { get } from 'svelte/store';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ parent }) => {
+
   await parent();
   const { isInitialized } = get(serverConfig);
 
@@ -19,7 +23,7 @@ export const load = (async ({ parent }) => {
   return {
     meta: {
       title: $t('login'),
-      titleSignUp: $t('signup')
+      titleSignUp: $t('signup'),
     },
   };
 }) satisfies PageLoad;
