@@ -30,6 +30,30 @@ services:
     healthcheck:
       disable: false
 
+  immich-web:
+    container_name: immich_web
+    image: immich-web-dev:latest
+    build:
+      context: ../web
+    command: ['/usr/src/app/bin/immich-web']
+    env_file:
+      - .env
+    ports:
+      - 2283:3000
+      - 24678:24678
+    volumes:
+      - ../web:/usr/src/app
+      - ../i18n:/usr/src/i18n
+      - ../open-api/:/usr/src/open-api/
+      - /usr/src/app/node_modules
+    ulimits:
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    restart: unless-stopped
+    depends_on:
+      - immich-server
+
   immich-machine-learning:
     container_name: immich_machine_learning
     # For hardware acceleration, add one of -[armnn, cuda, openvino] to the image tag.
