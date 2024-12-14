@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
 import archiver from 'archiver';
-import * as AWS from 'aws-sdk';
 import chokidar, { WatchOptions } from 'chokidar';
 import { escapePath, glob, globStream } from 'fast-glob';
 import { constants, createReadStream, createWriteStream, existsSync, mkdirSync } from 'node:fs';
@@ -21,8 +20,6 @@ import { mimeTypes } from 'src/utils/mime-types';
 
 @Injectable()
 export class StorageRepository implements IStorageRepository {
-  private s3: AWS.S3;
-  private readonly bucketName: string;
   constructor(
     @Inject(IConfigRepository) private configRepository: IConfigRepository,
     @Inject(ILoggerRepository) private logger: ILoggerRepository,
@@ -30,12 +27,6 @@ export class StorageRepository implements IStorageRepository {
     const { storage } = this.configRepository.getEnv();
 
     this.logger.setContext(StorageRepository.name);
-    this.s3 = new AWS.S3({
-      endpoint: storage.endpoint,
-      accessKeyId: storage.awsAccessKeyId, //your access-key
-      secretAccessKey: storage.awsSecretAccessKey, //your secret-key
-    });
-    this.bucketName = storage.s3BucketName || 'my-bucket';
   }
 
   realpath(filepath: string) {

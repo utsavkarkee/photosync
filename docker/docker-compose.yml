@@ -17,7 +17,7 @@ services:
     #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
       # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
-      - ${UPLOAD_LOCATION}:/usr/src/app/upload
+      - idrivee2-photo-stg:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
@@ -89,3 +89,17 @@ services:
 
 volumes:
   model-cache:
+  idrivee2-photo-stg:
+    driver: rclone
+    driver_opts:
+      remote: 'idrivee2:immich-photo-stg'
+      allow_other: 'true'
+      vfs_cache_mode: full
+      poll_interval: 0
+  idrivee2-databases:
+    driver: rclone
+    driver_opts:
+      remote: 'idrivee2:immich-db'
+      allow_other: 'true'
+      vfs_cache_mode: full
+      poll_interval: 0

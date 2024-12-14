@@ -10,6 +10,18 @@ dev-update:
 dev-scale:
 	docker compose -f ./docker/docker-compose.dev.yml up --build -V  --scale immich-server=3 --remove-orphans
 
+stg:
+	docker compose -f ./docker/docker-compose.yml up --remove-orphans || make stg-down
+
+stg-down:
+	docker compose -f ./docker/docker-compose.yml down --remove-orphans
+
+stg-update:
+	docker compose -f ./docker/docker-compose.yml up --build -V --remove-orphans
+
+stg-scale:
+	docker compose -f ./docker/docker-compose.dev.yml up --build -V  --scale immich-server=3 --remove-orphans	
+
 .PHONY: e2e
 e2e:
 	docker compose -f ./e2e/docker-compose.yml up --build -V --remove-orphans

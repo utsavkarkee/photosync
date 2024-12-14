@@ -11,7 +11,7 @@ services:
       context: ../
       dockerfile: server/Dockerfile
     volumes:
-      - ${UPLOAD_LOCATION}/photos:/usr/src/app/upload
+      - idrivee2-photo-prod:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
@@ -114,3 +114,17 @@ volumes:
   model-cache:
   prometheus-data:
   grafana-data:
+  idrivee2-photo-prod:
+    driver: rclone
+    driver_opts:
+      remote: 'idrivee2:immich-photo-prod'
+      allow_other: 'true'
+      vfs_cache_mode: full
+      poll_interval: 0
+  idrivee2-databases-prod:
+    driver: rclone
+    driver_opts:
+      remote: 'idrivee2:immich-db'
+      allow_other: 'true'
+      vfs_cache_mode: full
+      poll_interval: 0

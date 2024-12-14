@@ -1222,6 +1222,7 @@
   "timezone": "Timezone",
   "to_archive": "Archive",
   "to_change_password": "Change password",
+  "to_reset_password": "Reset password",
   "to_favorite": "Favorite",
   "to_login": "Login",
   "to_parent": "Go to parent",

@@ -1,4 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { DateTime } from 'luxon';
+import { SALT_ROUNDS, TOKEN_EXP_TIME } from 'src/constants';
 import { OnEvent, OnJob } from 'src/decorators';
 import { SystemConfigSmtpDto } from 'src/dtos/system-config.dto';
 import { AlbumEntity } from 'src/entities/album.entity';
@@ -102,6 +104,16 @@ export class NotificationService extends BaseService {
     }
   }
 
+  @OnEvent({ name: 'user.forgetPassword' })
+  async onUserForgetPassword({ id }: ArgOf<'user.forgetPassword'>) {
+    await this.jobRepository.queue({ name: JobName.NOTIFY_RESETPASSWORD, data: { id } });
+  }
+
+  @OnEvent({ name: 'user.send-verification-email' })
+  async onUserSendVerificationEmail({ id }: ArgOf<'user.send-verification-email'>) {
+    await this.jobRepository.queue({ name: JobName.NOTIFY_EMAIL_VERIFIY, data: { id } });
+  }
+
   @OnEvent({ name: 'album.update' })
   async onAlbumUpdate({ id, recipientIds }: ArgOf<'album.update'>) {
     // if recipientIds is empty, album likely only has one user part of it, don't queue notification if so
@@ -199,6 +211,76 @@ export class NotificationService extends BaseService {
       data: {
         to: user.email,
         subject: 'Welcome to Immich',
+        html,
+        text,
+      },
+    });
+
+    return JobStatus.SUCCESS;
+  }
+
+  @OnJob({ name: JobName.NOTIFY_EMAIL_VERIFIY, queue: QueueName.NOTIFICATION })
+  async handleUserVerify({ id }: JobOf<JobName.NOTIFY_EMAIL_VERIFIY>) {
+    const user = await this.userRepository.get(id, { withDeleted: false });
+
+    if (!user) {
+      return JobStatus.SKIPPED;
+    }
+
+    const { server } = await this.getConfig({ withCache: true });
+    const { port } = this.configRepository.getEnv();
+    const { html, text } = await this.notificationRepository.renderEmail({
+      template: EmailTemplate.EMAIL_VERIFIY,
+      data: {
+        baseUrl: getExternalDomain(server, port),
+        displayName: user.name,
+        verificationLink:
+          getExternalDomain(server, port) + '/verify' + '?email=' + user.email + '&token=' + user.emailVerifyToken,
+      },
+    });
+
+    await this.jobRepository.queue({
+      name: JobName.SEND_EMAIL,
+      data: {
+        to: user.email,
+        subject: 'Verify Email',
+        html,
+        text,
+      },
+    });
+
+    return JobStatus.SUCCESS;
+  }
+  @OnJob({ name: JobName.NOTIFY_RESETPASSWORD, queue: QueueName.NOTIFICATION })
+  async handleResetPassword({ id }: JobOf<JobName.NOTIFY_RESETPASSWORD>) {
+    const user = await this.userRepository.get(id, { withDeleted: false });
+
+    if (!user) {
+      return JobStatus.SKIPPED;
+    }
+
+    const { server } = await this.getConfig({ withCache: true });
+    const { port } = this.configRepository.getEnv();
+    const { html, text } = await this.notificationRepository.renderEmail({
+      template: EmailTemplate.RESET_PASSWORD,
+      data: {
+        baseUrl: getExternalDomain(server, port),
+        displayName: user.name,
+        resetLink:
+          getExternalDomain(server, port) +
+          '/auth/reset-password' +
+          '?email=' +
+          user.email +
+          '&token=' +
+          user.resetToken,
+      },
+    });
+
+    await this.jobRepository.queue({
+      name: JobName.SEND_EMAIL,
+      data: {
+        to: user.email,
+        subject: 'Reset Email',
         html,
         text,
       },

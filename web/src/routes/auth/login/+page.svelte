@@ -41,5 +41,7 @@
     <button on:click={() => (isLogin = !isLogin)}>
       {isLogin ? "Don't have an account? Sign Up" : 'You already have an accoount?Sign In '}
     </button>
+
+    <button on:click={() => goto('forget-password')}> Forgot Password ? </button>
   </FullscreenContainer>
 {/if}

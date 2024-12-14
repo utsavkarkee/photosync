@@ -4,11 +4,15 @@ import { Request, Response } from 'express';
 import {
   AuthDto,
   ChangePasswordDto,
+  ForgetPasswordDto,
   LoginCredentialDto,
   LoginResponseDto,
   LogoutResponseDto,
+  ResetPasswordDto,
   SignUpDto,
   ValidateAccessTokenResponseDto,
+  ValidateTokenDto,
+  VerifyEmailDto,
 } from 'src/dtos/auth.dto';
 import { UserAdminCreateDto, UserAdminResponseDto } from 'src/dtos/user.dto';
 import { AuthType, ImmichCookie } from 'src/enum';
@@ -54,16 +58,45 @@ export class AuthController {
 
   @Post('validateToken')
   @HttpCode(HttpStatus.OK)
-  @Authenticated()
   validateAccessToken(): ValidateAccessTokenResponseDto {
     return { authStatus: true };
   }
 
   @Post('change-password')
   @HttpCode(HttpStatus.OK)
-  @Authenticated()
   changePassword(@Auth() auth: AuthDto, @Body() dto: ChangePasswordDto): Promise<UserAdminResponseDto> {
     return this.service.changePassword(auth, dto);
+  }
+
+  @Post('reset-password')
+  @HttpCode(HttpStatus.OK)
+  resetPassword(@Body() dto: ResetPasswordDto): Promise<UserAdminResponseDto> {
+    return this.service.resetPassword(dto);
+  }
+
+  @Post('forget-password')
+  @HttpCode(HttpStatus.OK)
+  forgetPassword(@Body() dto: ForgetPasswordDto): Promise<Boolean> {
+    return this.service.forgetPassword(dto);
+  }
+
+  @Post('validate-token')
+  @HttpCode(HttpStatus.OK)
+  validateToken(@Body() dto: ValidateTokenDto): Promise<Boolean> {
+    return this.service.validateTokenInfo(dto);
+  }
+
+  @Post('send-verification-email')
+  @HttpCode(HttpStatus.OK)
+  @Authenticated()
+  sendVerificationEmail(@Auth() auth: AuthDto): Promise<Boolean> {
+    return this.service.sendVerificationEmail(auth);
+  }
+
+  @Post('verify-email')
+  @HttpCode(HttpStatus.OK)
+  emailVerification(@Body() dto: VerifyEmailDto): Promise<Boolean> {
+    return this.service.verifyEmail(dto);
   }
 
   @Post('logout')

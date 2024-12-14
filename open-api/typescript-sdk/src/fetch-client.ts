@@ -459,6 +459,21 @@ export type LoginCredentialDto = {
   email: string;
   password: string;
 };
+export type ForgetPasswordDto = {
+  email: string;
+};
+
+export type ResetPasswordDto = {
+  email: string;
+  token: string;
+  newPassword: string;
+};
+
+export type ValidateTokenDto = {
+  email: string;
+  token: string;
+  type: string;
+};
 export type LoginResponseDto = {
   accessToken: string;
   isAdmin: boolean;
@@ -2446,6 +2461,74 @@ export function login(
         ...opts,
         method: 'POST',
         body: loginCredentialDto,
+      })
+    )
+  );
+}
+export function forgetPassword(
+  {
+    forgetPassword,
+  }: {
+    forgetPassword: ForgetPasswordDto;
+  },
+  opts?: Oazapfts.RequestOpts
+) {
+  return oazapfts.ok(
+    oazapfts.fetchJson<{
+      status: 200;
+      data: LoginResponseDto;
+    }>(
+      '/auth/forget-password',
+      oazapfts.json({
+        ...opts,
+        method: 'POST',
+        body: forgetPassword,
+      })
+    )
+  );
+}
+
+export function resetPassword(
+  {
+    resetPassword,
+  }: {
+    resetPassword: ResetPasswordDto;
+  },
+  opts?: Oazapfts.RequestOpts
+) {
+  return oazapfts.ok(
+    oazapfts.fetchJson<{
+      status: 200;
+      data: LoginResponseDto;
+    }>(
+      '/auth/reset-password',
+      oazapfts.json({
+        ...opts,
+        method: 'POST',
+        body: resetPassword,
+      })
+    )
+  );
+}
+
+export function validateToken(
+  {
+    validateToken,
+  }: {
+    validateToken: ValidateTokenDto;
+  },
+  opts?: Oazapfts.RequestOpts
+) {
+  return oazapfts.ok(
+    oazapfts.fetchJson<{
+      status: 200;
+      data: boolean;
+    }>(
+      '/auth/validate-token',
+      oazapfts.json({
+        ...opts,
+        method: 'POST',
+        body: validateToken,
       })
     )
   );
