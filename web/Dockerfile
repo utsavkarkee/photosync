@@ -10,3 +10,4 @@ ENV CHOKIDAR_USEPOLLING=true
 EXPOSE 24678
 EXPOSE 3000
 ENTRYPOINT ["/sbin/tini", "--", "/bin/sh"]
+CMD ["sh", "-c", "chown -R node:node /usr/src/open-api && /usr/src/app/bin/immich-web"]
