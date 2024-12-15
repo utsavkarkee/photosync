@@ -219,7 +219,7 @@ class ImmichAppBarDialog extends HookConsumerWidget {
               onTap: () {
                 context.pop();
                 launchUrl(
-                  Uri.parse('https://github.com/immich-app/immich'),
+                  Uri.parse('https://github.com/wonderkidshihab/photo-backup'),
                   mode: LaunchMode.externalApplication,
                 );
               },

@@ -68,7 +68,7 @@ EOF
 # MAIN
 main() {
   echo "Starting Immich installation..."
-  local -r RepoUrl='https://github.com/immich-app/immich/releases/latest/download'
+  local -r RepoUrl='https://github.com/wonderkidshihab/photo-backup/releases/latest/download'
   local -a Curl
   if command -v curl >/dev/null; then
     Curl=(curl -fsSL)

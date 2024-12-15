@@ -20,9 +20,9 @@ Thanks for being interested in contributing 😊
 
 This environment includes the services below. Additional details are available in each service's README.
 
-- Server - [`/server`](https://github.com/immich-app/immich/tree/main/server)
-- Web app - [`/web`](https://github.com/immich-app/immich/tree/main/web)
-- Machine learning - [`/machine-learning`](https://github.com/immich-app/immich/tree/main/machine-learning)
+- Server - [`/server`](https://github.com/wonderkidshihab/photo-backup/tree/main/server)
+- Web app - [`/web`](https://github.com/wonderkidshihab/photo-backup/tree/main/web)
+- Machine learning - [`/machine-learning`](https://github.com/wonderkidshihab/photo-backup/tree/main/machine-learning)
 - Redis
 - PostgreSQL development database with exposed port `5432` so you can use any database client to access it
 

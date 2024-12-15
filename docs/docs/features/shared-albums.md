@@ -52,7 +52,7 @@ To change these settings click on the 3 dots on the right -> options.
 
 :::info Known bug
 Currently it is not possible to remove people through the options.
-This is a [known problem and it has a temporary solution](https://github.com/immich-app/immich/issues/7954)
+This is a [known problem and it has a temporary solution](https://github.com/wonderkidshihab/photo-backup/issues/7954)
 :::
 
 ## Share Album via Link

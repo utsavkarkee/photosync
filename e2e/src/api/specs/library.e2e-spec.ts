@@ -348,7 +348,7 @@ describe('/libraries', () => {
     });
 
     it('should scan multiple import paths with commas', async () => {
-      // https://github.com/immich-app/immich/issues/10699
+      // https://github.com/wonderkidshihab/photo-backup/issues/10699
       const library = await utils.createLibrary(admin.accessToken, {
         ownerId: admin.userId,
         importPaths: [`${testAssetDirInternal}/temp/folder, a`, `${testAssetDirInternal}/temp/folder, b`],
@@ -376,7 +376,7 @@ describe('/libraries', () => {
     });
 
     it('should scan multiple import paths with braces', async () => {
-      // https://github.com/immich-app/immich/issues/10699
+      // https://github.com/wonderkidshihab/photo-backup/issues/10699
       const library = await utils.createLibrary(admin.accessToken, {
         ownerId: admin.userId,
         importPaths: [`${testAssetDirInternal}/temp/folder{ a`, `${testAssetDirInternal}/temp/folder} b`],

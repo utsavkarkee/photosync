@@ -52,7 +52,7 @@
   };
 
   const getMyImmichLink = () => {
-    return new URL($page.url.pathname + $page.url.search, 'https://my.immich.app');
+    return new URL($page.url.pathname + $page.url.search, 'https://my.app.photosync');
   };
 
   onMount(() => {

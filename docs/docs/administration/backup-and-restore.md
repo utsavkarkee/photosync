@@ -8,7 +8,7 @@ A [3-2-1 backup strategy](https://www.backblaze.com/blog/the-3-2-1-backup-strate
 ## Database
 
 :::caution
-Immich saves [file paths in the database](https://github.com/immich-app/immich/discussions/3299), it does not scan the library folder to update the database so backups are crucial.
+Immich saves [file paths in the database](https://github.com/wonderkidshihab/photo-backup/discussions/3299), it does not scan the library folder to update the database so backups are crucial.
 :::
 
 :::info
@@ -104,7 +104,7 @@ Some storage locations are impacted by the Storage Template. See below for more 
 
 :::note
 The `UPLOAD_LOCATION/library` folder is not used by default on new machines running version 1.92.0. It is used only if the system administrator activated the storage template engine,
-for more info read the [release notes](https://github.com/immich-app/immich/releases/tag/v1.92.0#:~:text=the%20partner%E2%80%99s%20assets.-,Hardening%20storage%20template).
+for more info read the [release notes](https://github.com/wonderkidshihab/photo-backup/releases/tag/v1.92.0#:~:text=the%20partner%E2%80%99s%20assets.-,Hardening%20storage%20template).
 :::
 
 **1. User-Specific Folders:**
@@ -131,7 +131,7 @@ for more info read the [release notes](https://github.com/immich-app/immich/rele
 - **Postgres**
 
   - The Immich database containing all the information to allow the system to function properly.  
-    **Note:** This folder will only appear to users who have made the changes mentioned in [v1.102.0](https://github.com/immich-app/immich/discussions/8930) (an optional, non-mandatory change) or who started with this version.
+    **Note:** This folder will only appear to users who have made the changes mentioned in [v1.102.0](https://github.com/wonderkidshihab/photo-backup/discussions/8930) (an optional, non-mandatory change) or who started with this version.
   - Stored in `DB_DATA_LOCATION`.
 
   :::danger
@@ -177,7 +177,7 @@ When you turn off the storage template engine, it will leave the assets in `UPLO
 - **Postgres**
 
   - The Immich database containing all the information to allow the system to function properly.  
-    **Note:** This folder will only appear to users who have made the changes mentioned in [v1.102.0](https://github.com/immich-app/immich/discussions/8930) (an optional, non-mandatory change) or who started with this version.
+    **Note:** This folder will only appear to users who have made the changes mentioned in [v1.102.0](https://github.com/wonderkidshihab/photo-backup/discussions/8930) (an optional, non-mandatory change) or who started with this version.
   - Stored in `DB_DATA_LOCATION`.
 
   :::danger

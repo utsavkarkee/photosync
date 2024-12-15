@@ -59,7 +59,7 @@
             <p class="text-sm dark:text-immich-dark-fg">
               <FormatMessage key="admin.map_manage_reverse_geocoding_settings" let:message>
                 <a
-                  href="https://immich.app/docs/features/reverse-geocoding"
+                  href="https://app.photosync/docs/features/reverse-geocoding"
                   class="underline"
                   target="_blank"
                   rel="noreferrer"

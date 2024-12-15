@@ -52,7 +52,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/immich-app/immich/tree/main/docs/',
+          editUrl: 'https://github.com/wonderkidshihab/photo-backup/tree/main/docs/',
         },
         api: {
           path: '../open-api/immich-openapi-specs.json',
@@ -60,7 +60,7 @@ const config = {
         },
         // blog: {
         //   showReadingTime: true,
-        //   editUrl: "https://github.com/immich-app/immich/tree/main/docs/",
+        //   editUrl: "https://github.com/wonderkidshihab/photo-backup/tree/main/docs/",
         // },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -115,7 +115,7 @@ const config = {
             label: 'Blog',
           },
           {
-            href: 'https://github.com/immich-app/immich',
+            href: 'https://github.com/wonderkidshihab/photo-backup',
             label: 'GitHub',
             position: 'right',
           },
@@ -172,7 +172,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/immich-app/immich',
+                href: 'https://github.com/wonderkidshihab/photo-backup',
               },
               {
                 label: 'YouTube',

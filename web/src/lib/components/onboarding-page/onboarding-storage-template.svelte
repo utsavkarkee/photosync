@@ -25,7 +25,7 @@
 <OnboardingCard title={$t('admin.storage_template_settings')} icon={mdiHarddisk}>
   <p>
     <FormatMessage key="admin.storage_template_onboarding_description" let:message>
-      <a class="underline" href="https://immich.app/docs/administration/storage-template">{message}</a>
+      <a class="underline" href="https://app.photosync/docs/administration/storage-template">{message}</a>
     </FormatMessage>
   </p>
 

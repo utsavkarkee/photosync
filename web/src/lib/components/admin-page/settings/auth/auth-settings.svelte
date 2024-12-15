@@ -54,7 +54,7 @@
         <p>
           <FormatMessage key="admin.authentication_settings_reenable" let:message>
             <a
-              href="https://immich.app/docs/administration/server-commands"
+              href="https://app.photosync/docs/administration/server-commands"
               rel="noreferrer"
               target="_blank"
               class="underline"
@@ -81,7 +81,7 @@
             <p class="text-sm dark:text-immich-dark-fg">
               <FormatMessage key="admin.oauth_settings_more_details" let:message>
                 <a
-                  href="https://immich.app/docs/administration/oauth"
+                  href="https://app.photosync/docs/administration/oauth"
                   class="underline"
                   target="_blank"
                   rel="noreferrer"

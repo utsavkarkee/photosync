@@ -11,22 +11,22 @@ const guides: CommunityGuidesProps[] = [
   {
     title: 'Cloudflare Tunnels with SSO/OAuth',
     description: `Setting up Cloudflare Tunnels and a SaaS App for Immich.`,
-    url: 'https://github.com/immich-app/immich/discussions/8299',
+    url: 'https://github.com/wonderkidshihab/photo-backup/discussions/8299',
   },
   {
     title: 'Database backup in TrueNAS',
     description: `Create a database backup with pgAdmin in TrueNAS.`,
-    url: 'https://github.com/immich-app/immich/discussions/8809',
+    url: 'https://github.com/wonderkidshihab/photo-backup/discussions/8809',
   },
   {
     title: 'Unraid backup scripts',
     description: `Back up your assets in Unraid with a pre-prepared script.`,
-    url: 'https://github.com/immich-app/immich/discussions/8416',
+    url: 'https://github.com/wonderkidshihab/photo-backup/discussions/8416',
   },
   {
     title: 'Sync folders with albums',
     description: `synchronize folders in imported library with albums having the folders name.`,
-    url: 'https://github.com/immich-app/immich/discussions/3382',
+    url: 'https://github.com/wonderkidshihab/photo-backup/discussions/3382',
   },
   {
     title: 'Podman/Quadlets Install',
@@ -36,7 +36,7 @@ const guides: CommunityGuidesProps[] = [
   {
     title: 'Google Photos import + albums',
     description: 'Import your Google Photos files into Immich and add your albums.',
-    url: 'https://github.com/immich-app/immich/discussions/1340',
+    url: 'https://github.com/wonderkidshihab/photo-backup/discussions/1340',
   },
   {
     title: 'Access Immich with custom domain',
@@ -51,7 +51,7 @@ const guides: CommunityGuidesProps[] = [
   {
     title: 'fail2ban setup instructions',
     description: 'How to configure an existing fail2ban installation to block incorrect login attempts.',
-    url: 'https://github.com/immich-app/immich/discussions/3243#discussioncomment-6681948',
+    url: 'https://github.com/wonderkidshihab/photo-backup/discussions/3243#discussioncomment-6681948',
   },
 ];
 

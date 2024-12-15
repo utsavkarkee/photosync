@@ -17,7 +17,11 @@
     <p>{$t('official_immich_resources')}</p>
     <div class="flex flex-col sm:grid sm:grid-cols-2 gap-2 mt-5">
       <div>
-        <a href="https://{info.version}.archive.immich.app/docs/overview/introduction" target="_blank" rel="noreferrer">
+        <a
+          href="https://{info.version}.archive.app.photosync/docs/overview/introduction"
+          target="_blank"
+          rel="noreferrer"
+        >
           <Icon path={mdiInformationOutline} size="1.5em" class="inline-block" />
           <p
             class="font-medium text-immich-primary dark:text-immich-dark-primary text-sm underline inline-block"
@@ -29,7 +33,7 @@
       </div>
 
       <div>
-        <a href="https://github.com/immich-app/immich/" target="_blank" rel="noreferrer">
+        <a href="https://github.com/wonderkidshihab/photo-backup/" target="_blank" rel="noreferrer">
           <Icon path={mdiGithub} size="1.5em" class="inline-block" />
           <p
             class="font-medium text-immich-primary dark:text-immich-dark-primary text-sm underline inline-block"
@@ -41,7 +45,7 @@
       </div>
 
       <div>
-        <a href="https://discord.immich.app" target="_blank" rel="noreferrer">
+        <a href="https://discord.app.photosync" target="_blank" rel="noreferrer">
           <Icon path={discordPath} class="inline-block" size="1.5em" />
           <p
             class="font-medium text-immich-primary dark:text-immich-dark-primary text-sm underline inline-block"
@@ -53,7 +57,7 @@
       </div>
 
       <div>
-        <a href="https://github.com/immich-app/immich/issues/new/choose" target="_blank" rel="noreferrer">
+        <a href="https://github.com/wonderkidshihab/photo-backup/issues/new/choose" target="_blank" rel="noreferrer">
           <Icon path={mdiBugOutline} size="1.5em" class="inline-block" />
           <p
             class="font-medium text-immich-primary dark:text-immich-dark-primary text-sm underline inline-block"

@@ -172,7 +172,7 @@ const withRelease = ({
     title,
     description,
     link: {
-      url: `https://github.com/immich-app/immich/releases/tag/${weirdTags[version] ?? version}`,
+      url: `https://github.com/wonderkidshihab/photo-backup/releases/tag/${weirdTags[version] ?? version}`,
       text: version,
     },
     getDateLabel: withLanguage(releases[version]),

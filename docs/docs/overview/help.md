@@ -11,6 +11,6 @@ Running into an issue or have a question? Try the following:
 3. Search through existing [GitHub Issues][github-issues].
 4. Open a help ticket on [Discord][discord-link].
 
-[github-issues]: https://github.com/immich-app/immich/issues
-[github-releases]: https://github.com/immich-app/immich/releases
+[github-issues]: https://github.com/wonderkidshihab/photo-backup/issues
+[github-releases]: https://github.com/wonderkidshihab/photo-backup/releases
 [discord-link]: https://discord.immich.app

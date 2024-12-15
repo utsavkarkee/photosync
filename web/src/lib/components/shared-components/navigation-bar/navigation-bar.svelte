@@ -75,7 +75,7 @@
         {/if}
 
         <ThemeButton padding="2" />
-
+<!-- 
         <div
           use:clickOutside={{
             onEscape: () => (shouldShowHelpPanel = false),
@@ -88,7 +88,7 @@
             on:click={() => (shouldShowHelpPanel = !shouldShowHelpPanel)}
             padding="1"
           />
-        </div>
+        </div> -->
 
         {#if !$page.url.pathname.includes('/admin') && showUploadButton}
           <LinkButton on:click={onUploadClick} class="hidden lg:block">

@@ -110,4 +110,4 @@ You can then make a new panel, specifying Prometheus as the data source for it.
 
 -- TODO: add images and more details here
 
-[prom-file]: https://github.com/immich-app/immich/releases/latest/download/prometheus.yml
+[prom-file]: https://github.com/wonderkidshihab/photo-backup/releases/latest/download/prometheus.yml

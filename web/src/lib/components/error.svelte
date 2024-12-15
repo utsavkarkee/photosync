@@ -61,9 +61,9 @@
           <hr />
 
           <div class="flex place-content-center place-items-center justify-around">
-            <!-- href="https://github.com/immich-app/immich/issues/new" -->
+            <!-- href="https://github.com/wonderkidshihab/photo-backup/issues/new" -->
             <a
-              href="https://discord.immich.app"
+              href="https://discord.app.photosync"
               target="_blank"
               rel="noopener noreferrer"
               class="flex grow basis-0 justify-center p-4"
@@ -75,7 +75,7 @@
             </a>
 
             <a
-              href="https://github.com/immich-app/immich/releases"
+              href="https://github.com/wonderkidshihab/photo-backup/releases"
               target="_blank"
               rel="noopener noreferrer"
               class="flex grow basis-0 justify-center p-4"
@@ -87,7 +87,7 @@
             </a>
 
             <a
-              href="https://immich.app/docs/guides/docker-help"
+              href="https://app.photosync/docs/guides/docker-help"
               target="_blank"
               rel="noopener noreferrer"
               class="flex grow basis-0 justify-center p-4"

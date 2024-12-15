@@ -141,7 +141,7 @@ describe(`immich upload`, () => {
     });
 
     it.each(specialCharStrings)(`should upload a multiple files from paths containing %s`, async (testString) => {
-      // https://github.com/immich-app/immich/issues/12078
+      // https://github.com/wonderkidshihab/photo-backup/issues/12078
 
       // NOTE: this test must contain more than one path since a related bug is only triggered with multiple paths
 

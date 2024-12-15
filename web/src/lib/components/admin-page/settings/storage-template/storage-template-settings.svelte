@@ -93,7 +93,7 @@
       <FormatMessage key="admin.storage_template_more_details" let:tag let:message>
         {#if tag === 'template-link'}
           <a
-            href="https://immich.app/docs/administration/storage-template"
+            href="https://app.photosync/docs/administration/storage-template"
             class="underline"
             target="_blank"
             rel="noreferrer"
@@ -102,7 +102,7 @@
           </a>
         {:else if tag === 'implications-link'}
           <a
-            href="https://immich.app/docs/administration/backup-and-restore#asset-types-and-storage-locations"
+            href="https://app.photosync/docs/administration/backup-and-restore#asset-types-and-storage-locations"
             class="underline"
             target="_blank"
             rel="noreferrer"

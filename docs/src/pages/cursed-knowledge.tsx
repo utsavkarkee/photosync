@@ -29,7 +29,7 @@ const items: Item[] = [
     description:
       'Hidden files in Windows cannot be opened with the "w" flag. That, combined with SMB option "hide dot files" leads to a lot of confusion.',
     link: {
-      url: 'https://github.com/immich-app/immich/pull/12812',
+      url: 'https://github.com/wonderkidshihab/photo-backup/pull/12812',
       text: '#12812',
     },
     date: new Date(2024, 8, 20),
@@ -40,7 +40,7 @@ const items: Item[] = [
     title: 'Carriage returns in bash scripts are cursed',
     description: 'Git can be configured to automatically convert LF to CRLF on checkout and CRLF breaks bash scripts.',
     link: {
-      url: 'https://github.com/immich-app/immich/pull/11613',
+      url: 'https://github.com/wonderkidshihab/photo-backup/pull/11613',
       text: '#11613',
     },
     date: new Date(2024, 7, 7),
@@ -64,7 +64,7 @@ const items: Item[] = [
     description:
       'Some phones will silently strip GPS data from images when apps without location permission try to access them.',
     link: {
-      url: 'https://github.com/immich-app/immich/discussions/11268',
+      url: 'https://github.com/wonderkidshihab/photo-backup/discussions/11268',
       text: '#11268',
     },
     date: new Date(2024, 6, 21),
@@ -75,7 +75,7 @@ const items: Item[] = [
     title: 'PostgreSQL NOTIFY is cursed',
     description:
       'PostgreSQL does everything in a transaction, including NOTIFY. This means using the socket.io postgres-adapter writes to WAL every 5 seconds.',
-    link: { url: 'https://github.com/immich-app/immich/pull/10801', text: '#10801' },
+    link: { url: 'https://github.com/wonderkidshihab/photo-backup/pull/10801', text: '#10801' },
     date: new Date(2024, 6, 3),
   },
   {
@@ -84,7 +84,7 @@ const items: Item[] = [
     title: 'npm scripts are cursed',
     description:
       'npm scripts make a http call to the npm registry each time they run, which means they are a terrible way to execute a health check.',
-    link: { url: 'https://github.com/immich-app/immich/issues/10796', text: '#10796' },
+    link: { url: 'https://github.com/wonderkidshihab/photo-backup/issues/10796', text: '#10796' },
     date: new Date(2024, 6, 3),
   },
   {
@@ -93,7 +93,7 @@ const items: Item[] = [
     title: '50 extra packages are cursed',
     description:
       'There is a user in the JavaScript community who goes around adding "backwards compatibility" to projects. They do this by adding 50 extra package dependencies to your project, which are maintained by them.',
-    link: { url: 'https://github.com/immich-app/immich/pull/10690', text: '#10690' },
+    link: { url: 'https://github.com/wonderkidshihab/photo-backup/pull/10690', text: '#10690' },
     date: new Date(2024, 5, 28),
   },
   {
@@ -110,7 +110,7 @@ const items: Item[] = [
     iconColor: 'greenyellow',
     title: 'JavaScript Date objects are cursed',
     description: 'JavaScript date objects are 1 indexed for years and days, but 0 indexed for months.',
-    link: { url: 'https://github.com/immich-app/immich/pull/6787', text: '#6787' },
+    link: { url: 'https://github.com/wonderkidshihab/photo-backup/pull/6787', text: '#6787' },
     date: new Date(2024, 0, 31),
   },
   {
@@ -120,7 +120,7 @@ const items: Item[] = [
     description:
       'Prior to Node.js v20.8 using --experimental-vm-modules in a CommonJS project that imported an ES module that imported a CommonJS modules would create a segfault and crash Node.js',
     link: {
-      url: 'https://github.com/immich-app/immich/pull/6719',
+      url: 'https://github.com/wonderkidshihab/photo-backup/pull/6719',
       text: '#6179',
     },
     date: new Date(2024, 0, 9),
@@ -131,7 +131,7 @@ const items: Item[] = [
     title: 'PostgreSQL parameters are cursed',
     description: `PostgresSQL has a limit of ${Number(65535).toLocaleString()} parameters, so bulk inserts can fail with large datasets.`,
     link: {
-      url: 'https://github.com/immich-app/immich/pull/6034',
+      url: 'https://github.com/wonderkidshihab/photo-backup/pull/6034',
       text: '#6034',
     },
     date: new Date(2023, 11, 28),
@@ -142,7 +142,7 @@ const items: Item[] = [
     title: 'Secure contexts are cursed',
     description: `Some web features like the clipboard API only work in "secure contexts" (ie. https or localhost)`,
     link: {
-      url: 'https://github.com/immich-app/immich/issues/2981',
+      url: 'https://github.com/wonderkidshihab/photo-backup/issues/2981',
       text: '#2981',
     },
     date: new Date(2023, 5, 26),
