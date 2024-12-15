@@ -6,7 +6,7 @@
     type UserResponseDto,
     updateAlbumUser,
     AlbumUserRole,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import { mdiDotsVertical } from '@mdi/js';
   import { onMount } from 'svelte';
   import { handleError } from '../../utils/handle-error';

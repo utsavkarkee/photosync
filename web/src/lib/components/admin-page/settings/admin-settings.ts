@@ -1,5 +1,5 @@
 import type { ResetOptions } from '$lib/utils/dipatch';
-import type { SystemConfigDto } from '@immich/sdk';
+import type { SystemConfigDto } from '@photosync/sdk';
 
 export type SettingsResetOptions = ResetOptions & { configKeys: Array<keyof SystemConfigDto> };
 export type SettingsResetEvent = (options: SettingsResetOptions) => void;

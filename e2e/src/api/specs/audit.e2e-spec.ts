@@ -1,4 +1,4 @@
-import { deleteAssets, getAuditFiles, updateAsset, type LoginResponseDto } from '@immich/sdk';
+import { deleteAssets, getAuditFiles, updateAsset, type LoginResponseDto } from '@photosync/sdk';
 import { asBearerAuth, utils } from 'src/utils';
 import { beforeAll, describe, expect, it } from 'vitest';
 

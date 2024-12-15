@@ -1,12 +1,12 @@
 import { retrieveServerConfig } from '$lib/stores/server-config.store';
 import { initLanguage } from '$lib/utils';
-import { defaults } from '@immich/sdk';
+import { defaults } from '@photosync/sdk';
 import { memoize } from 'lodash-es';
 
 type Fetch = typeof fetch;
 
 async function _init(fetch: Fetch) {
-  // set event.fetch on the fetch-client used by @immich/sdk
+  // set event.fetch on the fetch-client used by @photosync/sdk
   // https://kit.svelte.dev/docs/load#making-fetch-requests
   // https://github.com/oazapfts/oazapfts/blob/main/README.md#fetch-options
   defaults.fetch = fetch;

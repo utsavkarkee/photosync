@@ -4,7 +4,7 @@
   import { maximumLengthSearchPeople, timeBeforeShowLoadingSpinner } from '$lib/constants';
   import { handleError } from '$lib/utils/handle-error';
   import { searchNameLocal } from '$lib/utils/person';
-  import { searchPerson, type PersonResponseDto } from '@immich/sdk';
+  import { searchPerson, type PersonResponseDto } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
 
   export let searchName: string;

@@ -20,7 +20,7 @@
     type ScrollTargetListener,
   } from '$lib/utils/timeline-util';
   import { TUNABLES } from '$lib/utils/tunables';
-  import type { AlbumResponseDto, AssetResponseDto } from '@immich/sdk';
+  import type { AlbumResponseDto, AssetResponseDto } from '@photosync/sdk';
   import { throttle } from 'lodash-es';
   import { onDestroy, onMount } from 'svelte';
   import Portal from '../shared-components/portal/portal.svelte';

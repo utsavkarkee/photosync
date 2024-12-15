@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { AppRoute } from '$lib/constants';
-  import { signUpAdmin } from '@immich/sdk';
+  import { signUpAdmin } from '@photosync/sdk';
   import { handleError } from '../../utils/handle-error';
   import Button from '../elements/buttons/button.svelte';
   import PasswordField from '../shared-components/password-field.svelte';

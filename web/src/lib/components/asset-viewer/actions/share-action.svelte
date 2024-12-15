@@ -2,7 +2,7 @@
   import CircleIconButton from '$lib/components/elements/buttons/circle-icon-button.svelte';
   import CreateSharedLinkModal from '$lib/components/shared-components/create-share-link-modal/create-shared-link-modal.svelte';
   import Portal from '$lib/components/shared-components/portal/portal.svelte';
-  import type { AssetResponseDto } from '@immich/sdk';
+  import type { AssetResponseDto } from '@photosync/sdk';
   import { mdiShareVariantOutline } from '@mdi/js';
   import { t } from 'svelte-i18n';
 

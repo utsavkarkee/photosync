@@ -1,6 +1,6 @@
 <script lang="ts">
   import Icon from '$lib/components/elements/icon.svelte';
-  import { getAllAlbums, type AlbumResponseDto } from '@immich/sdk';
+  import { getAllAlbums, type AlbumResponseDto } from '@photosync/sdk';
   import { mdiPlus } from '@mdi/js';
   import { onMount } from 'svelte';
   import AlbumListItem from '../asset-viewer/album-list-item.svelte';

@@ -25,7 +25,7 @@
     type LibraryResponseDto,
     type LibraryStatsResponseDto,
     type UserResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import { mdiDatabase, mdiDotsVertical, mdiPlusBoxOutline, mdiSync } from '@mdi/js';
   import { onMount } from 'svelte';
   import { fade, slide } from 'svelte/transition';

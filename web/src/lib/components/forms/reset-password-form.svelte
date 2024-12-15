@@ -3,7 +3,7 @@
   import { getServerErrorMessage, handleError } from '$lib/utils/handle-error';
   import Button from '../elements/buttons/button.svelte';
   import PasswordField from '../shared-components/password-field.svelte';
-  import { resetPassword, updateMyUser } from '@immich/sdk';
+  import { resetPassword, updateMyUser } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
   let email: string, token: string;
 

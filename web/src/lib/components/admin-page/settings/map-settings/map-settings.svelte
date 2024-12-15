@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { SystemConfigDto } from '@immich/sdk';
+  import type { SystemConfigDto } from '@photosync/sdk';
   import { isEqual } from 'lodash-es';
   import { fade } from 'svelte/transition';
   import type { SettingsResetEvent, SettingsSaveEvent } from '../admin-settings';

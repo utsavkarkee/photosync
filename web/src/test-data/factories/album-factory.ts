@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { AssetOrder, type AlbumResponseDto } from '@immich/sdk';
+import { AssetOrder, type AlbumResponseDto } from '@photosync/sdk';
 import { Sync } from 'factory.ts';
 import { userFactory } from './user-factory';
 

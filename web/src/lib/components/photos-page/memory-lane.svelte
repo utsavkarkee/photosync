@@ -5,7 +5,7 @@
   import { memoryStore } from '$lib/stores/memory.store';
   import { getAssetThumbnailUrl, memoryLaneTitle } from '$lib/utils';
   import { getAltText } from '$lib/utils/thumbnail-util';
-  import { getMemoryLane } from '@immich/sdk';
+  import { getMemoryLane } from '@photosync/sdk';
   import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';

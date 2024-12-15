@@ -3,7 +3,7 @@
   import CircleIconButton from '$lib/components/elements/buttons/circle-icon-button.svelte';
   import MenuOption from '$lib/components/shared-components/context-menu/menu-option.svelte';
   import { downloadFile } from '$lib/utils/asset-utils';
-  import type { AssetResponseDto } from '@immich/sdk';
+  import type { AssetResponseDto } from '@photosync/sdk';
   import { mdiFolderDownloadOutline } from '@mdi/js';
   import { t } from 'svelte-i18n';
 

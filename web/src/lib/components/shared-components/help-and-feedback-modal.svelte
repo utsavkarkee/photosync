@@ -1,7 +1,7 @@
 <script lang="ts">
   import FullScreenModal from '$lib/components/shared-components/full-screen-modal.svelte';
   import Portal from '$lib/components/shared-components/portal/portal.svelte';
-  import { type ServerAboutResponseDto } from '@immich/sdk';
+  import { type ServerAboutResponseDto } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
   import Icon from '$lib/components/elements/icon.svelte';
   import { mdiBugOutline, mdiFaceAgent, mdiGit, mdiGithub, mdiInformationOutline } from '@mdi/js';

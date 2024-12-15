@@ -1,4 +1,4 @@
-import { AssetMediaResponseDto, LoginResponseDto, deleteAssets, updateAsset } from '@immich/sdk';
+import { AssetMediaResponseDto, LoginResponseDto, deleteAssets, updateAsset } from '@photosync/sdk';
 import { DateTime } from 'luxon';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';

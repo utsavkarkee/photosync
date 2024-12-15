@@ -1,6 +1,6 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
-  import type { AlbumResponseDto } from '@immich/sdk';
+  import type { AlbumResponseDto } from '@photosync/sdk';
   import { AlbumGroupBy, albumViewSettings } from '$lib/stores/preferences.store';
   import type { ContextMenuPosition } from '$lib/utils/context-menu';
   import { mdiChevronRight } from '@mdi/js';

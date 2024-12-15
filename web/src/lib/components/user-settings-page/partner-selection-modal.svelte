@@ -1,6 +1,6 @@
 <script lang="ts">
   import FullScreenModal from '$lib/components/shared-components/full-screen-modal.svelte';
-  import { getPartners, PartnerDirection, searchUsers, type UserResponseDto } from '@immich/sdk';
+  import { getPartners, PartnerDirection, searchUsers, type UserResponseDto } from '@photosync/sdk';
   import { onMount } from 'svelte';
   import { t } from 'svelte-i18n';
   import Button from '../elements/buttons/button.svelte';

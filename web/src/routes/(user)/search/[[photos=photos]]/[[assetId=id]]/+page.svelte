@@ -28,7 +28,7 @@
     type SmartSearchDto,
     type MetadataSearchDto,
     type AlbumResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import { mdiArrowLeft, mdiDotsVertical, mdiImageOffOutline, mdiPlus, mdiSelectAll } from '@mdi/js';
   import type { Viewport } from '$lib/stores/assets.store';
   import { locale } from '$lib/stores/preferences.store';

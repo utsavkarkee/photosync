@@ -1,6 +1,6 @@
 import { authenticate } from '$lib/utils/auth';
 import { getFormatter } from '$lib/utils/i18n';
-import { PartnerDirection, getAllAlbums, getPartners } from '@immich/sdk';
+import { PartnerDirection, getAllAlbums, getPartners } from '@photosync/sdk';
 import type { PageLoad } from './$types';
 
 export const load = (async () => {

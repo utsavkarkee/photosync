@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getJobName } from '$lib/utils';
-  import { JobName, type SystemConfigDto, type SystemConfigJobDto } from '@immich/sdk';
+  import { JobName, type SystemConfigDto, type SystemConfigJobDto } from '@photosync/sdk';
   import { isEqual } from 'lodash-es';
   import { fade } from 'svelte/transition';
   import type { SettingsResetEvent, SettingsSaveEvent } from '../admin-settings';

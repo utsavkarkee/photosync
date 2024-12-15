@@ -5,7 +5,7 @@
   import Portal from '$lib/components/shared-components/portal/portal.svelte';
   import { AssetAction } from '$lib/constants';
   import { addAssetsToAlbum, addAssetsToNewAlbum } from '$lib/utils/asset-utils';
-  import type { AlbumResponseDto, AssetResponseDto } from '@immich/sdk';
+  import type { AlbumResponseDto, AssetResponseDto } from '@photosync/sdk';
   import { mdiImageAlbum, mdiShareVariantOutline } from '@mdi/js';
   import { t } from 'svelte-i18n';
 

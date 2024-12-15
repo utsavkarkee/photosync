@@ -1,4 +1,4 @@
-import { getServerConfig, getServerFeatures, type ServerConfigDto, type ServerFeaturesDto } from '@immich/sdk';
+import { getServerConfig, getServerFeatures, type ServerConfigDto, type ServerFeaturesDto } from '@photosync/sdk';
 import { writable } from 'svelte/store';
 
 export type FeatureFlags = ServerFeaturesDto & { loaded: boolean };

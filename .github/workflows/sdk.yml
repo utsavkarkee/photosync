@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   publish:
-    name: Publish `@immich/sdk`
+    name: Publish `@photosync/sdk`
     runs-on: ubuntu-latest
     defaults:
       run:

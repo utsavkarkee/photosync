@@ -7,7 +7,7 @@
   import { AppRoute } from '$lib/constants';
   import { preferences, user } from '$lib/stores/user.store';
   import { handleError } from '$lib/utils/handle-error';
-  import { deleteProfileImage, updateMyPreferences, type UserAvatarColor } from '@immich/sdk';
+  import { deleteProfileImage, updateMyPreferences, type UserAvatarColor } from '@photosync/sdk';
   import { mdiCog, mdiLogout, mdiPencil, mdiWrench } from '@mdi/js';
   import { t } from 'svelte-i18n';
   import { fade } from 'svelte/transition';

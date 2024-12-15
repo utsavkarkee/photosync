@@ -8,7 +8,7 @@
     reassignFaces,
     type AssetFaceUpdateItem,
     type PersonResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import { mdiMerge, mdiPlus } from '@mdi/js';
   import { onMount } from 'svelte';
   import { quintOut } from 'svelte/easing';

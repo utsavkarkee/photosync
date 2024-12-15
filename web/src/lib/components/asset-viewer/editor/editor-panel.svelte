@@ -1,6 +1,6 @@
 <script lang="ts">
   import { websocketEvents } from '$lib/stores/websocket';
-  import { type AssetResponseDto } from '@immich/sdk';
+  import { type AssetResponseDto } from '@photosync/sdk';
   import { mdiClose } from '@mdi/js';
   import { onMount } from 'svelte';
   import CircleIconButton from '../../elements/buttons/circle-icon-button.svelte';

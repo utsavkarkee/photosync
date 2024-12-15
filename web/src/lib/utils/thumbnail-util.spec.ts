@@ -1,5 +1,5 @@
 import { getAltText } from '$lib/utils/thumbnail-util';
-import { AssetTypeEnum, type AssetResponseDto } from '@immich/sdk';
+import { AssetTypeEnum, type AssetResponseDto } from '@photosync/sdk';
 import { init, register, waitLocale } from 'svelte-i18n';
 
 const onePerson = [{ name: 'person' }];

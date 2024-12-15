@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type PersonResponseDto } from '@immich/sdk';
+  import { type PersonResponseDto } from '@photosync/sdk';
   import FaceThumbnail from './face-thumbnail.svelte';
   import SearchPeople from '$lib/components/faces-page/people-search.svelte';
   import { t } from 'svelte-i18n';

@@ -1,7 +1,7 @@
 import { authenticate } from '$lib/utils/auth';
 import { getFormatter } from '$lib/utils/i18n';
 import { getAssetInfoFromParam } from '$lib/utils/navigation';
-import { getUser } from '@immich/sdk';
+import { getUser } from '@photosync/sdk';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ params }) => {

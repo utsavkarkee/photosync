@@ -9,7 +9,7 @@
     getVersionHistory,
     type ServerAboutResponseDto,
     type ServerVersionHistoryResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import Icon from '$lib/components/elements/icon.svelte';
   import { mdiAlert } from '@mdi/js';
 

@@ -8,7 +8,7 @@
   import { featureFlags } from '$lib/stores/server-config.store';
   import { user } from '$lib/stores/user.store';
   import { handleLogout } from '$lib/utils/auth';
-  import { getAboutInfo, logout, type ServerAboutResponseDto } from '@immich/sdk';
+  import { getAboutInfo, logout, type ServerAboutResponseDto } from '@photosync/sdk';
   import { mdiHelpCircleOutline, mdiMagnify, mdiTrayArrowUp } from '@mdi/js';
   import { t } from 'svelte-i18n';
   import { fade } from 'svelte/transition';

@@ -7,7 +7,7 @@
     SettingInputFieldType,
   } from '$lib/components/shared-components/settings/setting-input-field.svelte';
   import { user } from '$lib/stores/user.store';
-  import { updateMyUser } from '@immich/sdk';
+  import { updateMyUser } from '@photosync/sdk';
   import { cloneDeep } from 'lodash-es';
   import { fade } from 'svelte/transition';
   import { handleError } from '../../utils/handle-error';

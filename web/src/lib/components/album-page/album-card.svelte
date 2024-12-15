@@ -1,6 +1,6 @@
 <script lang="ts">
   import { user } from '$lib/stores/user.store';
-  import type { AlbumResponseDto } from '@immich/sdk';
+  import type { AlbumResponseDto } from '@photosync/sdk';
   import { mdiDotsVertical } from '@mdi/js';
   import { getContextMenuPositionFromEvent, type ContextMenuPosition } from '$lib/utils/context-menu';
   import { getShortDateRange } from '$lib/utils/date-time';

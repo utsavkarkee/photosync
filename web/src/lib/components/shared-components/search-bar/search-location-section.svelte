@@ -9,7 +9,7 @@
 <script lang="ts">
   import Combobox, { asComboboxOptions, asSelectedOption } from '$lib/components/shared-components/combobox.svelte';
   import { handlePromiseError } from '$lib/utils';
-  import { getSearchSuggestions, SearchSuggestionType } from '@immich/sdk';
+  import { getSearchSuggestions, SearchSuggestionType } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
 
   export let filters: SearchLocationFilter;

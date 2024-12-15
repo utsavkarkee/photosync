@@ -14,7 +14,7 @@
     type ActivityResponseDto,
     type AssetTypeEnum,
     type UserResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import { mdiClose, mdiDotsVertical, mdiHeart, mdiSend, mdiDeleteOutline } from '@mdi/js';
   import * as luxon from 'luxon';
   import { onMount } from 'svelte';

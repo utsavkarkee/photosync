@@ -1,6 +1,6 @@
 import { handleError } from '$lib/utils/handle-error';
 import { getFormatter } from '$lib/utils/i18n';
-import { validateToken } from '@immich/sdk';
+import { validateToken } from '@photosync/sdk';
 import type { PageLoad } from './$types';
 
 export const load = (async () => {

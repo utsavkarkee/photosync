@@ -1,4 +1,4 @@
-import type { PersonResponseDto } from '@immich/sdk';
+import type { PersonResponseDto } from '@photosync/sdk';
 import { t } from 'svelte-i18n';
 import { derived } from 'svelte/store';
 

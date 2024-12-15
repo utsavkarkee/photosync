@@ -1,4 +1,4 @@
-import { AssetMediaResponseDto, LoginResponseDto } from '@immich/sdk';
+import { AssetMediaResponseDto, LoginResponseDto } from '@photosync/sdk';
 import { readFile, writeFile } from 'node:fs/promises';
 import { errorDto } from 'src/responses';
 import { app, tempDir, utils } from 'src/utils';

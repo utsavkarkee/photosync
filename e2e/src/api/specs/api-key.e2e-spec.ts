@@ -1,4 +1,4 @@
-import { LoginResponseDto, Permission, createApiKey } from '@immich/sdk';
+import { LoginResponseDto, Permission, createApiKey } from '@photosync/sdk';
 import { createUserDto, uuidDto } from 'src/fixtures';
 import { errorDto } from 'src/responses';
 import { app, asBearerAuth, utils } from 'src/utils';

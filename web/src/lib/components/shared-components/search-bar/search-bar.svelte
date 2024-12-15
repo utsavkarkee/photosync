@@ -5,7 +5,7 @@
   import { mdiClose, mdiMagnify, mdiTune } from '@mdi/js';
   import SearchHistoryBox from './search-history-box.svelte';
   import SearchFilterModal from './search-filter-modal.svelte';
-  import type { MetadataSearchDto, SmartSearchDto } from '@immich/sdk';
+  import type { MetadataSearchDto, SmartSearchDto } from '@photosync/sdk';
   import { getMetadataSearchQuery } from '$lib/utils/metadata-search';
   import { handlePromiseError } from '$lib/utils';
   import { shortcuts } from '$lib/actions/shortcut';

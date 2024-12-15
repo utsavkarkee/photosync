@@ -1,7 +1,7 @@
 import { PUBLIC_IMMICH_BUY_HOST, PUBLIC_IMMICH_PAY_HOST } from '$env/static/public';
 import type { ImmichProduct } from '$lib/constants';
 import { serverConfig } from '$lib/stores/server-config.store';
-import { setServerLicense, setUserLicense, type LicenseResponseDto } from '@immich/sdk';
+import { setServerLicense, setUserLicense, type LicenseResponseDto } from '@photosync/sdk';
 import { get } from 'svelte/store';
 import { loadUser } from './auth';
 

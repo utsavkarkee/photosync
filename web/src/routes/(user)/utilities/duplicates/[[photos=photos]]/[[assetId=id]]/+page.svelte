@@ -6,10 +6,10 @@
     notificationController,
   } from '$lib/components/shared-components/notification/notification';
   import DuplicatesCompareControl from '$lib/components/utilities-page/duplicates/duplicates-compare-control.svelte';
-  import type { AssetResponseDto } from '@immich/sdk';
+  import type { AssetResponseDto } from '@photosync/sdk';
   import { featureFlags } from '$lib/stores/server-config.store';
   import { handleError } from '$lib/utils/handle-error';
-  import { deleteAssets, updateAssets } from '@immich/sdk';
+  import { deleteAssets, updateAssets } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
   import type { PageData } from './$types';
   import { suggestDuplicateByFileSize } from '$lib/utils';

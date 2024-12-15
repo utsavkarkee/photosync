@@ -1,4 +1,4 @@
-import type { AssetResponseDto } from '@immich/sdk';
+import type { AssetResponseDto } from '@photosync/sdk';
 import { derived, readonly, writable } from 'svelte/store';
 
 export type AssetInteractionStore = ReturnType<typeof createAssetInteractionStore>;

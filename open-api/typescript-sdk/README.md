@@ -1,11 +1,11 @@
-# @immich/sdk
+# @photosync/sdk
 
 A TypeScript SDK for interfacing with the [Immich](https://immich.app/) API.
 
 ## Install
 
 ```bash
-npm i --save @immich/sdk
+npm i --save @photosync/sdk
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ npm i --save @immich/sdk
 For a more detailed example, check out the [`@immich/cli`](https://github.com/immich-app/immich/tree/main/cli).
 
 ```typescript
-import { getAllAlbums, getMyUser, init } from "@immich/sdk";
+import { getAllAlbums, getMyUser, init } from "@photosync/sdk";
 
 const API_KEY = "<API_KEY>"; // process.env.IMMICH_API_KEY
 

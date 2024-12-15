@@ -6,7 +6,7 @@
   import { downloadArchive } from '$lib/utils/asset-utils';
   import { fileUploadHandler, openFileUploadDialog } from '$lib/utils/file-uploader';
   import { handleError } from '$lib/utils/handle-error';
-  import { addSharedLinkAssets, type AssetResponseDto, type SharedLinkResponseDto } from '@immich/sdk';
+  import { addSharedLinkAssets, type AssetResponseDto, type SharedLinkResponseDto } from '@photosync/sdk';
   import { mdiArrowLeft, mdiFileImagePlusOutline, mdiFolderDownloadOutline, mdiSelectAll } from '@mdi/js';
   import CircleIconButton from '../elements/buttons/circle-icon-button.svelte';
   import DownloadAction from '../photos-page/actions/download-action.svelte';

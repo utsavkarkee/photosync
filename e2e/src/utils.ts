@@ -33,7 +33,7 @@ import {
   updateAssets,
   updateConfig,
   validate,
-} from '@immich/sdk';
+} from '@photosync/sdk';
 import { BrowserContext } from '@playwright/test';
 import { exec, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';

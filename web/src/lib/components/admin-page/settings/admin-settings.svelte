@@ -6,7 +6,7 @@
     notificationController,
   } from '$lib/components/shared-components/notification/notification';
   import { handleError } from '$lib/utils/handle-error';
-  import { getConfig, getConfigDefaults, updateConfig, type SystemConfigDto } from '@immich/sdk';
+  import { getConfig, getConfigDefaults, updateConfig, type SystemConfigDto } from '@photosync/sdk';
   import { retrieveServerConfig } from '$lib/stores/server-config.store';
   import { cloneDeep, isEqual } from 'lodash-es';
   import { onMount } from 'svelte';

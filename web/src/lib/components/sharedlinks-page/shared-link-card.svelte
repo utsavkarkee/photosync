@@ -3,7 +3,7 @@
   import ShareCover from '$lib/components/sharedlinks-page/covers/share-cover.svelte';
   import { AppRoute } from '$lib/constants';
   import { locale } from '$lib/stores/preferences.store';
-  import { SharedLinkType, type SharedLinkResponseDto } from '@immich/sdk';
+  import { SharedLinkType, type SharedLinkResponseDto } from '@photosync/sdk';
   import { DateTime, type ToRelativeUnit } from 'luxon';
   import { t } from 'svelte-i18n';
   import SharedLinkDelete from '$lib/components/sharedlinks-page/actions/shared-link-delete.svelte';

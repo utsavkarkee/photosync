@@ -4,7 +4,7 @@ import { cancelIdleCB, idleCB } from '$lib/utils/idle-callback-support';
 import { KeyedPriorityQueue } from '$lib/utils/keyed-priority-queue';
 import { type DateGroup } from '$lib/utils/timeline-util';
 import { TUNABLES } from '$lib/utils/tunables';
-import { type AssetResponseDto } from '@immich/sdk';
+import { type AssetResponseDto } from '@photosync/sdk';
 import { clamp } from 'lodash-es';
 
 type Task = () => void;

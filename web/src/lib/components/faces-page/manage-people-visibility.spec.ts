@@ -1,7 +1,7 @@
 import { getIntersectionObserverMock } from '$lib/__mocks__/intersection-observer.mock';
 import { sdkMock } from '$lib/__mocks__/sdk.mock';
 import ManagePeopleVisibility from '$lib/components/faces-page/manage-people-visibility.svelte';
-import type { PersonResponseDto } from '@immich/sdk';
+import type { PersonResponseDto } from '@photosync/sdk';
 import { personFactory } from '@test-data/factories/person-factory';
 import { render } from '@testing-library/svelte';
 import { tick } from 'svelte';

@@ -3,7 +3,7 @@ import { authenticate } from '$lib/utils/auth';
 import { getFormatter } from '$lib/utils/i18n';
 import { getAssetInfoFromParam } from '$lib/utils/navigation';
 import { buildTree, normalizeTreePath } from '$lib/utils/tree-utils';
-import { getAllTags } from '@immich/sdk';
+import { getAllTags } from '@photosync/sdk';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ params, url }) => {

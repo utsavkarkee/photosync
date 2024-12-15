@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type AlbumStatisticsResponseDto, getAlbumStatistics } from '@immich/sdk';
+  import { type AlbumStatisticsResponseDto, getAlbumStatistics } from '@photosync/sdk';
   import LoadingSpinner from '$lib/components/shared-components/loading-spinner.svelte';
   import { t } from 'svelte-i18n';
 

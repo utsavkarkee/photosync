@@ -12,7 +12,7 @@
   import { getAccountAge } from '$lib/utils/auth';
   import { fade } from 'svelte/transition';
   import ImmichLogo from '$lib/components/shared-components/immich-logo.svelte';
-  import { updateMyPreferences } from '@immich/sdk';
+  import { updateMyPreferences } from '@photosync/sdk';
   import { handleError } from '$lib/utils/handle-error';
   import { preferences } from '$lib/stores/user.store';
   import { getButtonVisibility } from '$lib/utils/purchase-utils';

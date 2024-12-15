@@ -2,7 +2,7 @@
   import { timeBeforeShowLoadingSpinner } from '$lib/constants';
   import { getPersonNameWithHiddenValue } from '$lib/utils/person';
   import { getPeopleThumbnailUrl } from '$lib/utils';
-  import { AssetTypeEnum, type AssetFaceResponseDto, type PersonResponseDto } from '@immich/sdk';
+  import { AssetTypeEnum, type AssetFaceResponseDto, type PersonResponseDto } from '@photosync/sdk';
   import { mdiArrowLeftThin, mdiClose, mdiMagnify, mdiPlus } from '@mdi/js';
   import { linear } from 'svelte/easing';
   import { fly } from 'svelte/transition';

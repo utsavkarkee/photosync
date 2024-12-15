@@ -3,7 +3,7 @@
   import ChangeLocation from '$lib/components/shared-components/change-location.svelte';
   import Portal from '$lib/components/shared-components/portal/portal.svelte';
   import { handleError } from '$lib/utils/handle-error';
-  import { updateAsset, type AssetResponseDto } from '@immich/sdk';
+  import { updateAsset, type AssetResponseDto } from '@photosync/sdk';
   import { mdiMapMarkerOutline, mdiPencil } from '@mdi/js';
   import { t } from 'svelte-i18n';
 

@@ -1,4 +1,4 @@
-import { getMyUser, init, isHttpError } from '@immich/sdk';
+import { getMyUser, init, isHttpError } from '@photosync/sdk';
 import { convertPathToPattern, glob } from 'fast-glob';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';

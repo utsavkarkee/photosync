@@ -1,4 +1,4 @@
-import { AssetTypeEnum, type AssetResponseDto } from '@immich/sdk';
+import { AssetTypeEnum, type AssetResponseDto } from '@photosync/sdk';
 import { t } from 'svelte-i18n';
 import { derived } from 'svelte/store';
 import { fromLocalDateTime } from './timeline-util';

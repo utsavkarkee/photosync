@@ -4,7 +4,7 @@
     NotificationType,
     notificationController,
   } from '$lib/components/shared-components/notification/notification';
-  import { getAlbumInfo, removeAssetFromAlbum, type AlbumResponseDto } from '@immich/sdk';
+  import { getAlbumInfo, removeAssetFromAlbum, type AlbumResponseDto } from '@photosync/sdk';
   import { mdiDeleteOutline, mdiImageRemoveOutline } from '@mdi/js';
   import MenuOption from '../../shared-components/context-menu/menu-option.svelte';
   import { getAssetControlContext } from '../asset-select-control-bar.svelte';

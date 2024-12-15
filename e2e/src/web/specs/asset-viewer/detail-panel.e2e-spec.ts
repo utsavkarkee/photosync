@@ -1,4 +1,4 @@
-import { AssetMediaResponseDto, LoginResponseDto, SharedLinkType } from '@immich/sdk';
+import { AssetMediaResponseDto, LoginResponseDto, SharedLinkType } from '@photosync/sdk';
 import { expect, test } from '@playwright/test';
 import type { Socket } from 'socket.io-client';
 import { utils } from 'src/utils';

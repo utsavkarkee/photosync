@@ -5,7 +5,7 @@
   import { serverConfig } from '$lib/stores/server-config.store';
   import { copyToClipboard, makeSharedLinkUrl } from '$lib/utils';
   import { handleError } from '$lib/utils/handle-error';
-  import { SharedLinkType, createSharedLink, updateSharedLink, type SharedLinkResponseDto } from '@immich/sdk';
+  import { SharedLinkType, createSharedLink, updateSharedLink, type SharedLinkResponseDto } from '@photosync/sdk';
   import { mdiContentCopy, mdiLink } from '@mdi/js';
   import { NotificationType, notificationController } from '../notification/notification';
   import SettingInputField, { SettingInputFieldType } from '../settings/setting-input-field.svelte';

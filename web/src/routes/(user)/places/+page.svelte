@@ -5,7 +5,7 @@
   import { mdiMapMarkerOff } from '@mdi/js';
   import type { PageData } from './$types';
   import { getMetadataSearchQuery } from '$lib/utils/metadata-search';
-  import { AssetMediaSize, type AssetResponseDto } from '@immich/sdk';
+  import { AssetMediaSize, type AssetResponseDto } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
   import { getAssetThumbnailUrl } from '$lib/utils';
 

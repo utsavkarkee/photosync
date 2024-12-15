@@ -1,5 +1,5 @@
 import { notificationController, NotificationType } from '$lib/components/shared-components/notification/notification';
-import { deleteAssets as deleteBulk, type AssetResponseDto } from '@immich/sdk';
+import { deleteAssets as deleteBulk, type AssetResponseDto } from '@photosync/sdk';
 import { t } from 'svelte-i18n';
 import { get } from 'svelte/store';
 import { handleError } from './handle-error';

@@ -4,7 +4,7 @@
   import SearchBar from '$lib/components/elements/search-bar.svelte';
   import Icon from '$lib/components/elements/icon.svelte';
   import { getPeopleThumbnailUrl } from '$lib/utils';
-  import { getAllPeople, type PersonResponseDto } from '@immich/sdk';
+  import { getAllPeople, type PersonResponseDto } from '@photosync/sdk';
   import { mdiClose, mdiArrowRight } from '@mdi/js';
   import { handleError } from '$lib/utils/handle-error';
   import { t } from 'svelte-i18n';

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getPeopleThumbnailUrl } from '$lib/utils';
-  import { type PersonResponseDto } from '@immich/sdk';
+  import { type PersonResponseDto } from '@photosync/sdk';
   import ImageThumbnail from '../assets/thumbnail/image-thumbnail.svelte';
 
   export let person: PersonResponseDto;

@@ -5,7 +5,7 @@
   import { AppRoute } from '$lib/constants';
   import { isSharedLink } from '$lib/utils';
   import { removeTag, tagAssets } from '$lib/utils/asset-utils';
-  import { getAssetInfo, type AssetResponseDto } from '@immich/sdk';
+  import { getAssetInfo, type AssetResponseDto } from '@photosync/sdk';
   import { mdiClose, mdiPlus } from '@mdi/js';
   import { t } from 'svelte-i18n';
 

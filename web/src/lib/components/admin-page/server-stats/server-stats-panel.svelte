@@ -2,7 +2,7 @@
   import Icon from '$lib/components/elements/icon.svelte';
   import { locale } from '$lib/stores/preferences.store';
   import { getByteUnitString, getBytesWithUnit } from '$lib/utils/byte-units';
-  import type { ServerStatsResponseDto } from '@immich/sdk';
+  import type { ServerStatsResponseDto } from '@photosync/sdk';
   import { mdiCameraIris, mdiChartPie, mdiPlayCircle } from '@mdi/js';
   import StatsCard from './stats-card.svelte';
   import { t } from 'svelte-i18n';

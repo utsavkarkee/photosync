@@ -23,7 +23,7 @@
 
 <script lang="ts">
   import Button from '$lib/components/elements/buttons/button.svelte';
-  import { AssetTypeEnum, type SmartSearchDto, type MetadataSearchDto } from '@immich/sdk';
+  import { AssetTypeEnum, type SmartSearchDto, type MetadataSearchDto } from '@photosync/sdk';
   import SearchPeopleSection from './search-people-section.svelte';
   import SearchLocationSection from './search-location-section.svelte';
   import SearchCameraSection, { type SearchCameraFilter } from './search-camera-section.svelte';

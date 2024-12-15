@@ -1,7 +1,7 @@
 <script lang="ts">
   import Button from '../elements/buttons/button.svelte';
   import PasswordField from '../shared-components/password-field.svelte';
-  import { login, forgetPassword } from '@immich/sdk';
+  import { login, forgetPassword } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
 
   export let onSuccess: () => void;

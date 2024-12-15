@@ -12,7 +12,7 @@
     getServerLicense,
     isHttpError,
     type LicenseResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import Icon from '$lib/components/elements/icon.svelte';
   import { mdiKey } from '@mdi/js';
   import Button from '$lib/components/elements/buttons/button.svelte';

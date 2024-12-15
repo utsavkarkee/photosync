@@ -5,7 +5,7 @@ import { getAssetRatio } from '$lib/utils/asset-utils';
 import { generateId } from '$lib/utils/generate-id';
 import type { AssetGridRouteSearchParams } from '$lib/utils/navigation';
 import { calculateWidth, fromLocalDateTime, splitBucketIntoDateGroups, type DateGroup } from '$lib/utils/timeline-util';
-import { TimeBucketSize, getAssetInfo, getTimeBucket, getTimeBuckets, type AssetResponseDto } from '@immich/sdk';
+import { TimeBucketSize, getAssetInfo, getTimeBucket, getTimeBuckets, type AssetResponseDto } from '@photosync/sdk';
 import createJustifiedLayout from 'justified-layout';
 import { throttle } from 'lodash-es';
 import { DateTime } from 'luxon';

@@ -5,7 +5,7 @@
   import { getAssetThumbnailUrl, isSharedLink } from '$lib/utils';
   import { getAltText } from '$lib/utils/thumbnail-util';
   import { timeToSeconds } from '$lib/utils/date-time';
-  import { AssetMediaSize, AssetTypeEnum, type AssetResponseDto } from '@immich/sdk';
+  import { AssetMediaSize, AssetTypeEnum, type AssetResponseDto } from '@photosync/sdk';
   import { locale, playVideoThumbnailOnHover } from '$lib/stores/preferences.store';
   import { getAssetPlaybackUrl } from '$lib/utils';
   import {

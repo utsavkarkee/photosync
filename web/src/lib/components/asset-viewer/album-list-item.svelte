@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getAssetThumbnailUrl } from '$lib/utils';
-  import { type AlbumResponseDto } from '@immich/sdk';
+  import { type AlbumResponseDto } from '@photosync/sdk';
   import { normalizeSearchString } from '$lib/utils/string-utils.js';
   import AlbumListItemDetails from './album-list-item-details.svelte';
 

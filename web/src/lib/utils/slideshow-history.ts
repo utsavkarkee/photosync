@@ -1,4 +1,4 @@
-import type { AssetResponseDto } from '@immich/sdk';
+import type { AssetResponseDto } from '@photosync/sdk';
 
 export class SlideshowHistory {
   private history: AssetResponseDto[] = [];

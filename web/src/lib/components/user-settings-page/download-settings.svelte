@@ -3,7 +3,7 @@
     notificationController,
     NotificationType,
   } from '$lib/components/shared-components/notification/notification';
-  import { updateMyPreferences } from '@immich/sdk';
+  import { updateMyPreferences } from '@photosync/sdk';
   import { fade } from 'svelte/transition';
   import { handleError } from '../../utils/handle-error';
 

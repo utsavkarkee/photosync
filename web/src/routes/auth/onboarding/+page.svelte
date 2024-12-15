@@ -7,7 +7,7 @@
   import OnboardingTheme from '$lib/components/onboarding-page/onboarding-theme.svelte';
   import { AppRoute, QueryParameter } from '$lib/constants';
   import { retrieveServerConfig } from '$lib/stores/server-config.store';
-  import { updateAdminOnboarding } from '@immich/sdk';
+  import { updateAdminOnboarding } from '@photosync/sdk';
 
   let index = 0;
 

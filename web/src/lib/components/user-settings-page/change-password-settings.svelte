@@ -3,7 +3,7 @@
     notificationController,
     NotificationType,
   } from '$lib/components/shared-components/notification/notification';
-  import { changePassword } from '@immich/sdk';
+  import { changePassword } from '@photosync/sdk';
   import { fade } from 'svelte/transition';
 
   import Button from '$lib/components/elements/buttons/button.svelte';

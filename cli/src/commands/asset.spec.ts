@@ -3,12 +3,12 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
 
-import { Action, checkBulkUpload, defaults, Reason } from '@immich/sdk';
+import { Action, checkBulkUpload, defaults, Reason } from '@photosync/sdk';
 import createFetchMock from 'vitest-fetch-mock';
 
 import { checkForDuplicates, getAlbumName, uploadFiles, UploadOptionsDto } from './asset';
 
-vi.mock('@immich/sdk');
+vi.mock('@photosync/sdk');
 
 describe('getAlbumName', () => {
   it('should return a non-undefined value', () => {

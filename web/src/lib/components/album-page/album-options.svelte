@@ -8,7 +8,7 @@
     AssetOrder,
     AlbumUserRole,
     updateAlbumUser,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import { mdiArrowDownThin, mdiArrowUpThin, mdiPlus, mdiDotsVertical } from '@mdi/js';
   import FullScreenModal from '$lib/components/shared-components/full-screen-modal.svelte';
   import UserAvatar from '$lib/components/shared-components/user-avatar.svelte';

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { dateFormats } from '$lib/constants';
   import { locale } from '$lib/stores/preferences.store';
-  import type { AlbumResponseDto } from '@immich/sdk';
+  import type { AlbumResponseDto } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
 
   export let album: AlbumResponseDto;

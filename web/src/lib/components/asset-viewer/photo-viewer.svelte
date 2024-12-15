@@ -11,7 +11,7 @@
   import { isWebCompatibleImage, canCopyImageToClipboard, copyImageToClipboard } from '$lib/utils/asset-utils';
   import { getBoundingBox } from '$lib/utils/people-utils';
   import { getAltText } from '$lib/utils/thumbnail-util';
-  import { AssetMediaSize, AssetTypeEnum, type AssetResponseDto, type SharedLinkResponseDto } from '@immich/sdk';
+  import { AssetMediaSize, AssetTypeEnum, type AssetResponseDto, type SharedLinkResponseDto } from '@photosync/sdk';
   import { onDestroy, onMount } from 'svelte';
   import { t } from 'svelte-i18n';
   import { type SwipeCustomEvent, swipe } from 'svelte-gestures';

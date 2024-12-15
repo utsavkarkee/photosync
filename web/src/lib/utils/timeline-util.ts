@@ -1,6 +1,6 @@
 import type { AssetBucket } from '$lib/stores/assets.store';
 import { locale } from '$lib/stores/preferences.store';
-import type { AssetResponseDto } from '@immich/sdk';
+import type { AssetResponseDto } from '@photosync/sdk';
 import type createJustifiedLayout from 'justified-layout';
 import { groupBy, memoize, sortBy } from 'lodash-es';
 import { DateTime } from 'luxon';

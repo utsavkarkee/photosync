@@ -66,7 +66,7 @@
     updateAlbumInfo,
     type ActivityResponseDto,
     type AlbumUserAddDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import {
     mdiArrowLeft,
     mdiCogOutline,

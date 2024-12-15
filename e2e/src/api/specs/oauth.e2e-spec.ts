@@ -5,7 +5,7 @@ import {
   getMyUser,
   startOAuth,
   updateConfig,
-} from '@immich/sdk';
+} from '@photosync/sdk';
 import { errorDto } from 'src/responses';
 import { OAuthClient, OAuthUser } from 'src/setup/auth-server';
 import { app, asBearerAuth, baseUrl, utils } from 'src/utils';

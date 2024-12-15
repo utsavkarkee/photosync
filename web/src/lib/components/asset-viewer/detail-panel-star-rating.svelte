@@ -1,6 +1,6 @@
 <script lang="ts">
   import { handleError } from '$lib/utils/handle-error';
-  import { updateAsset, type AssetResponseDto } from '@immich/sdk';
+  import { updateAsset, type AssetResponseDto } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
   import StarRating from '$lib/components/shared-components/star-rating.svelte';
   import { handlePromiseError, isSharedLink } from '$lib/utils';

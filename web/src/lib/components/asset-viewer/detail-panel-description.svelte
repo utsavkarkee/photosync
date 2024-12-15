@@ -4,7 +4,7 @@
     notificationController,
   } from '$lib/components/shared-components/notification/notification';
   import { handleError } from '$lib/utils/handle-error';
-  import { updateAsset, type AssetResponseDto } from '@immich/sdk';
+  import { updateAsset, type AssetResponseDto } from '@photosync/sdk';
   import AutogrowTextarea from '$lib/components/shared-components/autogrow-textarea.svelte';
   import { t } from 'svelte-i18n';
 

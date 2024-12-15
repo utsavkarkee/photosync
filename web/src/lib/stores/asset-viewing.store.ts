@@ -1,6 +1,6 @@
 import { getKey } from '$lib/utils';
 import { type AssetGridRouteSearchParams } from '$lib/utils/navigation';
-import { getAssetInfo, type AssetResponseDto } from '@immich/sdk';
+import { getAssetInfo, type AssetResponseDto } from '@photosync/sdk';
 import { readonly, writable } from 'svelte/store';
 
 function createAssetViewingStore() {

@@ -3,7 +3,7 @@
   import UserPageLayout from '$lib/components/layouts/user-page-layout.svelte';
   import { AppRoute } from '$lib/constants';
   import { getAssetThumbnailUrl, getPeopleThumbnailUrl } from '$lib/utils';
-  import { AssetMediaSize, type SearchExploreResponseDto } from '@immich/sdk';
+  import { AssetMediaSize, type SearchExploreResponseDto } from '@photosync/sdk';
   import type { PageData } from './$types';
   import { getMetadataSearchQuery } from '$lib/utils/metadata-search';
   import { t } from 'svelte-i18n';

@@ -11,7 +11,7 @@
     type AlbumUserAddDto,
     type SharedLinkResponseDto,
     type UserResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import { mdiCheck, mdiEye, mdiLink, mdiPencil, mdiShareCircle } from '@mdi/js';
   import { onMount } from 'svelte';
   import Button from '../elements/buttons/button.svelte';

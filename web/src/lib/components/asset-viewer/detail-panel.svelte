@@ -23,7 +23,7 @@
     type AlbumResponseDto,
     type AssetResponseDto,
     type ExifResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import {
     mdiAccountOff,
     mdiCalendar,

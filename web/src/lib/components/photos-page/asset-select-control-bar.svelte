@@ -14,7 +14,7 @@
 </script>
 
 <script lang="ts">
-  import type { AssetResponseDto } from '@immich/sdk';
+  import type { AssetResponseDto } from '@photosync/sdk';
   import { mdiClose } from '@mdi/js';
   import ControlAppBar from '../shared-components/control-app-bar.svelte';
 

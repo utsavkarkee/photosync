@@ -1,7 +1,7 @@
 <script lang="ts">
   import ServerStatsPanel from '$lib/components/admin-page/server-stats/server-stats-panel.svelte';
   import UserPageLayout from '$lib/components/layouts/user-page-layout.svelte';
-  import { getServerStatistics } from '@immich/sdk';
+  import { getServerStatistics } from '@photosync/sdk';
   import { onDestroy, onMount } from 'svelte';
   import type { PageData } from './$types';
   import { asyncTimeout } from '$lib/utils';

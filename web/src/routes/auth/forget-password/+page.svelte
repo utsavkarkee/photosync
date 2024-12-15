@@ -3,7 +3,7 @@
   import FullscreenContainer from '$lib/components/shared-components/fullscreen-container.svelte';
   import { AppRoute } from '$lib/constants';
   import { resetSavedUser, user } from '$lib/stores/user.store';
-  import { logout } from '@immich/sdk';
+  import { logout } from '@photosync/sdk';
   import type { PageData } from './$types';
   import { t } from 'svelte-i18n';
   import ResetPasswordForm from '$lib/components/forms/reset-password-form.svelte';

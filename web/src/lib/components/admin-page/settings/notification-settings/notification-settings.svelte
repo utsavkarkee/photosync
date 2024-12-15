@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { sendTestEmail, type SystemConfigDto } from '@immich/sdk';
+  import { sendTestEmail, type SystemConfigDto } from '@photosync/sdk';
   import { isEqual } from 'lodash-es';
   import { fade } from 'svelte/transition';
   import type { SettingsResetEvent, SettingsSaveEvent } from '../admin-settings';

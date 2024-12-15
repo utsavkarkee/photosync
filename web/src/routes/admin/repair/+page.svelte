@@ -13,7 +13,7 @@
   import { copyToClipboard } from '$lib/utils';
   import { downloadBlob } from '$lib/utils/asset-utils';
   import { handleError } from '$lib/utils/handle-error';
-  import { fixAuditFiles, getAuditFiles, getFileChecksums, type FileReportItemDto } from '@immich/sdk';
+  import { fixAuditFiles, getAuditFiles, getFileChecksums, type FileReportItemDto } from '@photosync/sdk';
   import { mdiCheckAll, mdiContentCopy, mdiDownload, mdiRefresh, mdiWrench } from '@mdi/js';
   import type { PageData } from './$types';
   import { t } from 'svelte-i18n';

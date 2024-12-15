@@ -19,7 +19,7 @@
   import { locale } from '$lib/stores/preferences.store';
   import { getPeopleThumbnailUrl } from '$lib/utils';
   import { handleError } from '$lib/utils/handle-error';
-  import { updatePeople, type PersonResponseDto } from '@immich/sdk';
+  import { updatePeople, type PersonResponseDto } from '@photosync/sdk';
   import { mdiClose, mdiEye, mdiEyeOff, mdiEyeSettings, mdiRestart } from '@mdi/js';
   import { t } from 'svelte-i18n';
   import CircleIconButton from '../elements/buttons/circle-icon-button.svelte';

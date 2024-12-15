@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getAssetThumbnailUrl } from '$lib/utils';
-  import { type AlbumResponseDto } from '@immich/sdk';
+  import { type AlbumResponseDto } from '@photosync/sdk';
   import NoCover from '$lib/components/sharedlinks-page/covers/no-cover.svelte';
   import AssetCover from '$lib/components/sharedlinks-page/covers/asset-cover.svelte';
   import { t } from 'svelte-i18n';

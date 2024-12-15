@@ -29,7 +29,7 @@ import {
   type DownloadInfoDto,
   type UserPreferencesResponseDto,
   type UserResponseDto,
-} from '@immich/sdk';
+} from '@photosync/sdk';
 import { DateTime } from 'luxon';
 import { t } from 'svelte-i18n';
 import { get } from 'svelte/store';

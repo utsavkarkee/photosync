@@ -6,7 +6,7 @@
     getStorageTemplateOptions,
     type SystemConfigDto,
     type SystemConfigTemplateStorageOptionDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import handlebar from 'handlebars';
   import { isEqual } from 'lodash-es';
   import * as luxon from 'luxon';

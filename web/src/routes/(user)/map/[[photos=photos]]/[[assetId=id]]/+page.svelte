@@ -9,7 +9,7 @@
   import type { MapSettings } from '$lib/stores/preferences.store';
   import { mapSettings } from '$lib/stores/preferences.store';
   import { featureFlags } from '$lib/stores/server-config.store';
-  import { getMapMarkers, type MapMarkerResponseDto } from '@immich/sdk';
+  import { getMapMarkers, type MapMarkerResponseDto } from '@photosync/sdk';
   import { isEqual } from 'lodash-es';
   import { DateTime, Duration } from 'luxon';
   import { onDestroy, onMount } from 'svelte';

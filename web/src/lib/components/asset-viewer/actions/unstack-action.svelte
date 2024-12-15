@@ -2,7 +2,7 @@
   import MenuOption from '$lib/components/shared-components/context-menu/menu-option.svelte';
   import { AssetAction } from '$lib/constants';
   import { deleteStack } from '$lib/utils/asset-utils';
-  import type { StackResponseDto } from '@immich/sdk';
+  import type { StackResponseDto } from '@photosync/sdk';
   import { mdiImageMinusOutline } from '@mdi/js';
   import { t } from 'svelte-i18n';
   import type { OnAction } from './action';

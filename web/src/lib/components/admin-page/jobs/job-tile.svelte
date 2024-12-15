@@ -3,7 +3,7 @@
   import CircleIconButton from '$lib/components/elements/buttons/circle-icon-button.svelte';
   import Icon from '$lib/components/elements/icon.svelte';
   import { locale } from '$lib/stores/preferences.store';
-  import { JobCommand, type JobCommandDto, type JobCountsDto, type QueueStatusDto } from '@immich/sdk';
+  import { JobCommand, type JobCommandDto, type JobCountsDto, type QueueStatusDto } from '@photosync/sdk';
   import {
     mdiAlertCircle,
     mdiAllInclusive,

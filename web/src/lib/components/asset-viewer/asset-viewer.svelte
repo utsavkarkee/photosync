@@ -31,7 +31,7 @@
     type AlbumResponseDto,
     type AssetResponseDto,
     type StackResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import { onDestroy, onMount } from 'svelte';
   import { t } from 'svelte-i18n';
   import { fly } from 'svelte/transition';

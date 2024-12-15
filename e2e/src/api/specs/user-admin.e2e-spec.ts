@@ -6,7 +6,7 @@ import {
   getUserAdmin,
   getUserPreferencesAdmin,
   login,
-} from '@immich/sdk';
+} from '@photosync/sdk';
 import { Socket } from 'socket.io-client';
 import { createUserDto, uuidDto } from 'src/fixtures';
 import { errorDto } from 'src/responses';

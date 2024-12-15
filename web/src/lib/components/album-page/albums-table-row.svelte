@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { AppRoute, dateFormats } from '$lib/constants';
-  import type { AlbumResponseDto } from '@immich/sdk';
+  import type { AlbumResponseDto } from '@photosync/sdk';
   import type { ContextMenuPosition } from '$lib/utils/context-menu';
   import { user } from '$lib/stores/user.store';
   import { locale } from '$lib/stores/preferences.store';

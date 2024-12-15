@@ -1,4 +1,4 @@
-import { LoginResponseDto, getAssetInfo, getAssetStatistics, scanLibrary } from '@immich/sdk';
+import { LoginResponseDto, getAssetInfo, getAssetStatistics, scanLibrary } from '@photosync/sdk';
 import { existsSync } from 'node:fs';
 import { Socket } from 'socket.io-client';
 import { errorDto } from 'src/responses';

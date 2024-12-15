@@ -9,7 +9,7 @@ import {
   getConfig,
   getMyUser,
   updateConfig,
-} from '@immich/sdk';
+} from '@photosync/sdk';
 import { exiftool } from 'exiftool-vendored';
 import { DateTime } from 'luxon';
 import { randomBytes } from 'node:crypto';

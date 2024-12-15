@@ -30,7 +30,7 @@
     searchPerson,
     updatePerson,
     type PersonResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import { mdiAccountOff, mdiEyeOutline } from '@mdi/js';
   import { onMount } from 'svelte';
   import { t } from 'svelte-i18n';

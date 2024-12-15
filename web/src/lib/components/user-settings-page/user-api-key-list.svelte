@@ -7,7 +7,7 @@
     Permission,
     updateApiKey,
     type ApiKeyResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import { mdiPencilOutline, mdiTrashCanOutline } from '@mdi/js';
   import { fade } from 'svelte/transition';
   import { handleError } from '../../utils/handle-error';

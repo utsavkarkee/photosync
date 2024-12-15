@@ -11,8 +11,8 @@ import {
   type AlbumViewSettings,
 } from '$lib/stores/preferences.store';
 import { handleError } from '$lib/utils/handle-error';
-import type { AlbumResponseDto } from '@immich/sdk';
-import * as sdk from '@immich/sdk';
+import type { AlbumResponseDto } from '@photosync/sdk';
+import * as sdk from '@photosync/sdk';
 import { orderBy } from 'lodash-es';
 import { t } from 'svelte-i18n';
 import { get } from 'svelte/store';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { updateAlbumInfo, type AlbumResponseDto } from '@immich/sdk';
+  import { updateAlbumInfo, type AlbumResponseDto } from '@photosync/sdk';
   import { handleError } from '$lib/utils/handle-error';
   import Button from '$lib/components/elements/buttons/button.svelte';
   import AlbumCover from '$lib/components/album-page/album-cover.svelte';

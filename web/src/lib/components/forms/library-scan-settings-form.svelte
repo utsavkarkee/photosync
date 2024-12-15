@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type LibraryResponseDto } from '@immich/sdk';
+  import { type LibraryResponseDto } from '@photosync/sdk';
   import { mdiPencilOutline } from '@mdi/js';
   import { onMount } from 'svelte';
   import { handleError } from '../../utils/handle-error';

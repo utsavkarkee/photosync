@@ -6,7 +6,7 @@
   import { AssetBucket, type AssetStore, type Viewport } from '$lib/stores/assets.store';
   import { navigate } from '$lib/utils/navigation';
   import { findTotalOffset, type DateGroup, type ScrollTargetListener } from '$lib/utils/timeline-util';
-  import type { AssetResponseDto } from '@immich/sdk';
+  import type { AssetResponseDto } from '@photosync/sdk';
   import { mdiCheckCircle, mdiCircleOutline } from '@mdi/js';
   import { onDestroy } from 'svelte';
   import { fly } from 'svelte/transition';

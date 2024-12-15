@@ -19,7 +19,7 @@
   import { AssetStore } from '$lib/stores/assets.store';
   import { featureFlags, serverConfig } from '$lib/stores/server-config.store';
   import { handleError } from '$lib/utils/handle-error';
-  import { emptyTrash, restoreTrash } from '@immich/sdk';
+  import { emptyTrash, restoreTrash } from '@photosync/sdk';
   import { mdiDeleteForeverOutline, mdiHistory } from '@mdi/js';
   import type { PageData } from './$types';
   import { handlePromiseError } from '$lib/utils';

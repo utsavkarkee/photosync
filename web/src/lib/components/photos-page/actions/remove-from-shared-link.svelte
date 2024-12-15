@@ -2,7 +2,7 @@
   import CircleIconButton from '$lib/components/elements/buttons/circle-icon-button.svelte';
   import { getKey } from '$lib/utils';
   import { handleError } from '$lib/utils/handle-error';
-  import { removeSharedLinkAssets, type SharedLinkResponseDto } from '@immich/sdk';
+  import { removeSharedLinkAssets, type SharedLinkResponseDto } from '@photosync/sdk';
   import { mdiDeleteOutline } from '@mdi/js';
   import { NotificationType, notificationController } from '../../shared-components/notification/notification';
   import { getAssetControlContext } from '../asset-select-control-bar.svelte';

@@ -7,7 +7,7 @@
   import { handlePromiseError, suggestDuplicateByFileSize } from '$lib/utils';
   import { navigate } from '$lib/utils/navigation';
   import { shortcuts } from '$lib/actions/shortcut';
-  import { type AssetResponseDto } from '@immich/sdk';
+  import { type AssetResponseDto } from '@photosync/sdk';
   import { mdiCheck, mdiTrashCanOutline, mdiImageMultipleOutline } from '@mdi/js';
   import { onDestroy, onMount } from 'svelte';
   import { t } from 'svelte-i18n';

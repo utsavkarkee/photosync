@@ -1,7 +1,7 @@
 <script lang="ts">
   import { featureFlags } from '$lib/stores/server-config.store';
   import { user } from '$lib/stores/user.store';
-  import { getConfig, type SystemConfigDto } from '@immich/sdk';
+  import { getConfig, type SystemConfigDto } from '@photosync/sdk';
   import { mdiArrowLeft, mdiCheck, mdiHarddisk } from '@mdi/js';
   import { onMount } from 'svelte';
   import AdminSettings from '$lib/components/admin-page/settings/admin-settings.svelte';

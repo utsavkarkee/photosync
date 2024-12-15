@@ -1,7 +1,7 @@
 <script lang="ts">
   import { AppRoute, QueryParameter } from '$lib/constants';
   import { getPeopleThumbnailUrl } from '$lib/utils';
-  import { type PersonResponseDto } from '@immich/sdk';
+  import { type PersonResponseDto } from '@photosync/sdk';
   import {
     mdiAccountEditOutline,
     mdiAccountMultipleCheckOutline,

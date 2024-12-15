@@ -9,7 +9,7 @@
     VideoCodec,
     VideoContainer,
     type SystemConfigDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import { mdiHelpCircleOutline } from '@mdi/js';
   import { isEqual, sortBy } from 'lodash-es';
   import { fade } from 'svelte/transition';

@@ -1,6 +1,6 @@
 import type { Faces } from '$lib/stores/people.store';
 import { getAssetThumbnailUrl } from '$lib/utils';
-import { AssetTypeEnum, type AssetFaceResponseDto } from '@immich/sdk';
+import { AssetTypeEnum, type AssetFaceResponseDto } from '@photosync/sdk';
 import type { ZoomImageWheelState } from '@zoom-image/core';
 
 const getContainedSize = (img: HTMLImageElement): { width: number; height: number } => {

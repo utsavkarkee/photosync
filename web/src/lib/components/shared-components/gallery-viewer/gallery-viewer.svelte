@@ -9,7 +9,7 @@
   import { handleError } from '$lib/utils/handle-error';
   import { navigate } from '$lib/utils/navigation';
   import { calculateWidth } from '$lib/utils/timeline-util';
-  import { type AssetResponseDto } from '@immich/sdk';
+  import { type AssetResponseDto } from '@photosync/sdk';
   import justifiedLayout from 'justified-layout';
   import { onDestroy } from 'svelte';
   import { t } from 'svelte-i18n';

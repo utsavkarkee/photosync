@@ -3,7 +3,7 @@
   import { AppRoute } from '$lib/constants';
   import { serverInfo } from '$lib/stores/server-info.store';
   import { handleError } from '$lib/utils/handle-error';
-  import { updateUserAdmin, type UserAdminResponseDto } from '@immich/sdk';
+  import { updateUserAdmin, type UserAdminResponseDto } from '@photosync/sdk';
   import { mdiAccountEditOutline } from '@mdi/js';
   import Button from '../elements/buttons/button.svelte';
   import { dialogController } from '$lib/components/shared-components/dialog/dialog';

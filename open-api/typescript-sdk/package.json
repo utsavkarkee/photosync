@@ -1,5 +1,5 @@
 {
-  "name": "@immich/sdk",
+  "name": "@photosync/sdk",
   "version": "1.120.1",
   "description": "Auto-generated TypeScript SDK for the Immich API",
   "type": "module",

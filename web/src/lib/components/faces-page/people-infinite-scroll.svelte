@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { PersonResponseDto } from '@immich/sdk';
+  import type { PersonResponseDto } from '@photosync/sdk';
 
   export let people: PersonResponseDto[];
   export let hasNextPage: boolean | undefined = undefined;

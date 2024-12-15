@@ -11,7 +11,7 @@
   import { showDeleteModal } from '$lib/stores/preferences.store';
   import { featureFlags } from '$lib/stores/server-config.store';
   import { handleError } from '$lib/utils/handle-error';
-  import { deleteAssets, type AssetResponseDto } from '@immich/sdk';
+  import { deleteAssets, type AssetResponseDto } from '@photosync/sdk';
   import { mdiDeleteForeverOutline, mdiDeleteOutline } from '@mdi/js';
   import { t } from 'svelte-i18n';
   import type { OnAction } from './action';

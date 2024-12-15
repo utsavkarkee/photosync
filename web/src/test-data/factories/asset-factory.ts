@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { AssetTypeEnum, type AssetResponseDto } from '@immich/sdk';
+import { AssetTypeEnum, type AssetResponseDto } from '@photosync/sdk';
 import { Sync } from 'factory.ts';
 
 export const assetFactory = Sync.makeFactory<AssetResponseDto>({

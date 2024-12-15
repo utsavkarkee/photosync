@@ -1,4 +1,4 @@
-import { LoginResponseDto, getConfig } from '@immich/sdk';
+import { LoginResponseDto, getConfig } from '@photosync/sdk';
 import { errorDto } from 'src/responses';
 import { app, asBearerAuth, utils } from 'src/utils';
 import request from 'supertest';

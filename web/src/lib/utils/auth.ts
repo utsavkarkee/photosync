@@ -4,7 +4,7 @@ import { foldersStore } from '$lib/stores/folders.store';
 import { purchaseStore } from '$lib/stores/purchase.store';
 import { serverInfo } from '$lib/stores/server-info.store';
 import { preferences as preferences$, resetSavedUser, user as user$ } from '$lib/stores/user.store';
-import { getAboutInfo, getMyPreferences, getMyUser, getStorage } from '@immich/sdk';
+import { getAboutInfo, getMyPreferences, getMyUser, getStorage } from '@photosync/sdk';
 import { redirect } from '@sveltejs/kit';
 import { DateTime } from 'luxon';
 import { get } from 'svelte/store';

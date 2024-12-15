@@ -20,7 +20,7 @@
   import { websocketEvents } from '$lib/stores/websocket';
   import { copyToClipboard } from '$lib/utils';
   import { getByteUnitString } from '$lib/utils/byte-units';
-  import { UserStatus, searchUsersAdmin, type UserAdminResponseDto } from '@immich/sdk';
+  import { UserStatus, searchUsersAdmin, type UserAdminResponseDto } from '@photosync/sdk';
   import { mdiContentCopy, mdiDeleteRestore, mdiInfinity, mdiPencilOutline, mdiTrashCanOutline } from '@mdi/js';
   import { DateTime } from 'luxon';
   import { onMount } from 'svelte';

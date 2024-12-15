@@ -1,6 +1,6 @@
 <script lang="ts">
   import { user } from '$lib/stores/user.store';
-  import { getConfig, type SystemConfigDto } from '@immich/sdk';
+  import { getConfig, type SystemConfigDto } from '@photosync/sdk';
   import { mdiArrowLeft, mdiArrowRight, mdiIncognito } from '@mdi/js';
   import { onMount } from 'svelte';
   import AdminSettings from '$lib/components/admin-page/settings/admin-settings.svelte';

@@ -5,7 +5,7 @@ import {
    * TODO: Incorrect type
    */
   type AssetResponseDto,
-} from '@immich/sdk';
+} from '@photosync/sdk';
 import { get, writable } from 'svelte/store';
 
 type AssetCache = {

@@ -4,7 +4,7 @@
   import { featureFlags } from '$lib/stores/server-config.store';
   import { user } from '$lib/stores/user.store';
   import { oauth } from '$lib/utils';
-  import { type ApiKeyResponseDto, type SessionResponseDto } from '@immich/sdk';
+  import { type ApiKeyResponseDto, type SessionResponseDto } from '@photosync/sdk';
   import SettingAccordionState from '../shared-components/settings/setting-accordion-state.svelte';
   import SettingAccordion from '../shared-components/settings/setting-accordion.svelte';
   import AppSettings from './app-settings.svelte';

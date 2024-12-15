@@ -1,4 +1,4 @@
-import { LoginResponseDto } from '@immich/sdk';
+import { LoginResponseDto } from '@photosync/sdk';
 import { test } from '@playwright/test';
 import { utils } from 'src/utils';
 

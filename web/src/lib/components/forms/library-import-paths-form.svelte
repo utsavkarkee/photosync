@@ -5,8 +5,8 @@
   import LibraryImportPathForm from './library-import-path-form.svelte';
   import Icon from '$lib/components/elements/icon.svelte';
   import { mdiAlertOutline, mdiCheckCircleOutline, mdiPencilOutline, mdiRefresh } from '@mdi/js';
-  import { validate, type LibraryResponseDto } from '@immich/sdk';
-  import type { ValidateLibraryImportPathResponseDto } from '@immich/sdk';
+  import { validate, type LibraryResponseDto } from '@photosync/sdk';
+  import type { ValidateLibraryImportPathResponseDto } from '@photosync/sdk';
   import { NotificationType, notificationController } from '../shared-components/notification/notification';
   import CircleIconButton from '$lib/components/elements/buttons/circle-icon-button.svelte';
   import { t } from 'svelte-i18n';

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { user } from '$lib/stores/user.store';
   import { handleError } from '$lib/utils/handle-error';
-  import { createProfileImage, type AssetResponseDto } from '@immich/sdk';
+  import { createProfileImage, type AssetResponseDto } from '@photosync/sdk';
   import domtoimage from 'dom-to-image';
   import { onMount } from 'svelte';
   import PhotoViewer from '../asset-viewer/photo-viewer.svelte';

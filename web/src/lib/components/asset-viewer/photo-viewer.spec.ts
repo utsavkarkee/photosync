@@ -1,7 +1,7 @@
 import { getAnimateMock } from '$lib/__mocks__/animate.mock';
 import PhotoViewer from '$lib/components/asset-viewer/photo-viewer.svelte';
 import * as utils from '$lib/utils';
-import { AssetMediaSize } from '@immich/sdk';
+import { AssetMediaSize } from '@photosync/sdk';
 import { assetFactory } from '@test-data/factories/asset-factory';
 import { sharedLinkFactory } from '@test-data/factories/shared-link-factory';
 import { render } from '@testing-library/svelte';

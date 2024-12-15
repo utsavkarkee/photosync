@@ -14,7 +14,7 @@
     AssetTypeEnum,
     type AssetFaceResponseDto,
     type PersonResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import Icon from '$lib/components/elements/icon.svelte';
   import { mdiAccountOff, mdiArrowLeftThin, mdiPencil, mdiRestart } from '@mdi/js';
   import { onMount } from 'svelte';

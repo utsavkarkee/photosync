@@ -1,6 +1,6 @@
 import { sdkMock } from '$lib/__mocks__/sdk.mock';
 import { AbortError } from '$lib/utils';
-import { TimeBucketSize, type AssetResponseDto } from '@immich/sdk';
+import { TimeBucketSize, type AssetResponseDto } from '@photosync/sdk';
 import { assetFactory } from '@test-data/factories/asset-factory';
 import { AssetStore } from './assets.store';
 

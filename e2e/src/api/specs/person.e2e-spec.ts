@@ -1,4 +1,4 @@
-import { LoginResponseDto, PersonResponseDto } from '@immich/sdk';
+import { LoginResponseDto, PersonResponseDto } from '@photosync/sdk';
 import { uuidDto } from 'src/fixtures';
 import { errorDto } from 'src/responses';
 import { app, utils } from 'src/utils';

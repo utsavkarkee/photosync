@@ -1,5 +1,5 @@
 import { purchaseStore } from '$lib/stores/purchase.store';
-import { type UserAdminResponseDto, type UserPreferencesResponseDto } from '@immich/sdk';
+import { type UserAdminResponseDto, type UserPreferencesResponseDto } from '@photosync/sdk';
 import { writable } from 'svelte/store';
 
 export const user = writable<UserAdminResponseDto>();

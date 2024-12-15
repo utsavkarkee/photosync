@@ -6,7 +6,7 @@
   } from '$lib/components/shared-components/notification/notification';
   import { AssetAction } from '$lib/constants';
   import { handleError } from '$lib/utils/handle-error';
-  import { restoreAssets, type AssetResponseDto } from '@immich/sdk';
+  import { restoreAssets, type AssetResponseDto } from '@photosync/sdk';
   import { mdiHistory } from '@mdi/js';
   import { t } from 'svelte-i18n';
   import type { OnAction } from './action';

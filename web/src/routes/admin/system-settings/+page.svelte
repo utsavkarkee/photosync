@@ -27,7 +27,7 @@
   import { featureFlags } from '$lib/stores/server-config.store';
   import { copyToClipboard } from '$lib/utils';
   import { downloadBlob } from '$lib/utils/asset-utils';
-  import type { SystemConfigDto } from '@immich/sdk';
+  import type { SystemConfigDto } from '@photosync/sdk';
   import {
     mdiAccountOutline,
     mdiAlert,

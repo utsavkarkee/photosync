@@ -9,7 +9,7 @@
   import SharedLinkCard from '$lib/components/sharedlinks-page/shared-link-card.svelte';
   import { AppRoute } from '$lib/constants';
   import { handleError } from '$lib/utils/handle-error';
-  import { getAllSharedLinks, removeSharedLink, type SharedLinkResponseDto } from '@immich/sdk';
+  import { getAllSharedLinks, removeSharedLink, type SharedLinkResponseDto } from '@photosync/sdk';
   import { mdiArrowLeft } from '@mdi/js';
   import { onMount } from 'svelte';
   import { dialogController } from '$lib/components/shared-components/dialog/dialog';

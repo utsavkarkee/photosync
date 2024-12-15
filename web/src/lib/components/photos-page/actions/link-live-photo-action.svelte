@@ -2,7 +2,7 @@
   import CircleIconButton from '$lib/components/elements/buttons/circle-icon-button.svelte';
   import type { OnLink, OnUnlink } from '$lib/utils/actions';
   import { handleError } from '$lib/utils/handle-error';
-  import { AssetTypeEnum, getAssetInfo, updateAsset } from '@immich/sdk';
+  import { AssetTypeEnum, getAssetInfo, updateAsset } from '@photosync/sdk';
   import { mdiLinkOff, mdiMotionPlayOutline, mdiTimerSand } from '@mdi/js';
   import { t } from 'svelte-i18n';
   import MenuOption from '../../shared-components/context-menu/menu-option.svelte';

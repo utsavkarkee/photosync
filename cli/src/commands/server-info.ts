@@ -1,4 +1,4 @@
-import { getAssetStatistics, getMyUser, getServerVersion, getSupportedMediaTypes } from '@immich/sdk';
+import { getAssetStatistics, getMyUser, getServerVersion, getSupportedMediaTypes } from '@photosync/sdk';
 import { BaseOptions, authenticate } from 'src/utils';
 
 export const serverInfo = async (options: BaseOptions) => {

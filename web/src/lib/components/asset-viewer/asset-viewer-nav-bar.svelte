@@ -27,7 +27,7 @@
     type AlbumResponseDto,
     type AssetResponseDto,
     type StackResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import {
     mdiAlertOutline,
     mdiCogRefreshOutline,

@@ -1,4 +1,4 @@
-import { LoginResponseDto, login, signUpAdmin } from '@immich/sdk';
+import { LoginResponseDto, login, signUpAdmin } from '@photosync/sdk';
 import { loginDto, signupDto } from 'src/fixtures';
 import { errorDto, loginResponseDto, signupResponseDto } from 'src/responses';
 import { app, utils } from 'src/utils';

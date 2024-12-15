@@ -1,6 +1,6 @@
 import { authenticate } from '$lib/utils/auth';
 import { getFormatter } from '$lib/utils/i18n';
-import { getAssetsByCity } from '@immich/sdk';
+import { getAssetsByCity } from '@photosync/sdk';
 import type { PageLoad } from './$types';
 
 export const load = (async () => {

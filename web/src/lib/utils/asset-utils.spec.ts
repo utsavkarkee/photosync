@@ -1,4 +1,4 @@
-import type { AssetResponseDto } from '@immich/sdk';
+import type { AssetResponseDto } from '@photosync/sdk';
 import { canCopyImageToClipboard, getAssetFilename, getFilenameExtension } from './asset-utils';
 
 describe('get file extension from filename', () => {

@@ -7,7 +7,7 @@
     updatePartner,
     type PartnerResponseDto,
     type UserResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import { mdiCheck, mdiClose } from '@mdi/js';
   import { onMount } from 'svelte';
   import { handleError } from '../../utils/handle-error';

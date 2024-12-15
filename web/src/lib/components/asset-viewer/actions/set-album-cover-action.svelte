@@ -5,7 +5,7 @@
     NotificationType,
   } from '$lib/components/shared-components/notification/notification';
   import { handleError } from '$lib/utils/handle-error';
-  import { updateAlbumInfo, type AlbumResponseDto, type AssetResponseDto } from '@immich/sdk';
+  import { updateAlbumInfo, type AlbumResponseDto, type AssetResponseDto } from '@photosync/sdk';
   import { mdiImageOutline } from '@mdi/js';
   import { t } from 'svelte-i18n';
 

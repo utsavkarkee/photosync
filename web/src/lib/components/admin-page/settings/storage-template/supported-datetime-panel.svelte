@@ -1,6 +1,6 @@
 <script lang="ts">
   import { locale } from '$lib/stores/preferences.store';
-  import type { SystemConfigTemplateStorageOptionDto } from '@immich/sdk';
+  import type { SystemConfigTemplateStorageOptionDto } from '@photosync/sdk';
   import { DateTime } from 'luxon';
   import { t } from 'svelte-i18n';
 

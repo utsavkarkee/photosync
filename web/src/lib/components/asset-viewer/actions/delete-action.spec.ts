@@ -1,4 +1,4 @@
-import type { AssetResponseDto } from '@immich/sdk';
+import type { AssetResponseDto } from '@photosync/sdk';
 import { assetFactory } from '@test-data/factories/asset-factory';
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/svelte';

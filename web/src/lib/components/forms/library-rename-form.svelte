@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { LibraryResponseDto } from '@immich/sdk';
+  import type { LibraryResponseDto } from '@photosync/sdk';
   import Button from '../elements/buttons/button.svelte';
   import { t } from 'svelte-i18n';
 

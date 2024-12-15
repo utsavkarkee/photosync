@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { updateAlbumInfo } from '@immich/sdk';
+  import { updateAlbumInfo } from '@photosync/sdk';
   import { handleError } from '$lib/utils/handle-error';
   import AutogrowTextarea from '$lib/components/shared-components/autogrow-textarea.svelte';
   import { t } from 'svelte-i18n';

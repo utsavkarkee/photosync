@@ -4,7 +4,7 @@
   import ConfirmDialog from '$lib/components/shared-components/dialog/confirm-dialog.svelte';
   import { serverConfig } from '$lib/stores/server-config.store';
   import { handleError } from '$lib/utils/handle-error';
-  import { deleteUserAdmin, type UserResponseDto } from '@immich/sdk';
+  import { deleteUserAdmin, type UserResponseDto } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
 
   export let user: UserResponseDto;

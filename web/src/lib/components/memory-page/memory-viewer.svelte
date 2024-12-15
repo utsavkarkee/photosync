@@ -24,7 +24,7 @@
   import { locale } from '$lib/stores/preferences.store';
   import { getAssetThumbnailUrl, handlePromiseError, memoryLaneTitle } from '$lib/utils';
   import { fromLocalDateTime } from '$lib/utils/timeline-util';
-  import { AssetMediaSize, getMemoryLane, type AssetResponseDto, type MemoryLaneResponseDto } from '@immich/sdk';
+  import { AssetMediaSize, getMemoryLane, type AssetResponseDto, type MemoryLaneResponseDto } from '@photosync/sdk';
   import {
     mdiChevronDown,
     mdiChevronLeft,

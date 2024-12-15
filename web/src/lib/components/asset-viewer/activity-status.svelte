@@ -1,6 +1,6 @@
 <script lang="ts">
   import { locale } from '$lib/stores/preferences.store';
-  import type { ActivityResponseDto } from '@immich/sdk';
+  import type { ActivityResponseDto } from '@photosync/sdk';
   import { mdiCommentOutline, mdiHeart, mdiHeartOutline } from '@mdi/js';
   import Icon from '../elements/icon.svelte';
 

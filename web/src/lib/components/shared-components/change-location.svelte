@@ -7,7 +7,7 @@
   import LoadingSpinner from './loading-spinner.svelte';
   import { delay } from '$lib/utils/asset-utils';
   import { timeToLoadTheMap } from '$lib/constants';
-  import { searchPlaces, type AssetResponseDto, type PlacesResponseDto } from '@immich/sdk';
+  import { searchPlaces, type AssetResponseDto, type PlacesResponseDto } from '@photosync/sdk';
   import SearchBar from '../elements/search-bar.svelte';
   import { listNavigation } from '$lib/actions/list-navigation';
   import { t } from 'svelte-i18n';

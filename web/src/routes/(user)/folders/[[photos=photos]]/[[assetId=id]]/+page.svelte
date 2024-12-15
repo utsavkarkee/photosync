@@ -10,7 +10,7 @@
   import type { Viewport } from '$lib/stores/assets.store';
   import { foldersStore } from '$lib/stores/folders.store';
   import { buildTree, normalizeTreePath } from '$lib/utils/tree-utils';
-  import { type AssetResponseDto } from '@immich/sdk';
+  import { type AssetResponseDto } from '@photosync/sdk';
   import { mdiFolder, mdiFolderHome, mdiFolderOutline } from '@mdi/js';
   import { onMount } from 'svelte';
   import { t } from 'svelte-i18n';

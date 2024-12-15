@@ -2,6 +2,7 @@ import { NotificationType, notificationController } from '$lib/components/shared
 import { defaultLang, langs, locales } from '$lib/constants';
 import { lang } from '$lib/stores/preferences.store';
 import { handleError } from '$lib/utils/handle-error';
+import { mdiCogRefreshOutline, mdiDatabaseRefreshOutline, mdiHeadSyncOutline, mdiImageRefreshOutline } from '@mdi/js';
 import {
   AssetJobName,
   AssetMediaSize,
@@ -20,8 +21,7 @@ import {
   type PersonResponseDto,
   type SharedLinkResponseDto,
   type UserResponseDto,
-} from '@immich/sdk';
-import { mdiCogRefreshOutline, mdiDatabaseRefreshOutline, mdiHeadSyncOutline, mdiImageRefreshOutline } from '@mdi/js';
+} from '@photosync/sdk';
 import { sortBy } from 'lodash-es';
 import { init, register, t } from 'svelte-i18n';
 import { derived, get } from 'svelte/store';

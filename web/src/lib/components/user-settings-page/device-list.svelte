@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { deleteAllSessions, deleteSession, getSessions, type SessionResponseDto } from '@immich/sdk';
+  import { deleteAllSessions, deleteSession, getSessions, type SessionResponseDto } from '@photosync/sdk';
   import { handleError } from '../../utils/handle-error';
   import Button from '../elements/buttons/button.svelte';
   import { notificationController, NotificationType } from '../shared-components/notification/notification';

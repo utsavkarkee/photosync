@@ -3,7 +3,7 @@
   import { assetViewingStore } from '$lib/stores/asset-viewing.store';
   import { dragAndDropFilesStore } from '$lib/stores/drag-and-drop-files.store';
   import { fileUploadHandler, openFileUploadDialog } from '$lib/utils/file-uploader';
-  import type { AlbumResponseDto, SharedLinkResponseDto, UserResponseDto } from '@immich/sdk';
+  import type { AlbumResponseDto, SharedLinkResponseDto, UserResponseDto } from '@photosync/sdk';
   import { createAssetInteractionStore } from '$lib/stores/asset-interaction.store';
   import { AssetStore } from '$lib/stores/assets.store';
   import { cancelMultiselect, downloadAlbum } from '$lib/utils/asset-utils';

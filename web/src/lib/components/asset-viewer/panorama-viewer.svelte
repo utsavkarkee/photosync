@@ -2,7 +2,7 @@
   import { alwaysLoadOriginalFile } from '$lib/stores/preferences.store';
   import { getAssetOriginalUrl, getKey } from '$lib/utils';
   import { isWebCompatibleImage } from '$lib/utils/asset-utils';
-  import { AssetMediaSize, AssetTypeEnum, viewAsset, type AssetResponseDto } from '@immich/sdk';
+  import { AssetMediaSize, AssetTypeEnum, viewAsset, type AssetResponseDto } from '@photosync/sdk';
   import type { AdapterConstructor, PluginConstructor } from '@photo-sphere-viewer/core';
   import { t } from 'svelte-i18n';
   import { fade } from 'svelte/transition';

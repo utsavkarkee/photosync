@@ -1,5 +1,5 @@
 import { preferences } from '$lib/stores/user.store';
-import { updateMyPreferences } from '@immich/sdk';
+import { updateMyPreferences } from '@photosync/sdk';
 import { DateTime } from 'luxon';
 import { get } from 'svelte/store';
 

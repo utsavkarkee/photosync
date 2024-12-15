@@ -1,4 +1,4 @@
-import { AssetMediaResponseDto, LoginResponseDto } from '@immich/sdk';
+import { AssetMediaResponseDto, LoginResponseDto } from '@photosync/sdk';
 import { Page, expect, test } from '@playwright/test';
 import { utils } from 'src/utils';
 

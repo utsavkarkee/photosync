@@ -41,7 +41,7 @@
     updatePerson,
     type AssetResponseDto,
     type PersonResponseDto,
-  } from '@immich/sdk';
+  } from '@photosync/sdk';
   import {
     mdiAccountBoxOutline,
     mdiAccountMultipleCheckOutline,

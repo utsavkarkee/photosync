@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { AlbumResponseDto } from '@immich/sdk';
+  import type { AlbumResponseDto } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
 
   export let album: AlbumResponseDto;

@@ -1,4 +1,4 @@
-import { LoginResponseDto, createPartner } from '@immich/sdk';
+import { LoginResponseDto, createPartner } from '@photosync/sdk';
 import { createUserDto } from 'src/fixtures';
 import { errorDto } from 'src/responses';
 import { app, asBearerAuth, utils } from 'src/utils';

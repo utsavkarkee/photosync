@@ -7,7 +7,7 @@
   } from '$lib/components/shared-components/notification/notification';
   import type { OnFavorite } from '$lib/utils/actions';
   import { handleError } from '$lib/utils/handle-error';
-  import { updateAssets } from '@immich/sdk';
+  import { updateAssets } from '@photosync/sdk';
   import { mdiHeartMinusOutline, mdiHeartOutline, mdiTimerSand } from '@mdi/js';
   import { getAssetControlContext } from '../asset-select-control-bar.svelte';
   import { t } from 'svelte-i18n';

@@ -4,7 +4,7 @@
   import { serverInfo } from '$lib/stores/server-info.store';
   import { ByteUnit, convertToBytes } from '$lib/utils/byte-units';
   import { handleError } from '$lib/utils/handle-error';
-  import { createUserAdmin } from '@immich/sdk';
+  import { createUserAdmin } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
   import Button from '../elements/buttons/button.svelte';
   import Slider from '../elements/slider.svelte';

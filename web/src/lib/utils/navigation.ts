@@ -1,7 +1,7 @@
 import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import { AppRoute } from '$lib/constants';
-import { getAssetInfo } from '@immich/sdk';
+import { getAssetInfo } from '@photosync/sdk';
 import type { NavigationTarget } from '@sveltejs/kit';
 import { get } from 'svelte/store';
 

@@ -3,7 +3,7 @@
   import MenuOption from '$lib/components/shared-components/context-menu/menu-option.svelte';
   import { serverConfig } from '$lib/stores/server-config.store';
   import { copyToClipboard, makeSharedLinkUrl } from '$lib/utils';
-  import type { SharedLinkResponseDto } from '@immich/sdk';
+  import type { SharedLinkResponseDto } from '@photosync/sdk';
   import { mdiContentCopy } from '@mdi/js';
   import { t } from 'svelte-i18n';
 

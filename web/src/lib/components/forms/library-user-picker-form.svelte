@@ -3,7 +3,7 @@
   import FullScreenModal from '../shared-components/full-screen-modal.svelte';
   import { mdiFolderSync } from '@mdi/js';
   import { onMount } from 'svelte';
-  import { searchUsersAdmin } from '@immich/sdk';
+  import { searchUsersAdmin } from '@photosync/sdk';
   import { user } from '$lib/stores/user.store';
   import SettingSelect from '$lib/components/shared-components/settings/setting-select.svelte';
   import { t } from 'svelte-i18n';

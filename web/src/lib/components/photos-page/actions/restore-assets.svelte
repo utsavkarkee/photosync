@@ -6,7 +6,7 @@
   } from '$lib/components/shared-components/notification/notification';
   import type { OnRestore } from '$lib/utils/actions';
   import { handleError } from '$lib/utils/handle-error';
-  import { restoreAssets } from '@immich/sdk';
+  import { restoreAssets } from '@photosync/sdk';
   import { mdiHistory } from '@mdi/js';
   import Button from '../../elements/buttons/button.svelte';
   import { getAssetControlContext } from '../asset-select-control-bar.svelte';

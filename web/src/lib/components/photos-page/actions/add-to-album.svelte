@@ -2,7 +2,7 @@
   import AlbumSelectionModal from '$lib/components/shared-components/album-selection-modal.svelte';
   import MenuOption from '$lib/components/shared-components/context-menu/menu-option.svelte';
   import { addAssetsToAlbum, addAssetsToNewAlbum } from '$lib/utils/asset-utils';
-  import type { AlbumResponseDto } from '@immich/sdk';
+  import type { AlbumResponseDto } from '@photosync/sdk';
   import { getAssetControlContext } from '../asset-select-control-bar.svelte';
   import { mdiImageAlbum, mdiShareVariantOutline } from '@mdi/js';
   import { t } from 'svelte-i18n';

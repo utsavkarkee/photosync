@@ -1,6 +1,6 @@
 import { authenticate, requestServerInfo } from '$lib/utils/auth';
 import { getFormatter } from '$lib/utils/i18n';
-import { searchUsersAdmin } from '@immich/sdk';
+import { searchUsersAdmin } from '@photosync/sdk';
 import type { PageLoad } from './$types';
 
 export const load = (async () => {

@@ -1,5 +1,5 @@
 import type { AssetAction } from '$lib/constants';
-import type { AlbumResponseDto, AssetResponseDto } from '@immich/sdk';
+import type { AlbumResponseDto, AssetResponseDto } from '@photosync/sdk';
 
 type ActionMap = {
   [AssetAction.ARCHIVE]: { asset: AssetResponseDto };

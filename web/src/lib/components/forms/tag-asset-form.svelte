@@ -5,7 +5,7 @@
   import Combobox, { type ComboBoxOption } from '../shared-components/combobox.svelte';
   import FullScreenModal from '../shared-components/full-screen-modal.svelte';
   import { onMount } from 'svelte';
-  import { getAllTags, type TagResponseDto } from '@immich/sdk';
+  import { getAllTags, type TagResponseDto } from '@photosync/sdk';
   import Icon from '$lib/components/elements/icon.svelte';
   import { AppRoute } from '$lib/constants';
   import FormatMessage from '$lib/components/i18n/format-message.svelte';

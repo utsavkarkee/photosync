@@ -12,7 +12,7 @@
   import { AppRoute } from '$lib/constants';
   import { asyncTimeout } from '$lib/utils';
   import { handleError } from '$lib/utils/handle-error';
-  import { createJob, getAllJobsStatus, ManualJobName, type AllJobStatusResponseDto } from '@immich/sdk';
+  import { createJob, getAllJobsStatus, ManualJobName, type AllJobStatusResponseDto } from '@photosync/sdk';
   import { mdiCog, mdiPlus } from '@mdi/js';
   import { onDestroy, onMount } from 'svelte';
   import { t } from 'svelte-i18n';

@@ -1,4 +1,4 @@
-import { Permission } from '@immich/sdk';
+import { Permission } from '@photosync/sdk';
 import { stat } from 'node:fs/promises';
 import { app, immichCli, utils } from 'src/utils';
 import { beforeEach, describe, expect, it } from 'vitest';

@@ -25,7 +25,7 @@
   import { preferences, user } from '$lib/stores/user.store';
   import type { OnLink, OnUnlink } from '$lib/utils/actions';
   import { openFileUploadDialog } from '$lib/utils/file-uploader';
-  import { AssetTypeEnum } from '@immich/sdk';
+  import { AssetTypeEnum } from '@photosync/sdk';
   import { mdiDotsVertical, mdiPlus } from '@mdi/js';
   import { onDestroy } from 'svelte';
   import { t } from 'svelte-i18n';

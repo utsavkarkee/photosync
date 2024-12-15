@@ -1,4 +1,4 @@
-import { isHttpError } from '@immich/sdk';
+import { isHttpError } from '@photosync/sdk';
 import { notificationController, NotificationType } from '../components/shared-components/notification/notification';
 
 export function getServerErrorMessage(error: unknown) {

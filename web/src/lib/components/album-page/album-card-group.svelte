@@ -2,7 +2,7 @@
   import { flip } from 'svelte/animate';
   import { slide } from 'svelte/transition';
   import { AppRoute } from '$lib/constants';
-  import type { AlbumResponseDto } from '@immich/sdk';
+  import type { AlbumResponseDto } from '@photosync/sdk';
   import { albumViewSettings } from '$lib/stores/preferences.store';
   import type { ContextMenuPosition } from '$lib/utils/context-menu';
   import { type AlbumGroup, isAlbumGroupCollapsed, toggleAlbumGroupCollapsing } from '$lib/utils/album-utils';

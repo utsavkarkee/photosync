@@ -11,7 +11,7 @@ import {
   getBaseUrl,
   getSupportedMediaTypes,
   type AssetMediaResponseDto,
-} from '@immich/sdk';
+} from '@photosync/sdk';
 import { tick } from 'svelte';
 import { t } from 'svelte-i18n';
 import { get } from 'svelte/store';

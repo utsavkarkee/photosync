@@ -3,7 +3,7 @@
   import { user } from '$lib/stores/user.store';
   import { getSelectedAssets } from '$lib/utils/asset-utils';
   import { handleError } from '$lib/utils/handle-error';
-  import { updateAssets } from '@immich/sdk';
+  import { updateAssets } from '@photosync/sdk';
   import { DateTime } from 'luxon';
   import MenuOption from '../../shared-components/context-menu/menu-option.svelte';
   import { getAssetControlContext } from '../asset-select-control-bar.svelte';

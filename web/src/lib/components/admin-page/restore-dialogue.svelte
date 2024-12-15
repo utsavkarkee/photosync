@@ -2,7 +2,7 @@
   import FormatMessage from '$lib/components/i18n/format-message.svelte';
   import ConfirmDialog from '$lib/components/shared-components/dialog/confirm-dialog.svelte';
   import { handleError } from '$lib/utils/handle-error';
-  import { restoreUserAdmin, type UserResponseDto } from '@immich/sdk';
+  import { restoreUserAdmin, type UserResponseDto } from '@photosync/sdk';
   import { t } from 'svelte-i18n';
 
   export let user: UserResponseDto;

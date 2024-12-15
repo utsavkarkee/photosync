@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { SharedLinkResponseDto } from '@immich/sdk';
+  import type { SharedLinkResponseDto } from '@photosync/sdk';
   import AlbumCover from '$lib/components/album-page/album-cover.svelte';
   import NoCover from '$lib/components/sharedlinks-page/covers/no-cover.svelte';
   import AssetCover from '$lib/components/sharedlinks-page/covers/asset-cover.svelte';

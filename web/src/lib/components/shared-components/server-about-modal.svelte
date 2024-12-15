@@ -1,7 +1,7 @@
 <script lang="ts">
   import FullScreenModal from '$lib/components/shared-components/full-screen-modal.svelte';
   import Portal from '$lib/components/shared-components/portal/portal.svelte';
-  import { type ServerAboutResponseDto, type ServerVersionHistoryResponseDto } from '@immich/sdk';
+  import { type ServerAboutResponseDto, type ServerVersionHistoryResponseDto } from '@photosync/sdk';
   import { DateTime } from 'luxon';
   import { t } from 'svelte-i18n';
   import { mdiAlert } from '@mdi/js';
