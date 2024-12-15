@@ -8,7 +8,7 @@ body:
 
         If you have a feature or enhancement request, please use the [feature request][fr] section of our [GitHub Discussions][fr].
 
-        [fr]: https://github.com/immich-app/immich/discussions/new?category=feature-request
+        [fr]: https://github.com/wonderkidshihab/photo-backup/discussions/new?category=feature-request
 
   - type: textarea
     validations:
@@ -77,7 +77,7 @@ body:
     id: repro
     attributes:
       label: Reproduction steps
-      description: "How do you trigger this bug? Please walk us through it step by step."
+      description: 'How do you trigger this bug? Please walk us through it step by step.'
       value: |
         1.
         2.
@@ -90,12 +90,13 @@ body:
     id: logs
     attributes:
       label: Relevant log output
-      description: Please copy and paste any relevant logs below. (code formatting is
+      description:
+        Please copy and paste any relevant logs below. (code formatting is
         enabled, no need for backticks)
       render: shell
     validations:
       required: false
-      
+
   - type: textarea
     attributes:
       label: Additional information

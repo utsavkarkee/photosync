@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/immich-app/immich.git",
+    "url": "git+https://github.com/wonderkidshihab/photo-backup.git",
     "directory": "open-api/typescript-sdk"
   },
   "volta": {

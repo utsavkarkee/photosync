@@ -41,7 +41,7 @@ export class ServerService extends BaseService {
 
     return {
       version,
-      versionUrl: `https://github.com/immich-app/immich/releases/tag/${version}`,
+      versionUrl: `https://github.com/wonderkidshihab/photo-backup/releases/tag/${version}`,
       licensed: !!licensed,
       ...buildMetadata,
       ...buildVersions,

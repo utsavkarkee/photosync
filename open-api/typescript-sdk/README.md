@@ -10,7 +10,7 @@ npm i --save @photosync/sdk
 
 ## Usage
 
-For a more detailed example, check out the [`@immich/cli`](https://github.com/immich-app/immich/tree/main/cli).
+For a more detailed example, check out the [`@immich/cli`](https://github.com/wonderkidshihab/photo-backup/tree/main/cli).
 
 ```typescript
 import { getAllAlbums, getMyUser, init } from "@photosync/sdk";

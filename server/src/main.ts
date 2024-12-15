@@ -56,7 +56,7 @@ function bootstrap() {
 
   if (immichApp === 'immich' || immichApp === 'microservices') {
     console.error(
-      `Using "start.sh ${immichApp}" has been deprecated. See https://github.com/immich-app/immich/releases/tag/v1.118.0 for more information.`,
+      `Using "start.sh ${immichApp}" has been deprecated. See https://github.com/wonderkidshihab/photo-backup/releases/tag/v1.118.0 for more information.`,
     );
     process.exit(1);
   }
