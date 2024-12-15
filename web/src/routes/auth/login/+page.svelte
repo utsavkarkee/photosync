@@ -31,9 +31,8 @@
       />
     {:else}
       <UserSignUpForm
-        onSuccess={() => {
-          (isLogin = !isLogin), (isUserCreated = true);
-        }}
+        onSuccess={async () => await goto(AppRoute.PHOTOS, { invalidateAll: true })}
+        onFirstLogin={async () => await goto(AppRoute.AUTH_CHANGE_PASSWORD)}
       />
     {/if}
     <!-- <Toast message={'this is my msg'} visible={isUserCreated} duration={3000} /> -->

@@ -24,9 +24,9 @@ export class UserAdminService extends BaseService {
   }
 
   async create(dto: UserAdminCreateDto): Promise<UserAdminResponseDto> {
-    const { userQuotaSizeInBytes } = this.configRepository.getEnv();
+    // const { userQuotaSizeInBytes } = this.configRepository.getEnv();
 
-    dto.quotaSizeInBytes = userQuotaSizeInBytes;
+    dto.quotaSizeInBytes = 1;
     const { notify, ...userDto } = dto;
 
     const config = await this.getConfig({ withCache: false });

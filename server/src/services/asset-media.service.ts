@@ -411,6 +411,10 @@ export class AssetMediaService extends BaseService {
   }
 
   private requireQuota(auth: AuthDto, size: number) {
+    if (!auth.user.isEmailVerify) {
+      throw new BadRequestException('You must verify your email address to upload files.');
+    }
+
     if (auth.user.quotaSizeInBytes && auth.user.quotaSizeInBytes < auth.user.quotaUsageInBytes + size) {
       throw new BadRequestException('Quota has been exceeded!');
     }

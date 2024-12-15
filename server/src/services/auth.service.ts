@@ -431,8 +431,7 @@ export class AuthService extends BaseService {
 
     const now = new Date();
 
-    console.log(now, tokenExpDate);
-    console.log(now < tokenExpDate);
+  
     return now <= tokenExpDate;
   }
 
