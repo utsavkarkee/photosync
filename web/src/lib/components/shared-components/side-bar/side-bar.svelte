@@ -53,18 +53,18 @@
       </svelte:fragment>
     </SideBarLink>
 
-    {#if $featureFlags.search}
+    <!-- {#if $featureFlags.search}
       <SideBarLink title={$t('explore')} routeId="/(user)/explore" icon={mdiMagnify} />
-    {/if}
+    {/if} -->
 
-    {#if $featureFlags.map}
+    <!-- {#if $featureFlags.map}
       <SideBarLink
         title={$t('map')}
         routeId="/(user)/map"
         bind:isSelected={isMapSelected}
         icon={isMapSelected ? mdiMap : mdiMapOutline}
       />
-    {/if}
+    {/if} -->
 
     {#if $preferences.people.enabled && $preferences.people.sidebarWeb}
       <SideBarLink
@@ -75,7 +75,7 @@
       />
     {/if}
 
-    <SideBarLink
+    <!-- <SideBarLink
       title={$t('sharing')}
       routeId="/(user)/sharing"
       icon={isSharingSelected ? mdiAccountMultiple : mdiAccountMultipleOutline}
@@ -84,7 +84,7 @@
       <svelte:fragment slot="moreInformation">
         <MoreInformationAlbums albumType="shared" />
       </svelte:fragment>
-    </SideBarLink>
+    </SideBarLink> -->
 
     <div class="text-xs transition-all duration-200 dark:text-immich-dark-fg">
       <p class="hidden p-6 group-hover:sm:block md:block">{$t('library').toUpperCase()}</p>
