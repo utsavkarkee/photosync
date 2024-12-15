@@ -493,13 +493,13 @@
               />
             {/if}
 
-            <!-- {#if isOwned}
+            {#if isOwned}
               <CircleIconButton
                 title={$t('share')}
                 on:click={() => (viewMode = ViewMode.SELECT_USERS)}
                 icon={mdiShareVariantOutline}
               />
-            {/if} -->
+            {/if}
 
             {#if album.assetCount > 0}
               <CircleIconButton title={$t('slideshow')} on:click={handleStartSlideshow} icon={mdiPresentationPlay} />

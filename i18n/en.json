@@ -872,6 +872,10 @@
   "no_albums_yet": "It looks like you do not have any albums yet.",
   "no_archived_assets_message": "Archive photos and videos to hide them from your Photos view",
   "no_assets_message": "CLICK TO UPLOAD YOUR FIRST PHOTO",
+"verify_email_message": "CLICK TO VERIFY YOUR EMAIL",
+"verify_email": "Verify your email",
+
+
   "no_duplicates_found": "No duplicates were found.",
   "no_exif_info_available": "No exif info available",
   "no_explore_results_message": "Upload more photos to explore your collection.",

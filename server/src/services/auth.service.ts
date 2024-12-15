@@ -150,11 +150,13 @@ export class AuthService extends BaseService {
         'Invalid or expired token. Please ensure your token is correct and has not expired.',
       );
     }
-
+    const { userQuotaSizeInBytes } = this.configRepository.getEnv();
+    console.log(userQuotaSizeInBytes, user.quotaSizeInBytes)
     const updatedUser = await this.userRepository.update(user.id, {
       isEmailVerify: true,
       resetToken: undefined,
       expireResetToken: undefined,
+      quotaSizeInBytes: userQuotaSizeInBytes,
     });
 
     return true;
@@ -189,11 +191,11 @@ export class AuthService extends BaseService {
       throw new BadRequestException('User already verified ');
     }
 
-    const { token, expTime } = await this.generateTokenAndExp();
+    const { token, expTime } = await this.generateTokenAndExp('otp');
 
     await this.userRepository.update(user.id, { ...user, emailVerifyToken: token, expireEmailVerifyToken: expTime });
 
-    await this.eventRepository.emit('user.forgetPassword', {
+    await this.eventRepository.emit('user.send-verification-email', {
       id: user.id,
     });
 
@@ -207,7 +209,7 @@ export class AuthService extends BaseService {
       throw new UnauthorizedException();
     }
 
-    return  this.validateToken(token, user, type);
+    return this.validateToken(token, user, type);
   }
 
   async adminSignUp(dto: SignUpDto): Promise<UserAdminResponseDto> {
@@ -431,7 +433,6 @@ export class AuthService extends BaseService {
 
     const now = new Date();
 
-  
     return now <= tokenExpDate;
   }
 
@@ -477,9 +478,15 @@ export class AuthService extends BaseService {
     throw new UnauthorizedException('Invalid user token');
   }
 
-  private generateTokenAndExp = async () => {
-    const token = await this.cryptoRepository.hashBcrypt(DateTime.now.toString(), SALT_ROUNDS);
-
+  private generateOTP = () => {
+    // Generate a random number between 1000 and 9999
+    const otp = Math.floor(1000 + Math.random() * 9000);
+    return otp.toString(); // Return as a string (for consistency)
+  };
+  private generateTokenAndExp = async (type: 'token' | 'otp' = 'token') => {
+    let token = '';
+    if (type === 'token') token = await this.cryptoRepository.hashBcrypt(DateTime.now.toString(), SALT_ROUNDS);
+    else token = this.generateOTP();
     const expTime = new Date();
     expTime.setMinutes(expTime.getMinutes() + TOKEN_EXP_TIME);
 

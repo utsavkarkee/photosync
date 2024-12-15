@@ -234,8 +234,7 @@ export class NotificationService extends BaseService {
       data: {
         baseUrl: getExternalDomain(server, port),
         displayName: user.name,
-        verificationLink:
-          getExternalDomain(server, port) + '/verify' + '?email=' + user.email + '&token=' + user.emailVerifyToken,
+        code: user.emailVerifyToken,
       },
     });
 

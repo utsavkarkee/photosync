@@ -150,3 +150,4 @@
 {#if $user?.isAdmin}
   <VersionAnnouncementBox />
 {/if}
+

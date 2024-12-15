@@ -139,6 +139,7 @@ export class UserAdminResponseDto extends UserResponseDto {
   @ApiProperty({ enumName: 'UserStatus', enum: UserStatus })
   status!: string;
   license!: UserLicense | null;
+  isEmailVerify!: boolean;
 }
 
 export function mapUserAdmin(entity: UserEntity): UserAdminResponseDto {
@@ -158,5 +159,6 @@ export function mapUserAdmin(entity: UserEntity): UserAdminResponseDto {
     quotaUsageInBytes: entity.quotaUsageInBytes,
     status: entity.status,
     license: license ?? null,
+    isEmailVerify: entity.isEmailVerify,
   };
 }

@@ -77,7 +77,8 @@ export const uploadRequest = async <T>(options: UploadRequestOptions): Promise<{
       if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300) {
         resolve({ data: xhr.response as T, status: xhr.status });
       } else {
-        reject(new ApiError(xhr.statusText, xhr.status, xhr.response));
+        notificationController.show({ message: xhr.response['message'], type: NotificationType.Error });
+        reject(new ApiError(xhr.statusText.toString(), xhr.status, xhr.response));
       }
     });
 

@@ -4,36 +4,30 @@ import { ImmichButton } from 'src/emails/components/button.component';
 import ImmichLayout from 'src/emails/components/immich.layout';
 import { VerifyEmailProps } from 'src/interfaces/notification.interface';
 
-export const VerifyEmail = ({ baseUrl, displayName, verificationLink }: VerifyEmailProps) => (
+export const VerifyEmail = ({ baseUrl, displayName, code }: VerifyEmailProps) => (
   <ImmichLayout preview="Verify your email to activate your Immich account.">
     <Text className="m-0">
       Hello <strong>{displayName}</strong>,
     </Text>
 
-    <Text>
-      Thank you for signing up for Immich! Please verify your email address to activate your account.
-    </Text>
+    <Text>Thank you for signing up for Immich! Please verify your email address to activate your account.</Text>
 
-    <Section className="flex justify-center my-6">
-      <ImmichButton href={verificationLink}>Verify Email</ImmichButton>
-    </Section>
+    <div className="flex items-center mt-4 gap-x-4">
+      {Array.from(code).map((x) => (
+        <p className="flex items-center justify-center w-10 h-10 text-2xl font-medium text-[#365CCE] border border-[#365CCE] rounded-md">
+          {x}
+        </p>
+      ))}
+    </div>
 
-    <Text className="text-xs">
-      If you cannot click the button, use the link below to verify your email:
-      <br />
-      <Link href={verificationLink}>{verificationLink}</Link>
-    </Text>
-
-    <Text>
-      If you did not sign up for an Immich account, please disregard this email.
-    </Text>
+    <Text>If you did not sign up for an Immich account, please disregard this email.</Text>
   </ImmichLayout>
 );
 
 VerifyEmail.PreviewProps = {
   baseUrl: 'https://demo.immich.app',
   displayName: 'Alan Turing',
-  verificationLink: 'https://demo.immich.app/auth/verify-email?token=exampletoken',
+  code: '234',
 } as VerifyEmailProps;
 
 export default VerifyEmail;

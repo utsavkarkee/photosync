@@ -62,6 +62,7 @@ export type UserAdminResponseDto = {
   status: UserStatus;
   storageLabel: string | null;
   updatedAt: string;
+  isEmailVerify: boolean;
 };
 export type UserAdminCreateDto = {
   email: string;
@@ -467,6 +468,10 @@ export type ResetPasswordDto = {
   email: string;
   token: string;
   newPassword: string;
+};
+export type VerifyEmailDto = {
+  email: string;
+  token: string;
 };
 
 export type ValidateTokenDto = {
@@ -2510,7 +2515,28 @@ export function resetPassword(
     )
   );
 }
-
+export function verifyEmailToken(
+  {
+    verifyEmail,
+  }: {
+    verifyEmail: VerifyEmailDto;
+  },
+  opts?: Oazapfts.RequestOpts
+) {
+  return oazapfts.ok(
+    oazapfts.fetchJson<{
+      status: 200;
+      data: LoginResponseDto;
+    }>(
+      '/auth/verify-email',
+      oazapfts.json({
+        ...opts,
+        method: 'POST',
+        body: verifyEmail,
+      })
+    )
+  );
+}
 export function validateToken(
   {
     validateToken,
@@ -2533,6 +2559,21 @@ export function validateToken(
     )
   );
 }
+export function sendVerificationEmail({}: {}, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.ok(
+    oazapfts.fetchJson<{
+      status: 200;
+      data: boolean;
+    }>(
+      '/auth/send-verification-email',
+      oazapfts.json({
+        ...opts,
+        method: 'POST',
+      })
+    )
+  );
+}
+
 export function logout(opts?: Oazapfts.RequestOpts) {
   return oazapfts.ok(
     oazapfts.fetchJson<{

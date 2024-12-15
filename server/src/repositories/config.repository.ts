@@ -210,10 +210,7 @@ const getEnv = (): EnvData => {
 
     storage: {
       ignoreMountCheckErrors: !!dto.IMMICH_IGNORE_MOUNT_CHECK_ERRORS,
-      awsAccessKeyId:dto.AWS_ACCESS_KEY_ID||"",
-      awsSecretAccessKey:dto.AWS_SECRET_ACCESS_KEY||"",
-      endpoint:dto.Endpoint||"",
-      s3BucketName: dto.S3_BUCKET_NAME||""
+    
       
     },
 

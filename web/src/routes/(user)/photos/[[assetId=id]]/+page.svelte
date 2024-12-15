@@ -29,7 +29,8 @@
   import { mdiDotsVertical, mdiPlus } from '@mdi/js';
   import { onDestroy } from 'svelte';
   import { t } from 'svelte-i18n';
-
+  import UserEmailVerifyModal from '$lib/components/album-page/user-email-verify-modal.svelte';
+  import { isBoolean } from 'lodash-es';
   let { isViewing: showAssetViewer } = assetViewingStore;
   const assetStore = new AssetStore({ isArchived: false, withStacked: true, withPartners: true });
   const assetInteractionStore = createAssetInteractionStore();
@@ -39,6 +40,7 @@
   let isAllOwned: boolean;
   let isAssetStackSelected: boolean;
   let isLinkActionAvailable: boolean;
+  let isOpenModal: boolean;
 
   // svelte-ignore reactive_declaration_non_reactive_property
   $: {
@@ -52,6 +54,7 @@
       selection.some((asset) => asset.type === AssetTypeEnum.Image) &&
       selection.some((asset) => asset.type === AssetTypeEnum.Image);
     isLinkActionAvailable = isAllOwned && (isLivePhoto || isLivePhotoCandidate);
+    isOpenModal = false;
   }
 
   const handleEscape = () => {
@@ -73,6 +76,10 @@
     assetStore.addAssets([motion]);
     assetStore.updateAssets([still]);
   };
+
+  function toggleModal() {
+    isOpenModal = !isOpenModal;
+  }
 
   onDestroy(() => {
     assetStore.destroy();
@@ -134,6 +141,13 @@
     {#if $preferences.memories.enabled}
       <MemoryLane />
     {/if}
-    <EmptyPlaceholder text={$t('no_assets_message')} onClick={() => openFileUploadDialog()} slot="empty" />
+    {#if $user?.isEmailVerify == false}
+      <EmptyPlaceholder text={$t('verify_email_message')} onClick={() => toggleModal()} />
+    {:else}
+      <EmptyPlaceholder text={$t('no_assets_message')} onClick={() => openFileUploadDialog()} />
+    {/if}
   </AssetGrid>
 </UserPageLayout>
+{#if isOpenModal}
+  <UserEmailVerifyModal onClose={() => (isOpenModal = !isOpenModal)} />
+{/if}

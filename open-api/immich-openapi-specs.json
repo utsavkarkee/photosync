@@ -12786,6 +12786,9 @@
           "isAdmin": {
             "type": "boolean"
           },
+          "isEmailVerify": {
+            "type": "boolean"
+          },
           "license": {
             "allOf": [
               {
@@ -12839,6 +12842,7 @@
           "email",
           "id",
           "isAdmin",
+          "isEmailVerify",
           "license",
           "name",
           "oauthId",

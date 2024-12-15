@@ -54,7 +54,7 @@ export interface WelcomeEmailProps extends BaseEmailProps {
 
 export interface VerifyEmailProps extends BaseEmailProps {
   displayName: string;
-  verificationLink: string;
+  code: string;
 }
 
 export interface ResetPasswordProps extends BaseEmailProps {
