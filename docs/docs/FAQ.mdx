@@ -46,11 +46,11 @@ The behaviors differ based on your device manufacturer and operating system, but
 
 ### Why is background backup on iOS not working?
 
-On iOS (iPhone and iPad), the operating system determines if a particular app can invoke background tasks based on multiple factors, most of which the Immich app has no control over. To increase the likelihood that the background backup task is run, follow the steps below:
+On iOS (iPhone and iPad), the operating system determines if a particular app can invoke background tasks based on multiple factors, most of which the  Photosync  app has no control over. To increase the likelihood that the background backup task is run, follow the steps below:
 
-- Enable Background App Refresh for Immich in the iOS settings at `Settings > General > Background App Refresh`.
+- Enable Background App Refresh for  Photosync  in the iOS settings at `Settings > General > Background App Refresh`.
 - Disable Background App Refresh for apps that don't need background tasks to run. This will reduce the competition for background task invocation for Immich.
-- Use the Immich app more often.
+- Use the  Photosync  app more often.
 
 ### Why are features not working with a self-signed cert or mTLS?
 
@@ -61,15 +61,15 @@ We recommend using a real SSL certificate from a free provider, for example [Let
 
 ## Assets
 
-### Does Immich change the file?
+### Does  Photosync  change the file?
 
-No, Immich does not modify the original files.
+No,  Photosync  does not modify the original files.
 All edited metadata is saved in companion `.xmp` sidecar files and the database.
-However, Immich will delete original files that have been trashed when the trash is emptied in the Immich UI.
+However,  Photosync  will delete original files that have been trashed when the trash is emptied in the  Photosync  UI.
 
 ### Why do my file names appear as a random string in the file manager?
 
-When Storage Template is off (default) Immich saves the file names in a random string (also known as random UUIDs) to prevent duplicate file names. To retrieve the original file names, you must enable the Storage Template and then run the STORAGE TEMPLATE MIGRATION job.
+When Storage Template is off (default)  Photosync  saves the file names in a random string (also known as random UUIDs) to prevent duplicate file names. To retrieve the original file names, you must enable the Storage Template and then run the STORAGE TEMPLATE MIGRATION job.
 It is recommended to read about [Storage Template](https://immich.app/docs/administration/storage-template) before activation.
 
 ### Can I add my existing photo library?
@@ -96,11 +96,11 @@ You can _archive_ them.
 
 See [Backup and Restore](/docs/administration/backup-and-restore.md).
 
-### Does Immich support reading existing face tag metadata?
+### Does  Photosync  support reading existing face tag metadata?
 
 No, it currently does not. There is an [open feature request on GitHub](https://github.com/wonderkidshihab/photo-backup/discussions/4348).
 
-### Does Immich support the filtering of NSFW images?
+### Does  Photosync  support the filtering of NSFW images?
 
 No, it currently does not. There is an [open feature request on Github](https://github.com/wonderkidshihab/photo-backup/discussions/2451).
 
@@ -116,17 +116,17 @@ Also, there are additional jobs for person (face) thumbnails.
 
 ### Why do files from WhatsApp not appear with the correct date?
 
-Files sent on WhatsApp are saved without metadata on the file. Therefore, Immich has no way of knowing the original date of the file when files are uploaded from WhatsApp, not the order of arrival on the device. [See #3527](https://github.com/wonderkidshihab/photo-backup/issues/3527).
+Files sent on WhatsApp are saved without metadata on the file. Therefore,  Photosync  has no way of knowing the original date of the file when files are uploaded from WhatsApp, not the order of arrival on the device. [See #3527](https://github.com/wonderkidshihab/photo-backup/issues/3527).
 
 ### What happens if an asset exists in more than one account?
 
 There are no requirements for assets to be unique across users. If multiple users upload the same image, it is processed as if it were a distinct asset, and jobs run and thumbnails are generated accordingly.
 
-### Why do HDR videos appear pale in Immich player but look normal after download?
+### Why do HDR videos appear pale in  Photosync  player but look normal after download?
 
 Immich uses a player with known HDR color display issues. We are experimenting with a different player that provides better color profiles for HDR content for future improvements.
 
-### Why does Immich transcode my videos to a lower quality?
+### Why does  Photosync  transcode my videos to a lower quality?
 
 Immich always keeps your original files. Alongside that, it generates a transcoded version for compatibility and performance reasons.
 
@@ -171,15 +171,15 @@ Duplicate checking only exists for upload libraries, using the file hash. Furthe
 ### Why are my edits to files not being saved in read-only external libraries?
 
 Images in read-write external libraries (the default) can be edited as normal.
-In read-only libraries (`:ro` in the `docker-compose.yml`), Immich is unable to create the `.xmp` sidecar files to store edited file metadata.
+In read-only libraries (`:ro` in the `docker-compose.yml`),  Photosync  is unable to create the `.xmp` sidecar files to store edited file metadata.
 For this reason, the metadata (timestamp, location, description, star rating, etc.) cannot be edited for files in read-only external libraries.
 
 ### How are deletions of files handled in external libraries?
 
 Immich will attempt to delete original files that have been trashed when the trash is emptied.
-In read-write external libraries (the default), Immich will delete the original file.
+In read-write external libraries (the default),  Photosync  will delete the original file.
 In read-only libraries (`:ro` in the `docker-compose.yml`), files can still be trashed in the UI.
-However, when the trash is emptied, the files will re-appear in the main timeline since Immich is unable to delete the original file.
+However, when the trash is emptied, the files will re-appear in the main timeline since  Photosync  is unable to delete the original file.
 
 ---
 
@@ -215,12 +215,12 @@ No, this is not supported. Only models listed in the [Hugging Face][huggingface]
 
 You can change to a multilingual CLIP model. See [here](/docs/features/smart-search#CLIP-model) for instructions.
 
-### Does Immich support Facial Recognition for videos?
+### Does  Photosync  support Facial Recognition for videos?
 
 Immich's machine learning feature operates on the generated thumbnail. If a face is visible in the video's thumbnail it will be picked up by facial recognition.
 Scanning the entire video for faces may be implemented in the future.
 
-### Does Immich have animal recognition?
+### Does  Photosync  have animal recognition?
 
 No.
 :::tip
@@ -252,7 +252,7 @@ ls clip/ facial-recognition/
 
 ## Performance
 
-### Why is Immich slow on low-memory systems like the Raspberry Pi?
+### Why is  Photosync  slow on low-memory systems like the Raspberry Pi?
 
 Immich optionally uses transcoding and machine learning for several features. However, it can be too heavy to run on a Raspberry Pi. You can [mitigate](/docs/FAQ#can-i-lower-cpu-and-ram-usage) this or host Immich's machine-learning container on a [more powerful system](/docs/guides/remote-machine-learning), or [disable](/docs/FAQ#how-can-i-disable-machine-learning) machine learning entirely.
 
@@ -314,7 +314,7 @@ You need to enable WebSockets on your reverse proxy.
 
 ## Docker
 
-### How can I see Immich logs?
+### How can I see  Photosync  logs?
 
 Immich components are typically deployed using docker. To see logs for deployed docker containers, you can use the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/), specifically the `docker logs` command. For examples, see [Docker Help](/docs/guides/docker-help.md).
 
@@ -324,7 +324,7 @@ To decrease Redis logs, you can add the following line to the `redis:` section o
 
 `    command: redis-server --loglevel warning`
 
-### How can I run Immich as a non-root user?
+### How can I run  Photosync  as a non-root user?
 
 You can change the user in the container by setting the `user` argument in `docker-compose.yml` for each service.
 You may need to add mount points or docker volumes for the following internal container paths:
@@ -357,7 +357,7 @@ cap_drop:
 
 ### How can I purge data from Immich?
 
-Data for Immich comes in two forms:
+Data for  Photosync  comes in two forms:
 
 1. **Metadata** stored in a Postgres database, stored in the `DB_DATA_LOCATION` folder (previously `pg_data` Docker volume).
 2. **Files** (originals, thumbs, profile, etc.), stored in the `UPLOAD_LOCATION` folder, more [info](/docs/administration/backup-and-restore#asset-types-and-storage-locations).
@@ -366,18 +366,18 @@ Data for Immich comes in two forms:
 This will destroy your database and reset your instance, meaning that you start from scratch.
 :::
 
-```bash title="Remove Immich (containers and volumes)"
+```bash title="Remove  Photosync  (containers and volumes)"
 docker compose down -v
 ```
 
-After removing the containers and volumes, there are a few directories that need to be deleted to reset Immich to a new installation. Once they are deleted, Immich can be started back up and will be a fresh installation.
+After removing the containers and volumes, there are a few directories that need to be deleted to reset  Photosync  to a new installation. Once they are deleted,  Photosync  can be started back up and will be a fresh installation.
 
 - `DB_DATA_LOCATION` contains the database, media info, and settings.
 - `UPLOAD_LOCATION` contains all the media uploaded to Immich.
 
 :::note Portainer
 If you use portainer, bring down the stack in portainer. Go into the volumes section  
-and remove all the volumes related to immich then restart the stack.
+and remove all the volumes related to  Photosync  then restart the stack.
 :::
 
 ### Why does the machine learning service report workers crashing?
@@ -390,9 +390,9 @@ There are a few reasons why this can happen.
 
 If the error mentions SIGKILL or error code 137, it most likely means the service is running out of memory. Consider either increasing the server's RAM or moving the service to a server with more RAM.
 
-If it mentions SIGILL (note the lack of a K) or error code 132, it most likely means your server's CPU is incompatible. This is unlikely to occur on version 1.92.0 or later. Consider upgrading if your version of Immich is below that.
+If it mentions SIGILL (note the lack of a K) or error code 132, it most likely means your server's CPU is incompatible. This is unlikely to occur on version 1.92.0 or later. Consider upgrading if your version of  Photosync  is below that.
 
-If your version of Immich is below 1.92.0 and the crash occurs after logs about tracing or exporting a model, consider either upgrading or disabling the Tag Objects job.
+If your version of  Photosync  is below 1.92.0 and the crash occurs after logs about tracing or exporting a model, consider either upgrading or disabling the Tag Objects job.
 
 ## Database
 
@@ -403,7 +403,7 @@ NTFS and ex/FAT/32 filesystems are not supported. See [here](/docs/install/envir
 
 ### How can I verify the integrity of my database?
 
-If you installed Immich using v1.104.0 or later, you likely have database checksums enabled by default. You can check this by running the following command.
+If you installed  Photosync  using v1.104.0 or later, you likely have database checksums enabled by default. You can check this by running the following command.
 A result of `on` means that checksums are enabled.
 
 <details>
@@ -429,7 +429,7 @@ docker exec -it immich_postgres psql --dbname=immich --username=<DB_USERNAME> --
   datname  | checksum_failures | checksum_last_failure
 -----------+-------------------+-----------------------
  postgres  |                 0 |
- immich    |                 0 |
+  Photosync     |                 0 |
  template1 |                 0 |
  template0 |                 0 |
 (4 rows)

@@ -44,11 +44,11 @@ The web app is a [TypeScript](https://www.typescriptlang.org/) project that uses
 
 ### CLI
 
-The Immich CLI is an [npm](https://www.npmjs.com/) package that lets users control their Immich instance from the command line. It uses the API to perform various tasks, especially uploading assets. See the [CLI documentation](/docs/features/command-line-interface.md) for more information.
+The  Photosync  CLI is an [npm](https://www.npmjs.com/) package that lets users control their  Photosync  instance from the command line. It uses the API to perform various tasks, especially uploading assets. See the [CLI documentation](/docs/features/command-line-interface.md) for more information.
 
 ## Server
 
-The Immich backend is divided into several services, which are run as individual docker containers.
+The  Photosync  backend is divided into several services, which are run as individual docker containers.
 
 1. `immich-server` - Handle and respond to REST API requests
 1. `immich-microservices` - Execute background jobs (thumbnail generation, metadata extraction, transcoding, etc.)
@@ -56,9 +56,9 @@ The Immich backend is divided into several services, which are run as individual
 1. `postgres` - Persistent data storage
 1. `redis`- Queue management for `immich-microservices`
 
-### Immich Server
+###  Photosync  Server
 
-The Immich Server is a [TypeScript](https://www.typescriptlang.org/) project written for [Node.js](https://nodejs.org/). It uses the [Nest.js](https://nestjs.com) framework, with [TypeORM](https://typeorm.io/) for database management. The server codebase also loosely follows the [Hexagonal Architecture](<https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)>). Specifically, we aim to separate technology specific implementations (`infra/`) from core business logic (`domain/`).
+The  Photosync  Server is a [TypeScript](https://www.typescriptlang.org/) project written for [Node.js](https://nodejs.org/). It uses the [Nest.js](https://nestjs.com) framework, with [TypeORM](https://typeorm.io/) for database management. The server codebase also loosely follows the [Hexagonal Architecture](<https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)>). Specifically, we aim to separate technology specific implementations (`infra/`) from core business logic (`domain/`).
 
 #### REST Endpoints
 
@@ -76,7 +76,7 @@ The server uses [Domain Transfer Objects](https://en.wikipedia.org/wiki/Data_tra
 
 ### Microservices
 
-The Immich Microservices image uses the same `Dockerfile` as the Immich Server, but with a different entrypoint. The Immich Microservices service mainly handles executing jobs, which include the following:
+The  Photosync  Microservices image uses the same `Dockerfile` as the  Photosync  Server, but with a different entrypoint. The  Photosync  Microservices service mainly handles executing jobs, which include the following:
 
 - Thumbnail Generation
 - Metadata Extraction

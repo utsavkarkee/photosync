@@ -1,6 +1,6 @@
 # SMTP settings using Gmail
 
-This guide walks you through how to get the information you need to set up your Immich instance to send emails using Gmail's SMTP server.
+This guide walks you through how to get the information you need to set up your  Photosync  instance to send emails using Gmail's SMTP server.
 
 ## Create an app password
 

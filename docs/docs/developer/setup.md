@@ -51,7 +51,7 @@ You can access the web from `http://your-machine-ip:2283` or `http://localhost:2
 
 If you only want to do web development connected to an existing, remote backend, follow these steps:
 
-1. Build the Immich SDK - `cd open-api/typescript-sdk && npm i && npm run build && cd -`
+1. Build the  Photosync  SDK - `cd open-api/typescript-sdk && npm i && npm run build && cd -`
 2. Enter the web directory - `cd web/`
 3. Install web dependencies - `npm i`
 4. Start the web development server

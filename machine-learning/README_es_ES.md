@@ -1,4 +1,4 @@
-# Immich Machine Learning
+# Photosync Machine Learning
 
 - Clasificación de imágenes
 - Incorporación de CLIP

@@ -110,7 +110,7 @@ describe(DatabaseService.name, () => {
         });
 
         await expect(sut.onBootstrap()).rejects.toThrow(
-          `The ${extensionName} extension version is ${versionBelowRange}, but Immich only supports ${extensionRange}`,
+          `The ${extensionName} extension version is ${versionBelowRange}, but  Photosync  only supports ${extensionRange}`,
         );
 
         expect(databaseMock.runMigrations).not.toHaveBeenCalled();
@@ -207,7 +207,7 @@ describe(DatabaseService.name, () => {
         });
 
         await expect(sut.onBootstrap()).rejects.toThrow(
-          `The ${extensionName} extension version is ${versionAboveRange}, but Immich only supports`,
+          `The ${extensionName} extension version is ${versionAboveRange}, but  Photosync  only supports`,
         );
 
         expect(databaseMock.updateVectorExtension).not.toHaveBeenCalled();

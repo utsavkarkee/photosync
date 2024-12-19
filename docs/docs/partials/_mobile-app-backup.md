@@ -2,7 +2,7 @@ Navigate to the backup screen by clicking on the cloud icon in the top right cor
 
 <img src={require('./img/backup-header.png').default} width='50%' title='Backup button' />
 
-You can select which album(s) you want to back up to the Immich server from the backup screen.
+You can select which album(s) you want to back up to the  Photosync  server from the backup screen.
 
 <img src={require('./img/album-selection.png').default} width='50%' title='Backup button' />
 

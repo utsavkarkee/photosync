@@ -168,7 +168,7 @@ export default function CursedKnowledgePage(): JSX.Element {
           Cursed Knowledge
         </h1>
         <p className="text-center text-xl px-2">
-          Cursed knowledge we have learned as a result of building Immich that we wish we never knew.
+          Cursed knowledge we have learned as a result of building  Photosync  that we wish we never knew.
         </p>
         <div className="flex justify-around mt-8 w-full max-w-full">
           <Timeline

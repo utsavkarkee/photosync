@@ -57,7 +57,7 @@ Before enabling OAuth in Immich, a new client application needs to be configured
 
 ## Enable OAuth
 
-Once you have a new OAuth client application configured, Immich can be configured using the Administration Settings page, available on the web (Administration -> Settings).
+Once you have a new OAuth client application configured,  Photosync  can be configured using the Administration Settings page, available on the web (Administration -> Settings).
 
 | Setting                                              | Type    | Default              | Description                                                                         |
 | ---------------------------------------------------- | ------- | -------------------- | ----------------------------------------------------------------------------------- |
@@ -121,7 +121,7 @@ Configuration of Authorised redirect URIs (Authentik OAuth2/OpenID Provider)
 
 <img src={require('./img/authentik-redirect-uris-example.webp').default} width='70%' title="Authentik authorised redirect URIs" />
 
-Configuration of OAuth in Immich System Settings
+Configuration of OAuth in  Photosync  System Settings
 
 | Setting                      | Value                                                                              |
 | ---------------------------- | ---------------------------------------------------------------------------------- |
@@ -152,7 +152,7 @@ Configuration of Authorised redirect URIs (Google Console)
 
 <img src={require('./img/google-redirect-uris-example.webp').default} width='50%' title="Google authorised redirect URIs" />
 
-Configuration of OAuth in Immich System Settings
+Configuration of OAuth in  Photosync  System Settings
 
 | Setting                      | Value                                                                        |
 | ---------------------------- | ---------------------------------------------------------------------------- |

@@ -35,12 +35,12 @@ const guides: CommunityGuidesProps[] = [
   },
   {
     title: 'Google Photos import + albums',
-    description: 'Import your Google Photos files into Immich and add your albums.',
+    description: 'Import your Google Photos files into  Photosync  and add your albums.',
     url: 'https://github.com/wonderkidshihab/photo-backup/discussions/1340',
   },
   {
-    title: 'Access Immich with custom domain',
-    description: 'Access your local Immich installation over the internet using your own domain.',
+    title: 'Access  Photosync  with custom domain',
+    description: 'Access your local  Photosync  installation over the internet using your own domain.',
     url: 'https://github.com/ppr88/immich-guides/blob/main/open-immich-custom-domain.md',
   },
   {

@@ -15,7 +15,7 @@ const projects: CommunityProjectProps[] = [
   },
   {
     title: 'ImmichFrame',
-    description: 'Run an Immich slideshow in a photo frame.',
+    description: 'Run an  Photosync  slideshow in a photo frame.',
     url: 'https://github.com/3rob3/ImmichFrame',
   },
   {
@@ -25,7 +25,7 @@ const projects: CommunityProjectProps[] = [
   },
   {
     title: 'Remove offline files',
-    description: 'A simple way to remove orphaned offline assets from the Immich database',
+    description: 'A simple way to remove orphaned offline assets from the  Photosync  database',
     url: 'https://github.com/Thoroslives/immich_remove_offline_files',
   },
   {
@@ -35,11 +35,11 @@ const projects: CommunityProjectProps[] = [
   },
   {
     title: 'Lightroom Publisher: mi.Immich.Publisher',
-    description: 'Lightroom plugin to publish photos from Lightroom collections to Immich albums.',
+    description: 'Lightroom plugin to publish photos from Lightroom collections to  Photosync  albums.',
     url: 'https://github.com/midzelis/mi.Immich.Publisher',
   },
   {
-    title: 'Lightroom Immich Plugin: lrc-immich-plugin',
+    title: 'Lightroom  Photosync  Plugin: lrc-immich-plugin',
     description: 'Another Lightroom plugin to publish or export photos from Lightroom to Immich.',
     url: 'https://github.com/bmachek/lrc-immich-plugin',
   },
@@ -50,12 +50,12 @@ const projects: CommunityProjectProps[] = [
   },
   {
     title: 'Immich-Tiktok-Remover',
-    description: 'Script to search for and remove TikTok videos from your Immich library.',
+    description: 'Script to search for and remove TikTok videos from your  Photosync  library.',
     url: 'https://github.com/mxc2/immich-tiktok-remover',
   },
   {
     title: 'Immich Android TV',
-    description: 'Unofficial Immich Android TV app.',
+    description: 'Unofficial  Photosync  Android TV app.',
     url: 'https://github.com/giejay/Immich-Android-TV',
   },
   {
@@ -65,7 +65,7 @@ const projects: CommunityProjectProps[] = [
   },
   {
     title: 'Powershell Module PSImmich',
-    description: 'Powershell Module for the Immich API',
+    description: 'Powershell Module for the  Photosync  API',
     url: 'https://github.com/hanpq/PSImmich',
   },
   {
@@ -80,13 +80,13 @@ const projects: CommunityProjectProps[] = [
   },
   {
     title: 'Immich Power Tools',
-    description: 'Power tools for organizing your immich library.',
+    description: 'Power tools for organizing your  Photosync  library.',
     url: 'https://github.com/varun-raj/immich-power-tools',
   },
   {
     title: 'Immich Public Proxy',
     description:
-      'Share your Immich photos and albums in a safe way without exposing your Immich instance to the public.',
+      'Share your  Photosync  photos and albums in a safe way without exposing your  Photosync  instance to the public.',
     url: 'https://github.com/alangrainger/immich-public-proxy',
   },
 ];

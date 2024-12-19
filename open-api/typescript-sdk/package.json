@@ -1,7 +1,7 @@
 {
   "name": "@photosync/sdk",
   "version": "1.120.1",
-  "description": "Auto-generated TypeScript SDK for the Immich API",
+  "description": "Auto-generated TypeScript SDK for the  Photosync  API",
   "type": "module",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",

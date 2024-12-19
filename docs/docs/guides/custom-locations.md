@@ -35,7 +35,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
 ```
 
-Restart Immich to register the changes.
+Restart  Photosync  to register the changes.
 
 ```
 docker compose up -d
@@ -47,7 +47,7 @@ For this reason, we mount the HDD or the network storage (NAS) to `/usr/src/app/
 
 The `thumbs/` folder contains both the small thumbnails displayed in the timeline and the larger previews shown when clicking into an image. These cannot be separated.
 
-The storage metrics of the Immich server will track available storage at `UPLOAD_LOCATION`, so the administrator must set up some sort of monitoring to ensure the storage does not run out of space. The `profile/` folder is much smaller, usually less than 1 MB.
+The storage metrics of the  Photosync  server will track available storage at `UPLOAD_LOCATION`, so the administrator must set up some sort of monitoring to ensure the storage does not run out of space. The `profile/` folder is much smaller, usually less than 1 MB.
 :::
 
 Thanks to [Jrasm91](https://github.com/wonderkidshihab/photo-backup/discussions/2110#discussioncomment-5477767) for writing the guide.

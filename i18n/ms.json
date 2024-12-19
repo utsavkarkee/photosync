@@ -28,7 +28,7 @@
   "added_to_favorites_count": "Menambahkan {count, number} ke favorit",
   "admin": {
     "add_exclusion_pattern_description": "Tambahkan corak pengecualian. Globbing menggunakan *, **, dan ? disokong. Untuk mengabaikan semua fail dalam mana-mana direktori bernama \"Raw\", gunakan \"**/Raw/**\". Untuk mengabaikan semua fail yang berakhir dengan \".tif\", gunakan \"**/*.tif\". Untuk mengabaikan laluan mutlak, gunakan \"/path/to/ignore/**\".",
-    "asset_offline_description": "Aset pustaka luaran ini tidak lagi ditemui pada cakera dan telah dialihkan ke sampah. Jika fail telah dialihkan dalam pustaka, semak garis masa anda untuk aset baharu yang sepadan. Untuk memulihkan aset ini, sila pastikan bahawa laluan fail di bawah boleh diakses oleh Immich dan mengimbas pustaka.",
+    "asset_offline_description": "Aset pustaka luaran ini tidak lagi ditemui pada cakera dan telah dialihkan ke sampah. Jika fail telah dialihkan dalam pustaka, semak garis masa anda untuk aset baharu yang sepadan. Untuk memulihkan aset ini, sila pastikan bahawa laluan fail di bawah boleh diakses oleh  Photosync  dan mengimbas pustaka.",
     "authentication_settings": "Tetapan Pengesahan",
     "authentication_settings_description": "Urus kata laluan, OAuth dan tetapan pengesahan lain",
     "authentication_settings_disable_all": "Adakah anda pasti mahu melumpuhkan semua kaedah log masuk? Log masuk akan dilumpuhkan sepenuhnya.",
@@ -38,7 +38,7 @@
     "cleared_jobs": "Kerja telah dibersihkan untuk: {job}",
     "config_set_by_file": "Konfigurasi kini ditetapkan oleh fail konfigurasi",
     "confirm_delete_library": "Adakah anda pasti mahu memadamkan {library}?",
-    "confirm_delete_library_assets": "Adakah anda pasti mahu memadamkan pustaka ini? Ini akan memadam {count, plural, one {# aset yang terkandung} other {semua # aset yang terkandung}} daripada Immich dan tidak boleh dibuat asal. Fail akan kekal pada disk.",
+    "confirm_delete_library_assets": "Adakah anda pasti mahu memadamkan pustaka ini? Ini akan memadam {count, plural, one {# aset yang terkandung} other {semua # aset yang terkandung}} daripada  Photosync  dan tidak boleh dibuat asal. Fail akan kekal pada disk.",
     "confirm_email_below": "Untuk mengesahkan, sila taip \"{email}\" dibawah",
     "confirm_reprocess_all_faces": "Adakah anda pasti mahu memproses semula semua wajah? Ini juga akan membersihkan orang bernama.",
     "confirm_user_password_reset": "Adakah anda pasti mahu menetapkan semula kata laluan {user}?",

@@ -6,7 +6,7 @@
 The folders considered for these checks include: `upload/`, `library/`, `thumbs/`, `encoded-video/`, `profile/`, `backups/`
 :::
 
-When Immich starts, it performs a series of checks in order to validate that it can read and write files to the volume mounts used by the storage system. If it cannot perform all the required operations, it will fail to start. The checks include:
+When  Photosync  starts, it performs a series of checks in order to validate that it can read and write files to the volume mounts used by the storage system. If it cannot perform all the required operations, it will fail to start. The checks include:
 
 - Creating an initial hidden file (`.immich`) in each folder
 - Reading a hidden file (`.immich`) in each folder

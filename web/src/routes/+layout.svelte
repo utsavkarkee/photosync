@@ -58,7 +58,7 @@
   onMount(() => {
     const element = document.querySelector('#stencil');
     element?.remove();
-    // if the browser theme changes, changes the Immich theme too
+    // if the browser theme changes, changes the  Photosync  theme too
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleChangeTheme);
   });
 
@@ -150,4 +150,3 @@
 {#if $user?.isAdmin}
   <VersionAnnouncementBox />
 {/if}
-

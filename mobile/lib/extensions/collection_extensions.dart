@@ -43,7 +43,7 @@ extension IntListExtension on Iterable<int> {
 }
 
 extension AssetListExtension on Iterable<Asset> {
-  /// Returns the assets that are already available in the Immich server
+  /// Returns the assets that are already available in the  Photosync  server
   Iterable<Asset> remoteOnly({
     void Function()? errorCallback,
   }) {

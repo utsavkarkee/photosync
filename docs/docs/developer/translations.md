@@ -6,7 +6,7 @@ You can request a new language [here](https://hosted.weblate.org/new-lang/immich
 
 ## Weblate
 
-[Weblate](https://weblate.org/) is a "libre software web-based continuous localization system". Immich localization efforts are managed on their [hosted platform](https://hosted.weblate.org/projects/immich/immich/).
+[Weblate](https://weblate.org/) is a "libre software web-based continuous localization system".  Photosync  localization efforts are managed on their [hosted platform](https://hosted.weblate.org/projects/immich/immich/).
 
 ## International message format
 

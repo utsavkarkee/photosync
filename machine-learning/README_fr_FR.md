@@ -1,4 +1,4 @@
-# Immich Apprentissage machine
+# Photosync Apprentissage machine
 
 - Classification d'images
 - Embarquement de CLIP
@@ -11,7 +11,6 @@ Exécuter `poetry install --no-root --with dev` installera tout ce dont vous ave
 
 Pour ajouter ou supprimer des dépendances, vous pouvez utiliser les commandes `poetry add $PACKAGE_NAME` et `poetry remove $PACKAGE_NAME` respectivement.
 Soyez sûr de commit les fichiers `poetry.lock` et `pyproject.toml` pour refléter les changements de dépendances.
-
 
 # Test de charge
 

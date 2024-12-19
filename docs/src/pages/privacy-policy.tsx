@@ -13,7 +13,7 @@ function HomepageHeader() {
           <p>Last updated: July 31st 2024</p>
           <p>
             Welcome to Immich. We are committed to respecting your privacy. This Privacy Policy sets out how we collect,
-            use, and share information when you use our Immich app.
+            use, and share information when you use our  Photosync  app.
           </p>
         </section>
 
@@ -21,7 +21,7 @@ function HomepageHeader() {
         <section>
           <h2>1. Scope of This Policy</h2>
           <p>
-            This Privacy Policy applies to the Immich app ("we", "our", or "us") and covers our collection, use, and
+            This Privacy Policy applies to the  Photosync  app ("we", "our", or "us") and covers our collection, use, and
             disclosure of your information. This Policy does not cover any third-party websites, services, or
             applications that can be accessed through our app, or third-party services you may access through Immich.
           </p>
@@ -32,7 +32,7 @@ function HomepageHeader() {
           <h2>2. Information We Collect</h2>
           <div>
             <p>
-              <strong>Locally Stored Data</strong>: Immich stores all your photos, albums, settings, and locally on your
+              <strong>Locally Stored Data</strong>:  Photosync  stores all your photos, albums, settings, and locally on your
               device. We do not have access to this data, nor do we transmit or store it on any of our servers.
             </p>
           </div>

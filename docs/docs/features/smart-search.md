@@ -9,7 +9,7 @@ Smart search is powered by the [pgvecto.rs](https://github.com/tensorchord/pgvec
 
 ## Advanced Search Filters
 
-In addition, Immich offers advanced search functionality, allowing you to find specific content using customizable search filters. These filters include location, one or more faces, specific albums, and more. You can try out the search filters on the [Demo site](https://demo.immich.app).
+In addition,  Photosync  offers advanced search functionality, allowing you to find specific content using customizable search filters. These filters include location, one or more faces, specific albums, and more. You can try out the search filters on the [Demo site](https://demo.immich.app).
 
 The filters smart search allows you to search by include:
 

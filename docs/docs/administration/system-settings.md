@@ -1,6 +1,6 @@
 # System Settings
 
-On the system settings page, the administrator can manage global settings for the Immich instance.
+On the system settings page, the administrator can manage global settings for the  Photosync  instance.
 
 :::note
 Viewing and modifying the system settings is restricted to the Administrator.
@@ -31,7 +31,7 @@ You can always use the [Server CLI](/docs/administration/server-commands) to re-
 - Thumbnails - Used in the main timeline.
 - Previews - Used in the asset viewer.
 
-By default Immich creates 3 thumbnails for each asset,
+By default  Photosync  creates 3 thumbnails for each asset,
 Blurred (thumbhash) , Small - thumbnails (webp) , and Large - previews (jpeg/webp), using these settings you can change the quality for the thumbnails and previews files that are created.
 
 **Thumbnail format**  
@@ -95,7 +95,7 @@ You can set the scanning interval using the preset or cron format. For more info
 
 ## Logging
 
-The default Immich log level is `Log` (commonly known as `Info`). The Immich administrator can choose a higher or lower log level according to personal preference or as requested by the Immich support team.
+The default  Photosync  log level is `Log` (commonly known as `Info`). The  Photosync  administrator can choose a higher or lower log level according to personal preference or as requested by the  Photosync  support team.
 
 ## Machine Learning Settings
 
@@ -109,7 +109,7 @@ Smart Search job on all images to fully apply the change.
 
 :::info Internet connection
 Changing models requires a connection to the Internet to download the model.
-After downloading, there is no need for Immich to connect to the network
+After downloading, there is no need for  Photosync  to connect to the network
 Unless version checking has been enabled in the settings.
 :::
 

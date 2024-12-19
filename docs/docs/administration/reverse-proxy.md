@@ -1,6 +1,6 @@
 # Reverse Proxy
 
-Users can deploy a custom reverse proxy that forwards requests to Immich. This way, the reverse proxy can handle TLS termination, load balancing, or other advanced features. All reverse proxies between Immich and the user must forward all headers and set the `Host`, `X-Real-IP`, `X-Forwarded-Proto` and `X-Forwarded-For` headers to their appropriate values. Additionally, your reverse proxy should allow for big enough uploads. By following these practices, you ensure that all custom reverse proxies are fully compatible with Immich.
+Users can deploy a custom reverse proxy that forwards requests to Immich. This way, the reverse proxy can handle TLS termination, load balancing, or other advanced features. All reverse proxies between  Photosync  and the user must forward all headers and set the `Host`, `X-Real-IP`, `X-Forwarded-Proto` and `X-Forwarded-For` headers to their appropriate values. Additionally, your reverse proxy should allow for big enough uploads. By following these practices, you ensure that all custom reverse proxies are fully compatible with Immich.
 
 :::note
 The Repair page can take a long time to load. To avoid server timeouts or errors, we recommend specifying a timeout of at least 10 minutes on your proxy server.
@@ -8,7 +8,7 @@ The Repair page can take a long time to load. To avoid server timeouts or errors
 
 ### Nginx example config
 
-Below is an example config for nginx. Make sure to set `public_url` to the front-facing URL of your instance, and `backend_url` to the path of the Immich server.
+Below is an example config for nginx. Make sure to set `public_url` to the front-facing URL of your instance, and `backend_url` to the path of the  Photosync  server.
 
 ```nginx
 server {
@@ -50,7 +50,7 @@ location ~ /.well-known {
 }
 ```
 
-This particular `location` directive can inadvertently prevent mobile clients from reaching the `/.well-known/immich` path, which is crucial for discovery. Usual error message for this case is: "Your app major version is not compatible with the server". To remedy this, you should introduce an additional location block specifically for this path, ensuring that requests are correctly proxied to the Immich server:
+This particular `location` directive can inadvertently prevent mobile clients from reaching the `/.well-known/immich` path, which is crucial for discovery. Usual error message for this case is: "Your app major version is not compatible with the server". To remedy this, you should introduce an additional location block specifically for this path, ensuring that requests are correctly proxied to the  Photosync  server:
 
 ```nginx
 location = /.well-known/immich {
@@ -58,7 +58,7 @@ location = /.well-known/immich {
 }
 ```
 
-By doing so, you'll maintain the functionality of Let's Encrypt while allowing mobile clients to access the necessary Immich path without obstruction.
+By doing so, you'll maintain the functionality of Let's Encrypt while allowing mobile clients to access the necessary  Photosync  path without obstruction.
 
 ### Caddy example config
 
@@ -106,7 +106,7 @@ entryPoints:
         writeTimeout: 600s
 ```
 
-The second part is in the `docker-compose.yml` file where immich is in. Add the Traefik specific labels like in the example.
+The second part is in the `docker-compose.yml` file where  Photosync  is in. Add the Traefik specific labels like in the example.
 
 `docker-compose.yml`
 
@@ -122,5 +122,5 @@ services:
       traefik.http.services.immich.loadbalancer.server.port: 2283
 ```
 
-Keep in mind, that Traefik needs to communicate with the network where immich is in, usually done
+Keep in mind, that Traefik needs to communicate with the network where  Photosync  is in, usually done
 by adding the Traefik network to the `immich-server`.

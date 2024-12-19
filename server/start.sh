@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Initializing Immich $IMMICH_SOURCE_REF"
+echo "Initializing  Photosync  $IMMICH_SOURCE_REF"
 
 lib_path="/usr/lib/$(arch)-linux-gnu/libmimalloc.so.2"
 export LD_PRELOAD="$lib_path"

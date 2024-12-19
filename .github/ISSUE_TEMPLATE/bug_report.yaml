@@ -30,7 +30,7 @@ body:
     validations:
       required: true
     attributes:
-      label: The OS that Immich Server is running on
+      label: The OS that  Photosync  Server is running on
       placeholder: Ubuntu 22.10, Debian, Arch...etc
 
   - type: input
@@ -38,14 +38,14 @@ body:
     validations:
       required: true
     attributes:
-      label: Version of Immich Server
+      label: Version of  Photosync  Server
       placeholder: v1.0.0
 
   - type: input
     validations:
       required: true
     attributes:
-      label: Version of Immich Mobile App
+      label: Version of  Photosync  Mobile App
       placeholder: v1.0.0
 
   - type: checkboxes

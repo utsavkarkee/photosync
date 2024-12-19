@@ -30,7 +30,7 @@ function HomepageHeader() {
           </p>
 
           <p className="max-w-1/4 m-auto mt-4 px-4">
-            Easily back up, organize, and manage your photos on your own server. Immich helps you
+            Easily back up, organize, and manage your photos on your own server.  Photosync  helps you
             <span className="sm:block"></span> browse, search and organize your photos and videos with ease, without
             sacrificing your privacy.
           </p>
@@ -75,7 +75,7 @@ function HomepageHeader() {
         <div>
           <p className="font-bold text-2xl md:text-5xl ">Download mobile app</p>
           <p className="text-lg">
-            Download Immich app and start backing up your photos and videos securely to your own server
+            Download  Photosync  app and start backing up your photos and videos securely to your own server
           </p>
         </div>
         <div className="flex flex-col sm:flex-row place-items-center place-content-center mt-4 gap-1">

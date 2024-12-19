@@ -70,7 +70,7 @@ Future<void> initApp() async {
 
   await fetchSystemPalette();
 
-  // Initialize Immich Logger Service
+  // Initialize  Photosync  Logger Service
   ImmichLogger();
 
   var log = Logger("ImmichErrorLogger");

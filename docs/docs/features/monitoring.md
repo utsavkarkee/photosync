@@ -21,7 +21,7 @@ These metrics come in a variety of forms:
 - Histograms, where each observation is assigned to a certain number of "buckets". Example: response time, where each bucket is a number of milliseconds. This one is a bit more complicated.
   - Buckets in this case are _cumulative_; that is, an observation is placed not only into the smallest bucket that contains it, but also to all buckets larger than this. For example, if a histogram has three buckets for 1ms, 5ms and 10ms, an observation of 3ms will be bucketed into both 5ms and 10ms.
 
-The metrics in immich are grouped into API (endpoint calls and response times), host (memory and CPU utilization), and IO (internal database queries, image processing, and so on). Each group of metrics can be enabled or disabled independently.
+The metrics in  Photosync  are grouped into API (endpoint calls and response times), host (memory and CPU utilization), and IO (internal database queries, image processing, and so on). Each group of metrics can be enabled or disabled independently.
 
 ### Configuration
 
@@ -63,7 +63,7 @@ The last piece is the [configuration file][prom-file]. This file defines (among 
 The provided file is just a starting point. There are a ton of ways to configure Prometheus, so feel free to experiment!
 :::
 
-After bringing down the containers with `docker compose down` and back up with `docker compose up -d`, a Prometheus instance will now collect metrics from the immich server and microservices containers. Note that we didn't need to expose any new ports for these containers - the communication is handled in the internal Docker network.
+After bringing down the containers with `docker compose down` and back up with `docker compose up -d`, a Prometheus instance will now collect metrics from the  Photosync  server and microservices containers. Note that we didn't need to expose any new ports for these containers - the communication is handled in the internal Docker network.
 
 :::note
 To see exactly what metrics are made available, you can additionally add `8081:8081` to the server container's ports and `8082:8082` to the microservices container's ports. Visiting the `/metrics` endpoint for these services will show the same raw data that Prometheus collects.

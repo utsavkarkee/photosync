@@ -71,7 +71,7 @@ describe(AuditService.name, () => {
   });
 
   describe('getChecksums', () => {
-    it('should fail if the file is not in the immich path', async () => {
+    it('should fail if the file is not in the  Photosync  path', async () => {
       await expect(sut.getChecksums({ filenames: ['foo/bar'] })).rejects.toBeInstanceOf(BadRequestException);
 
       expect(cryptoMock.hashFile).not.toHaveBeenCalled();
@@ -87,7 +87,7 @@ describe(AuditService.name, () => {
   });
 
   describe('fixItems', () => {
-    it('should fail if the file is not in the immich path', async () => {
+    it('should fail if the file is not in the  Photosync  path', async () => {
       await expect(
         sut.fixItems([
           { entityId: 'my-id', pathType: AssetPathType.ORIGINAL, pathValue: 'foo/bar' } as FileReportItemDto,

@@ -1288,7 +1288,7 @@ describe(LibraryService.name, () => {
       });
     });
 
-    it('should detect when import path is in immich media folder', async () => {
+    it('should detect when import path is in  Photosync  media folder', async () => {
       storageMock.stat.mockResolvedValue({ isDirectory: () => true } as Stats);
       const cwd = process.cwd();
 

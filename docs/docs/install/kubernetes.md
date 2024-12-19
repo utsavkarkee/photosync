@@ -4,9 +4,9 @@ sidebar_position: 40
 
 # Kubernetes
 
-You can deploy Immich on Kubernetes using [the official Helm chart](https://github.com/wonderkidshihab/photo-backup-charts/blob/main/README.md).
+You can deploy  Photosync  on Kubernetes using [the official Helm chart](https://github.com/wonderkidshihab/photo-backup-charts/blob/main/README.md).
 
-You can view some [examples](https://kubesearch.dev/#/immich) of how other people run Immich on Kubernetes, using the official chart or otherwise.
+You can view some [examples](https://kubesearch.dev/#/immich) of how other people run  Photosync  on Kubernetes, using the official chart or otherwise.
 
 :::caution DNS in Alpine containers
 Immich makes use of Alpine container images. These can encounter [a DNS resolution bug](https://stackoverflow.com/a/65593511) on Kubernetes clusters if the host

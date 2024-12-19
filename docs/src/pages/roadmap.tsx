@@ -243,7 +243,7 @@ const milestones: Item[] = [
     icon: mdiDatabaseOutline,
     iconColor: 'brown',
     title: 'Automatic database backups',
-    description: 'Database backups are now integrated into the Immich server',
+    description: 'Database backups are now integrated into the  Photosync  server',
     release: 'v1.120.0',
   }),
   {
@@ -270,7 +270,7 @@ const milestones: Item[] = [
     icon: mdiFolderSync,
     iconColor: 'green',
     title: 'Album sync (mobile)',
-    description: 'Sync or mirror an album from your phone to the Immich server',
+    description: 'Sync or mirror an album from your phone to the  Photosync  server',
     release: 'v1.113.0',
   }),
   withRelease({
@@ -317,14 +317,14 @@ const milestones: Item[] = [
   withRelease({
     icon: mdiShare,
     title: 'Deploy my.immich.app',
-    description: 'Url router for immich links',
+    description: 'Url router for  Photosync  links',
     release: 'v1.109.0',
   }),
   withRelease({
     icon: mdiLicense,
     iconColor: 'gold',
     title: 'Supporter Badge',
-    description: 'The option to buy Immich to support its development!',
+    description: 'The option to buy  Photosync  to support its development!',
     release: 'v1.109.0',
   }),
   withRelease({
@@ -371,7 +371,7 @@ const milestones: Item[] = [
     icon: mdiHandshakeOutline,
     iconColor: 'magenta',
     title: 'Immich joins FUTO!',
-    description: 'Joined Futo and Immich core team goes full-time',
+    description: 'Joined Futo and  Photosync  core team goes full-time',
     getDateLabel: withLanguage(new Date(2024, 4, 1)),
   },
   withRelease({
@@ -465,7 +465,7 @@ const milestones: Item[] = [
     icon: mdiBash,
     iconColor: 'gray',
     title: 'CLI v2',
-    description: 'Version 2 of the Immich CLI is released, replacing the legacy v1 CLI.',
+    description: 'Version 2 of the  Photosync  CLI is released, replacing the legacy v1 CLI.',
     release: 'v1.88.0',
   }),
   withRelease({
@@ -506,7 +506,7 @@ const milestones: Item[] = [
   withRelease({
     icon: mdiBookSearchOutline,
     title: 'External libraries',
-    description: 'Automatically import media into Immich based on imports paths and ignore patterns.',
+    description: 'Automatically import media into  Photosync  based on imports paths and ignore patterns.',
     release: 'v1.79.0',
   }),
   withRelease({
@@ -520,7 +520,7 @@ const milestones: Item[] = [
     icon: mdiFile,
     iconColor: 'lightblue',
     title: 'Configuration file',
-    description: 'Auto-configure an Immich installation via a configuration file.',
+    description: 'Auto-configure an  Photosync  installation via a configuration file.',
     release: 'v1.75.0',
   }),
   withRelease({
@@ -865,7 +865,7 @@ const milestones: Item[] = [
     icon: mdiPartyPopper,
     iconColor: 'deeppink',
     title: 'First commit',
-    description: 'First commit on GitHub, Immich is born.',
+    description: 'First commit on GitHub,  Photosync  is born.',
     getDateLabel: withLanguage(new Date(2022, 1, 3)),
   },
 ];

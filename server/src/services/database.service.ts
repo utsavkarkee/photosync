@@ -29,24 +29,24 @@ const messages = {
     Please run 'DROP EXTENSION IF EXISTS ${extension}' and switch to a release version.
     See https://immich.app/docs/guides/database-queries for how to query the database.`,
   outOfRange: ({ name, version, range }: OutOfRangeArgs) =>
-    `The ${name} extension version is ${version}, but Immich only supports ${range}.
+    `The ${name} extension version is ${version}, but  Photosync  only supports ${range}.
     Please change ${name} to a compatible version in the Postgres instance.`,
   createFailed: ({ name, extension, otherName }: CreateFailedArgs) =>
     `Failed to activate ${name} extension.
     Please ensure the Postgres instance has ${name} installed.
 
-    If the Postgres instance already has ${name} installed, Immich may not have the necessary permissions to activate it.
+    If the Postgres instance already has ${name} installed,  Photosync  may not have the necessary permissions to activate it.
     In this case, please run 'CREATE EXTENSION IF NOT EXISTS ${extension}' manually as a superuser.
     See https://immich.app/docs/guides/database-queries for how to query the database.
 
     Alternatively, if your Postgres instance has ${otherName}, you may use this instead by setting the environment variable 'DB_VECTOR_EXTENSION=${otherName}'.
     Note that switching between the two extensions after a successful startup is not supported.
-    The exception is if your version of Immich prior to upgrading was 1.90.2 or earlier.
+    The exception is if your version of  Photosync  prior to upgrading was 1.90.2 or earlier.
     In this case, you may set either extension now, but you will not be able to switch to the other extension following a successful startup.`,
   updateFailed: ({ name, extension, availableVersion }: UpdateFailedArgs) =>
     `The ${name} extension can be updated to ${availableVersion}.
-    Immich attempted to update the extension, but failed to do so.
-    This may be because Immich does not have the necessary permissions to update the extension.
+     Photosync  attempted to update the extension, but failed to do so.
+    This may be because  Photosync  does not have the necessary permissions to update the extension.
 
     Please run 'ALTER EXTENSION ${extension} UPDATE' manually as a superuser.
     See https://immich.app/docs/guides/database-queries for how to query the database.`,

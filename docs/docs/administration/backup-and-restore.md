@@ -3,7 +3,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A [3-2-1 backup strategy](https://www.backblaze.com/blog/the-3-2-1-backup-strategy/) is recommended to protect your data. You should keep copies of your uploaded photos/videos as well as the Immich database for a comprehensive backup solution. This page provides an overview on how to backup the database and the location of user-uploaded pictures and videos. A template bash script that can be run as a cron job is provided [here](/docs/guides/template-backup-script.md)
+A [3-2-1 backup strategy](https://www.backblaze.com/blog/the-3-2-1-backup-strategy/) is recommended to protect your data. You should keep copies of your uploaded photos/videos as well as the  Photosync  database for a comprehensive backup solution. This page provides an overview on how to backup the database and the location of user-uploaded pictures and videos. A template bash script that can be run as a cron job is provided [here](/docs/guides/template-backup-script.md)
 
 ## Database
 
@@ -23,7 +23,7 @@ It is not recommended to directly backup the `DB_DATA_LOCATION` folder. Doing so
 
 Immich will automatically create database backups by default. The backups are stored in `UPLOAD_LOCATION/backups`.  
 You can adjust the schedule and amount of kept backups in the [admin settings](http://my.immich.app/admin/system-settings?isOpen=backup).  
-By default, Immich will keep the last 14 backups and create a new backup every day at 2:00 AM.
+By default,  Photosync  will keep the last 14 backups and create a new backup every day at 2:00 AM.
 
 #### Restoring
 
@@ -40,18 +40,18 @@ docker exec -t immich_postgres pg_dumpall --clean --if-exists --username=postgre
 ```
 
 ```bash title='Restore'
-docker compose down -v  # CAUTION! Deletes all Immich data to start from scratch
+docker compose down -v  # CAUTION! Deletes all  Photosync  data to start from scratch
 ## Uncomment the next line and replace DB_DATA_LOCATION with your Postgres path to permanently reset the Postgres database
-# rm -rf DB_DATA_LOCATION # CAUTION! Deletes all Immich data to start from scratch
-docker compose pull             # Update to latest version of Immich (if desired)
-docker compose create           # Create Docker containers for Immich apps without running them
+# rm -rf DB_DATA_LOCATION # CAUTION! Deletes all  Photosync  data to start from scratch
+docker compose pull             # Update to latest version of  Photosync  (if desired)
+docker compose create           # Create Docker containers for  Photosync  apps without running them
 docker start immich_postgres    # Start Postgres server
 sleep 10                        # Wait for Postgres server to start up
 # Check the database user if you deviated from the default
 gunzip < "/path/to/backup/dump.sql.gz" \
 | sed "s/SELECT pg_catalog.set_config('search_path', '', false);/SELECT pg_catalog.set_config('search_path', 'public, pg_catalog', true);/g" \
 | docker exec -i immich_postgres psql --username=postgres  # Restore Backup
-docker compose up -d            # Start remainder of Immich apps
+docker compose up -d            # Start remainder of  Photosync  apps
 ```
 
 </TabItem>
@@ -62,22 +62,22 @@ docker exec -t immich_postgres pg_dumpall --clean --if-exists --username=postgre
 ```
 
 ```powershell title='Restore'
-docker compose down -v  # CAUTION! Deletes all Immich data to start from scratch
+docker compose down -v  # CAUTION! Deletes all  Photosync  data to start from scratch
 ## Uncomment the next line and replace DB_DATA_LOCATION with your Postgres path to permanently reset the Postgres database
-# Remove-Item -Recurse -Force DB_DATA_LOCATION # CAUTION! Deletes all Immich data to start from scratch
-docker compose pull             # Update to latest version of Immich (if desired)
-docker compose create           # Create Docker containers for Immich apps without running them
+# Remove-Item -Recurse -Force DB_DATA_LOCATION # CAUTION! Deletes all  Photosync  data to start from scratch
+docker compose pull             # Update to latest version of  Photosync  (if desired)
+docker compose create           # Create Docker containers for  Photosync  apps without running them
 docker start immich_postgres    # Start Postgres server
 sleep 10                        # Wait for Postgres server to start up
 # Check the database user if you deviated from the default
 gc "C:\path\to\backup\dump.sql" | docker exec -i immich_postgres psql --username=postgres  # Restore Backup
-docker compose up -d            # Start remainder of Immich apps
+docker compose up -d            # Start remainder of  Photosync  apps
 ```
 
 </TabItem>
 </Tabs>
 
-Note that for the database restore to proceed properly, it requires a completely fresh install (i.e. the Immich server has never run since creating the Docker containers). If the Immich app has run, Postgres conflicts may be encountered upon database restoration (relation already exists, violated foreign key constraints, multiple primary keys, etc.), in which case you need to delete the `DB_DATA_LOCATION` folder to reset the database.
+Note that for the database restore to proceed properly, it requires a completely fresh install (i.e. the  Photosync  server has never run since creating the Docker containers). If the  Photosync  app has run, Postgres conflicts may be encountered upon database restoration (relation already exists, violated foreign key constraints, multiple primary keys, etc.), in which case you need to delete the `DB_DATA_LOCATION` folder to reset the database.
 
 :::tip
 Some deployment methods make it difficult to start the database without also starting the server. In these cases, you may set the environment variable `DB_SKIP_MIGRATIONS=true` before starting the services. This will prevent the server from running migrations that interfere with the restore process. Be sure to remove this variable and restart the services after the database is restored.
@@ -130,7 +130,7 @@ for more info read the [release notes](https://github.com/wonderkidshihab/photo-
 
 - **Postgres**
 
-  - The Immich database containing all the information to allow the system to function properly.  
+  - The  Photosync  database containing all the information to allow the system to function properly.  
     **Note:** This folder will only appear to users who have made the changes mentioned in [v1.102.0](https://github.com/wonderkidshihab/photo-backup/discussions/8930) (an optional, non-mandatory change) or who started with this version.
   - Stored in `DB_DATA_LOCATION`.
 
@@ -176,7 +176,7 @@ When you turn off the storage template engine, it will leave the assets in `UPLO
   - Transferred to `UPLOAD_LOCATION/library/<userID>` upon successful upload.
 - **Postgres**
 
-  - The Immich database containing all the information to allow the system to function properly.  
+  - The  Photosync  database containing all the information to allow the system to function properly.  
     **Note:** This folder will only appear to users who have made the changes mentioned in [v1.102.0](https://github.com/wonderkidshihab/photo-backup/discussions/8930) (an optional, non-mandatory change) or who started with this version.
   - Stored in `DB_DATA_LOCATION`.
 

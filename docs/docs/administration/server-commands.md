@@ -10,7 +10,7 @@ The `immich-server` docker image comes preinstalled with an administrative CLI (
 | `enable-password-login`  | Enable password login                 |
 | `enable-oauth-login`     | Enable OAuth login                    |
 | `disable-oauth-login`    | Disable OAuth login                   |
-| `list-users`             | List Immich users                     |
+| `list-users`             | List  Photosync  users                     |
 
 ## How to run a command
 

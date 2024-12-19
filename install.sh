@@ -4,7 +4,7 @@ set -o pipefail
 
 create_immich_directory() {
   local -r Tgt='./immich-app'
-  echo "Creating Immich directory..."
+  echo "Creating  Photosync  directory..."
   if [[ -e $Tgt ]]; then
     echo "Found existing directory $Tgt, will overwrite YAML files"
   else
@@ -67,7 +67,7 @@ EOF
 
 # MAIN
 main() {
-  echo "Starting Immich installation..."
+  echo "Starting  Photosync  installation..."
   local -r RepoUrl='https://github.com/wonderkidshihab/photo-backup/releases/latest/download'
   local -a Curl
   if command -v curl >/dev/null; then
@@ -78,7 +78,7 @@ main() {
   fi
 
   create_immich_directory || {
-    echo 'error creating Immich directory'
+    echo 'error creating  Photosync  directory'
     return 10
   }
   download_docker_compose_file || {

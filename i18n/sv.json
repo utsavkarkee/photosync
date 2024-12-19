@@ -28,7 +28,7 @@
   "added_to_favorites_count": "{count, number} tillagda till favoriter",
   "admin": {
     "add_exclusion_pattern_description": "Lägg till exkluderande mönster. Matchning med jokertecken *, ** samt ? är supporterat. För att ignorera alla filer i samtliga mappar som heter \"Raw\", använd \"**/Raw/**\". För att ignorera alla filer som slutar med \".tif\", använd \"**/*.tif\". För att ignorera en absolut sökväg, använd \"/sökväg/att/ignorera/**\".",
-    "asset_offline_description": "Denna externa bibliotekstillgång finns inte längre på disken och har flyttats till papperskorgen. Om filen flyttades inom biblioteket, kontrollera din tidslinje för den nya motsvarande tillgången. För att återställa denna tillgång, se till att filsökvägen nedan kan nås av Immich och skanna biblioteket.",
+    "asset_offline_description": "Denna externa bibliotekstillgång finns inte längre på disken och har flyttats till papperskorgen. Om filen flyttades inom biblioteket, kontrollera din tidslinje för den nya motsvarande tillgången. För att återställa denna tillgång, se till att filsökvägen nedan kan nås av  Photosync  och skanna biblioteket.",
     "authentication_settings": "Autentiseringsinställningar",
     "authentication_settings_description": "Hantera lösenord, OAuth, och andra autentiseringsinställningar",
     "authentication_settings_disable_all": "Är du säker på att du vill inaktivera alla inloggningsmetoder? Inloggning kommer att helt inaktiveras.",
@@ -41,7 +41,7 @@
     "cleared_jobs": "Rensade jobben för:{job}",
     "config_set_by_file": "Konfigurationen är satt av en konfigurationsfil",
     "confirm_delete_library": "Är du säker på att du vill radera {library} album?",
-    "confirm_delete_library_assets": "Är du säker på att du vill radera detta album? {count, plural, one {# objekt} other {Samtliga # objekt}} kommer att tas bort från Immich och åtgärden kan inte ångras. Filerna kommer att behållas på hårddisken.",
+    "confirm_delete_library_assets": "Är du säker på att du vill radera detta album? {count, plural, one {# objekt} other {Samtliga # objekt}} kommer att tas bort från  Photosync  och åtgärden kan inte ångras. Filerna kommer att behållas på hårddisken.",
     "confirm_email_below": "För att bekräfta, skriv ”{email}” nedan",
     "confirm_reprocess_all_faces": "Är du säker på att du vill återprocessa alla ansikten? Detta kommer också rensa namngivna personer.",
     "confirm_user_password_reset": "Är du säker på att du vill återställa {user}’s lösenord?",

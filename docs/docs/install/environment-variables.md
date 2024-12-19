@@ -6,7 +6,7 @@ sidebar_position: 90
 
 :::caution
 
-To change environment variables, you must recreate the Immich containers.
+To change environment variables, you must recreate the  Photosync  containers.
 Just restarting the containers does not replace the environment within the container!
 
 In order to recreate the container using docker compose, run `docker compose up -d`.
@@ -37,7 +37,7 @@ These environment variables are used by the `docker-compose.yml` file and do **N
 | `IMMICH_MEDIA_LOCATION`             | Media Location inside the container ⚠️**You probably shouldn't set this**<sup>\*2</sup>⚠️ |   `./upload`<sup>\*3</sup>   | server                   | api, microservices |
 | `IMMICH_CONFIG_FILE`                | Path to config file                                                                       |                              | server                   | api, microservices |
 | `NO_COLOR`                          | Set to `true` to disable color-coded log output                                           |           `false`            | server, machine learning |                    |
-| `CPU_CORES`                         | Amount of cores available to the immich server                                            | auto-detected cpu core count | server                   |                    |
+| `CPU_CORES`                         | Amount of cores available to the  Photosync  server                                            | auto-detected cpu core count | server                   |                    |
 | `IMMICH_API_METRICS_PORT`           | Port for the OTEL metrics                                                                 |            `8081`            | server                   | api                |
 | `IMMICH_MICROSERVICES_METRICS_PORT` | Port for the OTEL metrics                                                                 |            `8082`            | server                   | microservices      |
 | `IMMICH_PROCESS_INVALID_IMAGES`     | When `true`, generate thumbnails for invalid images                                       |                              | server                   | microservices      |
@@ -47,10 +47,10 @@ These environment variables are used by the `docker-compose.yml` file and do **N
 \*1: `TZ` should be set to a `TZ identifier` from [this list][tz-list]. For example, `TZ="Etc/UTC"`.
 `TZ` is used by `exiftool` as a fallback in case the timezone cannot be determined from the image metadata. It is also used for logfile timestamps and cron job execution.
 
-\*2: This path is where the Immich code looks for the files, which is internal to the docker container. Setting it to a path on your host will certainly break things, you should use the `UPLOAD_LOCATION` variable instead.
+\*2: This path is where the  Photosync  code looks for the files, which is internal to the docker container. Setting it to a path on your host will certainly break things, you should use the `UPLOAD_LOCATION` variable instead.
 
 \*3: With the default `WORKDIR` of `/usr/src/app`, this path will resolve to `/usr/src/app/upload`.
-It only need to be set if the Immich deployment method is changing.
+It only need to be set if the  Photosync  deployment method is changing.
 
 ## Workers
 
@@ -89,7 +89,7 @@ Information on the current workers can be found [here](/docs/administration/jobs
 
 :::info
 
-All `DB_` variables must be provided to all Immich workers, including `api` and `microservices`.
+All `DB_` variables must be provided to all  Photosync  workers, including `api` and `microservices`.
 
 `DB_URL` must be in the format `postgresql://immichdbusername:immichdbpassword@postgreshost:postgresport/immichdatabasename`.
 You can require SSL by adding `?sslmode=require` to the end of the `DB_URL` string, or require SSL and skip certificate verification by adding `?sslmode=require&sslmode=no-verify`.
@@ -111,7 +111,7 @@ When `DB_URL` is defined, the `DB_HOSTNAME`, `DB_PORT`, `DB_USERNAME`, `DB_PASSW
 | `REDIS_DBINDEX`  | Redis DB Index |   `0`   | server     |
 
 :::info
-All `REDIS_` variables must be provided to all Immich workers, including `api` and `microservices`.
+All `REDIS_` variables must be provided to all  Photosync  workers, including `api` and `microservices`.
 
 `REDIS_URL` must start with `ioredis://` and then include a `base64` encoded JSON string for the configuration.
 More info can be found in the upstream [ioredis] documentation.

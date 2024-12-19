@@ -1,6 +1,6 @@
-# Immich Mobile Application - Flutter
+# Photosync Mobile Application - Flutter
 
-The Immich mobile app is a Flutter-based solution leveraging the Isar Database for local storage and Riverpod for state management. This structure optimizes functionality and maintainability, allowing for efficient development and robust performance.
+The Photosync mobile app is a Flutter-based solution leveraging the Isar Database for local storage and Riverpod for state management. This structure optimizes functionality and maintainability, allowing for efficient development and robust performance.
 
 ## Setup
 
@@ -15,6 +15,7 @@ Below are the directory inside the `lib` directory:
 - `extensions`: Extensions enhancing various existing functionalities within the app, such as asset_extensions.dart, string_extensions.dart, and more.
 
 - `module_template`: Provides a template structure for different modules within the app, including subdivisions like models, providers, services, UI, and views.
+
   - `models`: Placeholder for storing module-specific models.
   - `providers`: Section to define module-specific Riverpod providers.
   - `services`: Houses services tailored to the module's functionality.
@@ -29,9 +30,9 @@ Below are the directory inside the `lib` directory:
 
 - `utils`: A collection of utility classes and functions catering to different app functionalities, including async_mutex.dart, bytes_units.dart, debounce.dart, migration.dart, and more.
 
-## Immich Architectural Pattern
+## Photosync Architectural Pattern
 
-The Immich Flutter app embraces a well-defined architectural pattern inspired by the Model-View-ViewModel (MVVM) approach. This layout organizes modules for models, providers, services, UI, and views, creating a modular development approach that strongly emphasizes a clean separation of concerns.
+The Photosync Flutter app embraces a well-defined architectural pattern inspired by the Model-View-ViewModel (MVVM) approach. This layout organizes modules for models, providers, services, UI, and views, creating a modular development approach that strongly emphasizes a clean separation of concerns.
 
 Please use the `module_template` provided to create a new module.
 
@@ -41,7 +42,7 @@ Below is how your code needs to be structured:
 
 - Models: In Immich, Models are like the app's blueprint—they're essential for organizing and using information. Imagine them as containers that hold data the app needs to function. They also handle basic rules and logic for managing and interacting with this data across the app.
 
-- Providers (Riverpod): Providers in Immich are a bit like traffic managers. They help different parts of the app communicate and share information effectively. They ensure that the right data gets to the right places at the right time. These providers use Riverpod, a tool that helps with managing and organizing how the app's information flows. Everything related to the state goes here.
+- Providers (Riverpod): Providers in Photosync are a bit like traffic managers. They help different parts of the app communicate and share information effectively. They ensure that the right data gets to the right places at the right time. These providers use Riverpod, a tool that helps with managing and organizing how the app's information flows. Everything related to the state goes here.
 
 - Services: Services are the helpful behind-the-scenes workers in Immich. They handle important tasks like handling network requests or managing other essential functions. These services work independently and focus on supporting the app's main functionalities.
 

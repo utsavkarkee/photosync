@@ -1,8 +1,8 @@
 # Pre-existing Postgres
 
-While not officially recommended, it is possible to run Immich using a pre-existing Postgres server. To use this setup, you should have a baseline level of familiarity with Postgres and the Linux command line. If you do not have these, we recommend using the default setup with a dedicated Postgres container.
+While not officially recommended, it is possible to run  Photosync  using a pre-existing Postgres server. To use this setup, you should have a baseline level of familiarity with Postgres and the Linux command line. If you do not have these, we recommend using the default setup with a dedicated Postgres container.
 
-By default, Immich expects superuser permission on the Postgres database and requires certain extensions to be installed. This guide outlines the steps required to prepare a pre-existing Postgres server to be used by Immich.
+By default,  Photosync  expects superuser permission on the Postgres database and requires certain extensions to be installed. This guide outlines the steps required to prepare a pre-existing Postgres server to be used by Immich.
 
 :::tip
 Running with a pre-existing Postgres server can unlock powerful administrative features, including logical replication and streaming write-ahead log backups using programs like pgBackRest or Barman.
@@ -34,7 +34,7 @@ DB_URL='postgresql://immichdbusername:immichdbpassword@postgreshost:postgresport
 
 ## With superuser permission
 
-Typically Immich expects superuser permission in the database, which you can grant by running `ALTER USER <immichdbusername> WITH SUPERUSER;` at the `psql` console. If you prefer not to grant superuser permissions, follow the instructions in the next section.
+Typically  Photosync  expects superuser permission in the database, which you can grant by running `ALTER USER <immichdbusername> WITH SUPERUSER;` at the `psql` console. If you prefer not to grant superuser permissions, follow the instructions in the next section.
 
 ## Without superuser permission
 
@@ -58,12 +58,12 @@ COMMIT;
 
 ### Updating pgvecto.rs
 
-When installing a new version of pgvecto.rs, you will need to manually update the extension by connecting to the Immich database and running `ALTER EXTENSION vectors UPDATE;`.
+When installing a new version of pgvecto.rs, you will need to manually update the extension by connecting to the  Photosync  database and running `ALTER EXTENSION vectors UPDATE;`.
 
 ### Common errors
 
 #### Permission denied for view
 
-If you get the error `driverError: error: permission denied for view pg_vector_index_stat`, you can fix this by connecting to the Immich database and running `GRANT SELECT ON TABLE pg_vector_index_stat TO <immichdbusername>;`.
+If you get the error `driverError: error: permission denied for view pg_vector_index_stat`, you can fix this by connecting to the  Photosync  database and running `GRANT SELECT ON TABLE pg_vector_index_stat TO <immichdbusername>;`.
 
 [vectors-install]: https://docs.pgvecto.rs/getting-started/installation.html

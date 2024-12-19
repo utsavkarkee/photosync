@@ -28,7 +28,7 @@
   "added_to_favorites_count": "Pridané {count, number} do obľúbených",
   "admin": {
     "add_exclusion_pattern_description": "Pridávanie vzorov na vylúčenie. Globovanie pomocou *, ** a ? je podporované. Ak chcete ignorovať všetky súbory v akomkoľvek adresári s názvom \"Raw\", použite \"**/Raw/**\". Ak chcete ignorovať všetky súbory končiace na \".tif\", použite \"**/*.tif\". Ak chcete ignorovať absolútnu cestu, použite príkaz \"/cesta/k/ignorovanym/**\".",
-    "asset_offline_description": "Táto položka externej knižnice sa už na disku nenachádza a bola presunutá do koša. Pokiaľ bol súbor presunutý v rámci knižnice, skontrolujte časovú os a vyhľadajte nové odpovedajúce položky. Ak chcete túto položku obnoviť, uistite sa, že je cesta k nižšie uvedenému súboru prístupná pre aplikáciu Immich a prehľadajte knižnicu.",
+    "asset_offline_description": "Táto položka externej knižnice sa už na disku nenachádza a bola presunutá do koša. Pokiaľ bol súbor presunutý v rámci knižnice, skontrolujte časovú os a vyhľadajte nové odpovedajúce položky. Ak chcete túto položku obnoviť, uistite sa, že je cesta k nižšie uvedenému súboru prístupná pre aplikáciu  Photosync  a prehľadajte knižnicu.",
     "authentication_settings": "Nastavenia overovania",
     "authentication_settings_description": "Spravovať heslo, protokol OAuth a ďalšie nastavenia overenia",
     "authentication_settings_disable_all": "Naozaj chcete zakázať všetky spôsoby prihlásenia? Prihlásenie bude úplne zakázané.",
