@@ -82,19 +82,19 @@
         theme = JSON.parse(theme);
       }
 
-      let themeValue = 'light ';
+      let themeValue = 'light';
       if (theme.system) {
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          // themeValue = 'dark';
+           themeValue = 'dark';
         } else {
-          // themeValue = 'light';
+           themeValue = 'light';
         }
       }
 
       if (themeValue === 'light') {
-        // document.documentElement.classList.remove('dark');
+        document.documentElement.classList.remove('dark');
       } else {
-        // document.documentElement.classList.add('dark');
+        document.documentElement.classList.add('dark');
       }
     </script>
 

@@ -143,6 +143,7 @@
     {/if}
 
     <EmptyPlaceholder
+      slot="empty"
       text={$user?.isEmailVerify == false ? $t('verify_email_message') : $t('no_assets_message')}
       onClick={() => ($user?.isEmailVerify == false ? toggleModal() : openFileUploadDialog())}
     />
