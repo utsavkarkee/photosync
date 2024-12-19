@@ -5,7 +5,7 @@ import ImmichLayout from 'src/emails/components/immich.layout';
 import { WelcomeEmailProps } from 'src/interfaces/notification.interface';
 
 export const WelcomeEmail = ({ baseUrl, displayName, username, password }: WelcomeEmailProps) => (
-  <ImmichLayout preview="You have been invited to a new Immich instance.">
+  <ImmichLayout preview="You have been invited to a new Photosync instance.">
     <Text className="m-0">
       Hey <strong>{displayName}</strong>!
     </Text>

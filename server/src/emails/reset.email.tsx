@@ -5,13 +5,13 @@ import ImmichLayout from 'src/emails/components/immich.layout';
 import { ResetPasswordProps } from 'src/interfaces/notification.interface';
 
 export const ResetPassword = ({ baseUrl, displayName, resetLink }: ResetPasswordProps) => (
-  <ImmichLayout preview="Reset your password to regain access to your Immich account.">
+  <ImmichLayout preview="Reset your password to regain access to your Photosync account.">
     <Text className="m-0">
       Hello <strong>{displayName}</strong>,
     </Text>
 
     <Text>
-      We received a request to reset your password for your Immich account. Click the button below to reset your password.
+      We received a request to reset your password for your Photosync account. Click the button below to reset your password.
     </Text>
 
     <Section className="flex justify-center my-6">

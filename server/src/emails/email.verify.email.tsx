@@ -5,12 +5,12 @@ import ImmichLayout from 'src/emails/components/immich.layout';
 import { VerifyEmailProps } from 'src/interfaces/notification.interface';
 
 export const VerifyEmail = ({ baseUrl, displayName, code }: VerifyEmailProps) => (
-  <ImmichLayout preview="Verify your email to activate your Immich account.">
+  <ImmichLayout preview="Verify your email to activate your Photosync account.">
     <Text className="m-0">
       Hello <strong>{displayName}</strong>,
     </Text>
 
-    <Text>Thank you for signing up for Immich! Please verify your email address to activate your account.</Text>
+    <Text>Thank you for signing up for Photosync! Please verify your email address to activate your account.</Text>
 
     <div className="flex items-center mt-4 gap-x-4">
       {Array.from(code).map((x) => (
@@ -20,7 +20,7 @@ export const VerifyEmail = ({ baseUrl, displayName, code }: VerifyEmailProps) =>
       ))}
     </div>
 
-    <Text>If you did not sign up for an Immich account, please disregard this email.</Text>
+    <Text>If you did not sign up for an Photosync account, please disregard this email.</Text>
   </ImmichLayout>
 );
 

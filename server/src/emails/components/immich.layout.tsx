@@ -51,7 +51,7 @@ export const ImmichLayout = ({ children, preview }: ImmichLayoutProps) => (
               <Img
                 src="https://i.ibb.co/prDCZhC/Photo-Sync-full-logo.png"
                 className="h-12 antialiased rounded-none"
-                alt="Immich"
+                alt="Photosync"
               />
             </Section>
 
