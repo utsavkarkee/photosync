@@ -72,6 +72,7 @@
 
   async function registerAdmin() {
     try {
+      loading=true;
       await signUpUser({ signUpDto: { email, password, name, notify: true, shouldChangePassword: false } });
       await retrieveServerConfig();
 
@@ -79,6 +80,8 @@
     } catch (error) {
       handleError(error, $t('errors.unable_to_create_user_account'));
       errorMessage = $t('errors.unable_to_create_user_account');
+    }finally{
+      loading=false;
     }
   }
 
@@ -142,7 +145,7 @@
   {/if}
 
   <div class="my-5 flex w-full">
-    <Button type="submit" size="lg" fullwidth>{$t('sign_up')}</Button>
+    <Button disabled={loading} type="submit" size="lg" fullwidth>{$t('sign_up')}</Button>
   </div>
 </form>
 {#if $featureFlags.oauth}

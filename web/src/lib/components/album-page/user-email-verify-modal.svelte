@@ -45,6 +45,23 @@
       handleError(error);
     }
   };
+  function handlePaste(event: Event) {
+    event.preventDefault();
+    const clipboardEvent = event as ClipboardEvent;
+    // Get the pasted text
+    const pasteData = clipboardEvent .clipboardData?.getData('text').trim() || value;
+
+    // Check if the pasted data is valid for the OTP
+    if (pasteData.length === 4 && /^[0-9]+$/.test(pasteData)) {
+      // Assign each digit to the corresponding input
+      const inputs = document.querySelectorAll('input'); // Ensure correct input selection
+      pasteData.split('').forEach((digit, index) => {
+        if (inputs[index]) {
+          inputs[index].value = digit;
+        }
+      });
+    }
+  }
   const gotoHome = () => {
     window.location.reload();
   };
@@ -81,6 +98,7 @@
           placeholder="----"
           inputClass="rounded-md bg-white mx-2 py-4 border-immich-primary"
           separatorClass="border-immich-primary text-xl font-bold"
+          on:paste={(e) => handlePaste(e)}
         />
       </div>
       <div>
@@ -122,16 +140,6 @@
           <h1 class="text-4xl font-bold">Success!</h1>
           <p>Thank you for verifying your email! You can now access all the features. Enjoy using our service!</p>
 
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-3 h-3 mr-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-          </svg>
           <Button class="text-sm font-medium" onclick={gotoHome}>Home</Button>
         </div>
       </div>

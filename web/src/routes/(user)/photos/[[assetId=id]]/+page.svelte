@@ -141,13 +141,14 @@
     {#if $preferences.memories.enabled}
       <MemoryLane />
     {/if}
-    {#if $user?.isEmailVerify == false}
-      <EmptyPlaceholder text={$t('verify_email_message')} onClick={() => toggleModal()} />
-    {:else}
-      <EmptyPlaceholder text={$t('no_assets_message')} onClick={() => openFileUploadDialog()} />
-    {/if}
+
+    <EmptyPlaceholder
+      text={$user?.isEmailVerify == false ? $t('verify_email_message') : $t('no_assets_message')}
+      onClick={() => ($user?.isEmailVerify == false ? toggleModal() : openFileUploadDialog())}
+    />
   </AssetGrid>
 </UserPageLayout>
+
 {#if isOpenModal}
   <UserEmailVerifyModal onClose={() => (isOpenModal = !isOpenModal)} />
 {/if}
