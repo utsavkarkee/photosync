@@ -6,17 +6,17 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
-    <link rel="icon" type="image/png" sizes="144x144" href="/favicon-144.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180.png" />
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" /> -->
+    <!-- <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" /> -->
+    <link rel="icon" type="image/png" sizes="48x48" href="/immich-logo.svg" />
+    <!-- <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" /> -->
+    <!-- <link rel="icon" type="image/png" sizes="144x144" href="/favicon-144.png" /> -->
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180.png" /> -->
     <link rel="preload" as="font" type="font/ttf" href="%app.font%" crossorigin="anonymous" />
     <link rel="preload" as="font" type="font/ttf" href="%app.monofont%" crossorigin="anonymous" />
     %sveltekit.head%
-    <style>
+    <style> 
       /* prevent FOUC */
       html {
         height: 100%;
@@ -82,19 +82,19 @@
         theme = JSON.parse(theme);
       }
 
-      let themeValue = theme.value;
+      let themeValue = 'light ';
       if (theme.system) {
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          themeValue = 'dark';
+          // themeValue = 'dark';
         } else {
-          themeValue = 'light';
+          // themeValue = 'light';
         }
       }
 
       if (themeValue === 'light') {
-        document.documentElement.classList.remove('dark');
+        // document.documentElement.classList.remove('dark');
       } else {
-        document.documentElement.classList.add('dark');
+        // document.documentElement.classList.add('dark');
       }
     </script>
 
@@ -103,7 +103,7 @@
 
   <body class="bg-immich-bg dark:bg-immich-dark-bg">
     <div id="stencil">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 792">
+      <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 792">
         <style type="text/css">
           .st0 {
             fill: #fa2921;
@@ -153,7 +153,36 @@
 		c47.92-34.82,87.79-96.95,47.27-152.72C619.2,484.77,618.46,483.75,617.57,482.52z"
           />
         </g>
-      </svg>
+      </svg> -->
+   
+   <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="100.000000pt" height="100.000000pt" viewBox="0 0 636.000000 636.000000"
+ preserveAspectRatio="xMidYMid meet">
+
+<g transform="translate(0.000000,636.000000) scale(0.100000,-0.100000)"
+fill="#000000" stroke="none">
+<path d="M3855 5529 c-33 -11 -73 -24 -90 -30 -16 -6 -51 -17 -76 -24 -120
+-33 -341 -168 -446 -273 -103 -101 -263 -351 -263 -409 0 -9 -11 -35 -24 -57
+-13 -23 -32 -67 -42 -98 -10 -32 -21 -58 -25 -58 -19 0 -24 67 -29 452 -4 323
+-8 420 -18 430 -11 11 -223 13 -1102 13 -1033 0 -1090 -1 -1107 -18 -17 -17
+-18 -46 -17 -410 l1 -392 27 -100 c34 -127 61 -183 134 -282 102 -136 243
+-228 447 -289 l90 -27 508 -5 c279 -2 507 -7 507 -10 0 -4 -28 -15 -63 -25
+-34 -10 -90 -32 -123 -48 -34 -16 -65 -29 -69 -29 -17 0 -138 -66 -207 -113
+-138 -94 -291 -259 -352 -381 -17 -34 -41 -75 -54 -93 -12 -17 -34 -71 -48
+-120 -51 -169 -65 -261 -73 -453 -10 -236 -13 -1447 -5 -1552 6 -69 11 -83 36
+-108 l28 -29 688 5 c378 3 697 7 709 10 47 9 50 34 57 434 7 373 11 489 23
+565 l5 39 24 -64 c14 -36 38 -92 54 -125 16 -33 42 -89 58 -125 69 -152 222
+-339 359 -437 119 -85 251 -149 373 -181 63 -17 142 -33 175 -36 33 -3 461 -6
+951 -8 827 -2 894 -1 918 15 15 10 26 27 26 40 0 12 3 335 6 717 l6 695 -22
+28 -21 27 -437 0 c-240 0 -447 3 -458 6 -24 6 -67 89 -384 749 -31 66 -82 172
+-113 235 -186 387 -197 419 -158 440 13 7 277 10 783 10 665 1 766 3 783 16
+20 15 20 28 23 720 2 628 1 708 -13 738 -9 19 -26 37 -38 40 -12 3 -436 5
+-942 5 -883 -1 -922 -1 -980 -20z m-907 -1637 c23 -36 42 -70 42 -75 0 -4 30
+-70 66 -145 242 -501 311 -645 339 -712 16 -36 34 -72 41 -80 21 -26 96 -220
+98 -253 l1 -32 -321 -3 c-290 -2 -323 -1 -335 14 -12 14 -14 125 -13 653 0
+350 4 659 8 686 7 43 10 47 20 31 6 -10 30 -48 54 -84z"/>
+</g>
+</svg>
     </div>
     <div>%sveltekit.body%</div>
   </body>

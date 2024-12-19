@@ -49,7 +49,7 @@ export const ImmichLayout = ({ children, preview }: ImmichLayoutProps) => (
           <Section className="my-6 p-12 border border-red-400 rounded-[50px] bg-gray-50">
             <Section className="flex justify-center mb-12">
               <Img
-                src="https://drive.google.com/drive-viewer/AKGpihZ4Eu0GrUz3UjXETAQOD7MhRbGZd_Zp06fFnXGs6uMWdXOXllbOqAznMSurrI225qb935ZgBYfl3oagFQ6nvmZ4zeHEsqk5lfo=w2048-h2288-rw-v1"
+                src="https://i.ibb.co/prDCZhC/Photo-Sync-full-logo.png"
                 className="h-12 antialiased rounded-none"
                 alt="Immich"
               />

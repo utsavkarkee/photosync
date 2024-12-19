@@ -38,7 +38,7 @@
     <!-- <Toast message={'this is my msg'} visible={isUserCreated} duration={3000} /> -->
 
     <button on:click={() => (isLogin = !isLogin)}>
-      {isLogin ? "Don't have an account? Sign Up" : 'You already have an accoount?Sign In '}
+      {isLogin ? "Don't have an account? Sign Up" : 'You already have an account?Sign In '}
     </button>
 
     <button on:click={() => goto('forget-password')}> Forgot Password ? </button>

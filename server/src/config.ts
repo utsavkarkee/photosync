@@ -294,7 +294,7 @@ export const defaults = Object.freeze<SystemConfig>({
     },
   },
   server: {
-    externalDomain: '',
+    externalDomain: 'https://app.photosync.me',
     loginPageMessage: '',
   },
   notifications: {
