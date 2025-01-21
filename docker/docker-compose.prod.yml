@@ -1,6 +1,55 @@
 name: immich-prod
 
 services:
+
+  database:
+    container_name: immich_postgres
+    image: tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
+    env_file:
+      - .env
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE_NAME}
+      POSTGRES_INITDB_ARGS: '--data-checksums'
+    volumes:
+      - ${UPLOAD_LOCATION}/postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: pg_isready --dbname='${DB_DATABASE_NAME}' --username='${DB_USERNAME}' || exit 1; Chksum="$$(psql --dbname='${DB_DATABASE_NAME}' --username='${DB_USERNAME}' --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')"; echo "checksum failure count is $$Chksum"; [ "$$Chksum" = '0' ] || exit 1
+      interval: 5m
+      start_interval: 30s
+      start_period: 5m
+    command: [ 'postgres', '-c', 'shared_preload_libraries=vectors.so', '-c', 'search_path="$$user", public, vectors', '-c', 'logging_collector=on', '-c', 'max_wal_size=2GB', '-c', 'shared_buffers=512MB', '-c', 'wal_compression=on' ]
+    restart: always
+
+  redis:
+    container_name: immich_redis
+    image: redis:6.2-alpine@sha256:905c4ee67b8e0aa955331960d2aa745781e6bd89afc44a8584bfd13bc890f0ae
+    healthcheck:
+      test: redis-cli ping || exit 1
+    restart: always
+
+  rclone-backup:
+    image: alpine:latest
+    volumes:
+      - ${UPLOAD_LOCATION}/upload:/source/uploads:ro
+      - ./rclone.conf:/config/rclone.conf:ro
+      - ./watch-and-sync.sh:/watch-and-sync.sh
+      - rclone-cache:/cache
+    environment:
+      - RCLONE_CONFIG=/config/rclone.conf
+    entrypoint: |
+      /bin/sh -c '
+      apk add --no-cache rclone &&
+      apk add --no-cache inotify-tools &&
+      chmod +x /watch-and-sync.sh &&
+      /watch-and-sync.sh'
+    restart: unless-stopped
+    depends_on:
+      - immich-server
+
   immich-server:
     container_name: immich_server
     image: immich-server:latest
@@ -11,6 +60,7 @@ services:
       context: ../
       dockerfile: server/Dockerfile
     volumes:
+      - ${UPLOAD_LOCATION}/photos:/usr/src/app/upload
       - idrivee2-photo-prod:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
     env_file:
@@ -45,50 +95,6 @@ services:
     healthcheck:
       disable: false
 
-  redis:
-    container_name: immich_redis
-    image: redis:6.2-alpine@sha256:77c6e37734720700cd47d8b7d9e8a9a6f24fc32862833b064c76e830145bebce
-    healthcheck:
-      test: redis-cli ping || exit 1
-    restart: always
-
-  database:
-    container_name: immich_postgres
-    image: tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:90724186f0a3517cf6914295b5ab410db9ce23190a2d9d0b9dd6463e3fa298f0
-    env_file:
-      - .env
-    environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_DB: ${DB_DATABASE_NAME}
-      POSTGRES_INITDB_ARGS: '--data-checksums'
-    volumes:
-      - ${UPLOAD_LOCATION}/postgres:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
-    healthcheck:
-      test: pg_isready --dbname='${DB_DATABASE_NAME}' --username='${DB_USERNAME}' || exit 1; Chksum="$$(psql --dbname='${DB_DATABASE_NAME}' --username='${DB_USERNAME}' --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')"; echo "checksum failure count is $$Chksum"; [ "$$Chksum" = '0' ] || exit 1
-      interval: 5m
-      start_interval: 30s
-      start_period: 5m
-    command:
-      [
-        'postgres',
-        '-c',
-        'shared_preload_libraries=vectors.so',
-        '-c',
-        'search_path="$$user", public, vectors',
-        '-c',
-        'logging_collector=on',
-        '-c',
-        'max_wal_size=2GB',
-        '-c',
-        'shared_buffers=512MB',
-        '-c',
-        'wal_compression=on',
-      ]
-    restart: always
-
   # set IMMICH_TELEMETRY_INCLUDE=all in .env to enable metrics
   immich-prometheus:
     container_name: immich_prometheus
@@ -103,7 +109,7 @@ services:
   # add data source for http://immich-prometheus:9090 to get started
   immich-grafana:
     container_name: immich_grafana
-    command: ['./run.sh', '-disable-reporting']
+    command: [ './run.sh', '-disable-reporting' ]
     ports:
       - 3000:3000
     image: grafana/grafana:11.3.0-ubuntu@sha256:51587e148ac0214d7938e7f3fe8512182e4eb6141892a3ffb88bba1901b49285

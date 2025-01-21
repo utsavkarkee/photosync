@@ -7,6 +7,7 @@
 
 docker/upload
 docker/library
+docker/postgres
 uploads
 coverage
 
