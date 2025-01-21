@@ -120,6 +120,7 @@ volumes:
   model-cache:
   prometheus-data:
   grafana-data:
+  rclone-cache:
   idrivee2-photo-prod:
     driver: rclone
     driver_opts:
