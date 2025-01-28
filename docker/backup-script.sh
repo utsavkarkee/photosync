@@ -2,7 +2,7 @@
 set -e
 
 # Backup uploads
-sync /source/uploads idrivee2:immich-photo
+rclone sync /source/uploads idrivee2:immich-photo
 
 # Backup postgres data
 rclone sync /source/postgres idrivee2:immich-db
